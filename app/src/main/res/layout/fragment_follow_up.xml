@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.FollowUpFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FollowUP Fragment"
+        android:gravity="center"
+        android:textSize="28sp"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/followup_recyclerView"
         android:layout_width="match_parent"
