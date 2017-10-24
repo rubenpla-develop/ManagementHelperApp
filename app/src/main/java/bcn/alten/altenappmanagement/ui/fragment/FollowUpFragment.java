@@ -50,9 +50,12 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
         ButterKnife.bind(this, view);
 
         presenter = new FollowUpFragmentPresenter(this);
+        presenter.showFollowUpList();
 
         return view;
     }
+
+
 
     @Override
     public void ShowFollowUpList(List<Object> list) {

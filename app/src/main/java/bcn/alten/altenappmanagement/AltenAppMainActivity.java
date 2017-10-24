@@ -37,9 +37,7 @@ public class AltenAppMainActivity extends AppCompatActivity implements IMainActi
         ButterKnife.bind(this);
 
         setupViewPager();
-
-        viewPager.addOnPageChangeListener(this);
-        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        setListeners();
     }
 
     private void setupViewPager() {
@@ -54,6 +52,11 @@ public class AltenAppMainActivity extends AppCompatActivity implements IMainActi
         adapter.addFragment(QMFragment);
 
         viewPager.setAdapter(adapter);
+    }
+
+    private void setListeners() {
+        viewPager.addOnPageChangeListener(this);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
