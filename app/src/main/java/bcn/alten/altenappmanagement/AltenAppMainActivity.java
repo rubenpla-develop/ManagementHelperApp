@@ -3,14 +3,16 @@ package bcn.alten.altenappmanagement;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AltenAppMainActivity extends AppCompatActivity {
+public class AltenAppMainActivity extends AppCompatActivity implements IMainActivityView{
 
     @BindView(R.id.message)
     TextView mTextMessage;
@@ -45,4 +47,8 @@ public class AltenAppMainActivity extends AppCompatActivity {
     };
 
 
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+    }
 }
