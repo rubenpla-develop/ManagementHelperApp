@@ -14,6 +14,7 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.expandable.holderview.FollowUpHolder;
 import bcn.alten.altenappmanagement.expandable.holderview.GroupHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUpModel;
+import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
 
 public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapter<GroupHolder,
         FollowUpHolder>  {
@@ -46,10 +47,23 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
     }
 
     @Override
-    public void onBindChildViewHolder(FollowUpHolder holder, int flatPosition,
-                                      ExpandableGroup group, int childIndex) {
-        final FollowUpModel model = (FollowUpModel)group.getItems().get(childIndex);
+    public void onBindChildViewHolder(final FollowUpHolder holder, int flatPosition,
+                                      final ExpandableGroup group, final int childIndex) {
+        final FollowUpModel model = (FollowUpModel) group.getItems().get(childIndex);
         holder.onBind(model);
+
+        holder.getView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO TEMP, only for testing logic
+                ((IMainActivityView) context).showMessage("Categoria : " + group.getTitle()
+                        + ", Consultor: " +
+                        ((FollowUpModel) group.getItems().get(childIndex)).getConsultorName()
+                        + "\nCliente : " +  ((FollowUpModel) group.getItems().get(childIndex))
+                        .getCurrentClient()
+                        + ", Posicion: " + (childIndex + 1));
+            }
+        });
     }
 
     @Override
