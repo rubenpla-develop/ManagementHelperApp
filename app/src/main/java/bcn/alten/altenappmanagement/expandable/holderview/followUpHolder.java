@@ -8,16 +8,15 @@ import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.FollowUpModel;
 
-public class followUpHolder extends ChildViewHolder {
+public class FollowUpHolder extends ChildViewHolder {
 
     private TextView consultorName;
     private TextView clientName;
     private TextView date;
     private TextView status;
 
-    public followUpHolder(View itemView) {
+    public FollowUpHolder(View itemView) {
         super(itemView);
-
         findViews();
     }
 

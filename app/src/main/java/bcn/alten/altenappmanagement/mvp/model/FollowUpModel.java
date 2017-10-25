@@ -2,6 +2,7 @@ package bcn.alten.altenappmanagement.mvp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 public class FollowUpModel implements Parcelable {
 
@@ -10,6 +11,17 @@ public class FollowUpModel implements Parcelable {
     private long dateLastFollow;
     private String status;
     private String comments;
+
+    public FollowUpModel(@NonNull String consultorName,@NonNull  String currentClient,
+                         @NonNull  long dateLastFollow, @NonNull String status,
+                         @NonNull  String comments) {
+        this.consultorName = consultorName;
+        this.currentClient = currentClient;
+        this.dateLastFollow = dateLastFollow;
+        this.status = status;
+        this.comments = comments;
+
+    }
 
     protected FollowUpModel(Parcel in) {
         consultorName = in.readString();
