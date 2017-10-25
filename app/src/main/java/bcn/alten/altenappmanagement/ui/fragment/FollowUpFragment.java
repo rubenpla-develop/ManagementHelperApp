@@ -3,6 +3,7 @@ package bcn.alten.altenappmanagement.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.adapter.ExpandableCategoryListAdapter;
+import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import butterknife.BindView;
@@ -24,6 +27,8 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     RecyclerView expandableList;
 
     private FollowUpFragmentPresenter presenter;
+    private ExpandableCategoryListAdapter expandableRecyclerViewAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     public static FollowUpFragment newInstance() {
             Bundle args = new Bundle();
@@ -37,9 +42,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
             return fragment;
     }
 
-    public FollowUpFragment() {
-
-    }
+    public FollowUpFragment() {}
 
     @Nullable
     @Override
@@ -49,17 +52,26 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
         ButterKnife.bind(this, view);
 
-        presenter = new FollowUpFragmentPresenter(this);
-        presenter.showFollowUpList();
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        expandableList.setLayoutManager(layoutManager);
+        expandableList.setHasFixedSize(true);
 
         return view;
     }
 
-
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter = new FollowUpFragmentPresenter(this);
+        presenter.showFollowUpList();
+    }
 
     @Override
-    public void ShowFollowUpList(List<Object> list) {
+    public void ShowFollowUpList(List<Category> list) {
+        expandableRecyclerViewAdapter = new ExpandableCategoryListAdapter(getActivity(),
+                list);
 
+        expandableList.setAdapter(expandableRecyclerViewAdapter);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class AltenAppMainActivity extends AppCompatActivity implements IMainActi
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         HomeFragment homeFragment = new HomeFragment();
-        FollowUpFragment followupFragment = new FollowUpFragment();
+        FollowUpFragment followupFragment = FollowUpFragment.newInstance();
         QMFragment QMFragment = new QMFragment();
 
         adapter.addFragment(homeFragment);

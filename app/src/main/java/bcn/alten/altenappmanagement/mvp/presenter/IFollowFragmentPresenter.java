@@ -5,7 +5,7 @@ import java.util.List;
 public interface IFollowFragmentPresenter {
 
     //TODO all 'Object' ---> change by its own model
-    List<Object> showFollowUpList();
+    void showFollowUpList();
     Object editFollowUp(int id);
     List<Object> deleteFollowUp(int id);
     Object createNewFollowUp();

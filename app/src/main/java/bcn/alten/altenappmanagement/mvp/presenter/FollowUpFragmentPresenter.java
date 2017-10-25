@@ -3,7 +3,9 @@ package bcn.alten.altenappmanagement.mvp.presenter;
 import java.util.ArrayList;
 import java.util.List;
 
+import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
+import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
 
 public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
 
@@ -18,10 +20,12 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
     }
 
     @Override
-    public List<Object> showFollowUpList() {
-        //TODO get content from database about FollowUp items
+    public void showFollowUpList() {
+        //TODO get items from DB
 
-        return list;
+        //TODO mocking content
+        List<Category> categoryList = CategoryDataFactory.makeGenres();
+        view.ShowFollowUpList(categoryList);
     }
 
     @Override
