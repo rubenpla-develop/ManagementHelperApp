@@ -4,9 +4,9 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.mvp.model.FollowUpModel;
+import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 
-public class Category extends ExpandableGroup<FollowUpModel> {
+public class Category extends ExpandableGroup<FollowUp> {
 
     private int iconResId;
 

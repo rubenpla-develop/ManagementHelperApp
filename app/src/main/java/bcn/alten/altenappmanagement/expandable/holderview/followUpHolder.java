@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.mvp.model.FollowUpModel;
+import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 
 public class FollowUpHolder extends ChildViewHolder {
 
@@ -30,12 +30,11 @@ public class FollowUpHolder extends ChildViewHolder {
         status = itemView.findViewById(R.id.status_value);
     }
 
-    public void onBind(FollowUpModel followUpModel) {
-        consultorName.setText(followUpModel.getConsultorName());
-        clientName.setText(followUpModel.getCurrentClient());
+    public void onBind(FollowUp followUp) {
+        consultorName.setText(followUp.getConsultorName());
+        clientName.setText(followUp.getCurrentClient());
         //TODO make conversion from long to Date format (joda time)
-        date.setText(String.valueOf(followUpModel.getDateLastFollow()));
-        status.setText(followUpModel.getStatus());
+        date.setText(String.valueOf(followUp.getDateLastFollow()));
     }
 
     public RelativeLayout getView() {

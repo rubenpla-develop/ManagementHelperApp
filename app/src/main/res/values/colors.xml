@@ -14,4 +14,9 @@
     <color name="tab_enable">#FFFFFF</color>
     <color name="tab_checked">#F3CD70</color>
     <color name="tab_unchecked">#FFFFFF</color>
+
+    <color name="background_white">#FFFFFF</color>
+    <color name="background_electric_blue">#2E64FE</color>
+    <color name="background_soft_blue">#58ACFA</color>
+
 </resources>

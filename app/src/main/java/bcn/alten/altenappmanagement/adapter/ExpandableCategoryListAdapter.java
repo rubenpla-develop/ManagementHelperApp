@@ -13,7 +13,7 @@ import java.util.List;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.expandable.holderview.FollowUpHolder;
 import bcn.alten.altenappmanagement.expandable.holderview.GroupHolder;
-import bcn.alten.altenappmanagement.mvp.model.FollowUpModel;
+import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
 
 public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapter<GroupHolder,
@@ -49,7 +49,7 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
     @Override
     public void onBindChildViewHolder(final FollowUpHolder holder, int flatPosition,
                                       final ExpandableGroup group, final int childIndex) {
-        final FollowUpModel model = (FollowUpModel) group.getItems().get(childIndex);
+        final FollowUp model = (FollowUp) group.getItems().get(childIndex);
         holder.onBind(model);
 
         holder.getView().setOnClickListener(new View.OnClickListener() {
@@ -58,8 +58,8 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                 //TODO TEMP, only for testing logic
                 ((IMainActivityView) context).showMessage("Categoria : " + group.getTitle()
                         + ", Consultor: " +
-                        ((FollowUpModel) group.getItems().get(childIndex)).getConsultorName()
-                        + "\nCliente : " +  ((FollowUpModel) group.getItems().get(childIndex))
+                        ((FollowUp) group.getItems().get(childIndex)).getConsultorName()
+                        + "\nCliente : " +  ((FollowUp) group.getItems().get(childIndex))
                         .getCurrentClient()
                         + ", Posicion: " + (childIndex + 1));
             }
