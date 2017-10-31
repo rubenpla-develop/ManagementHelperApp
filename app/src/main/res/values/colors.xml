@@ -18,5 +18,10 @@
     <color name="background_white">#FFFFFF</color>
     <color name="background_electric_blue">#2E64FE</color>
     <color name="background_soft_blue">#58ACFA</color>
+    <color name="background_soft_dark_blue">#4c85b5</color>
+    <color name="background_soft_orange">#fa6e18</color>
+
+    <color name="odd_list_row_color">#FAFAFA</color>
+    <color name="pair_list_row_color">#E6E6E6</color>
 
 </resources>
