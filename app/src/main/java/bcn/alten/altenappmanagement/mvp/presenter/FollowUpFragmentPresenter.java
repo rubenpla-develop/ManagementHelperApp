@@ -23,8 +23,8 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
     public void showFollowUpList() {
         //TODO get items from DB
 
-        //TODO mocking content
-        List<Category> categoryList = CategoryDataFactory.makeGenres();
+        //TODO mocking content, delete
+        List<Category> categoryList = CategoryDataFactory.makeTrueDateTimesFollows();
         view.ShowFollowUpList(categoryList);
     }
 

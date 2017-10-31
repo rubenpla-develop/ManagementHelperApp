@@ -8,6 +8,7 @@ import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class FollowUpHolder extends ChildViewHolder {
 
@@ -34,7 +35,9 @@ public class FollowUpHolder extends ChildViewHolder {
         consultorName.setText(followUp.getConsultorName());
         clientName.setText(followUp.getCurrentClient());
         //TODO make conversion from long to Date format (joda time)
-        date.setText(String.valueOf(followUp.getDateLastFollow()));
+        String realDateFormat = JodaTimeConverter.getInstance()
+                .getDateInStringFormat(Long.valueOf(followUp.getDateLastFollow()));
+        date.setText(String.valueOf(realDateFormat));
     }
 
     public RelativeLayout getView() {
