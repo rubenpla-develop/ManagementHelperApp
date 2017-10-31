@@ -10,7 +10,7 @@ public class JodaTimeConverter {
     public static final String THREE_MONTH_INTERVAL = "7889238000";
     public static final String SIX_MONTH_INTERVAL = "15778476000";*/
 
-    private final String DATE_PATTERN = "dd MM yyyy";
+    private final String DATE_PATTERN = "dd-MM-yyyy";
 
     //jodaTimeConverter class singleton instance
     private static JodaTimeConverter instance = null;

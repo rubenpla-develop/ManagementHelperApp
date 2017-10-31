@@ -34,7 +34,7 @@ public class FollowUpHolder extends ChildViewHolder {
     public void onBind(FollowUp followUp) {
         consultorName.setText(followUp.getConsultorName());
         clientName.setText(followUp.getCurrentClient());
-        //TODO make conversion from long to Date format (joda time)
+
         String realDateFormat = JodaTimeConverter.getInstance()
                 .getDateInStringFormat(Long.valueOf(followUp.getDateLastFollow()));
         date.setText(String.valueOf(realDateFormat));

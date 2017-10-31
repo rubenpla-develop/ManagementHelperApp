@@ -1,5 +1,8 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,8 +17,10 @@ import java.util.List;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.adapter.ExpandableCategoryListAdapter;
 import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
+import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
+import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -75,6 +80,19 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     }
 
     @Override
+    public void onLiveDataChanged(final LiveData< List<FollowUp>> list) {
+        list.observe(this, new Observer<List<FollowUp>>() {
+            @Override
+            public void onChanged(@Nullable List<FollowUp> followUpList) {
+                List<Category> categoryList = CategoryDataFactory.getInstance()
+                        .getDataFilteredByCategory(list.getValue());
+
+                ShowFollowUpList(categoryList);
+            }
+        });
+    }
+
+    @Override
     public boolean editFollowUp(Object model) {
         return false;
     }
@@ -87,6 +105,11 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     @Override
     public void showFollowUpDialog(String mode, Object model) {
 
+    }
+
+    @Override
+    public Context getContext() {
+        return super.getContext();
     }
 
     @Override
