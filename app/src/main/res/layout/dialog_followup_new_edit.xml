@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/text_name_field_boxes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:primaryColor="@color/background_soft_dark_blue"
+        app:iconSignifier="@drawable/ic_person_black_24dp"
+        app:enabled="true"
+        app:errorColor="@color/cardview_shadow_end_color"
+        app:hasClearButton="true"
+        app:maxCharacters="30"
+        app:labelText="Nombre : ">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/extended_name_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/background_soft_dark_blue"/>
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/text_client_field_boxes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:primaryColor="@color/background_soft_dark_blue"
+        app:iconSignifier="@drawable/ic_business_center_black_24dp"
+        app:enabled="true"
+        app:errorColor="@color/cardview_shadow_end_color"
+        app:hasClearButton="true"
+        app:maxCharacters="20"
+        app:labelText="Cliente : ">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/extended_client_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/background_soft_dark_blue"/>
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/fup_dialog_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="Ultimo Seguimiento:" />
+
+        <TextView
+            android:id="@+id/fup_dialog_date_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/background_electric_blue"
+            android:text="22-10-2017"
+            android:maxLength="10"/>
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/fup_dialog_checkbox_add_next_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text= "Establecer Proximo Seguimiento"/>
+
+    <LinearLayout
+        android:id="@+id/fup_dialog_container_next_follow"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/fup_dialog_next_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="Proximo Seguimiento:" />
+
+        <TextView
+            android:id="@+id/fup_dialog_next_date_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/background_electric_blue"
+            android:text="17-11-2017"
+            android:maxLength="10"/>
+    </LinearLayout>
+
+
+</LinearLayout>
