@@ -145,16 +145,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
-            /*Log.i("AltenAPP", "year: " + year + " month : " + month + " day : " + day);
-            LocalDate dateTime = new LocalDate(year, month + 1 , day);
-            DateTime dt = dateTime.toDateTimeAtCurrentTime();
-            String dateInMillies = String.valueOf(dt.getMillis()); //TODO saves this value to DB*/
 
             String dateInmMillies = JodaTimeConverter.getInstance().parsefromDatePicker(month,day, year);
 
             //TODO retrieve date value this way
-            //DateTime finalDateTime = new DateTime(Long.valueOf(dateInMillies));
             String finalDateTime = JodaTimeConverter.getInstance()
                     .getDateInStringFormat(Long.valueOf(dateInmMillies));
            // dt.toString("dd-MM-yyyy");
