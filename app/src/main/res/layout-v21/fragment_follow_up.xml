@@ -15,11 +15,13 @@
         android:id="@+id/follow_up_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
+        android:elevation="@dimen/activity_horizontal_margin"
         android:layout_gravity="bottom|end"
-        android:background="@color/background_soft_orange"
         app:backgroundTint="@color/background_soft_orange"
-        app:fabSize="normal"
+        app:fabSize="auto"
         app:srcCompat="@drawable/ic_person_add_black_24dp"/>
+
 </FrameLayout>
