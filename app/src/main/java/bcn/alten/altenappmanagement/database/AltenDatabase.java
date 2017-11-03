@@ -25,5 +25,4 @@ public abstract class AltenDatabase extends RoomDatabase {
     }
 
     public abstract DaoAccess daoAccess();
-
 }

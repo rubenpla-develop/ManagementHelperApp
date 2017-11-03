@@ -22,13 +22,13 @@ public interface DaoAccess {
     void insertFollowUpList(List<FollowUp> followUpList);
 
     @Insert
-    void addNewFollowUp(FollowUp followUp);
+    void createNewFollowUp(FollowUp followUp);
 
     @Update
     void updateFollowUp(FollowUp followUp);
 
     @Delete
-    boolean deleteRecord(FollowUp followUp);
+    void deleteRecord(FollowUp followUp);
 
    /* @Insert
     void insertMultipleRecord(University... universities);
