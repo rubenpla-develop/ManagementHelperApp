@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.database.AltenDatabase;
+import bcn.alten.altenappmanagement.database.ops.CreateNewFollowUpWrapper;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 
@@ -23,14 +24,14 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
 
     @Override
     public void showFollowUpList() {
-        //TODO get items from DB
+        //getting items from DB
         LiveData<List<FollowUp>> categoryList = AltenDatabase.getDatabase(view.getContext())
                 .daoAccess()
                 .fecthFollowUpData();
 
         view.onLiveDataChanged(categoryList);
 
-        //TODO mocking content, delete
+        //TODO mocking content
         /*List<Category> categoryList = CategoryDataFactory.createMockFilteredCategories();
         view.ShowFollowUpList(categoryList);*/
     }
@@ -49,9 +50,8 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
     }
 
     @Override
-    public Object createNewFollowUp() {
-        //TODO create new element, store on DB and finally update list on recyclerview
-
-        return null;
+    public void createNewFollowUp(FollowUp followUp) {
+        CreateNewFollowUpWrapper wrapper = new CreateNewFollowUpWrapper(followUp, this);
+        wrapper.performCreateNewFollowUpOperation();
     }
 }

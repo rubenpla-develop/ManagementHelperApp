@@ -181,7 +181,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
     @Override
     public void showAddFollowUpDialog() {
-        FollowUpDialog followupDialog = new FollowUpDialog(getActivity());
+        FollowUpDialog followupDialog = new FollowUpDialog(getActivity(), presenter);
 
         addFollowUpDialog = followupDialog.getDialog();
         addFollowUpDialog.show();
