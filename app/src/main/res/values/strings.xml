@@ -6,5 +6,14 @@
 
     <string name="category_urgent">Urgente</string>
     <string name="category_warning">Atención</string>
-    <string name="categorty_up_to_day">Ok</string>
+    <string name="category_up_to_day">Ok</string>
+
+    <string name="follow_up_dialog_positive_button">Guardar</string>
+    <string name="follow_up_dialog_negative_button">Descartar</string>
+    <string name="follow_up_dialog_client">Cliente :</string>
+    <string name="follow_up_dialog_consultor">Nombre :</string>
+    <string name="follow_up_dialog_last_date_title">Ultimo seguimiento :</string>
+    <string name="follow_up_dialog_next_date_checkbox_title">Establecer próximo seguimiento</string>
+    <string name="follow_up_dialog_next_date_title">Próximo seguimiento</string>
+
 </resources>
