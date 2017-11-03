@@ -7,7 +7,7 @@
     android:padding="8dp">
 
     <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-        android:id="@+id/text_name_field_boxes"
+        android:id="@+id/textfieldbox_consultor_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -18,10 +18,10 @@
         app:errorColor="@color/cardview_shadow_end_color"
         app:hasClearButton="true"
         app:maxCharacters="30"
-        app:labelText="Nombre : ">
+        app:labelText="@string/follow_up_dialog_consultor">
 
         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-            android:id="@+id/extended_name_edit_text"
+            android:id="@+id/extended_edittext_consultor_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/background_soft_dark_blue"/>
@@ -29,7 +29,7 @@
     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
     <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-        android:id="@+id/text_client_field_boxes"
+        android:id="@+id/textfieldbox_client_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -40,10 +40,10 @@
         app:errorColor="@color/cardview_shadow_end_color"
         app:hasClearButton="true"
         app:maxCharacters="20"
-        app:labelText="Cliente : ">
+        app:labelText="@string/follow_up_dialog_client">
 
         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-            android:id="@+id/extended_client_edit_text"
+            android:id="@+id/extended_edittext_client_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/background_soft_dark_blue"/>
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:text="Ultimo Seguimiento:" />
+            android:text="@string/follow_up_dialog_last_date_title" />
 
         <TextView
             android:id="@+id/fup_dialog_date_edit"
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text= "Establecer Proximo Seguimiento"/>
+        android:text= "@string/follow_up_dialog_next_date_checkbox_title"/>
 
     <LinearLayout
         android:id="@+id/fup_dialog_container_next_follow"
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:text="Proximo Seguimiento:" />
+            android:text="@string/follow_up_dialog_next_date_title" />
 
         <TextView
             android:id="@+id/fup_dialog_next_date_edit"
