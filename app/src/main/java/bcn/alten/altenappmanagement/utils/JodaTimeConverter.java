@@ -3,6 +3,8 @@ package bcn.alten.altenappmanagement.utils;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Months;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class JodaTimeConverter {
 
@@ -35,6 +37,21 @@ public class JodaTimeConverter {
         DateTime finalDateTime = new DateTime(Long.valueOf(millis));
 
         return finalDateTime.getMillis();
+    }
+
+    public String parseDateFromStringPatternToMillis(String date) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(DATE_PATTERN);
+        DateTime dt = formatter.parseDateTime(date);
+
+        int month = dt.getMonthOfYear();
+        int day = dt.getDayOfMonth();
+        int year = dt.getYear();
+
+        LocalDate localDate = new LocalDate(year, month, day);
+        dt = localDate.toDateTimeAtCurrentTime();
+        String dateInMillis = String.valueOf(dt.getMillis());
+
+        return dateInMillis;
     }
 
     public String getDateInStringFormat(final Long millis) {

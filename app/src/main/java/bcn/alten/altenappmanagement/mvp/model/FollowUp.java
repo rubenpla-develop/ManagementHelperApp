@@ -21,14 +21,14 @@ public class FollowUp implements Parcelable {
     //@Embedded(prefix = DbKeys.FOLLOWUP_PREFIX)
     private String dateLastFollow;
 
-    private String datenextFollow;
+    private String dateNextFollow;
 
     public FollowUp(@NonNull String consultorName, @NonNull  String currentClient,
-                    @NonNull String dateLastFollow) {
+                    @NonNull String dateLastFollow, @NonNull String dateNextFollow) {
         this.consultorName = consultorName;
         this.currentClient = currentClient;
         this.dateLastFollow = dateLastFollow;
-        this.datenextFollow = getDatenextFollow();
+        this.dateNextFollow = dateNextFollow;
 
     }
 
@@ -36,7 +36,7 @@ public class FollowUp implements Parcelable {
         consultorName = in.readString();
         currentClient = in.readString();
         dateLastFollow = in.readString();
-        datenextFollow = in.readString();
+        dateNextFollow = in.readString();
     }
 
     public static final Creator<FollowUp> CREATOR = new Creator<FollowUp>() {
@@ -61,7 +61,7 @@ public class FollowUp implements Parcelable {
         dest.writeString(consultorName);
         dest.writeString(currentClient);
         dest.writeString(dateLastFollow);
-        dest.writeString(datenextFollow);
+        dest.writeString(dateNextFollow);
     }
 
     public int getId() {
@@ -96,11 +96,11 @@ public class FollowUp implements Parcelable {
         this.dateLastFollow = dateLastFollow;
     }
 
-    public String getDatenextFollow() {
-        return datenextFollow;
+    public String getDateNextFollow() {
+        return dateNextFollow;
     }
 
-    public void setDatenextFollow(String datenextFollow) {
-        this.datenextFollow = datenextFollow;
+    public void setDateNextFollow(String dateNextFollow) {
+        this.dateNextFollow = dateNextFollow;
     }
 }

@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setListeners() {
         btnFecthData.setOnClickListener(this);
         btnInsertData.setOnClickListener(this);
+        btnShowDatePicker.setVisibility(View.INVISIBLE);
         btnShowDatePicker.setOnClickListener(this);
     }
 
