@@ -36,7 +36,7 @@
         android:layout_toLeftOf="@+id/list_item_genre_arrow"
         android:layout_toStartOf="@+id/list_item_genre_arrow"
         android:layout_centerVertical="true"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/badge_view_number"

@@ -36,7 +36,7 @@ public class CategoryDataFactory {
             int months = JodaTimeConverter.getInstance()
                     .getMonthsOfDifferenceWithCurrentDate(follow.getDateLastFollow());
 
-            if (months > 0 && months < 3) {
+            if (months < 3) {
                 green.add(follow);
             } else if (months >= 3 && months < 6) {
                 yellow.add(follow);
