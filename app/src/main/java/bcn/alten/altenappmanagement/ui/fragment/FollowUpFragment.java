@@ -1,7 +1,6 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
 import android.animation.Animator;
-import android.app.DatePickerDialog;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
@@ -17,8 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import android.widget.DatePicker;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -28,14 +25,12 @@ import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
-import bcn.alten.altenappmanagement.ui.fragment.dialog.FollowUpDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.fragment.dialog.FollowUpDialog;
 import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
-import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FollowUpFragment extends Fragment implements IFollowUpFragmentView, DatePickerDialog.OnDateSetListener{
+public class FollowUpFragment extends Fragment implements IFollowUpFragmentView {
 
     public static final String TAG = FollowUpFragment.class.getSimpleName();
 
@@ -45,9 +40,13 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     @BindView(R.id.follow_up_fab)
     FloatingActionButton fab_add_people;
 
+    private AlertDialog addFollowUpDialog;
+
     private FollowUpFragmentPresenter presenter;
     private ExpandableCategoryListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    private String actionMode;
 
     public static FollowUpFragment newInstance() {
             Bundle args = new Bundle();
@@ -182,32 +181,9 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
 
     @Override
     public void showAddFollowUpDialog() {
+        FollowUpDialog followupDialog = new FollowUpDialog(getActivity());
 
-        final FollowUpDatePickerDialog datePickerDialog= new FollowUpDatePickerDialog(getActivity(), this);
-
-        final FollowUpDialog followupDialog = new FollowUpDialog(getActivity(),
-                this, this, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePickerDialog.showDatePicker();
-            }
-        });
-
-        AlertDialog addFollowUpDialog = followupDialog.getDialog();
+        addFollowUpDialog = followupDialog.getDialog();
         addFollowUpDialog.show();
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        final String dateInmMillies = JodaTimeConverter.getInstance()
-                .parsefromDatePicker(month,dayOfMonth, year);
-
-        final String finalDateTime = JodaTimeConverter.getInstance()
-                .getDateInStringFormat(Long.valueOf(dateInmMillies));
-
-        View dialogView = getLayoutInflater().from(getActivity()).inflate(R.layout.dialog_followup_new_edit, null);
-
-        TextView dateValueTextView = dialogView.findViewById(R.id.fup_dialog_date_edit);
-        dateValueTextView.setText(finalDateTime);
     }
 }
