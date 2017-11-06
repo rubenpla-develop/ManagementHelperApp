@@ -12,7 +12,7 @@ public interface IFollowUpFragmentView {
 
     void ShowFollowUpList(List<Category> list);
     void onLiveDataChanged(LiveData<List<FollowUp>> list);
-    boolean editFollowUp(Object model);
+    void editFollowUp(FollowUp followUp);
     boolean deleteFollowUp(List<Object> list);
     void showFollowUpDialog(String mode, Object model);
     List<Object> addNewFollowUpCreated(Object model);

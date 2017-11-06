@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.database.ops;
+package bcn.alten.altenappmanagement.database.ops.followup;
 
 import android.os.AsyncTask;
 

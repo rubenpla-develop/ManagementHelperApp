@@ -1,22 +1,22 @@
-package bcn.alten.altenappmanagement.database.ops;
+package bcn.alten.altenappmanagement.database.ops.followup;
 
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 
-public class CreateNewFollowUpWrapper {
-
+public class EditFollowUpWrapper {
     private final String TAG = CreateNewFollowUpWrapper.class.getSimpleName();
 
     private FollowUp followUp;
     private FollowUpFragmentPresenter presenter;
 
-    public CreateNewFollowUpWrapper(FollowUp followUp, FollowUpFragmentPresenter presenter) {
+    //TODO not needed presenter???
+    public EditFollowUpWrapper(FollowUp followUp, FollowUpFragmentPresenter presenter) {
         this.followUp = followUp;
         this.presenter = presenter;
     }
 
-    public void performCreateNewFollowUpOperation() {
-        CreateNewFollowUpAsyncTask asyncTask = new CreateNewFollowUpAsyncTask(followUp);
+    public void performEditFollowUpOperation() {
+        EditFollowUpAsyncTask asyncTask = new EditFollowUpAsyncTask(followUp);
         asyncTask.execute();
     }
 }

@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.database.AltenDatabase;
-import bcn.alten.altenappmanagement.database.ops.CreateNewFollowUpWrapper;
+import bcn.alten.altenappmanagement.database.ops.followup.CreateNewFollowUpWrapper;
+import bcn.alten.altenappmanagement.database.ops.followup.EditFollowUpWrapper;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 
@@ -37,9 +38,10 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
     }
 
     @Override
-    public Object editFollowUp(int id) {
+    public void editFollowUp(FollowUp followUp) {
         //TODO get item from id, modify, and store on DB, once at all, update recyclerview data
-        return null;
+        EditFollowUpWrapper wrapper = new EditFollowUpWrapper(followUp, this);
+        wrapper.performEditFollowUpOperation();
     }
 
     @Override

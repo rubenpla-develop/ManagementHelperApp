@@ -135,8 +135,8 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
     @Override
     public void ShowFollowUpList(List<Category> list) {
-        expandableRecyclerViewAdapter = new ExpandableCategoryListAdapter(getActivity(),
-                list);
+        expandableRecyclerViewAdapter = new ExpandableCategoryListAdapter(list, getActivity(),
+                this);
 
         expandableList.setAdapter(expandableRecyclerViewAdapter);
     }
@@ -155,8 +155,12 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     }
 
     @Override
-    public boolean editFollowUp(Object model) {
-        return false;
+    public void editFollowUp(FollowUp followUp) {
+        FollowUpDialog followupDialog = new FollowUpDialog(getContext(), FollowUpDialog.EDIT_FOLLOWUP_ACTION,
+                followUp, presenter);
+
+        addFollowUpDialog = followupDialog.getDialog();
+        addFollowUpDialog.show();
     }
 
     @Override
@@ -181,7 +185,8 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
     @Override
     public void showAddFollowUpDialog() {
-        FollowUpDialog followupDialog = new FollowUpDialog(getActivity(), presenter);
+        FollowUpDialog followupDialog = new FollowUpDialog(getActivity(),
+                FollowUpDialog.ADD_FOLLOWUP_ACTION ,presenter);
 
         addFollowUpDialog = followupDialog.getDialog();
         addFollowUpDialog.show();

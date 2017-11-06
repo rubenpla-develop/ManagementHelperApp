@@ -14,13 +14,14 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.expandable.holderview.FollowUpHolder;
 import bcn.alten.altenappmanagement.expandable.holderview.GroupHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
-import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
+import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 
 public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapter<GroupHolder,
         FollowUpHolder>  {
 
     private Context context;
     private LayoutInflater inflater;
+    private IFollowUpFragmentView followUpFragmentView;
 
     public ExpandableCategoryListAdapter(List<? extends ExpandableGroup> groups) {
         super(groups);
@@ -29,6 +30,14 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
     public ExpandableCategoryListAdapter(Context context, List<? extends ExpandableGroup> groups) {
         super(groups);
         this.context = context;
+        inflater = LayoutInflater.from(this.context);
+    }
+
+    public ExpandableCategoryListAdapter(List<? extends ExpandableGroup> groups,
+                                         Context context, IFollowUpFragmentView view) {
+        super(groups);
+        this.context = context;
+        this.followUpFragmentView = view;
         inflater = LayoutInflater.from(this.context);
     }
 
@@ -58,13 +67,25 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
         holder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String consultorName =  model.getConsultorName();
+                String clientName =   model.getCurrentClient();
+                String lastDateFollowUp =   model.getDateLastFollow();
+                String nextFollowUp = model.getDateNextFollow();
+                FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
+                        nextFollowUp);
+
+                followUp.setId(model.getId());
+
+                followUpFragmentView.editFollowUp(followUp);
+
                 //TODO TEMP, only for testing logic
-                ((IMainActivityView) context).showMessage("Categoria : " + group.getTitle()
+/*                ((IMainActivityView) context).showMessage("Categoria : " + group.getTitle()
                         + ", Consultor: " +
                         ((FollowUp) group.getItems().get(childIndex)).getConsultorName()
                         + "\nCliente : " +  ((FollowUp) group.getItems().get(childIndex))
                         .getCurrentClient()
-                        + ", Posicion: " + (childIndex + 1));
+                        + ", Posicion: " + (childIndex + 1));*/
             }
         });
     }
