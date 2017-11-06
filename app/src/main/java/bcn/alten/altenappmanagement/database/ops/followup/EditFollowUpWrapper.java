@@ -4,7 +4,7 @@ import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 
 public class EditFollowUpWrapper {
-    private final String TAG = CreateNewFollowUpWrapper.class.getSimpleName();
+    private final String TAG = EditFollowUpWrapper.class.getSimpleName();
 
     private FollowUp followUp;
     private FollowUpFragmentPresenter presenter;
