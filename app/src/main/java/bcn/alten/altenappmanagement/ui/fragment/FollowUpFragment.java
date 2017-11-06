@@ -25,6 +25,7 @@ import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
+import bcn.alten.altenappmanagement.ui.fragment.dialog.FollowUpDeleteDialog;
 import bcn.alten.altenappmanagement.ui.fragment.dialog.FollowUpDialog;
 import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
 import butterknife.BindView;
@@ -40,7 +41,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     @BindView(R.id.follow_up_fab)
     FloatingActionButton fab_add_people;
 
-    private AlertDialog addFollowUpDialog;
+    private AlertDialog followUpDialog;
 
     private FollowUpFragmentPresenter presenter;
     private ExpandableCategoryListAdapter expandableRecyclerViewAdapter;
@@ -156,16 +157,20 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
     @Override
     public void editFollowUp(FollowUp followUp) {
-        FollowUpDialog followupDialog = new FollowUpDialog(getContext(), FollowUpDialog.EDIT_FOLLOWUP_ACTION,
+        FollowUpDialog followupEditDialog = new FollowUpDialog(getContext(), FollowUpDialog.EDIT_FOLLOWUP_ACTION,
                 followUp, presenter);
 
-        addFollowUpDialog = followupDialog.getDialog();
-        addFollowUpDialog.show();
+        followUpDialog = followupEditDialog.getDialog();
+        followUpDialog.show();
     }
 
     @Override
-    public boolean deleteFollowUp(List<Object> list) {
-        return false;
+    public void deleteFollowUp(FollowUp followUp) {
+        FollowUpDeleteDialog followUpDeleteDialog = new FollowUpDeleteDialog(getContext(), followUp,
+                presenter);
+
+        followUpDialog = followUpDeleteDialog.getDialog();
+        followUpDialog.show();
     }
 
     @Override
@@ -179,16 +184,11 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     }
 
     @Override
-    public List<Object> addNewFollowUpCreated(Object model) {
-        return null;
-    }
-
-    @Override
     public void showAddFollowUpDialog() {
-        FollowUpDialog followupDialog = new FollowUpDialog(getActivity(),
+        FollowUpDialog followupAddDialog = new FollowUpDialog(getActivity(),
                 FollowUpDialog.ADD_FOLLOWUP_ACTION ,presenter);
 
-        addFollowUpDialog = followupDialog.getDialog();
-        addFollowUpDialog.show();
+        followUpDialog = followupAddDialog.getDialog();
+        followUpDialog.show();
     }
 }

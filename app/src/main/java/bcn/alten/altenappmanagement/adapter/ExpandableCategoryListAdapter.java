@@ -67,7 +67,6 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
         holder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String consultorName =  model.getConsultorName();
                 String clientName =   model.getCurrentClient();
                 String lastDateFollowUp =   model.getDateLastFollow();
@@ -86,6 +85,24 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                         + "\nCliente : " +  ((FollowUp) group.getItems().get(childIndex))
                         .getCurrentClient()
                         + ", Posicion: " + (childIndex + 1));*/
+            }
+        });
+
+        holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String consultorName =  model.getConsultorName();
+                String clientName =   model.getCurrentClient();
+                String lastDateFollowUp =   model.getDateLastFollow();
+                String nextFollowUp = model.getDateNextFollow();
+                FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
+                        nextFollowUp);
+
+                followUp.setId(model.getId());
+
+                followUpFragmentView.deleteFollowUp(followUp);
+
+                return false;
             }
         });
     }
