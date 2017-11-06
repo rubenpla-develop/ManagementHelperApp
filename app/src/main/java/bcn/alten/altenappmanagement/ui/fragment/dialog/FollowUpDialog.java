@@ -76,8 +76,8 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
         if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
             consultorNameExtEditText.setText(followUp.getConsultorName());
             clientNameExtEditText.setText(followUp.getCurrentClient());
-            consultorNameExtEditText.requestFocus();
             clientNameExtEditText.requestFocus();
+            consultorNameExtEditText.requestFocus();
 
             if (followUp.getDateNextFollow() != null
                     && followUp.getDateNextFollow().length() > 0) {

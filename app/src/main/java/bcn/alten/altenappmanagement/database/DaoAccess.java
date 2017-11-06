@@ -28,7 +28,7 @@ public interface DaoAccess {
     void updateFollowUp(FollowUp followUp);
 
     @Delete
-    void deleteRecord(FollowUp followUp);
+    void deleteFollowUp(FollowUp followUp);
 
    /* @Insert
     void insertMultipleRecord(University... universities);
