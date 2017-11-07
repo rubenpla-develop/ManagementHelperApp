@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.ui.fragment.dialog;
+package bcn.alten.altenappmanagement.ui.dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
