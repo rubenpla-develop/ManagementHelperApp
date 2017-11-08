@@ -55,9 +55,10 @@ public class CategoryDataFactory {
 
         return filteredList;
     }
-
-
-
+    
+    /*
+     *  TESTING MOCK METHODS, NOT USE FOR PRODUCTION
+     */
     //TODO from this points all code is for testing purpose
     public static List<Category> makeGenres() {
         return Arrays.asList(makeredCategory(),

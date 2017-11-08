@@ -2,7 +2,6 @@ package bcn.alten.altenappmanagement.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,23 +46,6 @@ public class FollowUpErrorController {
         }
         
         return isAnyError;
-    }
-
-    public String checkDateValidFormat(String dateInMillis) {
-        String formatedDate = "";
-
-        try {
-            formatedDate = JodaTimeConverter.getInstance().getDateInStringFormat(dateInMillis);
-            Log.i(TAG, "Parse Date successful, RESULT : " + formatedDate);
-        } catch (NumberFormatException formatException) {
-            Log.e(TAG, "ERROR NumberformatException : " + formatException.getLocalizedMessage());
-        } finally {
-            return formatedDate;
-        }
-    }
-
-    public void checkForEmptyOrNotValidDateFormat(View dialogView) {
-        
     }
 
     public void checkforFollowUpDates(View dateViewClicked, String dateInmMillies, 
