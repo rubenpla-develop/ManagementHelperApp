@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             //TODO retrieve date value this way
             String finalDateTime = JodaTimeConverter.getInstance()
-                    .getDateInStringFormat(Long.valueOf(dateInmMillies));
+                    .getDateInStringFormat(dateInmMillies);
            // dt.toString("dd-MM-yyyy");
             Log.i("Alten", "dateInMillies : " + dateInmMillies + "\nfinalDateTime : "
                     + finalDateTime);

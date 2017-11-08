@@ -36,7 +36,7 @@ public class FollowUpHolder extends ChildViewHolder {
         clientName.setText(followUp.getCurrentClient());
 
         String realDateFormat = JodaTimeConverter.getInstance()
-                .getDateInStringFormat(Long.valueOf(followUp.getDateLastFollow()));
+                .getDateInStringFormat(followUp.getDateLastFollow());
         date.setText(String.valueOf(realDateFormat));
     }
 
