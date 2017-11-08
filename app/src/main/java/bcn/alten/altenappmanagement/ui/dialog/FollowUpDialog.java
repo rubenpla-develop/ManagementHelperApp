@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -100,31 +101,8 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
         }
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setPositiveButton(R.string.follow_up_dialog_positive_button,
-                new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String formattedLastDate = JodaTimeConverter.getInstance()
-                .parseDateFromStringPatternToMillis(dateText.getText().toString());
-
-                String formattedNextDate = JodaTimeConverter.getInstance()
-                        .parseDateFromStringPatternToMillis(addNextFollowTextView.getText().toString());
-
-                editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
-                        clientNameExtEditText.getText().toString(), formattedLastDate,
-                        formattedNextDate);
-
-                if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
-                    followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
-                } else if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
-                    editedFollowUp.setId(followUp.getId());
-                    followUpFragmentPresenter.editFollowUp(editedFollowUp);
-                }
-
-                ((IMainActivityView) context).showMessage("FollowUp Dialog OK!");
-                dialog.dismiss();
-            }
-        }).setNegativeButton(R.string.follow_up_dialog_negative_button, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton(R.string.follow_up_dialog_positive_button, null)
+                .setNegativeButton(R.string.follow_up_dialog_negative_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -147,9 +125,45 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
             }
         });
 
-        AlertDialog dialog = alertDialogBuilder.create();
+        final AlertDialog followUpDialog = alertDialogBuilder.create();
+        followUpDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positiveButton = followUpDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-        return dialog;
+                        FollowUpErrorController errorController = new FollowUpErrorController(context,
+                                followUpFragmentPresenter);
+
+                        if (!errorController.isAnyFieldEmpty(dialogView)) {
+                            String formattedLastDate = JodaTimeConverter.getInstance()
+                                    .parseDateFromStringPatternToMillis(dateText.getText().toString());
+
+                            String formattedNextDate = JodaTimeConverter.getInstance()
+                                    .parseDateFromStringPatternToMillis(addNextFollowTextView.getText().toString());
+
+                            editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
+                                    clientNameExtEditText.getText().toString(), formattedLastDate,
+                                    formattedNextDate);
+
+                            if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
+                                followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
+                            } else if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
+                                editedFollowUp.setId(followUp.getId());
+                                followUpFragmentPresenter.editFollowUp(editedFollowUp);
+                            }
+
+                            ((IMainActivityView) context).showMessage("FollowUp Dialog OK!");
+                            followUpDialog.dismiss();
+                        }
+                    }
+                });
+            }
+        });
+
+        return followUpDialog;
     }
 
     private void launchDatePickerDialog() {

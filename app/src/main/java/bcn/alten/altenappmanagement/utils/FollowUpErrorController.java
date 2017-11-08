@@ -26,7 +26,7 @@ public class FollowUpErrorController {
         res = context.getResources();
     }
 
-    public boolean checkForEmptyFields(View dialogView) {
+    public boolean isAnyFieldEmpty(View dialogView) {
         boolean isAnyError = false;
         
         final TextFieldBoxes consultorNameBox = dialogView.findViewById(R.id.textfieldbox_consultor_name);
