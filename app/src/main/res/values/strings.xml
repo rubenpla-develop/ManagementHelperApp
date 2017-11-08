@@ -15,6 +15,7 @@
     <string name="follow_up_dialog_last_date_title">Ultimo seguimiento :</string>
     <string name="follow_up_dialog_next_date_checkbox_title">Establecer próximo seguimiento</string>
     <string name="follow_up_dialog_next_date_title">Próximo seguimiento :</string>
+    <string name="follow_up_dialog_no_date">Sin fecha</string>
 
     <!-- DELETE FOLLOWUP DIALOG -->
     <string name="follow_up_dialog_delete_title">Atención</string>
@@ -26,5 +27,11 @@
     <string name="follow_up_dialog_delete_consultor">Nombre :\u0020</string>
     <string name="follow_up_dialog_delete_last_date_title">Ultimo seguimiento :\u0020</string>
     <string name="follow_up_dialog_delete_next_date_title">Próximo seguimiento :\u0020</string>
+
+    <!-- FollowUp Error Controller -->
+    <string name="follow_up_error_controller_previous_date">Fecha previa a la fecha actual,
+        intenta con otra fecha nueva.</string>
+    <string name="follow_up_error_controller_newer_date">Fecha más reciente que la fecha actual,
+    intenta con otra fecha nueva.</string>
 
 </resources>

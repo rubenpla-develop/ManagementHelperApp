@@ -39,6 +39,20 @@ public class FollowUpDeleteDialog {
         final TextView infoNameTextView = dialogView.findViewById(R.id.fup_dialog_delete_info_name);
         final TextView lastDateTextView = dialogView.findViewById(R.id.fup_dialog_delete_info_last_date);
         final TextView nextDateTextview = dialogView.findViewById(R.id.fup_dialog_delete_info_next_date);
+        
+        infoNameTextView.append(followUpToDelete.getConsultorName());
+        infoClientTextview.append(followUpToDelete.getCurrentClient());
+
+        String formattedLastDate = JodaTimeConverter.getInstance()
+                .getDateInStringFormat(followUpToDelete.getDateLastFollow());
+
+        String formattedNextDate = JodaTimeConverter.getInstance()
+                .getDateInStringFormat(followUpToDelete.getDateNextFollow());
+
+        lastDateTextView.append(formattedLastDate);
+        nextDateTextview.append(formattedNextDate);
+
+        followUpInfoContainer.setVisibility(View.GONE);
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setPositiveButton(R.string.follow_up_dialog_delete_positive_button,
@@ -64,17 +78,6 @@ public class FollowUpDeleteDialog {
                 switch (followUpInfoContainer.getVisibility()) {
                     case View.GONE:
                         followUpInfoContainer.setVisibility(View.VISIBLE);
-                        infoNameTextView.append(followUpToDelete.getConsultorName());
-                        infoClientTextview.append(followUpToDelete.getCurrentClient());
-
-                        String formattedLastDate = JodaTimeConverter.getInstance()
-                                .getDateInStringFormat(Long.valueOf(followUpToDelete.getDateLastFollow()));
-
-                        String formattedNextDate = JodaTimeConverter.getInstance()
-                                .getDateInStringFormat(Long.valueOf(followUpToDelete.getDateNextFollow()));
-
-                        lastDateTextView.append(formattedLastDate);
-                        nextDateTextview.append(formattedNextDate);
                         break;
                     case View.VISIBLE:
                         followUpInfoContainer.setVisibility(View.GONE);

@@ -14,6 +14,7 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
+import bcn.alten.altenappmanagement.utils.FollowUpErrorController;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
@@ -79,11 +80,11 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
             clientNameExtEditText.requestFocus();
             consultorNameExtEditText.requestFocus();
 
-            if (followUp.getDateNextFollow() != null
-                    && followUp.getDateNextFollow().length() > 0) {
+            if (followUp.getDateLastFollow() != null
+                    && followUp.getDateLastFollow().length() > 0) {
                  formattedDate = JodaTimeConverter.getInstance()
-                        .getDateInStringFormat(Long.valueOf(followUp.getDateLastFollow()));
-                dateText.setText(formattedDate);
+                        .getDateInStringFormat(followUp.getDateLastFollow());
+                 dateText.setText(formattedDate);
             }
 
             if (followUp.getDateNextFollow() != null
@@ -162,7 +163,10 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
         final String finalDateTime = JodaTimeConverter.getInstance()
                 .getDateInStringFormat(Long.valueOf(dateInmMillies));
 
-        ((TextView) dateViewClicked).setText(finalDateTime);
+        FollowUpErrorController errorController = new FollowUpErrorController(context,
+                followUpFragmentPresenter);
+
+        errorController.checkforFollowUpDates(dateViewClicked, dateInmMillies, finalDateTime);
     }
 
     @Override
