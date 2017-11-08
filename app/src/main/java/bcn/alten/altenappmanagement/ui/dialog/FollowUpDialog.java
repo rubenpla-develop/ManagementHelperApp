@@ -15,10 +15,10 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
+import bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes;
 import bcn.alten.altenappmanagement.utils.FollowUpErrorController;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 import static android.app.DatePickerDialog.OnDateSetListener;
 import static android.view.View.OnClickListener;
@@ -66,8 +66,8 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
     public AlertDialog getDialog() {
         LayoutInflater inflater = LayoutInflater.from(context);
         dialogView = inflater.inflate(R.layout.dialog_followup_new_edit, null);
-        final TextFieldBoxes consultorNameBox = dialogView.findViewById(R.id.textfieldbox_consultor_name);
-        final TextFieldBoxes clientNameBox = dialogView.findViewById(R.id.textfieldbox_client_name);
+        final FUpCustomTextFieldBoxes consultorNameBox = dialogView.findViewById(R.id.textfieldbox_consultor_name);
+        final FUpCustomTextFieldBoxes clientNameBox = dialogView.findViewById(R.id.textfieldbox_client_name);
         final ExtendedEditText consultorNameExtEditText = dialogView.findViewById(R.id.extended_edittext_consultor_name);
         final ExtendedEditText clientNameExtEditText = dialogView.findViewById(R.id.extended_edittext_client_name);
         final CheckBox addNextFollowCheckbox = dialogView.findViewById(R.id.fup_dialog_checkbox_add_next_follow);

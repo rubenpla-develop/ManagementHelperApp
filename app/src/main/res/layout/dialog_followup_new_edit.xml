@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="8dp">
 
-    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+    <bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes
         android:id="@+id/textfieldbox_consultor_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,11 +26,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            android:maxLength="30"
             android:background="@color/background_soft_dark_blue"/>
 
-    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+    </bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes>
 
-    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+    <bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes
         android:id="@+id/textfieldbox_client_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,9 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            android:maxLength="20"
             android:background="@color/background_soft_dark_blue"/>
 
-    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+    </bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes>
 
     <LinearLayout
         android:orientation="horizontal"
