@@ -1,6 +1,7 @@
 package bcn.alten.altenappmanagement.expandable.holderview;
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,11 +13,13 @@ import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class FollowUpHolder extends ChildViewHolder {
 
-    private RelativeLayout followUpContainer;
+    private FrameLayout followUpContainer;
+    public RelativeLayout viewBackground;
+    public RelativeLayout viewForeground;
     private TextView consultorName;
     private TextView clientName;
     private TextView date;
-    private TextView status;
+   // private TextView status;
 
     public FollowUpHolder(View itemView) {
         super(itemView);
@@ -24,11 +27,13 @@ public class FollowUpHolder extends ChildViewHolder {
     }
 
     private void findViews() {
-        followUpContainer = itemView.findViewById(R.id.followup_item_container);
+        followUpContainer = itemView.findViewById(R.id.swipe_container);
         consultorName = itemView.findViewById(R.id.consulter_name);
         clientName = itemView.findViewById(R.id.client_name);
         date = itemView.findViewById(R.id.date_value);
-        status = itemView.findViewById(R.id.status_value);
+       // status = itemView.findViewById(R.id.status_value);
+        viewBackground = itemView.findViewById(R.id.view_background);
+        viewForeground = itemView.findViewById(R.id.view_foreground);
     }
 
     public void onBind(FollowUp followUp) {
@@ -40,7 +45,7 @@ public class FollowUpHolder extends ChildViewHolder {
         date.setText(String.valueOf(realDateFormat));
     }
 
-    public RelativeLayout getView() {
+    public FrameLayout getView() {
         return followUpContainer;
     }
 }

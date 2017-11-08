@@ -50,7 +50,7 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
 
     @Override
     public FollowUpHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.followup_item_child, parent, false);
+        View view = inflater.inflate(R.layout.swipeable_child_item, parent, false);
 
         return new FollowUpHolder(view);
     }

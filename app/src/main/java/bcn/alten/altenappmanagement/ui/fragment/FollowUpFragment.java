@@ -9,8 +9,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,21 +26,24 @@ import java.util.List;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.adapter.ExpandableCategoryListAdapter;
 import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
+import bcn.alten.altenappmanagement.expandable.holderview.FollowUpHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
+import bcn.alten.altenappmanagement.ui.customview.RecyclerItemTouchHelper;
 import bcn.alten.altenappmanagement.ui.dialog.FollowUpDeleteDialog;
 import bcn.alten.altenappmanagement.ui.dialog.FollowUpDialog;
 import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FollowUpFragment extends Fragment implements IFollowUpFragmentView {
+public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
+        RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
     public static final String TAG = FollowUpFragment.class.getSimpleName();
 
     @BindView(R.id.followup_recyclerView)
-    RecyclerView expandableList;
+    RecyclerView expandableRecyclerView;
 
     @BindView(R.id.follow_up_fab)
     FloatingActionButton fab_add_people;
@@ -73,8 +80,8 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
         ButterKnife.bind(this, view);
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        expandableList.setLayoutManager(layoutManager);
-        expandableList.setHasFixedSize(true);
+        expandableRecyclerView.setLayoutManager(layoutManager);
+        expandableRecyclerView.setHasFixedSize(true);
 
         fab_add_people.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +146,14 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
         expandableRecyclerViewAdapter = new ExpandableCategoryListAdapter(list, getActivity(),
                 this);
 
-        expandableList.setAdapter(expandableRecyclerViewAdapter);
+        expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
+                OrientationHelper.HORIZONTAL);
+        expandableRecyclerView.addItemDecoration(dividerItemDecoration);
+        ItemTouchHelper.SimpleCallback recycleritemTouchHelper =
+                new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+
+        new ItemTouchHelper(recycleritemTouchHelper).attachToRecyclerView(expandableRecyclerView);
     }
 
     @Override
@@ -190,5 +204,12 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
         followUpDialog = followupAddDialog.getDialog();
         followUpDialog.show();
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof FollowUpHolder) {
+            Log.i(TAG,"DIRECTION : " + direction + " || Position : " + position);
+        }
     }
 }

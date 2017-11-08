@@ -24,4 +24,6 @@
     <color name="odd_list_row_color">#FAFAFA</color>
     <color name="pair_list_row_color">#E6E6E6</color>
 
+    <color name="child_item_swipeable_background">#FFFFFF</color>
+
 </resources>
