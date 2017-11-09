@@ -39,6 +39,7 @@ public class FollowUpDeleteDialog {
         final TextView infoNameTextView = dialogView.findViewById(R.id.fup_dialog_delete_info_name);
         final TextView lastDateTextView = dialogView.findViewById(R.id.fup_dialog_delete_info_last_date);
         final TextView nextDateTextview = dialogView.findViewById(R.id.fup_dialog_delete_info_next_date);
+        final TextView statusTextView = dialogView.findViewById(R.id.fup_dialog_delete_info_status);
         
         infoNameTextView.append(followUpToDelete.getConsultorName());
         infoClientTextview.append(followUpToDelete.getCurrentClient());
@@ -51,6 +52,8 @@ public class FollowUpDeleteDialog {
 
         lastDateTextView.append(formattedLastDate);
         nextDateTextview.append(formattedNextDate);
+        statusTextView.append(followUpToDelete.getStatus());
+
 
         followUpInfoContainer.setVisibility(View.GONE);
 

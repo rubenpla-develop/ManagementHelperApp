@@ -104,22 +104,14 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            /*fab_add_people.animate()
-                                    .scaleY(0)
-                                    .scaleX(0)
-                                    .setInterpolator(interpolador)
-                                    .setDuration(600)
-                                    .start();*/
                         }
 
                         @Override
                         public void onAnimationCancel(Animator animation) {
-
                         }
 
                         @Override
                         public void onAnimationRepeat(Animator animation) {
-
                         }
                     });
         }
