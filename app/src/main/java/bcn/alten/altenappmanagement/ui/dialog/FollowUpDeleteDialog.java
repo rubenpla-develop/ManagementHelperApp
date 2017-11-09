@@ -52,7 +52,12 @@ public class FollowUpDeleteDialog {
 
         lastDateTextView.append(formattedLastDate);
         nextDateTextview.append(formattedNextDate);
-        statusTextView.append(followUpToDelete.getStatus());
+
+        if (followUpToDelete.getStatus().equals("")) {
+            statusTextView.append(context.getString(R.string.follow_up_dialog_no_status));
+        } else {
+            statusTextView.append(followUpToDelete.getStatus());
+        }
 
 
         followUpInfoContainer.setVisibility(View.GONE);

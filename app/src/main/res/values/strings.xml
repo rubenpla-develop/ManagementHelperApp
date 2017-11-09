@@ -16,6 +16,8 @@
     <string name="follow_up_dialog_next_date_checkbox_title">Establecer próximo seguimiento</string>
     <string name="follow_up_dialog_next_date_title">Próximo seguimiento :</string>
     <string name="follow_up_dialog_no_date">Sin fecha</string>
+    <string name="follow_up_dialog_no_status">Sin estado</string>
+
 
     <!-- DELETE FOLLOWUP DIALOG -->
     <string name="follow_up_dialog_delete_title">Atención</string>

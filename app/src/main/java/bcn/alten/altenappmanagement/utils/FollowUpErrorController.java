@@ -3,6 +3,7 @@ package bcn.alten.altenappmanagement.utils;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
@@ -48,9 +49,35 @@ public class FollowUpErrorController {
         return isAnyError;
     }
 
-    public void checkforFollowUpDates(View dateViewClicked, String dateInmMillies, 
+    public boolean isAnyErrorOnDateWithStates(View dialogView) {
+        boolean isAnyError = false;
+        final int NO_STATUS_SELECTED = -1;
+
+        TextView nextDateTextView = dialogView.findViewById(R.id.fup_dialog_next_date_edit);
+        RadioGroup stateRadioGroup = dialogView.findViewById(R.id.fup_dialog_radio_group_status);
+        TextView errorMessageTextView = dialogView.findViewById(R.id.fup_dialog_error_message);
+
+        int checkedStatus = stateRadioGroup.getCheckedRadioButtonId();
+        final String date = nextDateTextView.getText().toString();
+        final Boolean isAnyStatusSelected = (checkedStatus != NO_STATUS_SELECTED);
+        final Boolean isValidDate = JodaTimeConverter.getInstance().isAValidDate(date);
+
+        if (!isValidDate && isAnyStatusSelected) {
+            isAnyError = true;
+            errorMessageTextView.setText("No puedes elegir un estado sin fecha establecida");
+            return isAnyError;
+        }
+
+        if (isValidDate && !isAnyStatusSelected) {
+            return isAnyError;
+        }
+
+        return isAnyError;
+    }
+
+    public void checkforFollowUpDates(View dateViewClicked, String dateInMillies,
                                       String finalDateTime) {
-        int comparedDates = JodaTimeConverter.getInstance().compareDates(dateInmMillies);
+        int comparedDates = JodaTimeConverter.getInstance().compareDates(dateInMillies);
 
         //We compare date set in DatePicker dialog versus current date today, every date view
         // (last followUp, next FollowUp) is comprared to check if its previous or newer date,

@@ -62,7 +62,11 @@ public class FollowUpHolder extends ChildViewHolder {
             nextDate.setText(realDateFormat);
         }
 
-        status.setText(followUp.getStatus());
+        if (followUp.getStatus().equalsIgnoreCase(NO_DATE)) {
+            status.setText("Sin estado");
+        } else {
+            status.setText(followUp.getStatus());
+        }
     }
 
     public RelativeLayout getView() {

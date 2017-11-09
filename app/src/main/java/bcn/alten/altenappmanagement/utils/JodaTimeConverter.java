@@ -10,6 +10,8 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Calendar;
 
+import bcn.alten.altenappmanagement.ui.dialog.FollowUpDialog;
+
 public class JodaTimeConverter {
 
     private final String TAG = JodaTimeConverter.class.getSimpleName();
@@ -56,6 +58,16 @@ public class JodaTimeConverter {
         }
 
         return result;
+    }
+
+    public boolean isAValidDate(String date) {
+        boolean isValidDate = false;
+
+        if (!FollowUpDialog.NO_DATE.equalsIgnoreCase(date)) {
+            isValidDate = true;
+        }
+
+        return isValidDate;
     }
 
     public String parsefromDatePicker(final int month,final int day,final int year) {

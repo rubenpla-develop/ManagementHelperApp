@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.application.AltenApplication;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
@@ -30,7 +31,8 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     public static final String ADD_FOLLOWUP_ACTION = "ADD_FOLLOWUP_ACTION";
     public static final String EDIT_FOLLOWUP_ACTION = "EDIT_FOLLOWUP_ACTION";
 
-    public static final String NO_DATE = "NO_DATE";
+    public static final String NO_DATE = AltenApplication.getInstance()
+            .getString(R.string.follow_up_dialog_no_date);
 
     private Context context;
     private View dialogView;
@@ -157,7 +159,8 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
                         FollowUpErrorController errorController = new FollowUpErrorController(context,
                                 followUpFragmentPresenter);
 
-                        if (!errorController.isAnyFieldEmpty(dialogView)) {
+                        if (!errorController.isAnyFieldEmpty(dialogView)
+                                && !errorController.isAnyErrorOnDateWithStates(dialogView)) {
                             String formattedLastDate = JodaTimeConverter.getInstance()
                                     .parseDateFromStringPatternToMillis(dateText.getText().toString());
 
