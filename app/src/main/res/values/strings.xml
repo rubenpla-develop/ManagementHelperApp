@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_follow_up">Follow Up</string>
     <string name="title_qm">QM</string>
+
+    <string name="category_urgent">Urgente</string>
+    <string name="category_warning">Atención</string>
+    <string name="categorty_up_to_day">Ok</string>
 </resources>

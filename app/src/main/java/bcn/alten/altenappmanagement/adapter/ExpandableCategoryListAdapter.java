@@ -52,6 +52,9 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
         final FollowUp model = (FollowUp) group.getItems().get(childIndex);
         holder.onBind(model);
 
+        holder.getView().setBackgroundColor(context.getResources()
+                .getInteger(setRowColor(childIndex)));
+
         holder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +67,13 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                         + ", Posicion: " + (childIndex + 1));
             }
         });
+    }
+
+    private int setRowColor(int childIndex) {
+        int row_color = (((childIndex % 2) == 0 ? R.color.pair_list_row_color :
+                        R.color.odd_list_row_color));
+
+        return row_color;
     }
 
     @Override

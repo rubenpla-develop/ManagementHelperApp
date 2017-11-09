@@ -1,11 +1,13 @@
 package bcn.alten.altenappmanagement.mvp.presenter;
 
+import android.arch.lifecycle.LiveData;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
+import bcn.alten.altenappmanagement.database.AltenDatabase;
+import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
-import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
 
 public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
 
@@ -22,10 +24,15 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
     @Override
     public void showFollowUpList() {
         //TODO get items from DB
+        LiveData<List<FollowUp>> categoryList = AltenDatabase.getDatabase(view.getContext())
+                .daoAccess()
+                .fecthFollowUpData();
 
-        //TODO mocking content
-        List<Category> categoryList = CategoryDataFactory.makeGenres();
-        view.ShowFollowUpList(categoryList);
+        view.onLiveDataChanged(categoryList);
+
+        //TODO mocking content, delete
+        /*List<Category> categoryList = CategoryDataFactory.createMockFilteredCategories();
+        view.ShowFollowUpList(categoryList);*/
     }
 
     @Override

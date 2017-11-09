@@ -1,15 +1,48 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context="bcn.alten.altenappmanagement.ui.fragment.QMFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HOME"
-        android:layout_centerInParent="true"
-        android:textSize="30sp" />
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/hombe_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HOME"
+            android:layout_marginBottom="48dp"
+            android:layout_centerInParent="true"
+            android:textSize="30sp" />
+
+        <Button android:id="@+id/btn_fetch_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Fetch Data"
+            android:layout_marginLeft="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/hombe_tv"/>
+
+        <Button android:id="@+id/btn_insert_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="48dp"
+            android:layout_marginTop="32dp"
+            android:text="Insert Data"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/hombe_tv"/>
+
+        <Button android:id="@+id/btn_showPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="32dp"
+            android:text="Date Picker"
+            />
+
+    </RelativeLayout>
+</ScrollView>
