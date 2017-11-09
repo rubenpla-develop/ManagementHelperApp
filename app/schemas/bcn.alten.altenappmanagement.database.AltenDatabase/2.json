@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "9a1ec83e9562bb69bc12e194100daadc",
+    "identityHash": "af4c6a3f8af8c9c218dd5d231c76b1ac",
     "entities": [
       {
         "tableName": "FollowUp",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `consultorName` TEXT, `currentClient` TEXT, `dateLastFollow` TEXT, `dateNextFollow` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `consultorName` TEXT, `currentClient` TEXT, `dateLastFollow` TEXT, `dateNextFollow` TEXT, `status` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -37,6 +37,12 @@
             "columnName": "dateNextFollow",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -51,7 +57,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9a1ec83e9562bb69bc12e194100daadc\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"af4c6a3f8af8c9c218dd5d231c76b1ac\")"
     ]
   }
 }
