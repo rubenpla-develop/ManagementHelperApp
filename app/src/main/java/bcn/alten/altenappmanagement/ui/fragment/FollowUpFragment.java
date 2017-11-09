@@ -4,6 +4,12 @@ import android.animation.Animator;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +55,8 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     private RecyclerView.LayoutManager layoutManager;
 
     private String actionMode;
+
+    private Paint p = new Paint();
 
     public static FollowUpFragment newInstance() {
             Bundle args = new Bundle();
@@ -139,6 +148,49 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
         expandableRecyclerViewAdapter = new ExpandableCategoryListAdapter(list, getActivity(),
                 this);
 
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+
+                expandableRecyclerViewAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+                Bitmap icon;
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+
+                    View itemView = viewHolder.itemView;
+                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
+                    float width = height / 3;
+
+
+                        p.setColor(Color.parseColor("#D32F2F"));
+                        RectF background = new RectF((float) itemView.getRight() + dX,
+                                (float) itemView.getTop(),(float) itemView.getRight(),
+                                (float) itemView.getBottom());
+                        c.drawRect(background,p);
+                        icon = BitmapFactory.decodeResource(getResources(), R.drawable.remove);
+                        RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,
+                                (float) itemView.getTop() + width,(float) itemView.getRight() - width,
+                                (float)itemView.getBottom() - width);
+                        c.drawBitmap(icon,null,icon_dest,p);
+
+                }
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(expandableList);
         expandableList.setAdapter(expandableRecyclerViewAdapter);
     }
 
