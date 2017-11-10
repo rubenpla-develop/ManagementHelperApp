@@ -78,14 +78,6 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                 followUp.setId(model.getId());
 
                 followUpFragmentView.editFollowUp(followUp);
-
-                //TODO TEMP, only for testing logic
-/*                ((IMainActivityView) context).showMessage("Categoria : " + group.getTitle()
-                        + ", Consultor: " +
-                        ((FollowUp) group.getItems().get(childIndex)).getConsultorName()
-                        + "\nCliente : " +  ((FollowUp) group.getItems().get(childIndex))
-                        .getCurrentClient()
-                        + ", Posicion: " + (childIndex + 1));*/
             }
         });
 
