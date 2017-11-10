@@ -53,7 +53,7 @@ public class JodaTimeConverter {
 
         if ( chosenDate > currentDate ) {
             result = NEWER_DATE;
-        } else if (chosenDate  < currentDate) {
+        } else if (chosenDate  <= currentDate) {
             result = PREVIOUS_DATE;
         }
 

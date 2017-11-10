@@ -17,7 +17,6 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.application.AltenApplication;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
-import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
 import bcn.alten.altenappmanagement.utils.FollowUpErrorController;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
@@ -178,7 +177,6 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
                                 followUpFragmentPresenter.editFollowUp(editedFollowUp);
                             }
 
-                            ((IMainActivityView) context).showMessage("FollowUp Dialog OK!");
                             followUpDialog.dismiss();
                         }
                     }
@@ -204,6 +202,13 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
 
         FollowUpErrorController errorController = new FollowUpErrorController(context,
                 followUpFragmentPresenter);
+
+        TextView errorMesage = dialogView.findViewById(R.id.fup_dialog_error_message);
+        boolean errorMesageIsShown = (errorMesage != null && errorMesage.getText().length() > 0);
+
+        if (dateViewClicked.getId() == R.id.fup_dialog_next_date_edit && errorMesageIsShown) {
+            errorMesage.setText("");
+        }
 
         errorController.checkforFollowUpDates(dateViewClicked, dateInmMillies, finalDateTime);
     }

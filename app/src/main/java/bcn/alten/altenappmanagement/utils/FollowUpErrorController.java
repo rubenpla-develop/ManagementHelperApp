@@ -59,20 +59,53 @@ public class FollowUpErrorController {
 
         int checkedStatus = stateRadioGroup.getCheckedRadioButtonId();
         final String date = nextDateTextView.getText().toString();
-        final Boolean isAnyStatusSelected = (checkedStatus != NO_STATUS_SELECTED);
         final Boolean isValidDate = JodaTimeConverter.getInstance().isAValidDate(date);
 
-        if (!isValidDate && isAnyStatusSelected) {
+        if (!isStatusSelectionOk(checkedStatus, isValidDate, date)) {
             isAnyError = true;
-            errorMessageTextView.setText("No puedes elegir un estado sin fecha establecida");
-            return isAnyError;
-        }
+            errorMessageTextView.setText(context.getResources()
+                    .getString(R.string.follow_up_error_controller_state_with_no_date));
 
-        if (isValidDate && !isAnyStatusSelected) {
             return isAnyError;
         }
 
         return isAnyError;
+    }
+
+    public boolean isStatusSelectionOk(int checkedStatus, boolean isValidDate, String date) {
+        boolean isStatusOk = true;
+        final int NO_STATUS_SELECTED = -1;
+
+        final boolean isAnyStatusSelected = (checkedStatus != NO_STATUS_SELECTED);
+        if (isValidDate) {
+            if (isAnyStatusSelected) {
+                switch (checkedStatus) {
+                    case R.id.fup_dialog_radio_scheduled:
+
+                        break;
+                    case R.id.fup_dialog_radio_done:
+                        String dateInMillis = JodaTimeConverter.getInstance()
+                                .parseDateFromStringPatternToMillis(date);
+                        int comparedDates = JodaTimeConverter.getInstance().compareDates(dateInMillis);
+
+                        if (comparedDates == JodaTimeConverter.NEWER_DATE) {
+                            isStatusOk = false;
+                        }
+                        break;
+                    case R.id.fup_dialog_radio_cancelled:
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        if(!isValidDate && isAnyStatusSelected) {
+            isStatusOk = false;
+        }
+
+        return isStatusOk;
     }
 
     public void checkforFollowUpDates(View dateViewClicked, String dateInMillies,

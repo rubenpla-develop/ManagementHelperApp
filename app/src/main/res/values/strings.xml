@@ -36,6 +36,8 @@
         intenta con otra fecha nueva.</string>
     <string name="follow_up_error_controller_newer_date">Fecha más reciente que la fecha actual,
     intenta con otra fecha nueva.</string>
+    <string name="follow_up_error_controller_state_with_no_date">Error al establecer fecha y/o
+        estado</string>
 
     <string name="follow_up_dialog_radio_group_scheduled_value">Planificada</string>
     <string name="follow_up_dialog_radio_group_done_value">Realizada</string>
