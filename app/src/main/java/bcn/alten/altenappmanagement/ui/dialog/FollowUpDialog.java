@@ -203,11 +203,11 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         FollowUpErrorController errorController = new FollowUpErrorController(context,
                 followUpFragmentPresenter);
 
-        TextView errorMesage = dialogView.findViewById(R.id.fup_dialog_error_message);
-        boolean errorMesageIsShown = (errorMesage != null && errorMesage.getText().length() > 0);
+        TextView errorMessage = dialogView.findViewById(R.id.fup_dialog_error_message);
+        boolean errorMessageIsShown = (errorMessage != null && errorMessage.getText().length() > 0);
 
-        if (dateViewClicked.getId() == R.id.fup_dialog_next_date_edit && errorMesageIsShown) {
-            errorMesage.setText("");
+        if (dateViewClicked.getId() == R.id.fup_dialog_next_date_edit && errorMessageIsShown) {
+            errorMessage.setText("");
         }
 
         errorController.checkforFollowUpDates(dateViewClicked, dateInmMillies, finalDateTime);
