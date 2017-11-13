@@ -119,6 +119,15 @@ public class FollowUpErrorController {
         // for last follow, date must be previous than current date; For next followUp, exactly
         // inverse, date MUST be newer than current date.
         switch (comparedDates) {
+            case JodaTimeConverter.CURRENT_DATE:
+                if (dateViewClicked.getId() == R.id.fup_dialog_next_date_edit) {
+                    ((TextView) dateViewClicked).setText(finalDateTime);
+                } else {
+                    ((IMainActivityView) context).showMessage(res.getString(R.string.follow_up_error_controller_newer_date));
+                }
+
+                break;
+
             case JodaTimeConverter.NEWER_DATE :
                 if (dateViewClicked.getId() == R.id.fup_dialog_date_edit) {
                     ((IMainActivityView) context).showMessage(res.getString(R.string.follow_up_error_controller_newer_date));

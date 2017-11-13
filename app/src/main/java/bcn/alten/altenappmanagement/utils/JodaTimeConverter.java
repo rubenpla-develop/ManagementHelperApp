@@ -51,11 +51,19 @@ public class JodaTimeConverter {
         Long currentDate = Long.valueOf(getCurrenDate());
 
         int result = 0;
+        String chosenDateStringPatten = JodaTimeConverter.getInstance()
+                .getDateInStringFormat(String.valueOf(chosenDate));
+        String currentDateStringPatten = JodaTimeConverter.getInstance()
+                .getDateInStringFormat(String.valueOf(currentDate));
 
-        if ( chosenDate >= currentDate ) {
-            result = NEWER_DATE;
-        } else if (chosenDate  < currentDate) {
-            result = PREVIOUS_DATE;
+        if (chosenDateStringPatten.equalsIgnoreCase(currentDateStringPatten)) {
+            result = CURRENT_DATE;
+        } else {
+            if ( chosenDate >= currentDate ) {
+                result = NEWER_DATE;
+            } else if (chosenDate  < currentDate) {
+                result = PREVIOUS_DATE;
+            }
         }
 
         return result;

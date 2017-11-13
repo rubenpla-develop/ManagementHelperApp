@@ -164,11 +164,19 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
 
                         if (!errorController.isAnyFieldEmpty(dialogView)
                                 && !errorController.isAnyErrorOnDateWithStates(dialogView)) {
+
+                            String[] statusList = context.getResources().getStringArray(R.array.status_values);
                             String formattedLastDate = JodaTimeConverter.getInstance()
                                     .parseDateFromStringPatternToMillis(dateText.getText().toString());
 
                             String formattedNextDate = JodaTimeConverter.getInstance()
                                     .parseDateFromStringPatternToMillis(addNextFollowTextView.getText().toString());
+
+                            if (nextDateChosenStatus.equalsIgnoreCase(statusList[STATUS_DONE])) {
+                                formattedLastDate = formattedNextDate;
+                                formattedNextDate = "";
+                                nextDateChosenStatus = "";
+                            }
 
                             editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
                                     clientNameExtEditText.getText().toString(), formattedLastDate,
