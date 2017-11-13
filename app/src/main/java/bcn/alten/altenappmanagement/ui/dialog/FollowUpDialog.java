@@ -30,6 +30,10 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     public static final String ADD_FOLLOWUP_ACTION = "ADD_FOLLOWUP_ACTION";
     public static final String EDIT_FOLLOWUP_ACTION = "EDIT_FOLLOWUP_ACTION";
 
+    private final int STATUS_SCHEDULED = 0;
+    private final int STATUS_DONE = 1;
+    private final int STATUS_CANCELLED = 2;
+
     public static final String NO_DATE = AltenApplication.getInstance()
             .getString(R.string.follow_up_dialog_no_date);
 
@@ -234,13 +238,13 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         String[] statusList = context.getResources().getStringArray(R.array.status_values);
         switch (checkedId) {
             case R.id.fup_dialog_radio_scheduled:
-                nextDateChosenStatus = statusList[0]; // 'scheduled'
+                nextDateChosenStatus = statusList[STATUS_SCHEDULED];
                 break;
             case R.id.fup_dialog_radio_done:
-                nextDateChosenStatus = statusList[1]; // 'done'
+                nextDateChosenStatus = statusList[STATUS_DONE];
                 break;
             case R.id.fup_dialog_radio_cancelled:
-                nextDateChosenStatus = statusList[2]; // 'cancelled'
+                nextDateChosenStatus = statusList[STATUS_CANCELLED];
                 break;
             default:
                 nextDateChosenStatus = "";

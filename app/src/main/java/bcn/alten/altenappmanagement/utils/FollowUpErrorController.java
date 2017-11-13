@@ -35,13 +35,15 @@ public class FollowUpErrorController {
         final ExtendedEditText clientNameExtEditText = dialogView.findViewById(R.id.extended_edittext_client_name);
         
         if (consultorNameExtEditText.getText().toString().isEmpty()) {
-            consultorNameBox.setError("Campo Vacio", false);
+            consultorNameBox.setError(context.getString(R.string.follow_up_error_controller_empty_field),
+                    false);
             consultorNameBox.setErrorColor(R.color.background_soft_orange);
             isAnyError = true;
         }
 
         if (clientNameExtEditText.getText().toString().isEmpty()) {
-            clientNameBox.setError("Campo Vacio", false);
+            clientNameBox.setError(context.getString(R.string.follow_up_error_controller_empty_field),
+                    false);
             clientNameBox.setErrorColor(R.color.background_soft_orange);
             isAnyError = true;
         }
