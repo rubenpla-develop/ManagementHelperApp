@@ -20,6 +20,7 @@ public class JodaTimeConverter {
 
     public static final int PREVIOUS_DATE = 0;
     public static final int NEWER_DATE = 1;
+    public static final int CURRENT_DATE = 2;
 
     //jodaTimeConverter class singleton instance
     private static JodaTimeConverter instance = null;
@@ -51,9 +52,9 @@ public class JodaTimeConverter {
 
         int result = 0;
 
-        if ( chosenDate > currentDate ) {
+        if ( chosenDate >= currentDate ) {
             result = NEWER_DATE;
-        } else if (chosenDate  <= currentDate) {
+        } else if (chosenDate  < currentDate) {
             result = PREVIOUS_DATE;
         }
 
