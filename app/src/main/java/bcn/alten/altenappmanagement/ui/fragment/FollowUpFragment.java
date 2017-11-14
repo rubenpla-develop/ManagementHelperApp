@@ -101,32 +101,23 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
                     .scaleX(1)
                     .scaleY(1)
                     .setInterpolator(interpolador)
-                    .setDuration(300)
-                    .setStartDelay(1500)
+                    .setDuration(400)
+                    .setStartDelay(2000)
                     .setListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
-
                         }
 
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            /*fab_add_people.animate()
-                                    .scaleY(0)
-                                    .scaleX(0)
-                                    .setInterpolator(interpolador)
-                                    .setDuration(600)
-                                    .start();*/
                         }
 
                         @Override
                         public void onAnimationCancel(Animator animation) {
-
                         }
 
                         @Override
                         public void onAnimationRepeat(Animator animation) {
-
                         }
                     });
         }
@@ -188,11 +179,6 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     }
 
     @Override
-    public void showFollowUpDialog(String mode, Object model) {
-
-    }
-
-    @Override
     public Context getContext() {
         return super.getContext();
     }
@@ -210,6 +196,9 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof FollowUpHolder) {
             Log.i(TAG,"DIRECTION : " + direction + " || Position : " + position);
+            FollowUp followUp = expandableRecyclerViewAdapter.getItem(position);
+
+            presenter.swipeFollowUp(followUp, getString(R.string.follow_up_dialog_radio_group_done_value));
         }
     }
 }

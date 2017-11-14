@@ -2,6 +2,7 @@ package bcn.alten.altenappmanagement.ui.dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +10,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.application.AltenApplication;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
-import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
-import bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes;
 import bcn.alten.altenappmanagement.utils.FollowUpErrorController;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
@@ -23,12 +24,18 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import static android.app.DatePickerDialog.OnDateSetListener;
 import static android.view.View.OnClickListener;
 
-public class FollowUpDialog implements OnDateSetListener, OnClickListener {
+public class FollowUpDialog implements OnDateSetListener, OnClickListener,
+        RadioGroup.OnCheckedChangeListener {
 
     public static final String ADD_FOLLOWUP_ACTION = "ADD_FOLLOWUP_ACTION";
     public static final String EDIT_FOLLOWUP_ACTION = "EDIT_FOLLOWUP_ACTION";
 
-    public static final String NO_DATE = "NO_DATE";
+    private final int STATUS_SCHEDULED = 0;
+    private final int STATUS_DONE = 1;
+    private final int STATUS_CANCELLED = 2;
+
+    public static final String NO_DATE = AltenApplication.getInstance()
+            .getString(R.string.follow_up_dialog_no_date);
 
     private Context context;
     private View dialogView;
@@ -36,6 +43,9 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
     private String actionMode;
     private FollowUp followUp;
     private FollowUp editedFollowUp;
+    private String nextDateChosenStatus = "";
+
+    private Resources res;
 
     private FollowUpFragmentPresenter followUpFragmentPresenter;
 
@@ -46,6 +56,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
     public FollowUpDialog(Context context, FollowUpFragmentPresenter presenter) {
         this.context = context;
         this.followUpFragmentPresenter = presenter;
+        this.res = context.getResources();
     }
 
     public FollowUpDialog(Context context, String actionMode, FollowUp followUpToEdit,
@@ -54,6 +65,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
         this.followUpFragmentPresenter = presenter;
         this.followUp = followUpToEdit;
         this.actionMode = actionMode;
+        this.res = context.getResources();
     }
 
     public FollowUpDialog(Context context, String actionMode,
@@ -61,19 +73,21 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
         this.context = context;
         this.followUpFragmentPresenter = presenter;
         this.actionMode = actionMode;
+        this.res = context.getResources();
     }
 
     public AlertDialog getDialog() {
         LayoutInflater inflater = LayoutInflater.from(context);
         dialogView = inflater.inflate(R.layout.dialog_followup_new_edit, null);
-        final FUpCustomTextFieldBoxes consultorNameBox = dialogView.findViewById(R.id.textfieldbox_consultor_name);
-        final FUpCustomTextFieldBoxes clientNameBox = dialogView.findViewById(R.id.textfieldbox_client_name);
         final ExtendedEditText consultorNameExtEditText = dialogView.findViewById(R.id.extended_edittext_consultor_name);
         final ExtendedEditText clientNameExtEditText = dialogView.findViewById(R.id.extended_edittext_client_name);
         final CheckBox addNextFollowCheckbox = dialogView.findViewById(R.id.fup_dialog_checkbox_add_next_follow);
         final LinearLayout addNextFollowContainer = dialogView.findViewById(R.id.fup_dialog_container_next_follow);
         final TextView dateText = dialogView.findViewById(R.id.fup_dialog_date_edit);
         final TextView addNextFollowTextView = dialogView.findViewById(R.id.fup_dialog_next_date_edit);
+        final RadioGroup statusGroup = dialogView.findViewById(R.id.fup_dialog_radio_group_status);
+
+        statusGroup.setOnCheckedChangeListener(this);
 
         String formattedDate;
 
@@ -97,6 +111,17 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
                 formattedDate = JodaTimeConverter.getInstance()
                         .getDateInStringFormat(followUp.getDateNextFollow());
                 addNextFollowTextView.setText(formattedDate);
+            }
+
+            if (res.getString(R.string.follow_up_dialog_radio_group_scheduled_value)
+                    .equalsIgnoreCase(followUp.getStatus())) {
+                statusGroup.check(R.id.fup_dialog_radio_scheduled);
+            } else if (res.getString(R.string.follow_up_dialog_radio_group_done_value)
+                    .equalsIgnoreCase(followUp.getStatus())) {
+                statusGroup.check(R.id.fup_dialog_radio_done);
+            } else if (res.getString(R.string.follow_up_dialog_radio_group_cancelled_value)
+                    .equalsIgnoreCase(followUp.getStatus())) {
+                statusGroup.check(R.id.fup_dialog_radio_cancelled);
             }
         }
 
@@ -137,16 +162,24 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
                         FollowUpErrorController errorController = new FollowUpErrorController(context,
                                 followUpFragmentPresenter);
 
-                        if (!errorController.isAnyFieldEmpty(dialogView)) {
+                        if (!errorController.isAnyFieldEmpty(dialogView)
+                                && !errorController.isAnyErrorOnDateWithStates(dialogView)) {
+
+                            String[] statusList = context.getResources().getStringArray(R.array.status_values);
                             String formattedLastDate = JodaTimeConverter.getInstance()
                                     .parseDateFromStringPatternToMillis(dateText.getText().toString());
 
                             String formattedNextDate = JodaTimeConverter.getInstance()
                                     .parseDateFromStringPatternToMillis(addNextFollowTextView.getText().toString());
 
+                            if (nextDateChosenStatus.equalsIgnoreCase(statusList[STATUS_DONE])) {
+                                formattedLastDate = formattedNextDate;
+                                formattedNextDate = "";
+                            }
+
                             editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
                                     clientNameExtEditText.getText().toString(), formattedLastDate,
-                                    formattedNextDate);
+                                    formattedNextDate, nextDateChosenStatus);
 
                             if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
                                 followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
@@ -155,7 +188,6 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
                                 followUpFragmentPresenter.editFollowUp(editedFollowUp);
                             }
 
-                            ((IMainActivityView) context).showMessage("FollowUp Dialog OK!");
                             followUpDialog.dismiss();
                         }
                     }
@@ -182,6 +214,13 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
         FollowUpErrorController errorController = new FollowUpErrorController(context,
                 followUpFragmentPresenter);
 
+        TextView errorMessage = dialogView.findViewById(R.id.fup_dialog_error_message);
+        boolean errorMessageIsShown = (errorMessage != null && errorMessage.getText().length() > 0);
+
+        if (dateViewClicked.getId() == R.id.fup_dialog_next_date_edit && errorMessageIsShown) {
+            errorMessage.setText("");
+        }
+
         errorController.checkforFollowUpDates(dateViewClicked, dateInmMillies, finalDateTime);
     }
 
@@ -197,6 +236,25 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener {
                 launchDatePickerDialog();
                 break;
             default:
+                break;
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        String[] statusList = context.getResources().getStringArray(R.array.status_values);
+        switch (checkedId) {
+            case R.id.fup_dialog_radio_scheduled:
+                nextDateChosenStatus = statusList[STATUS_SCHEDULED];
+                break;
+            case R.id.fup_dialog_radio_done:
+                nextDateChosenStatus = statusList[STATUS_DONE];
+                break;
+            case R.id.fup_dialog_radio_cancelled:
+                nextDateChosenStatus = statusList[STATUS_CANCELLED];
+                break;
+            default:
+                nextDateChosenStatus = "";
                 break;
         }
     }
