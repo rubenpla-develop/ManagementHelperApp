@@ -1,16 +1,21 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion project.ext.altenCompileSdkVersion
+    buildToolsVersion project.ext.altenBuildToolsVersion
     defaultConfig {
         applicationId "bcn.alten.altenappmanagement"
-        minSdkVersion 18
-        targetSdkVersion 26
+        minSdkVersion project.ext.altenMinSdkVersion
+        targetSdkVersion project.ext.altenTargetSdkVersion
         versionCode 1
         versionName "0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -23,48 +28,80 @@ android {
             androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
         }
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    signingConfigs {
+        development {
+            storeFile file("/Users/alten/Repositories/AltenAppManagement/app/keystore/debug.keystore")
+            storePassword "android"
+            keyAlias "android"
+            keyPassword "android"
         }
     }
-}
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
-  //  implementation 'com.android.support:support-vector-drawable:26.+'
-    implementation 'com.android.support:palette-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.android.support:cardview-v7:26.1.0'
-    implementation 'com.android.support:support-v4:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
-    testImplementation 'junit:junit:4.12'
+    buildTypes {
+        debug {
+            buildConfigField 'boolean', 'HOME_SCREEN_MOCK_CONTENT_BUTTONS', 'true'
+            applicationIdSuffix ".debug"
+            signingConfig signingConfigs.development
+            //  If it reaches 65k methods, you can uncomment these lines.
+            //  Proguard's configuration for debug versions is proguard-android-debug.txt. No
+            //  obfuscation.
+            minifyEnabled false
+            proguardFile 'proguard-android-debug.txt'
+        }
 
-    //ROOM PERSISTENCE LIBRARY
-    implementation 'android.arch.persistence.room:runtime:1.0.0'
-    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+        // Release type
+        release {
+            applicationIdSuffix ""
+            buildConfigField 'boolean', 'HOME_SCREEN_MOCK_CONTENT_BUTTONS', 'false'
+            signingConfig signingConfigs.development
 
-    implementation "android.arch.lifecycle:extensions:1.0.0"
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-    //BUTTERKNIFE
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+        }
 
-    //GSON
-    implementation 'com.google.code.gson:gson:2.8.1'
+    }
 
-    //Expandable_recyclerview
-    implementation 'com.thoughtbot:expandablerecyclerview:1.3'
+    def androidSupportVersion = '26.1.0'
 
-    //JODA-TIME 4 ANDROID
-    implementation 'net.danlew:android.joda:2.9.9'
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
 
-    //Textfiled Boxes
-    implementation 'com.github.HITGIF:TextFieldBoxes:1.3.4'
+        implementation "com.android.support:appcompat-v7:${androidSupportVersion}"
+        implementation "com.android.support:design:${androidSupportVersion}"
+        //  implementation "com.android.support:support-vector-drawable:26.+"
+        implementation "com.android.support:palette-v7:${androidSupportVersion}"
+        implementation "com.android.support:recyclerview-v7:${androidSupportVersion}"
+        implementation "com.android.support:cardview-v7:${androidSupportVersion}"
+        implementation "com.android.support:support-v4:${androidSupportVersion}"
+        implementation "com.android.support:design:${androidSupportVersion}"
+        testImplementation 'junit:junit:4.12'
+
+        //ROOM PERSISTENCE LIBRARY
+        implementation 'android.arch.persistence.room:runtime:1.0.0'
+        annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+
+        //LiveData
+        implementation "android.arch.lifecycle:extensions:1.0.0"
+
+        //BUTTERKNIFE
+        implementation 'com.jakewharton:butterknife:8.8.1'
+        annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+        //GSON
+        implementation 'com.google.code.gson:gson:2.8.1'
+
+        //Expandable_recyclerview
+        implementation 'com.thoughtbot:expandablerecyclerview:1.3'
+
+        //JODA-TIME 4 ANDROID
+        implementation 'net.danlew:android.joda:2.9.9'
+
+        //Textfiled Boxes
+        implementation 'com.github.HITGIF:TextFieldBoxes:1.3.4'
+    }
 }

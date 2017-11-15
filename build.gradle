@@ -22,6 +22,12 @@ allprojects {
         maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
         maven { url 'https://jitpack.io' }
     }
+    project.ext {
+        altenBuildToolsVersion="26.0.2"
+        altenMinSdkVersion=18
+        altenTargetSdkVersion=26
+        altenCompileSdkVersion=26
+    }
 }
 
 task clean(type: Delete) {

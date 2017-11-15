@@ -21,6 +21,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.List;
 
+import bcn.alten.altenappmanagement.BuildConfig;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.database.AltenDatabase;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
@@ -54,6 +55,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        if (!BuildConfig.HOME_SCREEN_MOCK_CONTENT_BUTTONS) {
+            btnShowDatePicker.setVisibility(View.INVISIBLE);
+            btnInsertData.setVisibility(View.INVISIBLE);
+            btnFecthData.setVisibility(View.INVISIBLE);
+        }
+
         setListeners();
         return view;
     }
