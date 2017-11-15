@@ -94,32 +94,23 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
                     .scaleX(1)
                     .scaleY(1)
                     .setInterpolator(interpolador)
-                    .setDuration(300)
-                    .setStartDelay(1500)
+                    .setDuration(400)
+                    .setStartDelay(2000)
                     .setListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
-
                         }
 
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            /*fab_add_people.animate()
-                                    .scaleY(0)
-                                    .scaleX(0)
-                                    .setInterpolator(interpolador)
-                                    .setDuration(600)
-                                    .start();*/
                         }
 
                         @Override
                         public void onAnimationCancel(Animator animation) {
-
                         }
 
                         @Override
                         public void onAnimationRepeat(Animator animation) {
-
                         }
                     });
         }
@@ -171,11 +162,6 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
         followUpDialog = followUpDeleteDialog.getDialog();
         followUpDialog.show();
-    }
-
-    @Override
-    public void showFollowUpDialog(String mode, Object model) {
-
     }
 
     @Override

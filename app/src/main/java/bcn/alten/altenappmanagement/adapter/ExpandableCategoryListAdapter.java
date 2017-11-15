@@ -50,7 +50,7 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
 
     @Override
     public FollowUpHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.followup_item_child, parent, false);
+        View view = inflater.inflate(R.layout.followup_item_child_w_state, parent, false);
 
         return new FollowUpHolder(view);
     }
@@ -71,20 +71,13 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                 String clientName =   model.getCurrentClient();
                 String lastDateFollowUp =   model.getDateLastFollow();
                 String nextFollowUp = model.getDateNextFollow();
+                String status = model.getStatus();
                 FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
-                        nextFollowUp);
+                        nextFollowUp, status);
 
                 followUp.setId(model.getId());
 
                 followUpFragmentView.editFollowUp(followUp);
-
-                //TODO TEMP, only for testing logic
-/*                ((IMainActivityView) context).showMessage("Categoria : " + group.getTitle()
-                        + ", Consultor: " +
-                        ((FollowUp) group.getItems().get(childIndex)).getConsultorName()
-                        + "\nCliente : " +  ((FollowUp) group.getItems().get(childIndex))
-                        .getCurrentClient()
-                        + ", Posicion: " + (childIndex + 1));*/
             }
         });
 
@@ -95,8 +88,9 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                 String clientName =   model.getCurrentClient();
                 String lastDateFollowUp =   model.getDateLastFollow();
                 String nextFollowUp = model.getDateNextFollow();
+                String status = model.getStatus();
                 FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
-                        nextFollowUp);
+                        nextFollowUp, status);
 
                 followUp.setId(model.getId());
 

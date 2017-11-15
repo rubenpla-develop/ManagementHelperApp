@@ -14,7 +14,6 @@ public interface IFollowUpFragmentView {
     void onLiveDataChanged(LiveData<List<FollowUp>> list);
     void editFollowUp(FollowUp followUp);
     void deleteFollowUp(FollowUp followUp);
-    void showFollowUpDialog(String mode, Object model);
     void showAddFollowUpDialog();
     Context getContext();
 }

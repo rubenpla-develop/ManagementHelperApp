@@ -10,6 +10,8 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Calendar;
 
+import bcn.alten.altenappmanagement.ui.dialog.FollowUpDialog;
+
 public class JodaTimeConverter {
 
     private final String TAG = JodaTimeConverter.class.getSimpleName();
@@ -18,6 +20,7 @@ public class JodaTimeConverter {
 
     public static final int PREVIOUS_DATE = 0;
     public static final int NEWER_DATE = 1;
+    public static final int CURRENT_DATE = 2;
 
     //jodaTimeConverter class singleton instance
     private static JodaTimeConverter instance = null;
@@ -48,14 +51,32 @@ public class JodaTimeConverter {
         Long currentDate = Long.valueOf(getCurrenDate());
 
         int result = 0;
+        String chosenDateStringPatten = JodaTimeConverter.getInstance()
+                .getDateInStringFormat(String.valueOf(chosenDate));
+        String currentDateStringPatten = JodaTimeConverter.getInstance()
+                .getDateInStringFormat(String.valueOf(currentDate));
 
-        if ( chosenDate > currentDate ) {
-            result = NEWER_DATE;
-        } else if (chosenDate  < currentDate) {
-            result = PREVIOUS_DATE;
+        if (chosenDateStringPatten.equalsIgnoreCase(currentDateStringPatten)) {
+            result = CURRENT_DATE;
+        } else {
+            if ( chosenDate >= currentDate ) {
+                result = NEWER_DATE;
+            } else if (chosenDate  < currentDate) {
+                result = PREVIOUS_DATE;
+            }
         }
 
         return result;
+    }
+
+    public boolean isAValidDate(String date) {
+        boolean isValidDate = false;
+
+        if (!FollowUpDialog.NO_DATE.equalsIgnoreCase(date)) {
+            isValidDate = true;
+        }
+
+        return isValidDate;
     }
 
     public String parsefromDatePicker(final int month,final int day,final int year) {
