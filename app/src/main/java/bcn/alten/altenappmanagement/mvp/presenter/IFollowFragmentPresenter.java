@@ -8,5 +8,6 @@ public interface IFollowFragmentPresenter {
     void editFollowUp(FollowUp followUp);
     void deleteFollowUp(FollowUp followUp);
     void createNewFollowUp(FollowUp followUp);
+    void swipeFollowUp(FollowUp followUp, String status);
 
 }

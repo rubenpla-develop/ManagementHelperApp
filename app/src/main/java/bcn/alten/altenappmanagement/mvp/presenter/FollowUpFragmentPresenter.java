@@ -11,6 +11,7 @@ import bcn.alten.altenappmanagement.database.ops.followup.DeleteFollowUpWrapper;
 import bcn.alten.altenappmanagement.database.ops.followup.EditFollowUpWrapper;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
+import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
 
@@ -54,5 +55,11 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
     public void createNewFollowUp(FollowUp followUp) {
         CreateNewFollowUpWrapper wrapper = new CreateNewFollowUpWrapper(followUp, this);
         wrapper.performCreateNewFollowUpOperation();
+    }
+
+    @Override
+    public void swipeFollowUp(FollowUp followUp, String status) {
+        followUp.setFollowUpStatusToDone(JodaTimeConverter.getInstance().getCurrenDate(), status);
+        editFollowUp(followUp);
     }
 }

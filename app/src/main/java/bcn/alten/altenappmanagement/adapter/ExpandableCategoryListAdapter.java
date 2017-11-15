@@ -114,4 +114,37 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                                       ExpandableGroup group) {
         holder.onBind(group);
     }
+
+    public int getGroupsCount() {
+        return getGroups().size();
+    }
+
+    public FollowUp getItem(final int flatPosition) {
+        final int GROUP_HEADER_INDEX = 1;
+        int parentGroup = 0;
+        int indexPosition = flatPosition;
+        boolean isNextCategory = true;
+
+        List<Category> grouplist = ((List<Category>) getGroups());
+
+        for (Category category : grouplist) {
+            if (isGroupExpanded(category)) {
+                if (indexPosition > category.getItems().size()) {
+                    indexPosition -= category.getItems().size() + GROUP_HEADER_INDEX;
+                } else {
+                    isNextCategory = false;
+                }
+            } else {
+                indexPosition -= GROUP_HEADER_INDEX;
+            }
+
+            if (!isNextCategory) {
+                break;
+            }
+
+            parentGroup += 1;
+        }
+
+        return ((FollowUp) getGroups().get(parentGroup).getItems().get(indexPosition -1));
+    }
 }
