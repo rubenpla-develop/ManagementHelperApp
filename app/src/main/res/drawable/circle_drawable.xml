@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
     <stroke
-        android:width="2dp"
+        android:width="@dimen/drawable_badge_circle_width"
         android:color="@color/background_soft_blue"/>
 </shape>

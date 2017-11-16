@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AltenAppManagement</string>
+    <string name="app_name">Alten Management</string>
     <string name="title_home">Home</string>
     <string name="title_follow_up">Follow Up</string>
     <string name="title_qm">QM</string>
@@ -7,6 +7,10 @@
     <string name="category_urgent">Urgente</string>
     <string name="category_warning">Atención</string>
     <string name="category_up_to_day">Ok</string>
+
+    <string name="followup_item_last_date_title">Último :</string>
+    <string name="followup_item_next_date_title">Próx. :</string>
+    <string name="followup_item_status_title">Estado :</string>
 
     <string name="follow_up_dialog_positive_button">Guardar</string>
     <string name="follow_up_dialog_negative_button">Descartar</string>
