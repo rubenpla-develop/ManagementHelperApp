@@ -21,11 +21,18 @@ public class FollowUp implements Parcelable {
     //@Embedded(prefix = DbKeys.FOLLOWUP_PREFIX)
     private String dateLastFollow;
 
+    private String dateNextFollow;
+
+    private String status;
+
     public FollowUp(@NonNull String consultorName, @NonNull  String currentClient,
-                    @NonNull String dateLastFollow) {
+                    @NonNull String dateLastFollow, @NonNull String dateNextFollow,
+                    @NonNull String status) {
         this.consultorName = consultorName;
         this.currentClient = currentClient;
         this.dateLastFollow = dateLastFollow;
+        this.dateNextFollow = dateNextFollow;
+        this.status = status;
 
     }
 
@@ -33,6 +40,8 @@ public class FollowUp implements Parcelable {
         consultorName = in.readString();
         currentClient = in.readString();
         dateLastFollow = in.readString();
+        dateNextFollow = in.readString();
+        status = in.readString();
     }
 
     public static final Creator<FollowUp> CREATOR = new Creator<FollowUp>() {
@@ -57,6 +66,14 @@ public class FollowUp implements Parcelable {
         dest.writeString(consultorName);
         dest.writeString(currentClient);
         dest.writeString(dateLastFollow);
+        dest.writeString(dateNextFollow);
+        dest.writeString(status);
+    }
+
+    public void setFollowUpStatusToDone(@NonNull String dateLastFollow, @NonNull String status) {
+        this.dateLastFollow = dateLastFollow;
+        dateNextFollow = "";
+        this.status = status;
     }
 
     public int getId() {
@@ -89,5 +106,21 @@ public class FollowUp implements Parcelable {
 
     public void setDateLastFollow(String dateLastFollow) {
         this.dateLastFollow = dateLastFollow;
+    }
+
+    public String getDateNextFollow() {
+        return dateNextFollow;
+    }
+
+    public void setDateNextFollow(String dateNextFollow) {
+        this.dateNextFollow = dateNextFollow;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -3,6 +3,7 @@ package bcn.alten.altenappmanagement.database;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
@@ -20,8 +21,14 @@ public interface DaoAccess {
     @Insert
     void insertFollowUpList(List<FollowUp> followUpList);
 
+    @Insert
+    void createNewFollowUp(FollowUp followUp);
+
     @Update
-    void updateRecord(FollowUp followUp);
+    void updateFollowUp(FollowUp followUp);
+
+    @Delete
+    void deleteFollowUp(FollowUp followUp);
 
    /* @Insert
     void insertMultipleRecord(University... universities);

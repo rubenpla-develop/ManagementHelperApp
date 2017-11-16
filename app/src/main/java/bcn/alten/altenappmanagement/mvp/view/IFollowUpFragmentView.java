@@ -12,9 +12,8 @@ public interface IFollowUpFragmentView {
 
     void ShowFollowUpList(List<Category> list);
     void onLiveDataChanged(LiveData<List<FollowUp>> list);
-    boolean editFollowUp(Object model);
-    boolean deleteFollowUp(List<Object> list);
-    void showFollowUpDialog(String mode, Object model);
-    List<Object> addNewFollowUpCreated(Object model);
+    void editFollowUp(FollowUp followUp);
+    void deleteFollowUp(FollowUp followUp);
+    void showAddFollowUpDialog();
     Context getContext();
 }

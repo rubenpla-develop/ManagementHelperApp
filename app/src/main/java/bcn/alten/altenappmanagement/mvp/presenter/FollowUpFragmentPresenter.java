@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.database.AltenDatabase;
+import bcn.alten.altenappmanagement.database.ops.followup.CreateNewFollowUpWrapper;
+import bcn.alten.altenappmanagement.database.ops.followup.DeleteFollowUpWrapper;
+import bcn.alten.altenappmanagement.database.ops.followup.EditFollowUpWrapper;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
+import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
 
@@ -23,35 +27,38 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
 
     @Override
     public void showFollowUpList() {
-        //TODO get items from DB
         LiveData<List<FollowUp>> categoryList = AltenDatabase.getDatabase(view.getContext())
                 .daoAccess()
                 .fecthFollowUpData();
 
         view.onLiveDataChanged(categoryList);
 
-        //TODO mocking content, delete
+        //TODO mocking content
         /*List<Category> categoryList = CategoryDataFactory.createMockFilteredCategories();
         view.ShowFollowUpList(categoryList);*/
     }
 
     @Override
-    public Object editFollowUp(int id) {
-        //TODO get item from id, modify, and store on DB, once at all, update recyclerview data
-        return null;
+    public void editFollowUp(FollowUp followUp) {
+        EditFollowUpWrapper wrapper = new EditFollowUpWrapper(followUp);
+        wrapper.performEditFollowUpOperation();
     }
 
     @Override
-    public List<Object> deleteFollowUp(int id) {
-        //TODO get item from id, modify, delete from DB, once at all, update recyclerview data
-
-        return list;
+    public void deleteFollowUp(FollowUp followUp) {
+        DeleteFollowUpWrapper wrapper = new DeleteFollowUpWrapper(followUp);
+        wrapper.performDeleteFollowUpOperation();
     }
 
     @Override
-    public Object createNewFollowUp() {
-        //TODO create new element, store on DB and finally update list on recyclerview
+    public void createNewFollowUp(FollowUp followUp) {
+        CreateNewFollowUpWrapper wrapper = new CreateNewFollowUpWrapper(followUp);
+        wrapper.performCreateNewFollowUpOperation();
+    }
 
-        return null;
+    @Override
+    public void swipeFollowUp(FollowUp followUp, String status) {
+        followUp.setFollowUpStatusToDone(JodaTimeConverter.getInstance().getCurrenDate(), status);
+        editFollowUp(followUp);
     }
 }

@@ -21,10 +21,10 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.List;
 
+import bcn.alten.altenappmanagement.BuildConfig;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.database.AltenDatabase;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
-import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
 import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import butterknife.BindView;
@@ -54,6 +54,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        if (!BuildConfig.HOME_SCREEN_MOCK_CONTENT_BUTTONS) {
+            btnShowDatePicker.setVisibility(View.INVISIBLE);
+            btnInsertData.setVisibility(View.INVISIBLE);
+            btnFecthData.setVisibility(View.INVISIBLE);
+        }
+
         setListeners();
         return view;
     }
@@ -61,6 +67,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setListeners() {
         btnFecthData.setOnClickListener(this);
         btnInsertData.setOnClickListener(this);
+        btnShowDatePicker.setVisibility(View.INVISIBLE);
         btnShowDatePicker.setOnClickListener(this);
     }
 
@@ -89,9 +96,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                             home_tv.append(formattedString);
                         }
-
-                        ((IMainActivityView) getActivity())
-                                .showMessage("Livedata is Working!!");
                     }
                 });
                 break;
@@ -140,24 +144,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
-            /*Log.i("AltenAPP", "year: " + year + " month : " + month + " day : " + day);
-            LocalDate dateTime = new LocalDate(year, month + 1 , day);
-            DateTime dt = dateTime.toDateTimeAtCurrentTime();
-            String dateInMillies = String.valueOf(dt.getMillis()); //TODO saves this value to DB*/
 
             String dateInmMillies = JodaTimeConverter.getInstance().parsefromDatePicker(month,day, year);
 
-            //TODO retrieve date value this way
-            //DateTime finalDateTime = new DateTime(Long.valueOf(dateInMillies));
             String finalDateTime = JodaTimeConverter.getInstance()
-                    .getDateInStringFormat(Long.valueOf(dateInmMillies));
-           // dt.toString("dd-MM-yyyy");
+                    .getDateInStringFormat(dateInmMillies);
             Log.i("Alten", "dateInMillies : " + dateInmMillies + "\nfinalDateTime : "
                     + finalDateTime);
         }

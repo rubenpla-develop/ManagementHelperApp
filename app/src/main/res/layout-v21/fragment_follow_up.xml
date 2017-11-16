@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.FollowUpFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/followup_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/follow_up_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/followup_fragment_fab_right_margin"
+        android:layout_marginEnd="@dimen/followup_fragment_fab_right_margin"
+        android:layout_marginBottom="@dimen/followup_fragment_fab_bottom_margin"
+        android:elevation="@dimen/followup_fragment_fab_elevation"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/background_soft_orange"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_person_add_black_24dp"/>
+
+</FrameLayout>

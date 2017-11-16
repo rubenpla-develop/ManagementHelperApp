@@ -1,44 +1,63 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
+import android.animation.Animator;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.adapter.ExpandableCategoryListAdapter;
 import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
+import bcn.alten.altenappmanagement.expandable.holderview.FollowUpHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
+import bcn.alten.altenappmanagement.ui.customview.RecyclerItemTouchHelper;
+import bcn.alten.altenappmanagement.ui.dialog.FollowUpDeleteDialog;
+import bcn.alten.altenappmanagement.ui.dialog.FollowUpDialog;
 import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FollowUpFragment extends Fragment implements IFollowUpFragmentView {
+public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
+        RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
-    private final String TAG = FollowUpFragment.class.getSimpleName();
+    public static final String TAG = FollowUpFragment.class.getSimpleName();
 
     @BindView(R.id.followup_recyclerView)
-    RecyclerView expandableList;
+    RecyclerView expandableRecyclerView;
+
+    @BindView(R.id.follow_up_fab)
+    FloatingActionButton fab_add_people;
+
+    private AlertDialog followUpDialog;
 
     private FollowUpFragmentPresenter presenter;
     private ExpandableCategoryListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private String actionMode;
+
     public static FollowUpFragment newInstance() {
             Bundle args = new Bundle();
 
-            //arguments
             FollowUpFragment fragment = new FollowUpFragment();
             if (!args.isEmpty()) {
                 fragment.setArguments(args);
@@ -51,15 +70,55 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_follow_up,
-                container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_follow_up, container, false);
 
         ButterKnife.bind(this, view);
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        expandableList.setLayoutManager(layoutManager);
-        expandableList.setHasFixedSize(true);
+        expandableRecyclerView.setLayoutManager(layoutManager);
+        expandableRecyclerView.setHasFixedSize(true);
+
+        fab_add_people.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddFollowUpDialog();
+            }
+        });
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            final Interpolator interpolador = AnimationUtils.loadInterpolator(getActivity(),
+                    android.R.interpolator.overshoot);
+
+            fab_add_people.setScaleX(0);
+            fab_add_people.setScaleY(0);
+
+            fab_add_people.animate()
+                    .scaleX(1)
+                    .scaleY(1)
+                    .setInterpolator(interpolador)
+                    .setDuration(400)
+                    .setStartDelay(2000)
+                    .setListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+        }
 
         return view;
     }
@@ -73,10 +132,17 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
 
     @Override
     public void ShowFollowUpList(List<Category> list) {
-        expandableRecyclerViewAdapter = new ExpandableCategoryListAdapter(getActivity(),
-                list);
+        expandableRecyclerViewAdapter = new ExpandableCategoryListAdapter(list, getActivity(),
+                this);
 
-        expandableList.setAdapter(expandableRecyclerViewAdapter);
+        expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
+                OrientationHelper.HORIZONTAL);
+        expandableRecyclerView.addItemDecoration(dividerItemDecoration);
+        ItemTouchHelper.SimpleCallback recycleritemTouchHelper =
+                new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+
+        new ItemTouchHelper(recycleritemTouchHelper).attachToRecyclerView(expandableRecyclerView);
     }
 
     @Override
@@ -93,18 +159,21 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     }
 
     @Override
-    public boolean editFollowUp(Object model) {
-        return false;
+    public void editFollowUp(FollowUp followUp) {
+        FollowUpDialog followupEditDialog = new FollowUpDialog(getContext(), FollowUpDialog.EDIT_FOLLOWUP_ACTION,
+                followUp, presenter);
+
+        followUpDialog = followupEditDialog.getDialog();
+        followUpDialog.show();
     }
 
     @Override
-    public boolean deleteFollowUp(List<Object> list) {
-        return false;
-    }
+    public void deleteFollowUp(FollowUp followUp) {
+        FollowUpDeleteDialog followUpDeleteDialog = new FollowUpDeleteDialog(getContext(), followUp,
+                presenter);
 
-    @Override
-    public void showFollowUpDialog(String mode, Object model) {
-
+        followUpDialog = followUpDeleteDialog.getDialog();
+        followUpDialog.show();
     }
 
     @Override
@@ -113,7 +182,20 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView 
     }
 
     @Override
-    public List<Object> addNewFollowUpCreated(Object model) {
-        return null;
+    public void showAddFollowUpDialog() {
+        FollowUpDialog followupAddDialog = new FollowUpDialog(getActivity(),
+                FollowUpDialog.ADD_FOLLOWUP_ACTION ,presenter);
+
+        followUpDialog = followupAddDialog.getDialog();
+        followUpDialog.show();
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof FollowUpHolder) {
+            FollowUp followUp = expandableRecyclerViewAdapter.getItem(position);
+
+            presenter.swipeFollowUp(followUp, getString(R.string.follow_up_dialog_radio_group_done_value));
+        }
     }
 }

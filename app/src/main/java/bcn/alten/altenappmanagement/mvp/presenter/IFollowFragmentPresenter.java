@@ -1,13 +1,13 @@
 package bcn.alten.altenappmanagement.mvp.presenter;
 
-import java.util.List;
+import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 
 public interface IFollowFragmentPresenter {
 
-    //TODO all 'Object' ---> change by its own model
     void showFollowUpList();
-    Object editFollowUp(int id);
-    List<Object> deleteFollowUp(int id);
-    Object createNewFollowUp();
+    void editFollowUp(FollowUp followUp);
+    void deleteFollowUp(FollowUp followUp);
+    void createNewFollowUp(FollowUp followUp);
+    void swipeFollowUp(FollowUp followUp, String status);
 
 }

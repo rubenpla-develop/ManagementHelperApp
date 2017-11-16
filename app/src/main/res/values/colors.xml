@@ -24,4 +24,12 @@
     <color name="odd_list_row_color">#FAFAFA</color>
     <color name="pair_list_row_color">#E6E6E6</color>
 
+    <color name="child_item_swipeable_background">#FFFFFF</color>
+
+    <color name="followup_status_color_already_done">#31B404</color>
+    <color name="followup_status_color_scheduled">#F3CD70</color>
+    <color name="followup_status_color_cancelled">#fa6e18</color>
+    <color name="followup_swipe_view_background">#3ADF00</color>
+
+
 </resources>
