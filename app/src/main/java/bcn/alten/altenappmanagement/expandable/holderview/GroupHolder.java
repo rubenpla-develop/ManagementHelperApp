@@ -1,9 +1,6 @@
 package bcn.alten.altenappmanagement.expandable.holderview;
 
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,8 +10,7 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
-
-import static android.R.attr.animationDuration;
+import bcn.alten.altenappmanagement.utils.AnimationRenderer;
 
 public class GroupHolder extends GroupViewHolder {
 
@@ -48,20 +44,21 @@ public class GroupHolder extends GroupViewHolder {
         if (group.getItemCount() >= 1) {
             badgeView.setVisibility(View.VISIBLE);
             badgeNumber.setText(String.valueOf(group.getItemCount()));
+            arrow.setVisibility(View.VISIBLE);
         }
     }
 
-    private void setListeners() {
-        container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RotateAnimation rotateAnimation = new RotateAnimation(180.0f, 0.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                rotateAnimation.setInterpolator(new DecelerateInterpolator());
-                rotateAnimation.setRepeatCount(0);
-                rotateAnimation.setDuration(animationDuration);
-                rotateAnimation.setFillAfter(true);
-                arrow.startAnimation(rotateAnimation);
-            }
-        });
+    @Override
+    public void expand() {
+        AnimationRenderer animationRenderer = new AnimationRenderer();
+        animationRenderer.expandGroupArrowRotation(arrow);
+        super.expand();
+    }
+
+    @Override
+    public void collapse() {
+        AnimationRenderer animationRenderer = new AnimationRenderer();
+        animationRenderer.collapseGroupArrowRotation(arrow);
+        super.collapse();
     }
 }
