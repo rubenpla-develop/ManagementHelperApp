@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/background_soft_dark_blue"
-            android:textSize="16sp"
+            android:textSize="@dimen/followup_dialog_new_edit_consultor_client_fields"
             android:maxLength="30"
             android:maxLines="1" />
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/background_soft_dark_blue"
-            android:textSize="16sp"
+            android:textSize="@dimen/followup_dialog_new_edit_consultor_client_fields"
             android:maxLength="20"
             android:maxLines="1" />
 
@@ -138,21 +138,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/follow_up_dialog_radio_group_scheduled_value"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/followup_dialog_new_edit_status" />
 
                 <RadioButton
                     android:id="@+id/fup_dialog_radio_done"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/follow_up_dialog_radio_group_done_value"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/followup_dialog_new_edit_status" />
 
                 <RadioButton
                     android:id="@+id/fup_dialog_radio_cancelled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/follow_up_dialog_radio_group_cancelled_value"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/followup_dialog_new_edit_status" />
             </RadioGroup>
         </LinearLayout>
     </LinearLayout>
@@ -161,7 +161,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="2"
-        android:textSize="14sp"
+        android:textSize="@dimen/followup_dialog_new_edit_error_message"
         android:textColor="@color/background_soft_orange"
         android:visibility="visible"/>
 </LinearLayout>

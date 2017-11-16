@@ -9,7 +9,7 @@
         android:id="@+id/fup_dialog_delete_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="@dimen/followup_dialog_delete_message"
         android:text="@string/follow_up_dialog_delete_message"/>
 
     <TextView

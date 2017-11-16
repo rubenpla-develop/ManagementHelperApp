@@ -20,8 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/category_icon"
-        android:textSize="16sp"
-        android:textStyle="italic"
+        android:textSize="@dimen/followup_parent_item_consultor_name"
+        android:textStyle="bold|italic"
         android:textColor="@color/colorPrimaryDark"
         android:layout_centerVertical="true"/>
 
@@ -41,7 +41,7 @@
             android:id="@+id/badge_view_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="@dimen/followup_parent_item_bade_number"
             android:layout_centerInParent="true"
             android:textColor="@color/background_electric_blue"/>
     </RelativeLayout>
@@ -55,10 +55,8 @@
         android:layout_margin="@dimen/followup_item_parent_arrow_margin"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        app:srcCompat="@drawable/ic_arrow_down" />
-
-
-
+        app:srcCompat="@drawable/ic_arrow_down"
+        android:visibility="invisible"/>
 
 </RelativeLayout>
 

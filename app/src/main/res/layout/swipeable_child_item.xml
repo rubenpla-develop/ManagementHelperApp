@@ -44,7 +44,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginBottom="@dimen/followup_item_vertical_margin"
             android:maxLength="30"
-            android:textSize="15sp"
+            android:textSize="@dimen/followup_child_item_consultor_name"
             android:textStyle="bold" />
 
         <LinearLayout

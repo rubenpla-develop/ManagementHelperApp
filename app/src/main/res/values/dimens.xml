@@ -1,5 +1,6 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- dp's -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
@@ -41,4 +42,14 @@
 
     <dimen name ="dialog_followup_delete_padding">16dp</dimen>
     <dimen name ="dialog_followup_delete_margin">8dp</dimen>
+
+    <!-- sp's -->
+    <dimen name = "followup_child_item_consultor_name">15sp</dimen>
+    <dimen name = "followup_parent_item_consultor_name">16sp</dimen>
+    <dimen name = "followup_parent_item_bade_number">18sp</dimen>
+    <dimen name = "followup_dialog_new_edit_consultor_client_fields">16sp</dimen>
+    <dimen name = "followup_dialog_new_edit_status">12sp</dimen>
+    <dimen name = "followup_dialog_new_edit_error_message">14sp</dimen>
+
+    <dimen name ="followup_dialog_delete_message">14sp</dimen>
 </resources>
