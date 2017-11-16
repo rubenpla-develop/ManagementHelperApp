@@ -27,7 +27,6 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
 
     @Override
     public void showFollowUpList() {
-        //getting items from DB
         LiveData<List<FollowUp>> categoryList = AltenDatabase.getDatabase(view.getContext())
                 .daoAccess()
                 .fecthFollowUpData();
@@ -41,19 +40,19 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
 
     @Override
     public void editFollowUp(FollowUp followUp) {
-        EditFollowUpWrapper wrapper = new EditFollowUpWrapper(followUp, this);
+        EditFollowUpWrapper wrapper = new EditFollowUpWrapper(followUp);
         wrapper.performEditFollowUpOperation();
     }
 
     @Override
     public void deleteFollowUp(FollowUp followUp) {
-        DeleteFollowUpWrapper wrapper = new DeleteFollowUpWrapper(followUp, this);
+        DeleteFollowUpWrapper wrapper = new DeleteFollowUpWrapper(followUp);
         wrapper.performDeleteFollowUpOperation();
     }
 
     @Override
     public void createNewFollowUp(FollowUp followUp) {
-        CreateNewFollowUpWrapper wrapper = new CreateNewFollowUpWrapper(followUp, this);
+        CreateNewFollowUpWrapper wrapper = new CreateNewFollowUpWrapper(followUp);
         wrapper.performCreateNewFollowUpOperation();
     }
 

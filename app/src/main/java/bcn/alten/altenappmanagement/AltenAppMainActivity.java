@@ -27,7 +27,7 @@ public class AltenAppMainActivity extends AppCompatActivity implements IMainActi
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
 
-    private ViewPagerAdapter adapter;
+    private ViewPagerAdapter viewPagerAdapter;
     private MenuItem prevMenuItem;
 
     @Override
@@ -41,17 +41,17 @@ public class AltenAppMainActivity extends AppCompatActivity implements IMainActi
     }
 
     private void setupViewPager() {
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         HomeFragment homeFragment = new HomeFragment();
         FollowUpFragment followupFragment = FollowUpFragment.newInstance();
         QMFragment QMFragment = new QMFragment();
 
-        adapter.addFragment(homeFragment);
-        adapter.addFragment(followupFragment);
-        adapter.addFragment(QMFragment);
+        viewPagerAdapter.addFragment(homeFragment);
+        viewPagerAdapter.addFragment(followupFragment);
+        viewPagerAdapter.addFragment(QMFragment);
 
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(viewPagerAdapter);
     }
 
     private void setListeners() {
