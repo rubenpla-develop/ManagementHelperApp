@@ -22,7 +22,6 @@ public class JodaTimeConverter {
     public static final int NEWER_DATE = 1;
     public static final int CURRENT_DATE = 2;
 
-    //jodaTimeConverter class singleton instance
     private static JodaTimeConverter instance = null;
 
     public static JodaTimeConverter getInstance() {

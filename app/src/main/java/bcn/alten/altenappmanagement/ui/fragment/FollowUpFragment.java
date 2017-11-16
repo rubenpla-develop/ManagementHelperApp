@@ -14,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +58,6 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     public static FollowUpFragment newInstance() {
             Bundle args = new Bundle();
 
-            //arguments
             FollowUpFragment fragment = new FollowUpFragment();
             if (!args.isEmpty()) {
                 fragment.setArguments(args);
@@ -195,7 +193,6 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof FollowUpHolder) {
-            Log.i(TAG,"DIRECTION : " + direction + " || Position : " + position);
             FollowUp followUp = expandableRecyclerViewAdapter.getItem(position);
 
             presenter.swipeFollowUp(followUp, getString(R.string.follow_up_dialog_radio_group_done_value));

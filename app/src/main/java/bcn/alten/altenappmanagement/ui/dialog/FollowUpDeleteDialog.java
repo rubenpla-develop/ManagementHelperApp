@@ -11,7 +11,6 @@ import android.widget.TextView;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
-import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class FollowUpDeleteDialog {
@@ -68,7 +67,7 @@ public class FollowUpDeleteDialog {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         followUpFragmentPresenter.deleteFollowUp(followUpToDelete);
-                        ((IMainActivityView) context).showMessage("FollowUp DELETE OK!");
+
                         dialog.dismiss();
                     }
                 }).setNegativeButton(R.string.follow_up_dialog_delete_negative_button, new DialogInterface.OnClickListener() {

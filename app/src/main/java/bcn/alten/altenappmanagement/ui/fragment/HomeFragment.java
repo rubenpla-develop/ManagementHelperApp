@@ -25,7 +25,6 @@ import bcn.alten.altenappmanagement.BuildConfig;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.database.AltenDatabase;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
-import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
 import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import butterknife.BindView;
@@ -97,9 +96,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                             home_tv.append(formattedString);
                         }
-
-                        ((IMainActivityView) getActivity())
-                                .showMessage("Livedata is Working!!");
                     }
                 });
                 break;
@@ -148,7 +144,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
@@ -156,10 +151,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             String dateInmMillies = JodaTimeConverter.getInstance().parsefromDatePicker(month,day, year);
 
-            //TODO retrieve date value this way
             String finalDateTime = JodaTimeConverter.getInstance()
                     .getDateInStringFormat(dateInmMillies);
-           // dt.toString("dd-MM-yyyy");
             Log.i("Alten", "dateInMillies : " + dateInmMillies + "\nfinalDateTime : "
                     + finalDateTime);
         }

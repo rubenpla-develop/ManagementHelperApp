@@ -18,9 +18,9 @@ public abstract class AltenDatabase extends RoomDatabase {
 
     /**
      * Migrate from:
-     * version 2 - using Room
+     * version 1 - using Room
      * to
-     * version 3 - using Room where the {@link FollowUp} has an extra field: status
+     * version 2 - using Room where the {@link FollowUp} has an extra field: status
      */
     @VisibleForTesting
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
