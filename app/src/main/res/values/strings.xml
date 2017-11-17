@@ -4,6 +4,10 @@
     <string name="title_follow_up">Follow Up</string>
     <string name="title_qm">QM</string>
 
+    <string name="content_desc_icon_background_swipeable_view">icon for background
+        swipeable view</string>
+    <string name="content_desc_parent_group_icon">parent group icon</string>
+
     <string name="category_urgent">Urgente</string>
     <string name="category_warning">Atención</string>
     <string name="category_up_to_day">Ok</string>
@@ -48,6 +52,5 @@
     <string name="follow_up_dialog_radio_group_scheduled_value">Planificada</string>
     <string name="follow_up_dialog_radio_group_done_value">Realizada</string>
     <string name="follow_up_dialog_radio_group_cancelled_value">Cancelada</string>
-
 
 </resources>

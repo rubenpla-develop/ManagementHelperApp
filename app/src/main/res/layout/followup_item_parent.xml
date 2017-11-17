@@ -11,15 +11,16 @@
         android:id="@+id/category_icon"
         android:layout_width="@dimen/followup_item_parent_icon_width"
         android:layout_height="@dimen/followup_item_parent_icon_height"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/followup_item_parent_icon_left_margin"
-        android:layout_marginRight="@dimen/followup_item_parent_icon_right_margin"
-        android:layout_centerVertical="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/followup_item_parent_icon_left_margin"
+        android:layout_marginEnd="@dimen/followup_item_parent_icon_right_margin"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/content_desc_parent_group_icon" />
 
     <TextView android:id="@+id/category_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/category_icon"
+        android:layout_toEndOf="@id/category_icon"
         android:textSize="@dimen/followup_parent_item_consultor_name"
         android:textStyle="bold|italic"
         android:textColor="@color/colorPrimaryDark"
@@ -30,9 +31,7 @@
         android:layout_width="@dimen/followup_item_parent_badge_width"
         android:layout_height="@dimen/followup_item_parent_badge_height"
         android:background="@drawable/circle_drawable"
-        android:layout_marginLeft="@dimen/followup_item_parent_badge_horizontal_margin"
         android:layout_marginStart="@dimen/followup_item_parent_badge_horizontal_margin"
-        android:layout_toLeftOf="@+id/list_item_genre_arrow"
         android:layout_toStartOf="@+id/list_item_genre_arrow"
         android:layout_centerVertical="true"
         android:visibility="invisible">
@@ -53,7 +52,6 @@
         android:layout_gravity="center_vertical|end"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/followup_item_parent_arrow_margin"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         app:srcCompat="@drawable/ic_arrow_down"
         android:visibility="invisible"/>
