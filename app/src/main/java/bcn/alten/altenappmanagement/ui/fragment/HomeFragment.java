@@ -4,10 +4,9 @@ package bcn.alten.altenappmanagement.ui.fragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -84,11 +83,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         .daoAccess()
                         .fecthFollowUpData();
 
-                list.observe(this, new Observer<List<FollowUp>>() {
-                    @Override
-                    public void onChanged(@Nullable List<FollowUp> followUpList) {
-                        home_tv.setTextSize(10);
-                        home_tv.setText("");
+                list.observe(this, followUpList -> {
+                    home_tv.setTextSize(10);
+                    home_tv.setText("");
+                    if (followUpList != null && followUpList.size() > 0) {
                         for (FollowUp follow : followUpList) {
                             String formattedString = follow.getId() + "." +
                                     follow.getConsultorName() + " " +
@@ -136,6 +134,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker

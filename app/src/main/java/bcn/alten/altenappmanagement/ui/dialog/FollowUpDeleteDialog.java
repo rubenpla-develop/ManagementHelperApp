@@ -1,7 +1,6 @@
 package bcn.alten.altenappmanagement.ui.dialog;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,19 +62,11 @@ public class FollowUpDeleteDialog {
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setPositiveButton(R.string.follow_up_dialog_delete_positive_button,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        followUpFragmentPresenter.deleteFollowUp(followUpToDelete);
+                (dialog, which) -> {
+                    followUpFragmentPresenter.deleteFollowUp(followUpToDelete);
 
-                        dialog.dismiss();
-                    }
-                }).setNegativeButton(R.string.follow_up_dialog_delete_negative_button, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).setTitle(context.getResources().getString(R.string.follow_up_dialog_delete_title));
+                    dialog.dismiss();
+                }).setNegativeButton(R.string.follow_up_dialog_delete_negative_button, (dialog, which) -> dialog.dismiss()).setTitle(context.getResources().getString(R.string.follow_up_dialog_delete_title));
 
         alertDialogBuilder.setView(dialogView);
 

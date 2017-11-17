@@ -1,7 +1,6 @@
 package bcn.alten.altenappmanagement.ui.dialog;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -48,16 +47,6 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     private Resources res;
 
     private FollowUpFragmentPresenter followUpFragmentPresenter;
-
-    public FollowUpDialog(Context context) {
-        this.context = context;
-    }
-
-    public FollowUpDialog(Context context, FollowUpFragmentPresenter presenter) {
-        this.context = context;
-        this.followUpFragmentPresenter = presenter;
-        this.res = context.getResources();
-    }
 
     public FollowUpDialog(Context context, String actionMode, FollowUp followUpToEdit,
                           FollowUpFragmentPresenter presenter) {
@@ -143,45 +132,41 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         });
 
         final AlertDialog followUpDialog = alertDialogBuilder.create();
-        followUpDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                Button positiveButton = followUpDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                positiveButton.setOnClickListener(v -> {
+        followUpDialog.setOnShowListener(dialog -> {
+            Button positiveButton = followUpDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            positiveButton.setOnClickListener(v -> {
 
-                    FollowUpErrorController errorController = new FollowUpErrorController(context,
-                            followUpFragmentPresenter);
+                FollowUpErrorController errorController = new FollowUpErrorController(context);
 
-                    if (!errorController.isAnyFieldEmpty(dialogView)
-                            && !errorController.isAnyErrorOnDateWithStates(dialogView)) {
+                if (!errorController.isAnyFieldEmpty(dialogView)
+                        && !errorController.isAnyErrorOnDateWithStates(dialogView)) {
 
-                        String[] statusList = context.getResources().getStringArray(R.array.status_values);
-                        String formattedLastDate = JodaTimeConverter.getInstance()
-                                .parseDateFromStringPatternToMillis(dateText.getText().toString());
+                    String[] statusList = context.getResources().getStringArray(R.array.status_values);
+                    String formattedLastDate = JodaTimeConverter.getInstance()
+                            .parseDateFromStringPatternToMillis(dateText.getText().toString());
 
-                        String formattedNextDate = JodaTimeConverter.getInstance()
-                                .parseDateFromStringPatternToMillis(addNextFollowTextView.getText().toString());
+                    String formattedNextDate = JodaTimeConverter.getInstance()
+                            .parseDateFromStringPatternToMillis(addNextFollowTextView.getText().toString());
 
-                        if (nextDateChosenStatus.equalsIgnoreCase(statusList[STATUS_DONE])) {
-                            formattedLastDate = formattedNextDate;
-                            formattedNextDate = "";
-                        }
-
-                        editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
-                                clientNameExtEditText.getText().toString(), formattedLastDate,
-                                formattedNextDate, nextDateChosenStatus);
-
-                        if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
-                            followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
-                        } else if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
-                            editedFollowUp.setId(followUp.getId());
-                            followUpFragmentPresenter.editFollowUp(editedFollowUp);
-                        }
-
-                        followUpDialog.dismiss();
+                    if (nextDateChosenStatus.equalsIgnoreCase(statusList[STATUS_DONE])) {
+                        formattedLastDate = formattedNextDate;
+                        formattedNextDate = "";
                     }
-                });
-            }
+
+                    editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
+                            clientNameExtEditText.getText().toString(), formattedLastDate,
+                            formattedNextDate, nextDateChosenStatus);
+
+                    if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
+                        followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
+                    } else if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
+                        editedFollowUp.setId(followUp.getId());
+                        followUpFragmentPresenter.editFollowUp(editedFollowUp);
+                    }
+
+                    followUpDialog.dismiss();
+                }
+            });
         });
 
         return followUpDialog;
@@ -200,8 +185,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         final String finalDateTime = JodaTimeConverter.getInstance()
                 .getDateInStringFormat(dateInmMillies);
 
-        FollowUpErrorController errorController = new FollowUpErrorController(context,
-                followUpFragmentPresenter);
+        FollowUpErrorController errorController = new FollowUpErrorController(context);
 
         TextView errorMessage = dialogView.findViewById(R.id.fup_dialog_error_message);
         boolean errorMessageIsShown = (errorMessage != null && errorMessage.getText().length() > 0);

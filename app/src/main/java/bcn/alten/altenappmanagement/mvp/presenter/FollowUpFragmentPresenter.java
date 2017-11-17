@@ -2,7 +2,6 @@ package bcn.alten.altenappmanagement.mvp.presenter;
 
 import android.arch.lifecycle.LiveData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.database.AltenDatabase;
@@ -18,11 +17,9 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
     private final String TAG = FollowUpFragmentPresenter.class.getSimpleName();
 
     private IFollowUpFragmentView view;
-    private ArrayList<Object> list;
 
     public FollowUpFragmentPresenter(IFollowUpFragmentView view) {
         this.view = view;
-        list = new ArrayList<>();
     }
 
     @Override

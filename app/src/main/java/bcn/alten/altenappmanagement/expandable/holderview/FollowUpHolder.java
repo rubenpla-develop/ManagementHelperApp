@@ -1,7 +1,6 @@
 package bcn.alten.altenappmanagement.expandable.holderview;
 
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,7 +12,6 @@ import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class FollowUpHolder extends ChildViewHolder {
-    private FrameLayout followUpContainer;
     private LinearLayout lastDateContainer;
     private LinearLayout nextDateContainer;
     public RelativeLayout viewBackground;
@@ -30,7 +28,6 @@ public class FollowUpHolder extends ChildViewHolder {
     }
 
     private void findViews() {
-        followUpContainer = itemView.findViewById(R.id.swipe_container);
         lastDateContainer = itemView.findViewById(R.id.last_date_container);
         nextDateContainer = itemView.findViewById(R.id.next_date_container);
         consultorName = itemView.findViewById(R.id.consulter_name);

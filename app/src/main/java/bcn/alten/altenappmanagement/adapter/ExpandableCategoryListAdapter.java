@@ -24,16 +24,6 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
     private LayoutInflater inflater;
     private IFollowUpFragmentView followUpFragmentView;
 
-    public ExpandableCategoryListAdapter(List<? extends ExpandableGroup> groups) {
-        super(groups);
-    }
-
-    public ExpandableCategoryListAdapter(Context context, List<? extends ExpandableGroup> groups) {
-        super(groups);
-        this.context = context;
-        inflater = LayoutInflater.from(this.context);
-    }
-
     public ExpandableCategoryListAdapter(List<? extends ExpandableGroup> groups,
                                          Context context, IFollowUpFragmentView view) {
         super(groups);

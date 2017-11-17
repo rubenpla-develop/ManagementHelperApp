@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
@@ -25,7 +26,7 @@ public abstract class AltenDatabase extends RoomDatabase {
     @VisibleForTesting
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
-        public void migrate(SupportSQLiteDatabase database) {
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE FollowUp"
                     + " ADD COLUMN status STRING");
         }
@@ -46,5 +47,4 @@ public abstract class AltenDatabase extends RoomDatabase {
     }
 
     public abstract DaoAccess daoAccess();
-
 }

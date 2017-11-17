@@ -2,7 +2,6 @@ package bcn.alten.altenappmanagement.ui.fragment;
 
 import android.animation.Animator;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -52,8 +51,6 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     private FollowUpFragmentPresenter presenter;
     private ExpandableCategoryListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
-    private String actionMode;
 
     public static FollowUpFragment newInstance() {
             Bundle args = new Bundle();
@@ -142,14 +139,11 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
 
     @Override
     public void onLiveDataChanged(final LiveData< List<FollowUp>> list) {
-        list.observe(this, new Observer<List<FollowUp>>() {
-            @Override
-            public void onChanged(@Nullable List<FollowUp> followUpList) {
-                List<Category> categoryList = CategoryDataFactory.getInstance()
-                        .getDataFilteredByCategory(list.getValue());
+        list.observe(this, followUpList -> {
+            List<Category> categoryList = CategoryDataFactory.getInstance()
+                    .getDataFilteredByCategory(list.getValue());
 
-                ShowFollowUpList(categoryList);
-            }
+            ShowFollowUpList(categoryList);
         });
     }
 

@@ -7,7 +7,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
@@ -16,12 +15,10 @@ public class FollowUpErrorController {
 
     private final String TAG = FollowUpErrorController.class.getSimpleName();
 
-    private FollowUpFragmentPresenter presenter;
     private Context context;
     private Resources res;
 
-    public FollowUpErrorController(Context context, FollowUpFragmentPresenter presenter) {
-        this.presenter = presenter;
+    public FollowUpErrorController(Context context) {
         this.context = context;
         res = context.getResources();
     }
@@ -53,7 +50,6 @@ public class FollowUpErrorController {
 
     public boolean isAnyErrorOnDateWithStates(View dialogView) {
         boolean isAnyError = false;
-        final int NO_STATUS_SELECTED = -1;
 
         TextView nextDateTextView = dialogView.findViewById(R.id.fup_dialog_next_date_edit);
         RadioGroup stateRadioGroup = dialogView.findViewById(R.id.fup_dialog_radio_group_status);

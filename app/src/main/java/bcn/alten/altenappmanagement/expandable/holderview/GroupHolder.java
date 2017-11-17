@@ -2,7 +2,6 @@ package bcn.alten.altenappmanagement.expandable.holderview;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
@@ -14,7 +13,6 @@ import bcn.alten.altenappmanagement.utils.AnimationRenderer;
 
 public class GroupHolder extends GroupViewHolder {
 
-    private RelativeLayout container;
     private TextView categoryName;
     private ImageView categoryIcon;
     private View badgeView;
@@ -27,7 +25,6 @@ public class GroupHolder extends GroupViewHolder {
     }
 
     private void findViews() {
-        container = itemView.findViewById(R.id.group_container);
         categoryName = itemView.findViewById(R.id.category_title);
         categoryIcon = itemView.findViewById(R.id.category_icon);
         badgeNumber = itemView.findViewById(R.id.badge_view_number);

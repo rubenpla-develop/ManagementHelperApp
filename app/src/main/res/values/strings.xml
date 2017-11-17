@@ -26,7 +26,7 @@
     <!-- DELETE FOLLOWUP DIALOG -->
     <string name="follow_up_dialog_delete_title">Atención</string>
     <string name="follow_up_dialog_delete_message">¿Deseas eliminar este elemento?</string>
-    <string name="follow_up_dialog_delete_see_info">Ver info...</string>
+    <string name="follow_up_dialog_delete_see_info">Ver info…</string>
     <string name="follow_up_dialog_delete_positive_button">Eliminar</string>
     <string name="follow_up_dialog_delete_negative_button">Cancelar</string>
     <string name="follow_up_dialog_delete_client">Cliente :\u0020</string>
