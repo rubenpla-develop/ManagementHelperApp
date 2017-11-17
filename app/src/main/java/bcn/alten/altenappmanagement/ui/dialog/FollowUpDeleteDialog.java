@@ -79,19 +79,16 @@ public class FollowUpDeleteDialog {
 
         alertDialogBuilder.setView(dialogView);
 
-        seeInfoTextview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (followUpInfoContainer.getVisibility()) {
-                    case View.GONE:
-                        followUpInfoContainer.setVisibility(View.VISIBLE);
-                        break;
-                    case View.VISIBLE:
-                        followUpInfoContainer.setVisibility(View.GONE);
-                        break;
-                    default:
-                        break;
-                }
+        seeInfoTextview.setOnClickListener(v -> {
+            switch (followUpInfoContainer.getVisibility()) {
+                case View.GONE:
+                    followUpInfoContainer.setVisibility(View.VISIBLE);
+                    break;
+                case View.VISIBLE:
+                    followUpInfoContainer.setVisibility(View.GONE);
+                    break;
+                default:
+                    break;
             }
         });
 

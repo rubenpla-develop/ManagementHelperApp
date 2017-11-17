@@ -127,26 +127,18 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setPositiveButton(R.string.follow_up_dialog_positive_button, null)
-                .setNegativeButton(R.string.follow_up_dialog_negative_button, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+                .setNegativeButton(R.string.follow_up_dialog_negative_button, (dialog, which) -> dialog.dismiss());
 
         alertDialogBuilder.setView(dialogView);
 
         dateText.setOnClickListener(this);
         addNextFollowTextView.setOnClickListener(this);
 
-        addNextFollowCheckbox.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (addNextFollowCheckbox.isChecked()) {
-                    addNextFollowContainer.setVisibility(View.VISIBLE);
-                } else {
-                    addNextFollowContainer.setVisibility(View.INVISIBLE);
-                }
+        addNextFollowCheckbox.setOnClickListener(v -> {
+            if (addNextFollowCheckbox.isChecked()) {
+                addNextFollowContainer.setVisibility(View.VISIBLE);
+            } else {
+                addNextFollowContainer.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -155,41 +147,38 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
             @Override
             public void onShow(DialogInterface dialog) {
                 Button positiveButton = followUpDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                positiveButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                positiveButton.setOnClickListener(v -> {
 
-                        FollowUpErrorController errorController = new FollowUpErrorController(context,
-                                followUpFragmentPresenter);
+                    FollowUpErrorController errorController = new FollowUpErrorController(context,
+                            followUpFragmentPresenter);
 
-                        if (!errorController.isAnyFieldEmpty(dialogView)
-                                && !errorController.isAnyErrorOnDateWithStates(dialogView)) {
+                    if (!errorController.isAnyFieldEmpty(dialogView)
+                            && !errorController.isAnyErrorOnDateWithStates(dialogView)) {
 
-                            String[] statusList = context.getResources().getStringArray(R.array.status_values);
-                            String formattedLastDate = JodaTimeConverter.getInstance()
-                                    .parseDateFromStringPatternToMillis(dateText.getText().toString());
+                        String[] statusList = context.getResources().getStringArray(R.array.status_values);
+                        String formattedLastDate = JodaTimeConverter.getInstance()
+                                .parseDateFromStringPatternToMillis(dateText.getText().toString());
 
-                            String formattedNextDate = JodaTimeConverter.getInstance()
-                                    .parseDateFromStringPatternToMillis(addNextFollowTextView.getText().toString());
+                        String formattedNextDate = JodaTimeConverter.getInstance()
+                                .parseDateFromStringPatternToMillis(addNextFollowTextView.getText().toString());
 
-                            if (nextDateChosenStatus.equalsIgnoreCase(statusList[STATUS_DONE])) {
-                                formattedLastDate = formattedNextDate;
-                                formattedNextDate = "";
-                            }
-
-                            editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
-                                    clientNameExtEditText.getText().toString(), formattedLastDate,
-                                    formattedNextDate, nextDateChosenStatus);
-
-                            if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
-                                followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
-                            } else if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
-                                editedFollowUp.setId(followUp.getId());
-                                followUpFragmentPresenter.editFollowUp(editedFollowUp);
-                            }
-
-                            followUpDialog.dismiss();
+                        if (nextDateChosenStatus.equalsIgnoreCase(statusList[STATUS_DONE])) {
+                            formattedLastDate = formattedNextDate;
+                            formattedNextDate = "";
                         }
+
+                        editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
+                                clientNameExtEditText.getText().toString(), formattedLastDate,
+                                formattedNextDate, nextDateChosenStatus);
+
+                        if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
+                            followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
+                        } else if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
+                            editedFollowUp.setId(followUp.getId());
+                            followUpFragmentPresenter.editFollowUp(editedFollowUp);
+                        }
+
+                        followUpDialog.dismiss();
                     }
                 });
             }

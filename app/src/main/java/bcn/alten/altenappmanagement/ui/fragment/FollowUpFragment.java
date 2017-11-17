@@ -81,12 +81,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
         expandableRecyclerView.setLayoutManager(layoutManager);
         expandableRecyclerView.setHasFixedSize(true);
 
-        fab_add_people.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddFollowUpDialog();
-            }
-        });
+        fab_add_people.setOnClickListener(v -> showAddFollowUpDialog());
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             final Interpolator interpolador = AnimationUtils.loadInterpolator(getActivity(),

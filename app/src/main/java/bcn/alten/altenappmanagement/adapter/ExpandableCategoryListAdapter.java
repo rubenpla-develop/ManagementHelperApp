@@ -65,40 +65,34 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
         holder.getView().setBackgroundColor(context.getResources()
                 .getInteger(setRowColor(childIndex)));
 
-        holder.getView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String consultorName =  model.getConsultorName();
-                String clientName =   model.getCurrentClient();
-                String lastDateFollowUp =   model.getDateLastFollow();
-                String nextFollowUp = model.getDateNextFollow();
-                String status = model.getStatus();
-                FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
-                        nextFollowUp, status);
+        holder.getView().setOnClickListener(v -> {
+            String consultorName =  model.getConsultorName();
+            String clientName =   model.getCurrentClient();
+            String lastDateFollowUp =   model.getDateLastFollow();
+            String nextFollowUp = model.getDateNextFollow();
+            String status = model.getStatus();
+            FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
+                    nextFollowUp, status);
 
-                followUp.setId(model.getId());
+            followUp.setId(model.getId());
 
-                followUpFragmentView.editFollowUp(followUp);
-            }
+            followUpFragmentView.editFollowUp(followUp);
         });
 
-        holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                String consultorName =  model.getConsultorName();
-                String clientName =   model.getCurrentClient();
-                String lastDateFollowUp =   model.getDateLastFollow();
-                String nextFollowUp = model.getDateNextFollow();
-                String status = model.getStatus();
-                FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
-                        nextFollowUp, status);
+        holder.getView().setOnLongClickListener(v -> {
+            String consultorName =  model.getConsultorName();
+            String clientName =   model.getCurrentClient();
+            String lastDateFollowUp =   model.getDateLastFollow();
+            String nextFollowUp = model.getDateNextFollow();
+            String status = model.getStatus();
+            FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
+                    nextFollowUp, status);
 
-                followUp.setId(model.getId());
+            followUp.setId(model.getId());
 
-                followUpFragmentView.deleteFollowUp(followUp);
+            followUpFragmentView.deleteFollowUp(followUp);
 
-                return false;
-            }
+            return false;
         });
     }
 
