@@ -74,7 +74,7 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                 String nextFollowUp = model.getDateNextFollow();
                 String status = model.getStatus();
                 FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
-                        nextFollowUp, status);
+                        nextFollowUp, status, "");
 
                 followUp.setId(model.getId());
 
@@ -91,7 +91,7 @@ public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapte
                 String nextFollowUp = model.getDateNextFollow();
                 String status = model.getStatus();
                 FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
-                        nextFollowUp, status);
+                        nextFollowUp, status, "");
 
                 followUp.setId(model.getId());
 

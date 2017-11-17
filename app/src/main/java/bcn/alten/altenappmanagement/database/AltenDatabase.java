@@ -10,7 +10,7 @@ import android.support.annotation.VisibleForTesting;
 
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 
-@Database(entities = {FollowUp.class}, version = 2)
+@Database(entities = {FollowUp.class}, version = 3)
 public abstract class AltenDatabase extends RoomDatabase {
 
     private static AltenDatabase INSTANCE;
@@ -31,13 +31,21 @@ public abstract class AltenDatabase extends RoomDatabase {
         }
     };
 
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE FollowUp"
+                    + " ADD COLUMN question STRING");
+        }
+    };
+
     public static AltenDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             synchronized (LOCK) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
 
                         AltenDatabase.class, DbKeys.DATABASE_NAME)
-                        .addMigrations(MIGRATION_1_2)
+                        .addMigrations(MIGRATION_1_2,MIGRATION_2_3)
                         .build();
             }
         }

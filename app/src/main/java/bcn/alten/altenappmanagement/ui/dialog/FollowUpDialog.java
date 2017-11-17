@@ -179,7 +179,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
 
                             editedFollowUp = new FollowUp(consultorNameExtEditText.getText().toString(),
                                     clientNameExtEditText.getText().toString(), formattedLastDate,
-                                    formattedNextDate, nextDateChosenStatus);
+                                    formattedNextDate, nextDateChosenStatus, "");
 
                             if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
                                 followUpFragmentPresenter.createNewFollowUp(editedFollowUp);

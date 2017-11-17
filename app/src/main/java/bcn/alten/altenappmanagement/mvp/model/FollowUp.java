@@ -25,14 +25,17 @@ public class FollowUp implements Parcelable {
 
     private String status;
 
+    private String question;
+
     public FollowUp(@NonNull String consultorName, @NonNull  String currentClient,
                     @NonNull String dateLastFollow, @NonNull String dateNextFollow,
-                    @NonNull String status) {
+                    @NonNull String status, @NonNull String question) {
         this.consultorName = consultorName;
         this.currentClient = currentClient;
         this.dateLastFollow = dateLastFollow;
         this.dateNextFollow = dateNextFollow;
         this.status = status;
+        this.question = question;
 
     }
 
@@ -42,6 +45,7 @@ public class FollowUp implements Parcelable {
         dateLastFollow = in.readString();
         dateNextFollow = in.readString();
         status = in.readString();
+        question = in.readString();
     }
 
     public static final Creator<FollowUp> CREATOR = new Creator<FollowUp>() {
@@ -68,6 +72,7 @@ public class FollowUp implements Parcelable {
         dest.writeString(dateLastFollow);
         dest.writeString(dateNextFollow);
         dest.writeString(status);
+        dest.writeString(question);
     }
 
     public void setFollowUpStatusToDone(@NonNull String dateLastFollow, @NonNull String status) {
@@ -122,5 +127,13 @@ public class FollowUp implements Parcelable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }
