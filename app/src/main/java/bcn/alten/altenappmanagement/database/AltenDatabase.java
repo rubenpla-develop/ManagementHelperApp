@@ -27,7 +27,7 @@ public abstract class AltenDatabase extends RoomDatabase {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE FollowUp"
-                    + " ADD COLUMN status STRING");
+                    + " ADD COLUMN status TEXT");
         }
     };
 
