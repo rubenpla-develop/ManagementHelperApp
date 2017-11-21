@@ -22,7 +22,7 @@ import android.view.animation.Interpolator;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.adapter.ExpandableCategoryListAdapter;
+import bcn.alten.altenappmanagement.adapter.ExpandableFollowUpListAdapter;
 import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
 import bcn.alten.altenappmanagement.expandable.holderview.FollowUpHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
@@ -49,7 +49,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     private AlertDialog followUpDialog;
 
     private FollowUpFragmentPresenter presenter;
-    private ExpandableCategoryListAdapter expandableRecyclerViewAdapter;
+    private ExpandableFollowUpListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     public static FollowUpFragment newInstance() {
@@ -124,7 +124,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
 
     @Override
     public void ShowFollowUpList(List<Category> list) {
-        expandableRecyclerViewAdapter = new ExpandableCategoryListAdapter(list, getActivity(),
+        expandableRecyclerViewAdapter = new ExpandableFollowUpListAdapter(list, getActivity(),
                 this);
 
         expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);

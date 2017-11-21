@@ -17,14 +17,14 @@ import bcn.alten.altenappmanagement.expandable.holderview.GroupHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 
-public class ExpandableCategoryListAdapter  extends ExpandableRecyclerViewAdapter<GroupHolder,
+public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter<GroupHolder,
         FollowUpHolder>  {
 
     private Context context;
     private LayoutInflater inflater;
     private IFollowUpFragmentView followUpFragmentView;
 
-    public ExpandableCategoryListAdapter(List<? extends ExpandableGroup> groups,
+    public ExpandableFollowUpListAdapter(List<? extends ExpandableGroup> groups,
                                          Context context, IFollowUpFragmentView view) {
         super(groups);
         this.context = context;
