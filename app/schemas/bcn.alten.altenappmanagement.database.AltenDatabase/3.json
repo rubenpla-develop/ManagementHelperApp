@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "9e85f43f8066b0cdb60d3610abcb3cc3",
+    "identityHash": "8177a1016870b2bcae8f0d0e1794ef8a",
     "entities": [
       {
         "tableName": "FollowUp",
@@ -56,7 +56,7 @@
       },
       {
         "tableName": "qm",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `week` INTEGER NOT NULL, `clientName` TEXT NOT NULL, `clientPhone` TEXT NOT NULL, `candidateName` TEXT NOT NULL, `candidatePhone` TEXT NOT NULL, `status` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `week` INTEGER NOT NULL, `clientName` TEXT NOT NULL, `clientPhone` TEXT NOT NULL, `candidateName` TEXT NOT NULL, `candidatePhone` TEXT NOT NULL, `date` TEXT NOT NULL, `status` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -95,6 +95,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
             "fieldPath": "status",
             "columnName": "status",
             "affinity": "TEXT",
@@ -113,7 +119,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9e85f43f8066b0cdb60d3610abcb3cc3\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8177a1016870b2bcae8f0d0e1794ef8a\")"
     ]
   }
 }
