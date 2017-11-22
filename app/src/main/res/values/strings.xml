@@ -53,4 +53,9 @@
     <string name="follow_up_dialog_radio_group_done_value">Realizada</string>
     <string name="follow_up_dialog_radio_group_cancelled_value">Cancelada</string>
 
+
+    <!-- QM CATEGORIES-->
+    <string name="qm_category_next_week_title">Próxima semana - %s</string>
+    <string name="qm_category_current_week_title">Semana en curso</string>
+    <string name="qm_category_previous_week_title">Semana anterior - %s</string>
 </resources>

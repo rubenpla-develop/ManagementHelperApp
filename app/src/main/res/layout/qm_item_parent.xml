@@ -17,16 +17,16 @@
         android:layout_centerVertical="true"
         android:contentDescription="@string/content_desc_parent_group_icon" />
 
-    <TextView android:id="@+id/qm_group_holder_qm_category_title"
+    <TextView
+        android:id="@+id/qm_group_holder_qm_category_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/category_icon"
         android:textSize="@dimen/followup_parent_item_consultor_name"
         android:textStyle="bold|italic"
+        android:text="@string/qm_category_next_week_title"
         android:textColor="@color/colorPrimaryDark"
+        android:layout_toRightOf="@id/qm_group_holder_category_icon"
         android:layout_centerVertical="true"/>
-
-
 
     <ImageView
         android:id="@+id/qm_group_holder_list_item_genre_arrow"
