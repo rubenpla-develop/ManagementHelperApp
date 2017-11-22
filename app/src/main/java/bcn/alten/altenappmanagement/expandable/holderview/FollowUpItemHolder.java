@@ -5,13 +5,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
-
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
-public class FollowUpHolder extends ChildViewHolder {
+public class FollowUpItemHolder extends BaseChildHolder {
     private LinearLayout lastDateContainer;
     private LinearLayout nextDateContainer;
     public RelativeLayout viewBackground;
@@ -22,12 +20,12 @@ public class FollowUpHolder extends ChildViewHolder {
     private TextView nextDate;
     private TextView status;
 
-    public FollowUpHolder(View itemView) {
+    public FollowUpItemHolder(View itemView) {
         super(itemView);
-        findViews();
     }
 
-    private void findViews() {
+    @Override
+    protected void findViews() {
         lastDateContainer = itemView.findViewById(R.id.last_date_container);
         nextDateContainer = itemView.findViewById(R.id.next_date_container);
         consultorName = itemView.findViewById(R.id.consulter_name);
@@ -39,14 +37,15 @@ public class FollowUpHolder extends ChildViewHolder {
         viewForeground = itemView.findViewById(R.id.view_foreground);
     }
 
-    public void onBind(FollowUp followUp) {
-        consultorName.setText(followUp.getConsultorName());
-        clientName.setText(followUp.getCurrentClient());
+    @Override
+    public void onBind(Object object) {
+        consultorName.setText(((FollowUp) object).getConsultorName());
+        clientName.setText(((FollowUp) object).getCurrentClient());
 
         final String NO_DATE = "";
 
         String realDateFormat = JodaTimeConverter.getInstance()
-                .getDateInStringFormat(followUp.getDateLastFollow());
+                .getDateInStringFormat(((FollowUp) object).getDateLastFollow());
 
         if (realDateFormat.equals(NO_DATE)) {
             lastDateContainer.setVisibility(View.INVISIBLE);
@@ -55,7 +54,7 @@ public class FollowUpHolder extends ChildViewHolder {
         }
 
         realDateFormat = JodaTimeConverter.getInstance()
-                .getDateInStringFormat(followUp.getDateNextFollow());
+                .getDateInStringFormat(((FollowUp) object).getDateNextFollow());
 
         if (realDateFormat.equals(NO_DATE)) {
             nextDateContainer.setVisibility(View.INVISIBLE);
@@ -63,10 +62,10 @@ public class FollowUpHolder extends ChildViewHolder {
             nextDate.setText(realDateFormat);
         }
 
-        if (followUp.getStatus().equalsIgnoreCase(NO_DATE)) {
+        if (((FollowUp) object).getStatus().equalsIgnoreCase(NO_DATE)) {
             status.setText("Sin estado");
         } else {
-            status.setText(followUp.getStatus());
+            status.setText(((FollowUp) object).getStatus());
         }
     }
 

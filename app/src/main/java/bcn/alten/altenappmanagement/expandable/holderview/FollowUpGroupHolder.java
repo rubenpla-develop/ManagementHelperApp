@@ -5,13 +5,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
-import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
 import bcn.alten.altenappmanagement.utils.AnimationRenderer;
 
-public class GroupHolder extends GroupViewHolder {
+public class FollowUpGroupHolder extends BaseGroupHolder {
 
     private TextView categoryName;
     private ImageView categoryIcon;
@@ -19,12 +18,13 @@ public class GroupHolder extends GroupViewHolder {
     private TextView badgeNumber;
     private ImageView arrow;
 
-    public GroupHolder(View itemView) {
+    public FollowUpGroupHolder(View itemView) {
         super(itemView);
         findViews();
     }
 
-    private void findViews() {
+    @Override
+    protected void findViews() {
         categoryName = itemView.findViewById(R.id.category_title);
         categoryIcon = itemView.findViewById(R.id.category_icon);
         badgeNumber = itemView.findViewById(R.id.badge_view_number);
@@ -32,6 +32,7 @@ public class GroupHolder extends GroupViewHolder {
         arrow = itemView.findViewById(R.id.list_item_genre_arrow);
     }
 
+    @Override
     public void onBind(ExpandableGroup group) {
         categoryName.setText(group.getTitle());
         Category category= (Category) group;

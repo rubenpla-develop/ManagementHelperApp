@@ -24,7 +24,7 @@ import java.util.List;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.adapter.ExpandableFollowUpListAdapter;
 import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
-import bcn.alten.altenappmanagement.expandable.holderview.FollowUpHolder;
+import bcn.alten.altenappmanagement.expandable.holderview.FollowUpItemHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
@@ -181,8 +181,8 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        if (viewHolder instanceof FollowUpHolder) {
-            FollowUp followUp = expandableRecyclerViewAdapter.getItem(position);
+        if (viewHolder instanceof FollowUpItemHolder) {
+            FollowUp followUp = ((FollowUp)expandableRecyclerViewAdapter.getItem(position));
 
             presenter.swipeFollowUp(followUp, getString(R.string.follow_up_dialog_radio_group_done_value));
         }

@@ -12,13 +12,13 @@ import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
-import bcn.alten.altenappmanagement.expandable.holderview.FollowUpHolder;
-import bcn.alten.altenappmanagement.expandable.holderview.GroupHolder;
+import bcn.alten.altenappmanagement.expandable.holderview.FollowUpGroupHolder;
+import bcn.alten.altenappmanagement.expandable.holderview.FollowUpItemHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 
-public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter<GroupHolder,
-        FollowUpHolder>  {
+public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter<FollowUpGroupHolder,
+        FollowUpItemHolder> {
 
     private Context context;
     private LayoutInflater inflater;
@@ -33,21 +33,21 @@ public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter
     }
 
     @Override
-    public GroupHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+    public FollowUpGroupHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.followup_item_parent, parent, false);
 
-        return new GroupHolder(view);
+        return new FollowUpGroupHolder(view);
     }
 
     @Override
-    public FollowUpHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
+    public FollowUpItemHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.swipeable_child_item, parent, false);
 
-        return new FollowUpHolder(view);
+        return new FollowUpItemHolder(view);
     }
 
     @Override
-    public void onBindChildViewHolder(final FollowUpHolder holder, int flatPosition,
+    public void onBindChildViewHolder(final FollowUpItemHolder holder, int flatPosition,
                                       final ExpandableGroup group, final int childIndex) {
         final FollowUp model = (FollowUp) group.getItems().get(childIndex);
         holder.onBind(model);
@@ -69,7 +69,7 @@ public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter
             followUpFragmentView.editFollowUp(followUp);
         });
 
-        holder.getView().setOnLongClickListener(v -> {
+        ((FollowUpItemHolder)holder).getView().setOnLongClickListener(v -> {
             String consultorName =  model.getConsultorName();
             String clientName =   model.getCurrentClient();
             String lastDateFollowUp =   model.getDateLastFollow();
@@ -86,17 +86,17 @@ public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter
         });
     }
 
-    private int setRowColor(int childIndex) {
-        int row_color = (((childIndex % 2) == 0 ? R.color.pair_list_row_color :
-                        R.color.odd_list_row_color));
-
-        return row_color;
-    }
-
     @Override
-    public void onBindGroupViewHolder(GroupHolder holder, int flatPosition,
+    public void onBindGroupViewHolder(FollowUpGroupHolder holder, int flatPosition,
                                       ExpandableGroup group) {
         holder.onBind(group);
+    }
+
+    protected int setRowColor(int childIndex) {
+        int row_color = (((childIndex % 2) == 0 ? R.color.pair_list_row_color :
+                R.color.odd_list_row_color));
+
+        return row_color;
     }
 
     public int getGroupsCount() {
