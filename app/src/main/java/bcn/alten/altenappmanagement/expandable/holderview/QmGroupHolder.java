@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
+import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.utils.AnimationRenderer;
 
 public class QmGroupHolder extends BaseGroupHolder {
@@ -30,7 +30,7 @@ public class QmGroupHolder extends BaseGroupHolder {
     @Override
     public void onBind(ExpandableGroup group) {
         categoryName.setText(group.getTitle());
-        Category category= (Category) group;
+        QMCategory category= (QMCategory) group;
         categoryIcon.setImageResource(category.getIconResId());
     }
 

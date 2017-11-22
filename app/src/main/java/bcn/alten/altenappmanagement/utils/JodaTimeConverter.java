@@ -145,4 +145,26 @@ public class JodaTimeConverter {
             return difference;
         }
     }
+
+    public int getCurrentWeekOfYear() {
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        LocalDate dateTime = new LocalDate(year, month + 1, day);
+
+        return dateTime.getWeekOfWeekyear();
+    }
+
+    public int getWeekOfYearFromDate(int month, int day, int year) {
+        int week = 0;
+
+        LocalDate dateTime = new LocalDate(year, month + 1, day);
+        DateTime dt = dateTime.toDateTimeAtCurrentTime();
+
+        week = dt.getWeekOfWeekyear();
+
+        return week;
+    }
 }

@@ -1,6 +1,5 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.adapter.ExpandableQMListAdapter;
-import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
+import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
+import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -32,7 +31,6 @@ public class QMFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
 
     public QMFragment() {}
-
 
     @Nullable
     @Override
@@ -52,7 +50,7 @@ public class QMFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //TODO START - not correct, only for beginning, use custom constructor instead of this one-
-        List<Category> list = new ArrayList<>();
+        List<QMCategory> list = QMDataFactory.getInstance().getCurrentWeeks(QMDataFactory.createMockQMItemList());
         expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), null);
         //TODO END - DI THIS  WITH MVP
 
