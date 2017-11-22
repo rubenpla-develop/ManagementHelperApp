@@ -28,15 +28,19 @@ public class QMItem implements Parcelable {
     private String candidatePhone;
 
     @NonNull
+    private String date;
+
+    @NonNull
     private String status;
 
     public QMItem(int week, String clientName,String clientPhone, String candidateName, String candidatePhone,
-                   String status) {
+                   String date, String status) {
         this.week = week;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
         this.candidateName = candidateName;
         this.candidatePhone = candidatePhone;
+        this.date = date;
         this.status = status;
     }
 
@@ -46,6 +50,7 @@ public class QMItem implements Parcelable {
         clientPhone = in.readString();
         candidateName = in.readString();
         candidatePhone = in.readString();
+        date = in.readString();
         status = in.readString();
     }
 
@@ -109,6 +114,14 @@ public class QMItem implements Parcelable {
         this.candidatePhone = candidatePhone;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -129,6 +142,7 @@ public class QMItem implements Parcelable {
         dest.writeString(clientPhone);
         dest.writeString(candidateName);
         dest.writeString(candidatePhone);
+        dest.writeString(date);
         dest.writeString(status);
     }
 }

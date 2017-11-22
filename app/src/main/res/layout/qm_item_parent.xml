@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/group_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/followup_item_parent_layout_height"
+    android:layout_marginBottom="@dimen/followup_item_parent_layout_vertical_margin"
+    android:layout_marginTop="@dimen/followup_item_parent_layout_vertical_margin">
+
+    <ImageView
+        android:id="@+id/qm_group_holder_category_icon"
+        android:layout_width="@dimen/followup_item_parent_icon_width"
+        android:layout_height="@dimen/followup_item_parent_icon_height"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/followup_item_parent_icon_left_margin"
+        android:layout_marginEnd="@dimen/followup_item_parent_icon_right_margin"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/content_desc_parent_group_icon" />
+
+    <TextView android:id="@+id/qm_group_holder_qm_category_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/category_icon"
+        android:textSize="@dimen/followup_parent_item_consultor_name"
+        android:textStyle="bold|italic"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerVertical="true"/>
+
+
+
+    <ImageView
+        android:id="@+id/qm_group_holder_list_item_genre_arrow"
+        android:layout_width="@dimen/followup_item_parent_arrow_width"
+        android:layout_height="@dimen/followup_item_parent_arrow_height"
+        android:layout_gravity="center_vertical|end"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/followup_item_parent_arrow_margin"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/ic_arrow_down"
+        android:visibility="invisible"/>
+
+    <View
+        android:id="@+id/qm_group_holder_parent_item_divider"
+        style="@style/Divider"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"/>
+
+</RelativeLayout>
