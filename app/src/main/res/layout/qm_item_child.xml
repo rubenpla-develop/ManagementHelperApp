@@ -6,6 +6,7 @@
     android:padding="@dimen/followup_item_child_vertical_padding">
 
     <LinearLayout
+        android:id="@+id/qm_item_child_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

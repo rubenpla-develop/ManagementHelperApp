@@ -23,6 +23,7 @@ import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 
 public class QMFragment extends Fragment implements IQmFragmentView {
 
@@ -30,6 +31,9 @@ public class QMFragment extends Fragment implements IQmFragmentView {
 
     @BindView(R.id.qm_recyclerView)
     RecyclerView expandableRecyclerView;
+
+    @BindView(R.id.qm_fab_speed_dial)
+    FabSpeedDial qmFabSpeedDialButton;
 
     private ExpandableQMListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -49,6 +53,19 @@ public class QMFragment extends Fragment implements IQmFragmentView {
                 false);
         expandableRecyclerView.setLayoutManager(layoutManager);
         expandableRecyclerView.setHasFixedSize(true);
+
+        qmFabSpeedDialButton = new FabSpeedDial(getActivity());
+        qmFabSpeedDialButton.addOnMenuItemClickListener((fab, textView, itemId) -> {
+            // do stuff
+        });
+
+        qmFabSpeedDialButton.addOnStateChangeListener(new FabSpeedDial.OnStateChangeListener() {
+            @Override
+            public void onStateChange(boolean open) {
+                //do stuff
+            }
+        });
+
         return view;
     }
 
