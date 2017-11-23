@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/followup_parent_item_consultor_name"
         android:textStyle="bold|italic"
-        android:text="@string/qm_category_next_week_title"
         android:textColor="@color/colorPrimaryDark"
         android:layout_toRightOf="@id/qm_group_holder_category_icon"
         android:layout_centerVertical="true"/>

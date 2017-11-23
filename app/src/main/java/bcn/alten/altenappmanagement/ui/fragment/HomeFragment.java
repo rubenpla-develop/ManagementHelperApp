@@ -1,31 +1,26 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.Calendar;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.BuildConfig;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.database.AltenDatabase;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
-import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
+import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -33,8 +28,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private final String TAG = HomeFragment.class.getSimpleName();
 
-    @BindView(R.id.hombe_tv)
+    @BindView(R.id.home_fragment_mock_container)
+    RelativeLayout home_mock_container;
+
+    @BindView(R.id.home_tv)
     TextView home_tv;
+
+    @BindView(R.id.fecth_result_tv)
+    TextView fetch_result_tv;
 
     @BindView(R.id.btn_fetch_data)
     Button btnFecthData;
@@ -42,8 +43,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.btn_insert_data)
     Button btnInsertData;
 
-    @BindView(R.id.btn_showPicker)
-    Button btnShowDatePicker;
+    @BindView(R.id.btn_qm_fetch_data)
+    Button btnQmFecthData;
+
+    @BindView(R.id.btn_qm_insert_data)
+    Button btnQmInsertData;
 
     public HomeFragment() {
     }
@@ -54,9 +58,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         if (!BuildConfig.HOME_SCREEN_MOCK_CONTENT_BUTTONS) {
-            btnShowDatePicker.setVisibility(View.INVISIBLE);
-            btnInsertData.setVisibility(View.INVISIBLE);
-            btnFecthData.setVisibility(View.INVISIBLE);
+            home_mock_container.setVisibility(View.INVISIBLE);
+            home_tv.setVisibility(View.VISIBLE);
         }
 
         setListeners();
@@ -66,8 +69,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setListeners() {
         btnFecthData.setOnClickListener(this);
         btnInsertData.setOnClickListener(this);
-        btnShowDatePicker.setVisibility(View.INVISIBLE);
-        btnShowDatePicker.setOnClickListener(this);
+        btnQmFecthData.setOnClickListener(this);
+        btnQmInsertData.setOnClickListener(this);
     }
 
     @Override
@@ -84,23 +87,45 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         .fecthFollowUpData();
 
                 list.observe(this, followUpList -> {
-                    home_tv.setTextSize(10);
-                    home_tv.setText("");
+
+                    fetch_result_tv.setTextSize(10);
+                    fetch_result_tv.setText("");
                     if (followUpList != null && followUpList.size() > 0) {
                         for (FollowUp follow : followUpList) {
                             String formattedString = follow.getId() + "." +
                                     follow.getConsultorName() + " " +
                                     follow.getCurrentClient()  + "\n";
 
-                            home_tv.append(formattedString);
+                            fetch_result_tv.append(formattedString);
                         }
                     }
                 });
                 break;
 
-            case R.id.btn_showPicker :
-                DialogFragment newFragment = new DatePickerFragment();
-                newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+            case R.id.btn_qm_insert_data :
+                DatabaseQMAsync qmAsync = new DatabaseQMAsync();
+                qmAsync.execute();
+                break;
+
+            case R.id.btn_qm_fetch_data :
+                LiveData<List<QMItem>> qmList = AltenDatabase.getDatabase(getContext())
+                        .daoAccess()
+                        .fecthQMData();
+
+                qmList.observe(this, followUpList -> {
+
+                    fetch_result_tv.setTextSize(10);
+                    fetch_result_tv.setText("");
+                    if (followUpList != null && followUpList.size() > 0) {
+                        for (QMItem qm : followUpList) {
+                            String formattedString = qm.getId() + "." +
+                                    qm.getClientName() + " " +
+                                    qm.getCandidateName()  + "\n";
+
+                            fetch_result_tv.append(formattedString);
+                        }
+                    }
+                });
                 break;
 
             default :
@@ -131,29 +156,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
+    private class DatabaseQMAsync extends AsyncTask<Void, Void, Void> {
 
-        @NonNull
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-
-            return new DatePickerDialog(getActivity(), this, year, month, day);
+        protected void onPreExecute() {
+            super.onPreExecute();
         }
 
-        public void onDateSet(DatePicker view, int year, int month, int day) {
+        @Override
+        protected Void doInBackground(Void... voids) {
 
-            String dateInmMillies = JodaTimeConverter.getInstance().parsefromDatePicker(month,day, year);
+            List<QMItem> list = QMDataFactory.createMockQMItemList();
 
-            String finalDateTime = JodaTimeConverter.getInstance()
-                    .getDateInStringFormat(dateInmMillies);
-            Log.i("Alten", "dateInMillies : " + dateInmMillies + "\nfinalDateTime : "
-                    + finalDateTime);
+            AltenDatabase.getDatabase(getActivity()).daoAccess().insertQMList(list);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
         }
     }
 }

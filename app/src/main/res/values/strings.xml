@@ -55,7 +55,7 @@
 
 
     <!-- QM CATEGORIES-->
-    <string name="qm_category_next_week_title">Próxima semana - %s</string>
+    <string name="qm_category_next_week_title">Próxima semana - %s a %s</string>
     <string name="qm_category_current_week_title">Semana en curso</string>
-    <string name="qm_category_previous_week_title">Semana anterior - %s</string>
+    <string name="qm_category_previous_week_title">Semana anterior - %s a %s</string>
 </resources>

@@ -40,6 +40,9 @@ public interface DaoAccess {
     @Query("SELECT * FROM qm")
     LiveData<List<QMItem>> fecthQMData();
 
+    @Query("SELECT * FROM QM WHERE week =:weekIndex")
+    LiveData<List<QMItem>> fetchQMDataByWeek(int weekIndex);
+
     @Insert
     void insertQMList(List<QMItem> qmList);
 
@@ -51,8 +54,10 @@ public interface DaoAccess {
 
     @Delete
     void deleteQM(QMItem qm);
-    
 
+
+   /* @Query("SELECT * FROM user WHERE uid IN (:userIds)")
+    List<User> loadAllByIds(int[] userIds);*/
    /* @Insert
     void insertMultipleRecord(University... universities);
 

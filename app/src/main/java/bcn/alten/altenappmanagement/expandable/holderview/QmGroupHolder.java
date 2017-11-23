@@ -32,6 +32,12 @@ public class QmGroupHolder extends BaseGroupHolder {
         categoryName.setText(group.getTitle());
         QMCategory category= (QMCategory) group;
         categoryIcon.setImageResource(category.getIconResId());
+
+        if (group.getItemCount() >= 1) {
+            //badgeView.setVisibility(View.VISIBLE);
+            //badgeNumber.setText(String.valueOf(group.getItemCount()));
+            arrow.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

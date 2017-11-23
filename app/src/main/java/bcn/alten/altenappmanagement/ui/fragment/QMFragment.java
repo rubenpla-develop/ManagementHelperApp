@@ -1,5 +1,6 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
+import android.arch.lifecycle.LiveData;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,9 @@ import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.adapter.ExpandableQMListAdapter;
+import bcn.alten.altenappmanagement.database.AltenDatabase;
 import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
+import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,13 +53,23 @@ public class QMFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //TODO START - not correct, only for beginning, use custom constructor instead of this one-
-        List<QMCategory> list = QMDataFactory.getInstance().getCurrentWeeks(QMDataFactory.createMockQMItemList());
-        expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), null);
+        /*List<QMCategory> list = QMDataFactory.getInstance()
+                .getCurrentWeeks(QMDataFactory.createMockQMItemList());*/ //MOCKED CONTENT
+
+        LiveData<List<QMItem>> qmList = AltenDatabase.getDatabase(getContext())
+                .daoAccess()
+                .fecthQMData();
+
+        qmList.observe(this, qmItems -> {
+            List<QMCategory> categoryList = QMDataFactory.getInstance().getCurrentWeeks(qmList.getValue());
+            expandableRecyclerViewAdapter = new ExpandableQMListAdapter(categoryList, getActivity(), null);
+            expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
+                    OrientationHelper.HORIZONTAL);
+            expandableRecyclerView.addItemDecoration(dividerItemDecoration);
+        });
         //TODO END - DI THIS  WITH MVP
 
-        expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
-                OrientationHelper.HORIZONTAL);
-        expandableRecyclerView.addItemDecoration(dividerItemDecoration);
+
     }
 }
