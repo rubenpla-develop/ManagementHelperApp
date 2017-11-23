@@ -13,6 +13,7 @@ import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 
 public class BaseExpandableListAdapter<Q extends GroupViewHolder, Q1 extends ChildViewHolder>
         extends ExpandableRecyclerViewAdapter {
@@ -21,7 +22,7 @@ public class BaseExpandableListAdapter<Q extends GroupViewHolder, Q1 extends Chi
     protected LayoutInflater inflater;
 
     public BaseExpandableListAdapter(List<? extends ExpandableGroup> groups, Context context,
-                                     Object view) {
+                                     IQmFragmentView view) {
         super(groups);
         this.context = context;
         inflater = LayoutInflater.from(this.context);

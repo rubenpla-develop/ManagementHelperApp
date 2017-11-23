@@ -14,13 +14,16 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.expandable.holderview.QmGroupHolder;
 import bcn.alten.altenappmanagement.expandable.holderview.QmItemHolder;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 
 public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHolder, QmItemHolder> {
 
     //TODO IqmFragmentView
+    private IQmFragmentView view;
 
-    public ExpandableQMListAdapter(List<? extends ExpandableGroup> groups, Context context, Object view) {
+    public ExpandableQMListAdapter(List<? extends ExpandableGroup> groups, Context context, IQmFragmentView view) {
         super(groups, context, view);
+        this.view = view;
     }
 
     @Override

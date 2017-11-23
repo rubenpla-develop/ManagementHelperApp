@@ -16,14 +16,15 @@ import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.adapter.ExpandableQMListAdapter;
-import bcn.alten.altenappmanagement.database.AltenDatabase;
 import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
+import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class QMFragment extends Fragment {
+public class QMFragment extends Fragment implements IQmFragmentView {
 
     private final String TAG = QMFragment.class.getSimpleName();
 
@@ -32,6 +33,8 @@ public class QMFragment extends Fragment {
 
     private ExpandableQMListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    private QmFragmentPresenter presenter;
 
     public QMFragment() {}
 
@@ -52,24 +55,45 @@ public class QMFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //TODO START - not correct, only for beginning, use custom constructor instead of this one-
+
+        presenter = new QmFragmentPresenter(this);
+        presenter.showQmList();
+    }
+
+
+    @Override
+    public void showQmList(List<QMCategory> list) {
+        expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), null);
+        expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
+                OrientationHelper.HORIZONTAL);
+        expandableRecyclerView.addItemDecoration(dividerItemDecoration);
+    }
+
+    @Override
+    public void onLiveDataChanged(LiveData<List<QMItem>> list) {
         /*List<QMCategory> list = QMDataFactory.getInstance()
                 .getCurrentWeeks(QMDataFactory.createMockQMItemList());*/ //MOCKED CONTENT
 
-        LiveData<List<QMItem>> qmList = AltenDatabase.getDatabase(getContext())
-                .daoAccess()
-                .fecthQMData();
+        list.observe(this, qmItems -> {
+            List<QMCategory> categoryList = QMDataFactory.getInstance().getCurrentWeeks(list.getValue());
 
-        qmList.observe(this, qmItems -> {
-            List<QMCategory> categoryList = QMDataFactory.getInstance().getCurrentWeeks(qmList.getValue());
-            expandableRecyclerViewAdapter = new ExpandableQMListAdapter(categoryList, getActivity(), null);
-            expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
-                    OrientationHelper.HORIZONTAL);
-            expandableRecyclerView.addItemDecoration(dividerItemDecoration);
+            showQmList(categoryList);
         });
-        //TODO END - DI THIS  WITH MVP
+    }
 
+    @Override
+    public void editQm(QMItem qmToEdit) {
+
+    }
+
+    @Override
+    public void deleteQm(QMItem qmToDelete) {
+
+    }
+
+    @Override
+    public void showAddQmDialog() {
 
     }
 }
