@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/qm_fab_dial_add_qm"
+        android:title="@string/qm_speed_dial_menu_add_qm"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:orderInCategory="1"/>
+    <item
+        android:id="@+id/qm_fab_dial_go_to_week"
+        android:title="@string/qm_speed_dial_menu_go_to_week"
+        android:icon="@drawable/ic_timeline_go_to_24dp"
+        android:orderInCategory="2"/>
+</menu>

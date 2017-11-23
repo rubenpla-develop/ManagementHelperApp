@@ -45,7 +45,7 @@
     <string name="follow_up_error_controller_newer_date">Fecha más reciente que la fecha actual,
     intenta con otra fecha nueva.</string>
     <string name="follow_up_error_controller_state_with_no_date">Error al establecer fecha y/o
-        estado</string>
+        estado</string>x
     <string name="follow_up_error_controller_empty_field">Campo vacío</string>
 
     <!-- FollowUp Status -->
@@ -58,4 +58,9 @@
     <string name="qm_category_next_week_title">Próxima semana - %s a %s</string>
     <string name="qm_category_current_week_title">Semana en curso</string>
     <string name="qm_category_previous_week_title">Semana anterior - %s a %s</string>
+
+    <!-- QM fab speed dial -->
+    <string name="qm_speed_dial_menu_add_qm">Añadir QM</string>
+    <string name="qm_speed_dial_menu_go_to_week">Ir a semana</string>
+
 </resources>
