@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
@@ -32,8 +33,11 @@ public class QMFragment extends Fragment implements IQmFragmentView {
     @BindView(R.id.qm_recyclerView)
     RecyclerView expandableRecyclerView;
 
-    @BindView(R.id.qm_fab_speed_dial)
+    @BindView(R.id.qm_fab)
     FabSpeedDial qmFabSpeedDialButton;
+
+    @BindView(R.id.qm_header_container)
+    LinearLayout headerContainer;
 
     private ExpandableQMListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -54,18 +58,13 @@ public class QMFragment extends Fragment implements IQmFragmentView {
         expandableRecyclerView.setLayoutManager(layoutManager);
         expandableRecyclerView.setHasFixedSize(true);
 
-        qmFabSpeedDialButton = new FabSpeedDial(getActivity());
-        qmFabSpeedDialButton.addOnMenuItemClickListener((fab, textView, itemId) -> {
-            // do stuff
-        });
-
-        qmFabSpeedDialButton.addOnStateChangeListener(new FabSpeedDial.OnStateChangeListener() {
-            @Override
-            public void onStateChange(boolean open) {
-                //do stuff
+        qmFabSpeedDialButton.addOnMenuItemClickListener((miniFab, label, itemId) -> {
+            if (headerContainer.getVisibility() == View.VISIBLE) {
+                headerContainer.setVisibility(View.INVISIBLE);
+            } else if (headerContainer.getVisibility() == View.INVISIBLE) {
+                headerContainer.setVisibility(View.VISIBLE);
             }
         });
-
         return view;
     }
 

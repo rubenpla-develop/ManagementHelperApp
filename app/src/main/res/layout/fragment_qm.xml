@@ -7,6 +7,7 @@
     tools:context=".ui.fragment.QMFragment">
     
     <LinearLayout
+        android:id="@+id/qm_header_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
@@ -35,7 +36,6 @@
             android:layout_marginEnd="1dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_qm_header_schedule_black_24dp"/>
-
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -68,8 +68,6 @@
         android:paddingStart="4dp"
         android:paddingEnd="4dp"/>
 
-
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -80,23 +78,29 @@
             android:layout_height="match_parent"/>
 
         <io.github.kobakei.materialfabspeeddial.FabSpeedDial
-            android:id="@+id/qm_fab_speed_dial"
+            android:id="@+id/qm_fab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="bottom|end"
-            app:fab_fabDrawableTint="@color/colorBackground"
-            app:srcCompat="@drawable/ic_dashboard_black_24dp"
             app:fab_menu="@menu/qm_speed_dial_menu"
-            app:fab_useRevealEffect="true"
-            app:fab_useRippleOnPreLollipop="true"
-            app:fab_miniFabBackgroundColor="@color/background_soft_dark_blue"
-            app:fab_miniFabTextBackground="@color/colorTextPrimary"
-            app:fab_miniFabDrawableTint="@color/colorBackground"
+
+            app:fab_miniFabRippleColor="@android:color/white"
+
+            app:fab_fabDrawable="@drawable/ic_dashboard_black_24dp"
+            app:fab_fabDrawableTint="@color/colorBackground"
             app:fab_fabBackgroundColor="@color/background_soft_orange"
+
             app:fab_extraMargin="-8dp"
+
+            app:fab_miniFabBackgroundColor="@color/background_soft_dark_blue"
+            app:fab_miniFabTextBackground="@drawable/rounded_rectangle"
+            app:fab_miniFabDrawableTintList="@array/black_array"
+            app:fab_miniFabTextColor="@color/fab_mini"
+            app:fab_miniFabTextColorList="@array/black_array"
+            app:fab_miniFabRippleColorList="@array/white_array"
+            app:fab_miniFabTextBackgroundList="@array/labels"
+
             app:fab_useTouchGuard="true"
-            app:fab_touchGuardColor="#90000000"/>
+            app:fab_touchGuardColor="#90000000"
+            app:fab_useRevealEffect="false"/>
     </FrameLayout>
-
-
 </LinearLayout>
