@@ -46,7 +46,7 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
         ((QmItemHolder) holder).getView().setBackgroundColor(context.getResources()
                 .getInteger(setRowColor(childIndex)));
 
-        ((QmItemHolder) holder).getView().setOnClickListener(v -> {
+        ((QmItemHolder) holder).getView().setOnClickListener((View v) -> {
             QMItem qmItem = new QMItem();
             qmItem.setId(model.getId());
             qmItem.setWeek(model.getWeek());

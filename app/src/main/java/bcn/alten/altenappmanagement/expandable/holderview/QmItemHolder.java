@@ -1,17 +1,20 @@
 package bcn.alten.altenappmanagement.expandable.holderview;
 
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class QmItemHolder extends BaseChildHolder {
 
-    private LinearLayout containerView;
-    private TextView client;
-    private TextView consultor;
+    private RelativeLayout containerView;
+    private TextView clientName;
+    private TextView candidateName;
+    private TextView date;
+    private TextView time;
     private TextView status;
 
     public QmItemHolder(View itemView) {
@@ -20,20 +23,25 @@ public class QmItemHolder extends BaseChildHolder {
     
     @Override
     protected void findViews() {
-        containerView = itemView.findViewById(R.id.qm_item_child_container);
-        client = itemView.findViewById(R.id.qm_client);
-        consultor = itemView.findViewById(R.id.qm_consultor);
-        status = itemView.findViewById(R.id.qm_status);
+        containerView = itemView.findViewById(R.id.qm_item_child);
+        clientName = itemView.findViewById(R.id.qm_client_name);
+        candidateName = itemView.findViewById(R.id.qm_candidate_name);
+        date = itemView.findViewById(R.id.qm_date_value);
+        time = itemView.findViewById(R.id.qm_time_value);
+        status = itemView.findViewById(R.id.qm_status_value);
     }
 
     @Override
     public void onBind(Object object) {
-        client.setText(((QMItem) object).getClientName());
-        consultor.setText(((QMItem) object).getCandidateName());
+        clientName.setText(((QMItem) object).getClientName());
+        candidateName.setText(((QMItem) object).getCandidateName());
+        date.setText(JodaTimeConverter.getInstance()
+                .getDateInStringFormat(((QMItem) object).getDate()));
+        time.setText(((QMItem) object).getTime());
         status.setText(((QMItem) object).getStatus());
     }
 
-    public LinearLayout getView() {
+    public RelativeLayout getView() {
         return containerView;
     }
 }
