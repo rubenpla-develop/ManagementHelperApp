@@ -92,15 +92,15 @@ public class QMDataFactory {
      *  TESTING MOCK METHODS, NOT USE FOR PRODUCTION
      */
     public static List<QMItem> createMockQMItemList() {
-        QMItem fup1 = new QMItem(30,"Banc Sabadell", "", "Ruben Pla Ferrero", "", "1501338492096", "Rechazada"); //29-7-2017
-        QMItem fup2 = new QMItem(11,"Opentrends", "", "Laura Hernandez Alonso", "", "1489501854205", "Realizada");//14-3-2017
-        QMItem fup3 = new QMItem(50, "La Caixa", "", "Ignacio Ferror Planalta", "", "1513002724212", "Programada"); //11-12-2017
-        QMItem fup4 = new QMItem(48,"Hays", "","Raul Salomé Gutierrez", "", "1512052470308", "Programada");//30-11-2017
-        QMItem fup5 = new QMItem(47,"La Caixa", "", "Jorge Aviario Sole", "", "1511274885640", "Cancelada"); //21-11-2017
-        QMItem fup6 = new QMItem(47,"Microsoft", "", "Amaia Ferrero Sanchez", "", "1511361298215", "Realizada"); //22-11-2017
-        QMItem fup7 = new QMItem(47,"La Caixa", "", "Raul Milito Copón", "", "1511620509125", "Aceptada"); //25-11-2017
-        QMItem fup8 = new QMItem(46,"Deutsche Bank ", "", "David Jardi Gil", "", "1510583738614", "Cancelada");//13-11-2017
-        QMItem fup9 = new QMItem(46,"Seat", "", "Cristian Garcia Aran", "", "1510756571338", "Cancelada"); //15-11-2017
+        QMItem fup1 = new QMItem(30,"Banc Sabadell", "", "Ruben Pla Ferrero", "", "1501338492096", "19:15","Rechazada"); //29-7-2017
+        QMItem fup2 = new QMItem(11,"Opentrends", "", "Laura Hernandez Alonso", "", "1489501854205","19:15", "Realizada");//14-3-2017
+        QMItem fup3 = new QMItem(50, "La Caixa", "", "Ignacio Ferror Planalta", "", "1513002724212","19:15", "Programada"); //11-12-2017
+        QMItem fup4 = new QMItem(48,"Hays", "","Raul Salomé Gutierrez", "", "1512052470308","19:15", "Programada");//30-11-2017
+        QMItem fup5 = new QMItem(47,"La Caixa", "", "Jorge Aviario Sole", "", "1511274885640","19:15", "Cancelada"); //21-11-2017
+        QMItem fup6 = new QMItem(47,"Microsoft", "", "Amaia Ferrero Sanchez", "", "1511361298215", "19:15","Realizada"); //22-11-2017
+        QMItem fup7 = new QMItem(47,"La Caixa", "", "Raul Milito Copón", "", "1511620509125", "19:15","Aceptada"); //25-11-2017
+        QMItem fup8 = new QMItem(46,"Deutsche Bank ", "", "David Jardi Gil", "", "1510583738614","19:15", "Cancelada");//13-11-2017
+        QMItem fup9 = new QMItem(46,"Seat", "", "Cristian Garcia Aran", "", "1510756571338","19:15","Cancelada"); //15-11-2017
 
         List<QMItem> tempList = Arrays.asList(fup1, fup2, fup3, fup4, fup5, fup6, fup7, fup8, fup9);
 
