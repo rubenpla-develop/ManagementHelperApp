@@ -4,6 +4,7 @@ import android.util.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.joda.time.Months;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -78,12 +79,24 @@ public class JodaTimeConverter {
         return isValidDate;
     }
 
-    public String parsefromDatePicker(final int month,final int day,final int year) {
+    public String parseFromDatePicker(final int month, final int day, final int year) {
         LocalDate dateTime = new LocalDate(year, month + 1, day);
         DateTime dt = dateTime.toDateTimeAtCurrentTime();
         String dateInMillis = String.valueOf(dt.getMillis());
 
         return dateInMillis;
+    }
+
+    public String parseFromTimePicker(final int hour, final int minutes) {
+        LocalTime localTime = new LocalTime(hour, minutes);
+
+        return localTime.toString("HH:mm");
+    }
+
+    public String parseTimeFromStringPatternToMillis(String date) {
+
+
+        return null;
     }
 
     public Long parseDateFromMillisStringFormat(final String millis) {
@@ -155,6 +168,19 @@ public class JodaTimeConverter {
         LocalDate dateTime = new LocalDate(year, month + 1, day);
 
         return dateTime.getWeekOfWeekyear();
+    }
+
+    public int getWeekOfYearFromDate(String dateInStringFormat) {
+
+        String dateInMillis = parseDateFromStringPatternToMillis(dateInStringFormat);
+
+        LocalDate localDate = new LocalDate(Long.valueOf(dateInMillis));
+
+        int year = localDate.getYear();
+        int month = localDate.getMonthOfYear();
+        int day = localDate.getDayOfMonth();
+
+        return getWeekOfYearFromDate(month - 1, day, year);
     }
 
     public int getWeekOfYearFromDate(int month, int day, int year) {

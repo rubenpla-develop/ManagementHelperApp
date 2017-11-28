@@ -17,8 +17,6 @@ import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 
 public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHolder, QmItemHolder> {
-
-    //TODO IqmFragmentView
     private IQmFragmentView view;
 
     public ExpandableQMListAdapter(List<? extends ExpandableGroup> groups, Context context, IQmFragmentView view) {
@@ -44,6 +42,24 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
     public void onBindChildViewHolder(ChildViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
         final QMItem model = (QMItem) group.getItems().get(childIndex);
         ((QmItemHolder)holder).onBind(model);
+
+        ((QmItemHolder) holder).getView().setBackgroundColor(context.getResources()
+                .getInteger(setRowColor(childIndex)));
+
+        ((QmItemHolder) holder).getView().setOnClickListener(v -> {
+            QMItem qmItem = new QMItem();
+            qmItem.setId(model.getId());
+            qmItem.setWeek(model.getWeek());
+            qmItem.setClientName(model.getClientName());
+            qmItem.setClientPhone(model.getClientPhone());
+            qmItem.setCandidateName(model.getCandidateName());
+            qmItem.setCandidatePhone(model.getCandidatePhone());
+            qmItem.setDate(model.getDate());
+            qmItem.setTime(model.getTime());
+            qmItem.setStatus(model.getStatus());
+
+             view.editQm(qmItem);
+        });
 
         //TODO do stuff here (listeners, view logic...)
     }
