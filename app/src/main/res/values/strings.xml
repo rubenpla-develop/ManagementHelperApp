@@ -16,6 +16,7 @@
     <string name="followup_item_next_date_title">Próx. :</string>
     <string name="followup_item_status_title">Estado :</string>
 
+    <!-- NEW_EDIT FollowUp DIALOG -->
     <string name="follow_up_dialog_positive_button">Guardar</string>
     <string name="follow_up_dialog_negative_button">Descartar</string>
     <string name="follow_up_dialog_client">Cliente :</string>
@@ -62,5 +63,24 @@
     <!-- QM fab speed dial -->
     <string name="qm_speed_dial_menu_add_qm">Añadir QM</string>
     <string name="qm_speed_dial_menu_go_to_week">Ir a semana</string>
+
+    <!-- QM  NEW_EDIT DIALOG -->
+    <string name="qm_dialog_positive_button">Guardar</string>
+    <string name="qm_dialog_negative_button">Descartar</string>
+    <string name="qm_dialog_client">Cliente :</string>
+    <string name="qm_dialog_consultor">Candidato :</string>
+    <string name="qm_dialog_phone_title">Teléfono :</string>
+    <string name="qm_dialog_last_date_title">Fecha :</string>
+    <string name="qm_dialog_last_time_title">Hora :</string>
+    <string name="qm_dialog_no_status">Sin estado</string>
+    <string name="qm_dialog_no_date">Sin fecha</string>
+    <string name="qm_dialog_no_phone">Sin teléfono</string>
+
+    <!-- QM Status -->
+    <string name="qm_dialog_radio_group_scheduled_value">Planificada</string>
+    <string name="qm_dialog_radio_group_done_value">Realizada</string>
+    <string name="qm_dialog_radio_group_cancelled_value">Cancelada</string>
+    <string name="qm_dialog_radio_group_accepted_value">Aceptada</string>
+
 
 </resources>

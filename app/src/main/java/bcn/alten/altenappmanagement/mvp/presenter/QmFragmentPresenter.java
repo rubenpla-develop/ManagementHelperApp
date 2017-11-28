@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.database.AltenDatabase;
+import bcn.alten.altenappmanagement.database.ops.followup.CreateNewQmWrapper;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 
@@ -53,6 +54,7 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
 
     @Override
     public void createNewQm(QMItem qm) {
-
+        CreateNewQmWrapper createNewQmWrapper = new CreateNewQmWrapper(qm);
+        createNewQmWrapper.performCreateNewQmOperation();
     }
 }

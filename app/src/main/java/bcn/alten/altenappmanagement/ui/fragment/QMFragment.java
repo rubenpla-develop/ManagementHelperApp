@@ -1,5 +1,6 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.LiveData;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,8 @@ import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
+import bcn.alten.altenappmanagement.ui.dialog.AltenTimePickerDialog;
+import bcn.alten.altenappmanagement.ui.dialog.QMDialog;
 import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,10 +62,19 @@ public class QMFragment extends Fragment implements IQmFragmentView {
         expandableRecyclerView.setHasFixedSize(true);
 
         qmFabSpeedDialButton.addOnMenuItemClickListener((miniFab, label, itemId) -> {
-            if (headerContainer.getVisibility() == View.VISIBLE) {
-                headerContainer.setVisibility(View.INVISIBLE);
-            } else if (headerContainer.getVisibility() == View.INVISIBLE) {
-                headerContainer.setVisibility(View.VISIBLE);
+
+            switch (itemId) {
+                case R.id.go_to_week_dial :
+                    break;
+
+                case R.id.add_qm_dial :
+                    QMDialog qmDialog = new QMDialog(getActivity(), QMDialog.ADD_QM_ACTION, presenter);
+                    AlertDialog dialog = qmDialog.getDialog();
+                    dialog.show();
+                    break;
+
+                default:
+                    break;
             }
         });
         return view;
@@ -79,7 +91,7 @@ public class QMFragment extends Fragment implements IQmFragmentView {
 
     @Override
     public void showQmList(List<QMCategory> list) {
-        expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), null);
+        expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), this);
         expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
                 OrientationHelper.HORIZONTAL);
@@ -100,7 +112,9 @@ public class QMFragment extends Fragment implements IQmFragmentView {
 
     @Override
     public void editQm(QMItem qmToEdit) {
-
+        QMDialog qmDialog = new QMDialog(getActivity(), QMDialog.EDIT_QM_ACTION , qmToEdit, presenter);
+        AlertDialog alertDialog = qmDialog.getDialog();
+        alertDialog.show();
     }
 
     @Override
