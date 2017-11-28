@@ -141,7 +141,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
                 if (!errorController.isAnyFieldEmpty(dialogView)
                         && !errorController.isAnyErrorOnDateWithStates(dialogView)) {
 
-                    String[] statusList = context.getResources().getStringArray(R.array.status_values);
+                    String[] statusList = context.getResources().getStringArray(R.array.follow_up_status_values);
                     String formattedLastDate = JodaTimeConverter.getInstance()
                             .parseDateFromStringPatternToMillis(dateText.getText().toString());
 
@@ -173,14 +173,14 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     }
 
     private void launchDatePickerDialog() {
-        final FollowUpDatePickerDialog datePickerDialog= new FollowUpDatePickerDialog(context, this);
+        final AltenDatePickerDialog datePickerDialog= new AltenDatePickerDialog(context, this);
         datePickerDialog.showDatePicker();
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         final String dateInmMillies = JodaTimeConverter.getInstance()
-                .parsefromDatePicker(month,dayOfMonth, year);
+                .parseFromDatePicker(month,dayOfMonth, year);
 
         final String finalDateTime = JodaTimeConverter.getInstance()
                 .getDateInStringFormat(dateInmMillies);
@@ -215,7 +215,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        String[] statusList = context.getResources().getStringArray(R.array.status_values);
+        String[] statusList = context.getResources().getStringArray(R.array.follow_up_status_values);
         switch (checkedId) {
             case R.id.fup_dialog_radio_scheduled:
                 nextDateChosenStatus = statusList[STATUS_SCHEDULED];

@@ -17,7 +17,7 @@ public class AltenDatePickerDialog {
         this.onDateSetListener = onDateSetListener;
     }
 
-    public void showTimePicker() {
+    public void showDatePicker() {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);

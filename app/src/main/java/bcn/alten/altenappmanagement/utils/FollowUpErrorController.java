@@ -106,9 +106,9 @@ public class FollowUpErrorController {
         return isStatusOk;
     }
 
-    public void checkforFollowUpDates(View dateViewClicked, String dateInMillies,
+    public void checkforFollowUpDates(View dateViewClicked, String dateInMillis,
                                       String finalDateTime) {
-        int comparedDates = JodaTimeConverter.getInstance().compareDates(dateInMillies);
+        int comparedDates = JodaTimeConverter.getInstance().compareDates(dateInMillis);
 
         //We compare date set in DatePicker dialog versus current date today, every date view
         // (last followUp, next FollowUp) is comprared to check if its previous or newer date,

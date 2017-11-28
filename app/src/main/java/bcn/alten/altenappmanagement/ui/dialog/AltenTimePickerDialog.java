@@ -13,7 +13,7 @@ public class AltenTimePickerDialog {
     private Context context;
     private android.app.TimePickerDialog.OnTimeSetListener onTimeSetListener;
 
-    public AltenTimePickerDialog(Context context, android.app.TimePickerDialog.OnTimeSetListener onTImeSetListener)
+    public AltenTimePickerDialog(Context context, android.app.TimePickerDialog.OnTimeSetListener onTimeSetListener)
     {
         this.context = context;
         this.onTimeSetListener = onTimeSetListener;
