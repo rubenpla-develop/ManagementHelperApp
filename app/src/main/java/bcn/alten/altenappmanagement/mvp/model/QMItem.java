@@ -1,6 +1,7 @@
 package bcn.alten.altenappmanagement.mvp.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -31,16 +32,23 @@ public class QMItem implements Parcelable {
     private String date;
 
     @NonNull
+    private String time;
+
+    @NonNull
     private String status;
 
+    @Ignore
+    public QMItem(){};
+
     public QMItem(int week, String clientName,String clientPhone, String candidateName, String candidatePhone,
-                   String date, String status) {
+                   String date, String time, String status) {
         this.week = week;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
         this.candidateName = candidateName;
         this.candidatePhone = candidatePhone;
         this.date = date;
+        this.time = time;
         this.status = status;
     }
 
@@ -120,6 +128,15 @@ public class QMItem implements Parcelable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @NonNull
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(@NonNull String time) {
+        this.time = time;
     }
 
     public String getStatus() {
