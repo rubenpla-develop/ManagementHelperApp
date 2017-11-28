@@ -80,6 +80,8 @@ public class QMDialog implements OnDateSetListener, OnTimeSetListener, OnChecked
             dateText.setText(JodaTimeConverter.getInstance().getDateInStringFormat(qm.getDate()));
             timeText.setText(qm.getTime());
 
+            chosenStatus = qm.getStatus();
+
             clientNameExtEditText.requestFocus();
             candidateNameExtEditText.requestFocus();
 
