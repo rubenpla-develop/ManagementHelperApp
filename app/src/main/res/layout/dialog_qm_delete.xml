@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dialog_followup_delete_padding">
+
+    <TextView
+        android:id="@+id/qm_dialog_delete_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/followup_dialog_delete_message"
+        android:text="@string/qm_dialog_delete_message"/>
+
+    <TextView
+        android:id="@+id/qm_dialog_delete_see_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dialog_followup_delete_margin"
+        android:textStyle="bold"
+        android:textColor="@color/background_electric_blue"
+        android:text="@string/qm_dialog_delete_see_info"/>
+
+    <LinearLayout
+        android:id="@+id/qm_dialog_delete_info_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/qm_dialog_delete_info_client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qm_dialog_delete_client"/>
+
+        <TextView
+            android:id="@+id/qm_dialog_delete_info_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qm_dialog_delete_consultor"/>
+
+        
+        <TextView
+            android:id="@+id/qm_dialog_delete_info_last_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qm_dialog_delete_last_date_title"/>
+
+        <TextView
+            android:id="@+id/qm_dialog_delete_info_next_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qm_dialog_delete_next_date_title"/>
+
+        <TextView
+            android:id="@+id/qm_dialog_delete_info_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qm_dialog_delete_status"/>
+
+    </LinearLayout>
+</LinearLayout>
+

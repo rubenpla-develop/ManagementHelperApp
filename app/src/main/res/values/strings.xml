@@ -82,5 +82,17 @@
     <string name="qm_dialog_radio_group_cancelled_value">Cancelada</string>
     <string name="qm_dialog_radio_group_accepted_value">Aceptada</string>
 
+    <!-- DELETE FOLLOWUP DIALOG -->
+    <string name="qm_dialog_delete_title">Atención</string>
+    <string name="qm_dialog_delete_message">¿Deseas eliminar este elemento?</string>
+    <string name="qm_dialog_delete_see_info">Ver info…</string>
+    <string name="qm_dialog_delete_positive_button">Eliminar</string>
+    <string name="qm_dialog_delete_negative_button">Cancelar</string>
+    <string name="qm_dialog_delete_client">Cliente :\u0020</string>
+    <string name="qm_dialog_delete_consultor">Nombre :\u0020</string>
+    <string name="qm_dialog_delete_last_date_title">Fecha :\u0020</string>
+    <string name="qm_dialog_delete_next_date_title">Hora :\u0020</string>
+    <string name="qm_dialog_delete_status">Status :\u0020</string>
+
 
 </resources>

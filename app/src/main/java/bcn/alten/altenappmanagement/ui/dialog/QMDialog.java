@@ -1,8 +1,9 @@
 package bcn.alten.altenappmanagement.ui.dialog;
 
-import android.app.AlertDialog;
+
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;

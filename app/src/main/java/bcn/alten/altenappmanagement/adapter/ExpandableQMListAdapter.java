@@ -18,6 +18,7 @@ import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 
 public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHolder, QmItemHolder> {
     private IQmFragmentView view;
+    private QMItem qmItem;
 
     public ExpandableQMListAdapter(List<? extends ExpandableGroup> groups, Context context, IQmFragmentView view) {
         super(groups, context, view);
@@ -47,7 +48,7 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
                 .getInteger(setRowColor(childIndex)));
 
         ((QmItemHolder) holder).getView().setOnClickListener(v -> {
-            QMItem qmItem = new QMItem();
+            qmItem = new QMItem();
             qmItem.setId(model.getId());
             qmItem.setWeek(model.getWeek());
             qmItem.setClientName(model.getClientName());
@@ -59,6 +60,25 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
             qmItem.setStatus(model.getStatus());
 
              view.editQm(qmItem);
+        });
+
+        ((QmItemHolder) holder).getView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                qmItem = new QMItem();
+                qmItem.setId(model.getId());
+                qmItem.setWeek(model.getWeek());
+                qmItem.setClientName(model.getClientName());
+                qmItem.setClientPhone(model.getClientPhone());
+                qmItem.setCandidateName(model.getCandidateName());
+                qmItem.setCandidatePhone(model.getCandidatePhone());
+                qmItem.setDate(model.getDate());
+                qmItem.setTime(model.getTime());
+                qmItem.setStatus(model.getStatus());
+
+                view.deleteQm(qmItem);
+                return false;
+            }
         });
 
         //TODO do stuff here (listeners, view logic...)
