@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_toolbar_qm_edit_save"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_toolbar_save_icon_24dp"
+        android:title="Guardar" />
+
+    <item
+        android:id="@+id/menu_toolbar_qm_edit_discard"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_toolbar_cancel_24dp"
+        android:title="Descartar" />
+
+</menu>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/colorBackground"
+        app:title="Editar QM"
+        app:navigationIcon="@mipmap/ic_launcher_round"
+        app:titleMarginStart="@dimen/dialog_followup_new_edit_margin"
+        android:background="@color/colorPrimary" />
+
+    <LinearLayout
+        android:id="@+id/qm_activity_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dialog_followup_new_edit_margin"
+        android:orientation="vertical">
+
+        <bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes
+            android:id="@+id/qm_activity_textfieldbox_client_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dialog_followup_new_edit_margin"
+            android:layout_marginTop="@dimen/dialog_followup_new_edit_margin"
+            app:enabled="true"
+            app:errorColor="@color/background_soft_orange"
+            app:hasClearButton="true"
+            app:iconSignifier="@drawable/ic_business_center_black_24dp"
+            app:labelText="@string/follow_up_dialog_client"
+            app:maxCharacters="20"
+            app:primaryColor="@color/background_soft_dark_blue">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/qm_activity_extended_edittext_client_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/background_soft_dark_blue"
+                android:textSize="@dimen/followup_dialog_new_edit_consultor_client_fields"
+                android:maxLength="20"
+                android:maxLines="1" />
+        </bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/qm_activity_client_phone_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/dialog_followup_new_edit_margin"
+                android:text="@string/qm_dialog_phone_title" />
+
+            <TextView
+                android:id="@+id/qm_activity_client_phone_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="15"
+                android:text="@string/qm_dialog_no_phone"
+                android:textColor="@color/background_electric_blue"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/qm_activity_client_phone_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dialog_followup_new_edit_margin"
+                app:srcCompat="@drawable/ic_contact_phone_24dp"/>
+        </LinearLayout>
+
+        <bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes
+            android:id="@+id/qm_activity_textfieldbox_consultor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dialog_followup_new_edit_margin"
+            android:layout_marginTop="@dimen/dialog_followup_new_edit_margin"
+            app:enabled="true"
+            app:errorColor="@color/background_soft_orange"
+            app:hasClearButton="true"
+            app:hasFocus="true"
+            app:iconSignifier="@drawable/ic_person_black_24dp"
+            app:labelText="@string/follow_up_dialog_consultor"
+            app:maxCharacters="30"
+            app:primaryColor="@color/background_soft_dark_blue">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/qm_activity_extended_edittext_candidate_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/background_soft_dark_blue"
+                android:textSize="@dimen/followup_dialog_new_edit_consultor_client_fields"
+                android:maxLength="30"
+                android:maxLines="1"/>
+
+        </bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/dialog_followup_new_edit_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/qm_activity_candidate_phone_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dialog_followup_new_edit_margin"
+                android:layout_gravity="center_vertical"
+                android:text="@string/qm_dialog_phone_title" />
+
+            <TextView
+                android:id="@+id/qm_activity_candidate_phone_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="15"
+                android:text="@string/qm_dialog_no_phone"
+                android:textColor="@color/background_electric_blue"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/qm_activity_candidate_phone_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dialog_followup_new_edit_margin"
+                app:srcCompat="@drawable/ic_contact_phone_24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_followup_new_edit_margin"
+            android:layout_marginBottom="@dimen/dialog_followup_new_edit_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/qm_activity_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dialog_followup_new_edit_margin"
+                android:text="@string/qm_dialog_last_date_title" />
+
+            <TextView
+                android:id="@+id/qm_activity_date_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="10"
+                android:text="@string/follow_up_dialog_no_date"
+                android:textColor="@color/background_electric_blue"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_followup_new_edit_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/qm_activity_time_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dialog_followup_new_edit_margin"
+                android:layout_marginEnd="@dimen/dialog_followup_new_edit_margin"
+                android:text="@string/qm_dialog_last_time_title" />
+
+            <TextView
+                android:id="@+id/qm_activity_time_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="10"
+                android:text="@string/follow_up_dialog_no_date"
+                android:textColor="@color/background_electric_blue"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dialog_followup_new_edit_margin"
+                android:text="@string/followup_item_status_title"/>
+
+            <RadioGroup
+                android:id="@+id/qm_activity_radio_group_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="1"
+                android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/qm_activity_radio_scheduled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qm_dialog_radio_group_scheduled_value"
+                        android:textSize="@dimen/followup_dialog_new_edit_status" />
+
+                    <RadioButton
+                        android:id="@+id/qm_activity_radio_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qm_dialog_radio_group_done_value"
+                        android:textSize="@dimen/followup_dialog_new_edit_status" />
+
+                    <RadioButton
+                        android:id="@+id/qm_activity_radio_accepted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qm_dialog_radio_group_accepted_value"
+                        android:textSize="@dimen/followup_dialog_new_edit_status"/>
+
+                    <RadioButton
+                        android:id="@+id/qm_activity_radio_cancelled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qm_dialog_radio_group_cancelled_value"
+                        android:textSize="@dimen/followup_dialog_new_edit_status"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/qm_activity_error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textSize="@dimen/followup_dialog_new_edit_error_message"
+            android:textColor="@color/background_soft_orange"
+            android:text="@string/follow_up_error_controller_state_with_no_date"
+            android:visibility="invisible"/>
+
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
