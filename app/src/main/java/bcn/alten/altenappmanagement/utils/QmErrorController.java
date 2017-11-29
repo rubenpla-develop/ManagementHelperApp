@@ -5,12 +5,6 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.TextView;
 
-import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
-
-/**
- * Created by alten on 27/11/17.
- */
 
 public class QmErrorController {
 
@@ -26,14 +20,12 @@ public class QmErrorController {
 
 
     public void checkForQmDate(View dateView, String dateInMillis, String finalDateTime) {
-
         int comparedDates = JodaTimeConverter.getInstance().compareDates(dateInMillis);
 
         if (comparedDates == JodaTimeConverter.PREVIOUS_DATE) {
-            ((IMainActivityView) context).showMessage(res.getString(R.string.follow_up_error_controller_previous_date));
+            ((TextView) dateView).setText(finalDateTime);
         } else {
             ((TextView) dateView).setText(finalDateTime);
         }
     }
-
 }

@@ -1,7 +1,7 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
-import android.app.AlertDialog;
 import android.arch.lifecycle.LiveData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,14 +16,13 @@ import android.widget.LinearLayout;
 
 import java.util.List;
 
+import bcn.alten.altenappmanagement.QmCreateEditActivity;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.adapter.ExpandableQMListAdapter;
 import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
-import bcn.alten.altenappmanagement.ui.dialog.AltenTimePickerDialog;
-import bcn.alten.altenappmanagement.ui.dialog.QMDialog;
 import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +31,11 @@ import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 public class QMFragment extends Fragment implements IQmFragmentView {
 
     private final String TAG = QMFragment.class.getSimpleName();
+    public static final String ADD_QM_ACTION = "ADD_QM_ACTION";
+    public static final String EDIT_QM_ACTION = "EDIT_QM_ACTION";
+
+    public static final String QM_ITEM_PARAM = "QM_ITEM_PARAM";
+    public static final String QM_ACTIONMODE_PARAM = "QM_ACTIONMODE_PARAM";
 
     @BindView(R.id.qm_recyclerView)
     RecyclerView expandableRecyclerView;
@@ -66,11 +70,11 @@ public class QMFragment extends Fragment implements IQmFragmentView {
             switch (itemId) {
                 case R.id.go_to_week_dial :
                     break;
-
                 case R.id.add_qm_dial :
-                    QMDialog qmDialog = new QMDialog(getActivity(), QMDialog.ADD_QM_ACTION, presenter);
+                    /*QMDialog qmDialog = new QMDialog(getActivity(), QMDialog.ADD_QM_ACTION, presenter);
                     AlertDialog dialog = qmDialog.getDialog();
-                    dialog.show();
+                    dialog.show();*/
+                    launchQmActivityForResult(ADD_QM_ACTION, null);
                     break;
 
                 default:
@@ -88,6 +92,44 @@ public class QMFragment extends Fragment implements IQmFragmentView {
         presenter.showQmList();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == QmCreateEditActivity.QM_ACTIVITY_LAUNCH) {
+            switch (resultCode) {
+                case QmCreateEditActivity.RESULT_ADD_OK :
+                    if (data.getExtras().containsKey(QM_ITEM_PARAM)) {
+                        QMItem qmItem = data.getParcelableExtra(QM_ITEM_PARAM);
+                        presenter.createNewQm(qmItem);
+                    }
+                    break;
+                case QmCreateEditActivity.RESULT_EDIT_OK:
+                    if (data.getExtras().containsKey(QM_ITEM_PARAM)) {
+                        QMItem qmItem = data.getParcelableExtra(QM_ITEM_PARAM);
+                        presenter.editQm(qmItem);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void launchQmActivityForResult(String actionMode, @Nullable QMItem qmToEdit) {
+        if (ADD_QM_ACTION.equals(actionMode)) {
+            Intent i = new Intent(getActivity(), QmCreateEditActivity.class);
+            i.putExtra(QM_ACTIONMODE_PARAM, ADD_QM_ACTION);
+            startActivityForResult(i, QmCreateEditActivity.QM_ACTIVITY_LAUNCH);
+
+        } else if (EDIT_QM_ACTION.equals(actionMode)) {
+            Intent i = new Intent(getActivity(), QmCreateEditActivity.class);
+            i.putExtra(QM_ACTIONMODE_PARAM, EDIT_QM_ACTION);
+            i.putExtra(QM_ITEM_PARAM, qmToEdit);
+            startActivityForResult(i, QmCreateEditActivity.QM_ACTIVITY_LAUNCH);
+        }
+
+    }
 
     @Override
     public void showQmList(List<QMCategory> list) {
@@ -112,9 +154,7 @@ public class QMFragment extends Fragment implements IQmFragmentView {
 
     @Override
     public void editQm(QMItem qmToEdit) {
-        QMDialog qmDialog = new QMDialog(getActivity(), QMDialog.EDIT_QM_ACTION , qmToEdit, presenter);
-        AlertDialog alertDialog = qmDialog.getDialog();
-        alertDialog.show();
+        launchQmActivityForResult(EDIT_QM_ACTION, qmToEdit);
     }
 
     @Override
@@ -124,6 +164,6 @@ public class QMFragment extends Fragment implements IQmFragmentView {
 
     @Override
     public void showAddQmDialog() {
-
+        launchQmActivityForResult(ADD_QM_ACTION, null);
     }
 }

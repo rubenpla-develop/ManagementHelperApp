@@ -64,7 +64,7 @@
                 android:id="@+id/qm_activity_client_phone_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLength="15"
+                android:maxLength="20"
                 android:text="@string/qm_dialog_no_phone"
                 android:textColor="@color/background_electric_blue"
                 android:textStyle="bold" />
@@ -122,7 +122,7 @@
                 android:id="@+id/qm_activity_candidate_phone_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLength="15"
+                android:maxLength="20"
                 android:text="@string/qm_dialog_no_phone"
                 android:textColor="@color/background_electric_blue"
                 android:textStyle="bold" />

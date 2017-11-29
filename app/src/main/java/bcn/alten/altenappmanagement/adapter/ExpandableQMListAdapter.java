@@ -58,7 +58,7 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
             qmItem.setTime(model.getTime());
             qmItem.setStatus(model.getStatus());
 
-             view.editQm(qmItem);
+            view.editQm(qmItem);
         });
 
         //TODO do stuff here (listeners, view logic...)

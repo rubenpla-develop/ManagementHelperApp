@@ -82,5 +82,8 @@
     <string name="qm_dialog_radio_group_cancelled_value">Cancelada</string>
     <string name="qm_dialog_radio_group_accepted_value">Aceptada</string>
 
+    <!-- QM PHONE NUMBER DIALOG -->
+    <string name="qm_phone_input_dialog_number_title">Número :</string>
+
 
 </resources>

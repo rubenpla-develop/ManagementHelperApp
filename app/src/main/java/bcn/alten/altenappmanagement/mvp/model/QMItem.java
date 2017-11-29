@@ -53,12 +53,14 @@ public class QMItem implements Parcelable {
     }
 
     protected QMItem(Parcel in) {
+        id = in.readInt();
         week = in.readInt();
         clientName = in.readString();
         clientPhone = in.readString();
         candidateName = in.readString();
         candidatePhone = in.readString();
         date = in.readString();
+        time = in.readString();
         status = in.readString();
     }
 
@@ -154,12 +156,14 @@ public class QMItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeInt(week);
         dest.writeString(clientName);
         dest.writeString(clientPhone);
         dest.writeString(candidateName);
         dest.writeString(candidatePhone);
         dest.writeString(date);
+        dest.writeString(time);
         dest.writeString(status);
     }
 }

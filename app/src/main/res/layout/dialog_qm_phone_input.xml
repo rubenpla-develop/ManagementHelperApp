@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/followup_item_swipe_foreground_vertical_padding"
+    android:paddingEnd="@dimen/followup_item_swipe_foreground_horizontal_padding"
+    android:paddingLeft="@dimen/followup_item_swipe_foreground_horizontal_padding"
+    android:paddingRight="@dimen/followup_item_swipe_foreground_horizontal_padding"
+    android:paddingStart="@dimen/followup_item_swipe_foreground_horizontal_padding"
+    android:paddingTop="@dimen/followup_item_swipe_foreground_vertical_padding">
+
+    <bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes
+        android:id="@+id/qm_phone_input_dialog_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dialog_followup_new_edit_margin"
+        android:layout_marginTop="@dimen/dialog_followup_new_edit_margin"
+        app:enabled="true"
+        app:errorColor="@color/background_soft_orange"
+        app:hasClearButton="true"
+        app:hasFocus="true"
+        app:iconSignifier="@drawable/ic_qm_phone_input_icon_black_24dp"
+        app:labelText="@string/qm_phone_input_dialog_number_title"
+        app:maxCharacters="11"
+        app:primaryColor="@color/background_soft_dark_blue">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/qm_phone_input_dialog_extendededittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:background="@color/background_soft_dark_blue"
+            android:textSize="@dimen/followup_dialog_new_edit_consultor_client_fields"
+            android:maxLength="11"
+            android:maxLines="1" />
+
+    </bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes>
+</LinearLayout>
