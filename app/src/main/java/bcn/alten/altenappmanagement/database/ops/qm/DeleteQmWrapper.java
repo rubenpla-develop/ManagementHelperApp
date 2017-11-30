@@ -14,7 +14,7 @@ public class DeleteQmWrapper {
     }
 
     public void performDeleteQmOperation() {
-        EditQmAsyncTask asyncTask = new EditQmAsyncTask(qmItem);
+        DeleteQmAsyncTask asyncTask = new DeleteQmAsyncTask(qmItem);
         asyncTask.execute();
     }
 }

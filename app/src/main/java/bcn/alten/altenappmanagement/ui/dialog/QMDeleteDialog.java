@@ -33,23 +33,20 @@ public class QMDeleteDialog {
         dialogView = inflater.inflate(R.layout.dialog_qm_delete, null);
         final TextView seeInfoTextview = dialogView.findViewById(R.id.qm_dialog_delete_see_info);
         final LinearLayout qmInfoContainer = dialogView.findViewById(R.id.qm_dialog_delete_info_container);
-        final TextView infoClientTextview = dialogView.findViewById(R.id.qm_dialog_delete_info_client);
-        final TextView infoNameTextView = dialogView.findViewById(R.id.qm_dialog_delete_info_name);
-        final TextView lastDateTextView = dialogView.findViewById(R.id.qm_dialog_delete_info_last_date);
-        final TextView nextDateTextview = dialogView.findViewById(R.id.qm_dialog_delete_info_next_date);
+        final TextView infoClientTextview = dialogView.findViewById(R.id.qm_dialog_delete_info_client_name);
+        final TextView infoNameTextView = dialogView.findViewById(R.id.qm_dialog_delete_info_candidate_name);
+        final TextView dateTextView = dialogView.findViewById(R.id.qm_dialog_delete_info_date);
+        final TextView timeTextview = dialogView.findViewById(R.id.qm_dialog_delete_info_time);
         final TextView statusTextView = dialogView.findViewById(R.id.qm_dialog_delete_info_status);
 
         infoNameTextView.append(qmToDelete.getCandidateName());
         infoClientTextview.append(qmToDelete.getClientName());
 
-        String formattedLastDate = JodaTimeConverter.getInstance()
+        String formattedDate = JodaTimeConverter.getInstance()
                 .getDateInStringFormat(qmToDelete.getDate());
 
-        String formattedNextDate = JodaTimeConverter.getInstance()
-                .getDateInStringFormat(qmToDelete.getTime());
-
-        lastDateTextView.append(formattedLastDate);
-        nextDateTextview.append(formattedNextDate);
+        dateTextView.append(formattedDate);
+        timeTextview.append(qmToDelete.getTime());
 
         if (qmToDelete.getStatus().equals("")) {
             statusTextView.append(context.getString(R.string.qm_dialog_no_status));

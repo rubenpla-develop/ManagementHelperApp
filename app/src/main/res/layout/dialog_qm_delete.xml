@@ -31,26 +31,26 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/qm_dialog_delete_info_client"
+            android:id="@+id/qm_dialog_delete_info_client_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/qm_dialog_delete_client"/>
 
         <TextView
-            android:id="@+id/qm_dialog_delete_info_name"
+            android:id="@+id/qm_dialog_delete_info_candidate_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/qm_dialog_delete_consultor"/>
 
         
         <TextView
-            android:id="@+id/qm_dialog_delete_info_last_date"
+            android:id="@+id/qm_dialog_delete_info_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/qm_dialog_delete_last_date_title"/>
 
         <TextView
-            android:id="@+id/qm_dialog_delete_info_next_date"
+            android:id="@+id/qm_dialog_delete_info_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/qm_dialog_delete_next_date_title"/>
