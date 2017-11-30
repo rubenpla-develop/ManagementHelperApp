@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes;
+import bcn.alten.altenappmanagement.ui.fragment.QMFragment;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class QMPhoneInputDialog {
@@ -39,7 +40,7 @@ public class QMPhoneInputDialog {
         final FUpCustomTextFieldBoxes phoneNumberBox = dialogView.findViewById(R.id.qm_phone_input_dialog_box);
         final ExtendedEditText phoneNumberEditText = dialogView.findViewById(R.id.qm_phone_input_dialog_extendededittext);
 
-        if (QMDialog.EDIT_QM_ACTION.equalsIgnoreCase(actionMode)) {
+        if (QMFragment.EDIT_QM_ACTION.equalsIgnoreCase(actionMode)) {
             phoneNumberEditText.setText(phoneNumber);
         }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -23,6 +24,7 @@ import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
+import bcn.alten.altenappmanagement.ui.dialog.QMDeleteDialog;
 import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,9 +73,6 @@ public class QMFragment extends Fragment implements IQmFragmentView {
                 case R.id.go_to_week_dial :
                     break;
                 case R.id.add_qm_dial :
-                    /*QMDialog qmDialog = new QMDialog(getActivity(), QMDialog.ADD_QM_ACTION, presenter);
-                    AlertDialog dialog = qmDialog.getDialog();
-                    dialog.show();*/
                     launchQmActivityForResult(ADD_QM_ACTION, null);
                     break;
 
@@ -159,7 +158,9 @@ public class QMFragment extends Fragment implements IQmFragmentView {
 
     @Override
     public void deleteQm(QMItem qmToDelete) {
-
+        QMDeleteDialog qmDeleteDialog = new QMDeleteDialog(getActivity(),  qmToDelete, presenter);
+        AlertDialog alertDialog = qmDeleteDialog.getDialog();
+        alertDialog.show();
     }
 
     @Override

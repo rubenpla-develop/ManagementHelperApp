@@ -6,6 +6,7 @@ import java.util.List;
 
 import bcn.alten.altenappmanagement.database.AltenDatabase;
 import bcn.alten.altenappmanagement.database.ops.qm.CreateNewQmWrapper;
+import bcn.alten.altenappmanagement.database.ops.qm.DeleteQmWrapper;
 import bcn.alten.altenappmanagement.database.ops.qm.EditQmWrapper;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
@@ -46,12 +47,13 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
     @Override
     public void editQm(QMItem qmToEdit) {
         EditQmWrapper qmWrapper = new EditQmWrapper(qmToEdit);
-        qmWrapper.performCreateNewQmOperation();
+        qmWrapper.performEditQmOperation();
     }
 
     @Override
     public void deleteQm(QMItem qmToDelete) {
-
+        DeleteQmWrapper qmDeleteWrapper = new DeleteQmWrapper(qmToDelete);
+        qmDeleteWrapper.performDeleteQmOperation();
     }
 
     @Override
