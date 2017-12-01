@@ -10,9 +10,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -58,6 +60,9 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     private int phoneViewClicked;
     private String chosenStatus;
 
+    private QmErrorController qmErrorController;
+    private View activityView;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -88,11 +93,18 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     @BindView(R.id.qm_activity_radio_group_status)
     RadioGroup statusGroup;
 
+    @BindView(R.id.qm_activity_status_error_message)
+    TextView statusErrorMessage;
+
+    @BindView(R.id.qm_activity_date_error_message)
+    TextView dateErrorMessage;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        setContentView(R.layout.activity_qm_new_edit);
+
+        activityView = LayoutInflater.from(this).inflate(R.layout.activity_qm_new_edit, null);
+        setContentView(activityView);
 
         ButterKnife.bind(this);
 
@@ -108,6 +120,8 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
                 qm = bundle.getParcelable(QMFragment.QM_ITEM_PARAM);
             }
         }
+
+        qmErrorController = new QmErrorController(this, activityView);
 
         clientPhoneContactList.setOnClickListener(this);
         candidatePhoneContactList.setOnClickListener(this);
@@ -176,7 +190,10 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
                 finish();
                 break;
             case R.id.menu_toolbar_qm_edit_save:
-                sendActivityResult();
+                if ((!qmErrorController.isAnyFieldEmpty()) &&
+                        !qmErrorController.isAnyErrorOnDateWithStates()) {
+                    sendActivityResult();
+                }
                 break;
             default:
                 break;

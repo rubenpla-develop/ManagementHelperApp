@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/qm_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -78,7 +79,7 @@
         </LinearLayout>
 
         <bcn.alten.altenappmanagement.ui.customview.FUpCustomTextFieldBoxes
-            android:id="@+id/qm_activity_textfieldbox_consultor_name"
+            android:id="@+id/qm_activity_textfieldbox_candidate_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dialog_followup_new_edit_margin"
@@ -158,6 +159,16 @@
                 android:textColor="@color/background_electric_blue"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/qm_activity_date_error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic|bold"
+                android:textColor="@color/A400red"
+                android:layout_marginStart="4dp"
+                android:text="Fecha no válida"
+                android:visibility="invisible"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -189,11 +200,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dialog_followup_new_edit_margin"
-                android:text="@string/followup_item_status_title"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dialog_followup_new_edit_margin"
+                    android:text="@string/followup_item_status_title"/>
+
+                <TextView
+                    android:id="@+id/qm_activity_status_error_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic|bold"
+                    android:textColor="@color/A400red"
+                    android:layout_marginStart="4dp"
+                    android:text="Estado no valido"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+
 
             <RadioGroup
                 android:id="@+id/qm_activity_radio_group_status"
@@ -241,11 +269,6 @@
             android:textColor="@color/background_soft_orange"
             android:text="@string/follow_up_error_controller_state_with_no_date"
             android:visibility="invisible"/>
-
-
-
-
-
     </LinearLayout>
 
 </LinearLayout>

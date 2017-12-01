@@ -1,6 +1,8 @@
 package bcn.alten.altenappmanagement.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -82,7 +84,23 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
             }
         });
 
-        //TODO do stuff here (listeners, view logic...)
+        ((QmItemHolder) holder).getCandidateName().setOnClickListener(v -> {
+            if (!context.getResources().getString(R.string.qm_dialog_no_phone)
+                    .equalsIgnoreCase(model.getCandidatePhone())) {
+                String phone = model.getCandidatePhone();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                context.startActivity(intent);
+            }
+        });
+
+        ((QmItemHolder) holder).getClientName().setOnClickListener(v -> {
+            if (!context.getResources().getString(R.string.qm_dialog_no_phone)
+                    .equalsIgnoreCase(model.getCandidatePhone())) {
+                String phone = model.getClientPhone();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

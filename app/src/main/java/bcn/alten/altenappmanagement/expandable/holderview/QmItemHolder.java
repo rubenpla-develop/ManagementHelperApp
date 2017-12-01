@@ -44,4 +44,12 @@ public class QmItemHolder extends BaseChildHolder {
     public RelativeLayout getView() {
         return containerView;
     }
+
+    public TextView getClientName() {
+        return clientName;
+    }
+
+    public TextView getCandidateName() {
+        return candidateName;
+    }
 }
