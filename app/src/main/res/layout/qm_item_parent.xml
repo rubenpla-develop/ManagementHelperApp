@@ -38,7 +38,7 @@
             android:id="@+id/qm_group_holder_schedule_legend_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -53,15 +53,14 @@
                 android:id="@+id/qm_group_holder_schedule_legend_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="2"/>
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/qm_group_holder_done_legend_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -76,15 +75,14 @@
                 android:id="@+id/qm_group_holder_done_legend_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="2"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/qm_group_holder_accepted_legend_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -99,15 +97,14 @@
                 android:id="@+id/qm_group_holder_accepted_legend_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="2"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/qm_group_holder_cancelled_legend_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -122,8 +119,7 @@
                 android:id="@+id/qm_group_holder_cancelled_legend_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="2"/>
+                android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>
 

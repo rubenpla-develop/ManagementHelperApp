@@ -4,13 +4,9 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.mvp.model.QMItem;
 
-/**
- * Created by alten on 22/11/17.
- */
-
-public class QMCategory extends ExpandableGroup<FollowUp> {
+public class QMCategory extends ExpandableGroup<QMItem> {
 
     private int iconResId;
 

@@ -13,6 +13,7 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.expandable.groupmodel.LegendBadgeCounter;
 import bcn.alten.altenappmanagement.expandable.holderview.QmGroupHolder;
 import bcn.alten.altenappmanagement.expandable.holderview.QmItemHolder;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
@@ -21,6 +22,7 @@ import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHolder, QmItemHolder> {
     private IQmFragmentView view;
     private QMItem qmItem;
+    protected LegendBadgeCounter badgeCounter;
 
     public ExpandableQMListAdapter(List<? extends ExpandableGroup> groups, Context context, IQmFragmentView view) {
         super(groups, context, view);
@@ -103,8 +105,58 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
         });
     }
 
+
+
     @Override
-    public void onBindGroupViewHolder(GroupViewHolder holder, int flatPosition, ExpandableGroup group) {
+    public synchronized void onBindGroupViewHolder(GroupViewHolder holder, int flatPosition, ExpandableGroup group) {
         ((QmGroupHolder) holder).onBind(group);
+        LegendBadgeSorter badgeSorter = new LegendBadgeSorter(group);
+        badgeCounter = new LegendBadgeCounter();
+        badgeSorter.filterGroupByBadges();
+        ((QmGroupHolder)holder).onBindLegendBadges(badgeCounter);
+    }
+
+    private class LegendBadgeSorter {
+        private ExpandableGroup group;
+
+        public LegendBadgeSorter(ExpandableGroup group) {
+            this.group = group;
+        }
+
+        public void filterGroupByBadges() {
+            List<QMItem> listToFilterBadges = group.getItems();
+
+            for (QMItem qmItem : listToFilterBadges) {
+                if (context.getString(R.string.qm_dialog_radio_group_scheduled_value)
+                        .equals(qmItem.getStatus())) {
+                    incrementPlusOneScheduleBadge(badgeCounter);
+                } else if (context.getString(R.string.qm_dialog_radio_group_done_value)
+                        .equals(qmItem.getStatus())) {
+                    incrementPlusOneDoneBadge(badgeCounter);
+                } else if (context.getString(R.string.qm_dialog_radio_group_accepted_value)
+                        .equals(qmItem.getStatus())) {
+                    incrementPlusOneAcceptedBadge(badgeCounter);
+                } else if (context.getString(R.string.qm_dialog_radio_group_cancelled_value)
+                        .equals(qmItem.getStatus())) {
+                    incrementPlusOneCancelledBadge(badgeCounter);
+                }
+            }
+        }
+
+        private void incrementPlusOneScheduleBadge(LegendBadgeCounter counter) {
+            counter.scheduleBadgeCount += 1;
+        }
+
+        private void incrementPlusOneDoneBadge(LegendBadgeCounter counter) {
+            counter.doneBadgeCount += 1;
+        }
+
+        private void incrementPlusOneAcceptedBadge(LegendBadgeCounter counter) {
+            counter.acceptedBadgeCount += 1;
+        }
+
+        private void incrementPlusOneCancelledBadge(LegendBadgeCounter counter) {
+            counter.cancelledBadgeCount += 1;
+        }
     }
 }
