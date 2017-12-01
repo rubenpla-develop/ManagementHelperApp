@@ -61,7 +61,7 @@ public class QmErrorController {
     }
 
     public boolean isAnyErrorOnDateWithStates() {
-        boolean isDateWithStatesOk = false;
+        boolean isAnyError = true;
 
         TextView dateTextView = activityView.findViewById(R.id.qm_activity_date_edit);
         RadioGroup stateRadioGroup = activityView.findViewById(R.id.qm_activity_radio_group_status);
@@ -70,17 +70,17 @@ public class QmErrorController {
         final String date = dateTextView.getText().toString();
         final Boolean isValidDate = JodaTimeConverter.getInstance().isAValidDate(date);
 
-        if (isValidDate/* && isStatusSelectionOk(checkedStatus, isValidDate, date)*/) {
-                isDateWithStatesOk = true;
+        if (isValidDate && !isStatusWrong(checkedStatus, isValidDate, date)) {
+                isAnyError = false;
         }
 
-        printErrors(isValidDate, isDateWithStatesOk);
+        printErrors(isValidDate, isStatusWrong(checkedStatus, isValidDate, date));
 
-        return isDateWithStatesOk;
+        return isAnyError;
     }
 
-    public boolean isStatusSelectionOk(int checkedStatus,boolean isValidDate, String date) {
-        boolean isStatusOk = true;
+    public boolean isStatusWrong(int checkedStatus,boolean isValidDate, String date) {
+        boolean isAnyError = false;
         final int NO_STATUS_SELECTED = -1;
 
         final boolean isAnyStatusSelected = (checkedStatus != NO_STATUS_SELECTED);
@@ -95,7 +95,7 @@ public class QmErrorController {
                     int comparedDates = JodaTimeConverter.getInstance().compareDates(dateInMillis);
 
                     if (comparedDates == JodaTimeConverter.NEWER_DATE) {
-                        isStatusOk = false;
+                        isAnyError = true;
                     }
                     break;
                 case R.id.qm_activity_radio_cancelled:
@@ -110,19 +110,19 @@ public class QmErrorController {
         }
 
         if (isValidDate && !isAnyStatusSelected) {
-            isStatusOk = false;
+            isAnyError = true;
         }
 
-        return isStatusOk;
+        return isAnyError;
     }
 
-    public void printErrors(boolean isValidDate, boolean isDateWithStatusOk) {
+    public void printErrors(boolean isValidDate, boolean isDateWithStatusWrong) {
         if (!isValidDate) {
             TextView dateErrorMessage = activityView.findViewById(R.id.qm_activity_date_error_message);
             dateErrorMessage.setVisibility(View.VISIBLE);
         }
 
-        if (!isDateWithStatusOk) {
+        if (isDateWithStatusWrong) {
             TextView statusErrorMessage = activityView.findViewById(R.id.qm_activity_status_error_message);
             statusErrorMessage.setVisibility(View.VISIBLE);
         }

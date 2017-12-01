@@ -71,9 +71,12 @@
     <string name="qm_dialog_consultor">Candidato :</string>
     <string name="qm_dialog_phone_title">Teléfono :</string>
     <string name="qm_dialog_last_date_title">Fecha :</string>
+    <string name="qm_dialog_last_date_error_message">Fecha no válida</string>
     <string name="qm_dialog_last_time_title">Hora :</string>
+    <string name="qm_dialog_status_error_message">Estado no válido</string>
     <string name="qm_dialog_no_status">Sin estado</string>
     <string name="qm_dialog_no_date">Sin fecha</string>
+    <string name="qm_dialog_no_time">Sin hora</string>
     <string name="qm_dialog_no_phone">Sin teléfono</string>
 
     <!-- QM Status -->

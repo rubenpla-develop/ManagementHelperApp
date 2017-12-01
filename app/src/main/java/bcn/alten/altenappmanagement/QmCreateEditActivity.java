@@ -163,6 +163,13 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
         candidatePhoneEditText.setOnClickListener(this);
         candidatePhoneContactList.setOnClickListener(this);
 
+        dateText.setOnTouchListener((View v, MotionEvent event) -> {
+            if (dateErrorMessage.getVisibility() == View.VISIBLE) {
+                dateErrorMessage.setVisibility(View.INVISIBLE);
+            }
+            return false;
+        });
+        
         dateText.setOnClickListener(v -> {
             AltenDatePickerDialog datePickerDialog = new AltenDatePickerDialog(this
                     , this);
