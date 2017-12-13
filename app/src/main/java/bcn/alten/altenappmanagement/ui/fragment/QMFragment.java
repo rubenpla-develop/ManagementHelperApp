@@ -1,5 +1,6 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
+import android.app.DatePickerDialog;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 
 import java.util.List;
@@ -24,13 +26,15 @@ import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
+import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.QMDeleteDialog;
+import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 
-public class QMFragment extends Fragment implements IQmFragmentView {
+public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener {
 
     private final String TAG = QMFragment.class.getSimpleName();
     public static final String ADD_QM_ACTION = "ADD_QM_ACTION";
@@ -71,6 +75,9 @@ public class QMFragment extends Fragment implements IQmFragmentView {
 
             switch (itemId) {
                 case R.id.go_to_week_dial :
+                    AltenDatePickerDialog datePickerDialog = new AltenDatePickerDialog(getActivity(),
+                            this);
+                    datePickerDialog.showDatePicker();
                     break;
                 case R.id.add_qm_dial :
                     launchQmActivityForResult(ADD_QM_ACTION, null);
@@ -80,6 +87,7 @@ public class QMFragment extends Fragment implements IQmFragmentView {
                     break;
             }
         });
+
         return view;
     }
 
@@ -152,6 +160,16 @@ public class QMFragment extends Fragment implements IQmFragmentView {
     }
 
     @Override
+    public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, String date) {
+        list.observe(this, qmItems -> {
+            List<QMCategory> categoryList = QMDataFactory.getInstance()
+                    .getSelectedWeek(list.getValue(), date);
+
+            showQmList(categoryList);
+        });
+    }
+
+    @Override
     public void editQm(QMItem qmToEdit) {
         launchQmActivityForResult(EDIT_QM_ACTION, qmToEdit);
     }
@@ -164,7 +182,11 @@ public class QMFragment extends Fragment implements IQmFragmentView {
     }
 
     @Override
-    public void showAddQmDialog() {
-        launchQmActivityForResult(ADD_QM_ACTION, null);
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        final String dateInmMillis = JodaTimeConverter.getInstance()
+                .parseFromDatePicker(month,dayOfMonth, year);
+        final String date = JodaTimeConverter.getInstance().getDateInStringFormat(dateInmMillis);
+
+        presenter.goToWeek(date);
     }
 }

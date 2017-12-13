@@ -105,8 +105,6 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
         });
     }
 
-
-
     @Override
     public synchronized void onBindGroupViewHolder(GroupViewHolder holder, int flatPosition, ExpandableGroup group) {
         ((QmGroupHolder) holder).onBind(group);

@@ -33,6 +33,9 @@ public class JodaTimeConverter {
         return instance;
     }
 
+    /*
+     * Generic Date operations
+     */
     public String getCurrenDate() {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -143,6 +146,9 @@ public class JodaTimeConverter {
         }
     }
 
+    /*
+     * FollowUp Operations
+     */
     public int getMonthsOfDifferenceWithCurrentDate(final String millis) {
         int difference = 0;
 
@@ -159,6 +165,9 @@ public class JodaTimeConverter {
         }
     }
 
+    /*
+     * QM Operations
+     */
     public int getCurrentWeekOfYear() {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -193,4 +202,6 @@ public class JodaTimeConverter {
 
         return week;
     }
+
+
 }

@@ -41,7 +41,11 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
 
     @Override
     public void goToWeek(String date) {
+        LiveData<List<QMItem>> qmList = AltenDatabase.getDatabase(view.getContext())
+                .daoAccess()
+                .fecthQMData();
 
+        view.onLiveDataGoToWeek(qmList, date);
     }
 
     @Override
