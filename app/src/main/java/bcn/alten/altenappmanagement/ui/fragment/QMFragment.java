@@ -7,14 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import java.util.List;
@@ -34,9 +33,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 
+import static android.view.View.OnClickListener;
+
 public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener {
 
     private final String TAG = QMFragment.class.getSimpleName();
+
     public static final String ADD_QM_ACTION = "ADD_QM_ACTION";
     public static final String EDIT_QM_ACTION = "EDIT_QM_ACTION";
 
@@ -51,6 +53,12 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
 
     @BindView(R.id.qm_header_container)
     LinearLayout headerContainer;
+
+    @BindView(R.id.qm_header_arrow_up)
+    ImageButton qmHeaderArrowUp;
+
+    @BindView(R.id.qm_header_arrow_down)
+    ImageButton qmHeaderArrowDown;
 
     private ExpandableQMListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -70,6 +78,22 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
                 false);
         expandableRecyclerView.setLayoutManager(layoutManager);
         expandableRecyclerView.setHasFixedSize(true);
+
+        OnClickListener qmHeaderArrowsListener = v -> {
+          switch (v.getId()) {
+              case R.id.qm_header_arrow_up:
+                  presenter.showQmListWithActionParam(QMDataFactory.getInstance().QM_HEADER_ARROW_UP_ACTION);
+                  break;
+              case R.id.qm_header_arrow_down:
+                  presenter.showQmListWithActionParam(QMDataFactory.getInstance().QM_HEADER_ARROW_DOWN_ACTION);
+                  break;
+              default :
+                  break;
+          }
+        };
+
+        qmHeaderArrowUp.setOnClickListener(qmHeaderArrowsListener);
+        qmHeaderArrowDown.setOnClickListener(qmHeaderArrowsListener);
 
         qmFabSpeedDialButton.addOnMenuItemClickListener((miniFab, label, itemId) -> {
 
@@ -142,9 +166,6 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
     public void showQmList(List<QMCategory> list) {
         expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), this);
         expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
-                OrientationHelper.HORIZONTAL);
-        expandableRecyclerView.addItemDecoration(dividerItemDecoration);
     }
 
     @Override
@@ -160,10 +181,10 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
     }
 
     @Override
-    public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, String date) {
+    public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, int week) {
         list.observe(this, qmItems -> {
             List<QMCategory> categoryList = QMDataFactory.getInstance()
-                    .getSelectedWeek(list.getValue(), date);
+                    .getSelectedWeek(list.getValue(), week);
 
             showQmList(categoryList);
         });

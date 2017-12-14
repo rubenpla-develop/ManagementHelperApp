@@ -10,6 +10,8 @@ import bcn.alten.altenappmanagement.database.ops.qm.DeleteQmWrapper;
 import bcn.alten.altenappmanagement.database.ops.qm.EditQmWrapper;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
+import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
+import bcn.alten.altenappmanagement.utils.QMDataFactory;
 
 public class QmFragmentPresenter implements IQmFragmentPresenter{
 
@@ -36,7 +38,19 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
 
     @Override
     public void showQmListWithActionParam(int action) {
+        int weekForAction = 0;
 
+        if (action == QMDataFactory.getInstance().QM_HEADER_ARROW_UP_ACTION) {
+            weekForAction = QMDataFactory.getInstance().getCurrentWeek() + 1;
+        } else if (action == QMDataFactory.getInstance().QM_HEADER_ARROW_DOWN_ACTION) {
+            weekForAction = QMDataFactory.getInstance().getCurrentWeek() - 1;
+        }
+
+        LiveData<List<QMItem>> qmList = AltenDatabase.getDatabase(view.getContext())
+                .daoAccess()
+                .fecthQMData();
+
+        view.onLiveDataGoToWeek(qmList, weekForAction);
     }
 
     @Override
@@ -45,7 +59,9 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
                 .daoAccess()
                 .fecthQMData();
 
-        view.onLiveDataGoToWeek(qmList, date);
+        int week = JodaTimeConverter.getInstance().getWeekOfYearFromDate(date);
+
+        view.onLiveDataGoToWeek(qmList, week);
     }
 
     @Override

@@ -82,6 +82,12 @@ public class JodaTimeConverter {
         return isValidDate;
     }
 
+    public String getWeekNumberRangeTime(int weekNumber, int dayOfWeek) {
+        //TODO  change HARDCODED year to real year
+        return LocalDate.now().withWeekOfWeekyear(weekNumber).withYear(2017)
+                .withDayOfWeek(dayOfWeek).toString(DATE_PATTERN);
+    }
+
     public String parseFromDatePicker(final int month, final int day, final int year) {
         LocalDate dateTime = new LocalDate(year, month + 1, day);
         DateTime dt = dateTime.toDateTimeAtCurrentTime();
