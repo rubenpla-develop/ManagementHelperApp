@@ -82,10 +82,22 @@ public class JodaTimeConverter {
         return isValidDate;
     }
 
-    public String getWeekNumberRangeTime(int weekNumber, int dayOfWeek) {
+    public String getWeekNumberRangeTime(int weekNumber, int dayOfWeek, int year) {
         //TODO  change HARDCODED year to real year
-        return LocalDate.now().withWeekOfWeekyear(weekNumber).withYear(2017)
+        return LocalDate.now().withWeekOfWeekyear(weekNumber).withYear(year)
                 .withDayOfWeek(dayOfWeek).toString(DATE_PATTERN);
+    }
+
+    public int getYearFromDate(String date) {
+        String dateInMillis = parseDateFromStringPatternToMillis(date);
+
+        LocalDate localDate = new LocalDate(Long.valueOf(dateInMillis));
+
+        return localDate.getYear();
+    }
+
+    public int getMaximumWeeksValueOfYear(int year) {
+        return new DateTime().withYear(year).weekOfWeekyear().getMaximumValue();
     }
 
     public String parseFromDatePicker(final int month, final int day, final int year) {
@@ -100,12 +112,6 @@ public class JodaTimeConverter {
         LocalTime localTime = new LocalTime(hour, minutes);
 
         return localTime.toString("HH:mm");
-    }
-
-    public String parseTimeFromStringPatternToMillis(String date) {
-
-
-        return null;
     }
 
     public Long parseDateFromMillisStringFormat(final String millis) {
@@ -209,5 +215,7 @@ public class JodaTimeConverter {
         return week;
     }
 
-
+    public int getCurrentYear() {
+        return LocalDate.now().getYear();
+    }
 }
