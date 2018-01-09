@@ -14,22 +14,25 @@ import bcn.alten.altenappmanagement.application.AltenApplication;
 import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 
+import static bcn.alten.altenappmanagement.utils.QMCalendarController.QMCalendarInstance;
+
 public class QMDataFactory {
 
     private final String TAG = CategoryDataFactory.class.getSimpleName();
 
-    public final int QM_HEADER_ARROW_UP_ACTION = 5;
-    public final int QM_HEADER_ARROW_DOWN_ACTION = 4;
+    public static final int QM_HEADER_ARROW_NEXT_WEEK_ACTION = 5;
+    public static final int QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION = 4;
 
     private final int WEEK_NEXT_TO_CURRENT_WEEK = 3;
     private final int CURRENT_WEEK = 2;
     private final int WEEK_PREV_TO_CURRENT_WEEK = 1;
 
     private int currentWeek = 0;
+    private int currentYear;
 
     private static QMDataFactory instance;
 
-    public static QMDataFactory getInstance() {
+    public static QMDataFactory FactoryInstance() {
         if (instance == null) {
             instance = new QMDataFactory();
         }
@@ -37,8 +40,8 @@ public class QMDataFactory {
         return instance;
     }
 
+    //TODO add year param to filter qm items with same week num. but different year
     public List<QMCategory> getSelectedWeek(final List<QMItem> list, final int week) {
-        Resources resources = AltenApplication.getInstance().getResources();
         List<QMItem> nextToCurrentWeekList = new ArrayList<>();
         List<QMItem> currentWeekList = new ArrayList<>();
         List<QMItem> previousToCurrentWeekList = new ArrayList<>();
@@ -67,28 +70,31 @@ public class QMDataFactory {
         StringFormatter formatter = new StringFormatter();
 
         filteredList.add(new QMCategory(formatter
-                .formatParentGroupTitle(R.string.qm_category_week_generic_title, week + 1),
+                .formatParentGroupTitle(R.string.qm_category_week_generic_title, QMCalendarInstance()
+                                .returnFollowingWeek(currentWeek, currentYear) ,
+                        QMCalendarInstance().returnFollowingWeekYear(currentWeek, currentYear)),
                 nextToCurrentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         filteredList.add(new QMCategory(formatter
-                .formatParentGroupTitle(R.string.qm_category_week_generic_title, week),
+                .formatParentGroupTitle(R.string.qm_category_week_generic_title, week, currentYear),
                 currentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         filteredList.add(new QMCategory(formatter
-                .formatParentGroupTitle(R.string.qm_category_week_generic_title, week - 1),
+                .formatParentGroupTitle(R.string.qm_category_week_generic_title, week - 1, currentYear),
                 previousToCurrentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         return filteredList;
     }
 
     public List<QMCategory> getCurrentWeeks(final List<QMItem> list) {
-        Resources resources = AltenApplication.getInstance().getResources();
         List<QMItem> nextToCurrentWeekList = new ArrayList<>();
         List<QMItem> currentWeekList = new ArrayList<>();
         List<QMItem> previousToCurrentWeekList = new ArrayList<>();
 
+        currentWeek = JodaTimeConverter.getInstance().getCurrentWeekOfYear();
+        currentYear = JodaTimeConverter.getInstance().getCurrentYear();
+
         for (QMItem qm : list) {
-            currentWeek = JodaTimeConverter.getInstance().getCurrentWeekOfYear();
 
             int weekMatchResult = setWeekMatchResult(currentWeek, qm);
 
@@ -111,24 +117,29 @@ public class QMDataFactory {
         StringFormatter formatter = new StringFormatter();
 
         filteredList.add(new QMCategory(formatter
-                .formatParentGroupTitle(R.string.qm_category_next_week_title, currentWeek + 1),
+                .formatParentGroupTitle(R.string.qm_category_next_week_title, QMCalendarInstance()
+                        .returnFollowingWeek(currentWeek, currentYear) ,
+                        QMCalendarInstance().returnFollowingWeekYear(currentWeek, currentYear)),
                 nextToCurrentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         filteredList.add(new QMCategory(formatter
-                .formatParentGroupTitle(R.string.qm_category_current_week_title, currentWeek),
+                .formatParentGroupTitle(R.string.qm_category_current_week_title, currentWeek, currentYear),
                 currentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         filteredList.add(new QMCategory(formatter
-                .formatParentGroupTitle(R.string.qm_category_previous_week_title, currentWeek - 1),
+                .formatParentGroupTitle(R.string.qm_category_previous_week_title,
+                        currentWeek - 1, currentYear),
                 previousToCurrentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         return filteredList;
     }
 
+    //TODO filter qm items with same week num. but different year
     private int setWeekMatchResult(int currentWeek, QMItem item) {
         int weekMatch = 0 ;
+        currentYear = JodaTimeConverter.getInstance().getCurrentYear();
 
-        final boolean NEXT_TO_CURRENT_WEEK = item.getWeek() == (currentWeek + 1);
+        final boolean NEXT_TO_CURRENT_WEEK = item.getWeek() == QMCalendarInstance().returnFollowingWeek(currentWeek, currentYear);
         final boolean PREVIOUS_TO_CURRENT_WEEK = item.getWeek() == (currentWeek - 1);
         final boolean EQUALS_TO_CURRENT_WEEK = item.getWeek() == currentWeek;
 
@@ -157,12 +168,13 @@ public class QMDataFactory {
             res = AltenApplication.getInstance().getApplicationContext().getResources();
         }
 
-        public String formatParentGroupTitle(@StringRes int stringId, int week) {
+        public String formatParentGroupTitle(@StringRes int stringId, int week, int year) {
+
             String startWeek = JodaTimeConverter.getInstance()
-                    .getWeekNumberRangeTime(week, DateTimeConstants.MONDAY);
+                    .getWeekNumberRangeTime(week, DateTimeConstants.MONDAY, year);
 
             String endWeek = JodaTimeConverter.getInstance()
-                    .getWeekNumberRangeTime(week, DateTimeConstants.SUNDAY);
+                    .getWeekNumberRangeTime(week, DateTimeConstants.SUNDAY, year);
 
              return String.format(res.getString(stringId), startWeek, endWeek);
         }

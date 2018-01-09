@@ -28,12 +28,12 @@ import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.QMDeleteDialog;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
-import bcn.alten.altenappmanagement.utils.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 
 import static android.view.View.OnClickListener;
+import static bcn.alten.altenappmanagement.utils.QMDataFactory.FactoryInstance;
 
 public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener {
 
@@ -82,10 +82,10 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
         OnClickListener qmHeaderArrowsListener = v -> {
           switch (v.getId()) {
               case R.id.qm_header_arrow_up:
-                  presenter.showQmListWithActionParam(QMDataFactory.getInstance().QM_HEADER_ARROW_UP_ACTION);
+                  presenter.showQmListWithActionParam(FactoryInstance().QM_HEADER_ARROW_NEXT_WEEK_ACTION);
                   break;
               case R.id.qm_header_arrow_down:
-                  presenter.showQmListWithActionParam(QMDataFactory.getInstance().QM_HEADER_ARROW_DOWN_ACTION);
+                  presenter.showQmListWithActionParam(FactoryInstance().QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION);
                   break;
               default :
                   break;
@@ -170,20 +170,20 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
 
     @Override
     public void onLiveDataChanged(LiveData<List<QMItem>> list) {
-        /*List<QMCategory> list = QMDataFactory.getInstance()
+        /*List<QMCategory> list = QMDataFactory.FactoryInstance()
                 .getCurrentWeeks(QMDataFactory.createMockQMItemList());*/ //MOCKED CONTENT
 
         list.observe(this, qmItems -> {
-            List<QMCategory> categoryList = QMDataFactory.getInstance().getCurrentWeeks(list.getValue());
+            List<QMCategory> categoryList = FactoryInstance().getCurrentWeeks(list.getValue());
 
             showQmList(categoryList);
         });
     }
 
     @Override
-    public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, int week) {
+    public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, int week, int year) {
         list.observe(this, qmItems -> {
-            List<QMCategory> categoryList = QMDataFactory.getInstance()
+            List<QMCategory> categoryList = FactoryInstance()
                     .getSelectedWeek(list.getValue(), week);
 
             showQmList(categoryList);
