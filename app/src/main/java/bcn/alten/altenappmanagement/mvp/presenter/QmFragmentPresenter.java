@@ -10,10 +10,10 @@ import bcn.alten.altenappmanagement.database.ops.qm.DeleteQmWrapper;
 import bcn.alten.altenappmanagement.database.ops.qm.EditQmWrapper;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
+import bcn.alten.altenappmanagement.pojo.WeekRange;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 import static bcn.alten.altenappmanagement.utils.QMCalendarController.QMCalendarInstance;
-import static bcn.alten.altenappmanagement.utils.QMDataFactory.FactoryInstance;
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_NEXT_WEEK_ACTION;
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
 
@@ -48,11 +48,12 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
 
         switch (action) {
             case QM_HEADER_ARROW_NEXT_WEEK_ACTION:
-                weekForAction = QMCalendarInstance().returnFollowingWeek(FactoryInstance()
-                        .getCurrentWeek(), QMCalendarInstance().getYearForReference());
+                weekForAction = QMCalendarInstance().returnFollowingWeek(QMCalendarInstance().getWeekForReference(),
+                        QMCalendarInstance().getYearForReference());
                 break;
             case QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION :
-                weekForAction = FactoryInstance().getCurrentWeek() - 1;
+                weekForAction = QMCalendarInstance().returnPreviousWeek(QMCalendarInstance().getWeekForReference(),
+                        QMCalendarInstance().getYearForReference());
                 break;
             default :
                 break;
@@ -62,8 +63,9 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
                 .daoAccess()
                 .fecthQMData();
 
-        view.onLiveDataGoToWeek(qmList, weekForAction, QMCalendarInstance()
-                .getYearForReference());
+        WeekRange weekRange = new WeekRange(weekForAction, QMCalendarInstance().getYearForReference());
+
+        view.onLiveDataGoToWeek(qmList, weekRange);
     }
 
     @Override
@@ -72,10 +74,10 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
                 .daoAccess()
                 .fecthQMData();
 
-        int week = JodaTimeConverter.getInstance().getWeekOfYearFromDate(date);
-        int year = JodaTimeConverter.getInstance().getYearFromDate(date);
+        WeekRange weekRange = new WeekRange(JodaTimeConverter.getInstance().getWeekOfYearFromDate(date),
+                JodaTimeConverter.getInstance().getYearFromDate(date));
 
-        view.onLiveDataGoToWeek(qmList, week, year);
+        view.onLiveDataGoToWeek(qmList, weekRange);
     }
 
     @Override

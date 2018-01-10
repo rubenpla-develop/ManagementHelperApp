@@ -1,5 +1,7 @@
 package bcn.alten.altenappmanagement.utils;
 
+import bcn.alten.altenappmanagement.pojo.WeekRange;
+
 public class QMCalendarController {
 
     private final int WEEK_ONE_OF_YEAR = 1;
@@ -87,6 +89,10 @@ public class QMCalendarController {
         this.yearIn = year;
     }
 
+    public void updateCurrentWeek(int week) {
+        this.weekOfYearIn = week;
+    }
+
     public int getYearForReference() {
         return yearIn;
     }
@@ -95,16 +101,13 @@ public class QMCalendarController {
         return weekOfYearIn;
     }
 
-    public void setOnWeekYearListener(OnWeekMoveListener listener) {
+    public void setOnWeekMoveListener(OnWeekMoveListener listener) {
         if (listener != null) {
             this.onWeekMoveListener = listener;
         }
     }
 
     public interface OnWeekMoveListener {
-        void onNextWeek();
-        void onPreviousWeek();
-        void onYearMaximumWeeksReached();
-        void onYearMinimumWeeksReached();
+        void onWeekMove(WeekRange weekRange);
     }
 }

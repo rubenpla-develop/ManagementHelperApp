@@ -20,6 +20,7 @@ import java.util.List;
 
 import bcn.alten.altenappmanagement.QmCreateEditActivity;
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.pojo.WeekRange;
 import bcn.alten.altenappmanagement.adapter.ExpandableQMListAdapter;
 import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
@@ -183,10 +184,10 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
     }
 
     @Override
-    public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, int week, int year) {
+    public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, WeekRange weekRange) {
         list.observe(this, qmItems -> {
             List<QMCategory> categoryList = FactoryInstance()
-                    .getSelectedWeek(list.getValue(), week);
+                    .getSelectedWeek(list.getValue(), weekRange);
 
             showQmList(categoryList);
         });

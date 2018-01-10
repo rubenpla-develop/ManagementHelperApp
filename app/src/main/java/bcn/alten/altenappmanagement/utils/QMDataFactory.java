@@ -13,6 +13,7 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.application.AltenApplication;
 import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.pojo.WeekRange;
 
 import static bcn.alten.altenappmanagement.utils.QMCalendarController.QMCalendarInstance;
 
@@ -32,6 +33,8 @@ public class QMDataFactory {
 
     private static QMDataFactory instance;
 
+    private QMDataFactory() {}
+
     public static QMDataFactory FactoryInstance() {
         if (instance == null) {
             instance = new QMDataFactory();
@@ -40,16 +43,20 @@ public class QMDataFactory {
         return instance;
     }
 
+    //TODO check for secure way to refactor 'getSelectedWeek()' & 'getCurrentWeeks()' to unique method
     //TODO add year param to filter qm items with same week num. but different year
-    public List<QMCategory> getSelectedWeek(final List<QMItem> list, final int week) {
+    public List<QMCategory> getSelectedWeek(final List<QMItem> list, final WeekRange weekRange) {
         List<QMItem> nextToCurrentWeekList = new ArrayList<>();
         List<QMItem> currentWeekList = new ArrayList<>();
         List<QMItem> previousToCurrentWeekList = new ArrayList<>();
 
-        currentWeek = week;
+        QMCalendarInstance().saveCurrentWeekAndYear(weekRange.getWeek(), weekRange.getYear());
+
+        currentWeek = weekRange.getWeek();
+        currentYear = weekRange.getYear();
 
         for (QMItem qm : list) {
-            int weekMatchResult = setWeekMatchResult(week, qm);
+            int weekMatchResult = setWeekMatchResult(qm);
 
             switch (weekMatchResult) {
                 case WEEK_NEXT_TO_CURRENT_WEEK :
@@ -76,11 +83,13 @@ public class QMDataFactory {
                 nextToCurrentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         filteredList.add(new QMCategory(formatter
-                .formatParentGroupTitle(R.string.qm_category_week_generic_title, week, currentYear),
+                .formatParentGroupTitle(R.string.qm_category_week_generic_title, currentWeek, currentYear),
                 currentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         filteredList.add(new QMCategory(formatter
-                .formatParentGroupTitle(R.string.qm_category_week_generic_title, week - 1, currentYear),
+                .formatParentGroupTitle(R.string.qm_category_week_generic_title, QMCalendarInstance()
+                                .returnPreviousWeek(currentWeek,currentYear),
+                        QMCalendarInstance().returnPreviousWeekYear(currentWeek, currentYear)),
                 previousToCurrentWeekList, R.drawable.ic_qm_calendar_icon_category_black_32dp));
 
         return filteredList;
@@ -96,7 +105,7 @@ public class QMDataFactory {
 
         for (QMItem qm : list) {
 
-            int weekMatchResult = setWeekMatchResult(currentWeek, qm);
+            int weekMatchResult = setWeekMatchResult(qm);
 
             switch (weekMatchResult) {
                 case WEEK_NEXT_TO_CURRENT_WEEK :
@@ -133,15 +142,19 @@ public class QMDataFactory {
 
         return filteredList;
     }
+    //TODO END check for secure way to refactor 'getSelectedWeek()' & 'getCurrentWeeks()'
+    //todo  to unique method
 
     //TODO filter qm items with same week num. but different year
-    private int setWeekMatchResult(int currentWeek, QMItem item) {
+    private int setWeekMatchResult(QMItem item) {
         int weekMatch = 0 ;
-        currentYear = JodaTimeConverter.getInstance().getCurrentYear();
 
-        final boolean NEXT_TO_CURRENT_WEEK = item.getWeek() == QMCalendarInstance().returnFollowingWeek(currentWeek, currentYear);
-        final boolean PREVIOUS_TO_CURRENT_WEEK = item.getWeek() == (currentWeek - 1);
-        final boolean EQUALS_TO_CURRENT_WEEK = item.getWeek() == currentWeek;
+        final boolean NEXT_TO_CURRENT_WEEK = item.getWeek() == QMCalendarInstance()
+                .returnFollowingWeek(QMCalendarInstance().getWeekForReference(), currentYear);
+        final boolean PREVIOUS_TO_CURRENT_WEEK = item.getWeek() == QMCalendarInstance()
+                .returnPreviousWeek(QMCalendarInstance().getWeekForReference(), currentYear);
+        final boolean EQUALS_TO_CURRENT_WEEK = item.getWeek() == QMCalendarInstance()
+                .getWeekForReference();
 
         if (EQUALS_TO_CURRENT_WEEK || NEXT_TO_CURRENT_WEEK || PREVIOUS_TO_CURRENT_WEEK) {
 
