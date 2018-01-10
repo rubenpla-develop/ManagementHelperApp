@@ -25,6 +25,8 @@ public class JodaTimeConverter {
 
     private static JodaTimeConverter instance = null;
 
+    private JodaTimeConverter() {}
+
     public static JodaTimeConverter getInstance() {
         if (instance == null) {
             instance = new JodaTimeConverter();

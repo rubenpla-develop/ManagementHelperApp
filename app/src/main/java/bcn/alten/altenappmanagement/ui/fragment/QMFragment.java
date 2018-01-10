@@ -34,6 +34,8 @@ import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 
 import static android.view.View.OnClickListener;
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.FactoryInstance;
+import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_NEXT_WEEK_ACTION;
+import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
 
 public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener {
 
@@ -82,10 +84,10 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
         OnClickListener qmHeaderArrowsListener = v -> {
           switch (v.getId()) {
               case R.id.qm_header_arrow_up:
-                  presenter.showQmListWithActionParam(FactoryInstance().QM_HEADER_ARROW_NEXT_WEEK_ACTION);
+                  presenter.showQmListWithActionParam(QM_HEADER_ARROW_NEXT_WEEK_ACTION);
                   break;
               case R.id.qm_header_arrow_down:
-                  presenter.showQmListWithActionParam(FactoryInstance().QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION);
+                  presenter.showQmListWithActionParam(QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION);
                   break;
               default :
                   break;
