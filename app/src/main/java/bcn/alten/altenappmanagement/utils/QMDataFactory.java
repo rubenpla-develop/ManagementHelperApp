@@ -156,7 +156,13 @@ public class QMDataFactory {
         final boolean EQUALS_TO_CURRENT_WEEK = item.getWeek() == QMCalendarInstance()
                 .getWeekForReference();
 
-        if (EQUALS_TO_CURRENT_WEEK || NEXT_TO_CURRENT_WEEK || PREVIOUS_TO_CURRENT_WEEK) {
+        final boolean isYearEqual = JodaTimeConverter.getInstance()
+                .getYearFromMillis(item.getDate()) == QMCalendarInstance().getYearForReference();
+
+        final boolean isWeekMatching =  (EQUALS_TO_CURRENT_WEEK || NEXT_TO_CURRENT_WEEK
+                || PREVIOUS_TO_CURRENT_WEEK);
+
+        if (isWeekMatching && isYearEqual) {
 
             if (EQUALS_TO_CURRENT_WEEK){
                 weekMatch = CURRENT_WEEK;

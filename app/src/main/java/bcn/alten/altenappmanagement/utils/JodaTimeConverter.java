@@ -98,6 +98,10 @@ public class JodaTimeConverter {
         return localDate.getYear();
     }
 
+    public int getYearFromMillis(String dateInMillis) {
+        return new LocalDate(Long.valueOf(dateInMillis)).getYear();
+    }
+
     public int getMaximumWeeksValueOfYear(int year) {
         return new DateTime().withYear(year).weekOfWeekyear().getMaximumValue();
     }
