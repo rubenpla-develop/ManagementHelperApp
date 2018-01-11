@@ -32,7 +32,8 @@ public class QMCalendarController {
         int weekFollowingNumber = week + 1;
 
         if (isLastWeekOfYear(week, year)) {
-            return 1;
+            saveCurrentWeekAndYear(WEEK_ONE_OF_YEAR, year + 1);
+            return weekOfYearIn;
         }
 
         return weekFollowingNumber;
@@ -42,7 +43,7 @@ public class QMCalendarController {
         int weekPreviousNumber = week - 1;
 
         if (isFirstWeekOfYear(week, year)) {
-            weekPreviousNumber = 1;
+            weekPreviousNumber  = JodaTimeConverter.getInstance().getMaximumWeeksValueOfYear(year -1);
         }
 
         return weekPreviousNumber;
