@@ -6,10 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.QMFragment">
 
-    <include android:id="@+id/qm_header"
+    <bcn.alten.altenappmanagement.ui.customview.QmHeaderPanel
+        android:id="@+id/qm_header_panel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/qm_header_layout"/>
+        android:layout_height="wrap_content"/>
 
     <View
         android:id="@+id/parent_item_divider"

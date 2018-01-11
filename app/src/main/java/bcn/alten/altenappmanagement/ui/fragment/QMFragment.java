@@ -13,19 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import java.util.List;
 
 import bcn.alten.altenappmanagement.QmCreateEditActivity;
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.pojo.WeekRange;
 import bcn.alten.altenappmanagement.adapter.ExpandableQMListAdapter;
 import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
+import bcn.alten.altenappmanagement.pojo.WeekRange;
+import bcn.alten.altenappmanagement.ui.customview.QmHeaderPanel;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.QMDeleteDialog;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
@@ -33,12 +32,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 
-import static android.view.View.OnClickListener;
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.FactoryInstance;
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_NEXT_WEEK_ACTION;
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
 
-public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener {
+public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener,
+        QmHeaderPanel.OnQmHeaderPanelClickListener{
 
     private final String TAG = QMFragment.class.getSimpleName();
 
@@ -54,14 +53,8 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
     @BindView(R.id.qm_fab)
     FabSpeedDial qmFabSpeedDialButton;
 
-    @BindView(R.id.qm_header_container)
-    LinearLayout headerContainer;
-
-    @BindView(R.id.qm_header_arrow_up)
-    ImageButton qmHeaderArrowUp;
-
-    @BindView(R.id.qm_header_arrow_down)
-    ImageButton qmHeaderArrowDown;
+    @BindView(R.id.qm_header_panel)
+    QmHeaderPanel  qmHeaderPanel;
 
     private ExpandableQMListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -82,21 +75,7 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
         expandableRecyclerView.setLayoutManager(layoutManager);
         expandableRecyclerView.setHasFixedSize(true);
 
-        OnClickListener qmHeaderArrowsListener = v -> {
-          switch (v.getId()) {
-              case R.id.qm_header_arrow_up:
-                  presenter.showQmListWithActionParam(QM_HEADER_ARROW_NEXT_WEEK_ACTION);
-                  break;
-              case R.id.qm_header_arrow_down:
-                  presenter.showQmListWithActionParam(QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION);
-                  break;
-              default :
-                  break;
-          }
-        };
-
-        qmHeaderArrowUp.setOnClickListener(qmHeaderArrowsListener);
-        qmHeaderArrowDown.setOnClickListener(qmHeaderArrowsListener);
+        qmHeaderPanel.setOnQMHeaderPanelListener(this);
 
         qmFabSpeedDialButton.addOnMenuItemClickListener((miniFab, label, itemId) -> {
 
@@ -212,5 +191,15 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
         final String date = JodaTimeConverter.getInstance().getDateInStringFormat(dateInmMillis);
 
         presenter.goToWeek(date);
+    }
+
+    @Override
+    public void onClickArrowUp() {
+        presenter.showQmListWithActionParam(QM_HEADER_ARROW_NEXT_WEEK_ACTION);
+    }
+
+    @Override
+    public void onClickArrowDown() {
+        presenter.showQmListWithActionParam(QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION);
     }
 }
