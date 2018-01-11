@@ -48,12 +48,14 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
 
         switch (action) {
             case QM_HEADER_ARROW_NEXT_WEEK_ACTION:
-                weekForAction = QMCalendarInstance().returnFollowingWeek(QMCalendarInstance().getWeekForReference(),
-                        QMCalendarInstance().getYearForReference());
+                weekForAction = QMCalendarInstance().returnFollowingWeek(QMCalendarInstance()
+                                .getWeekForReference(), QMCalendarInstance().getYearForReference());
+
                 break;
             case QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION :
-                weekForAction = QMCalendarInstance().returnPreviousWeek(QMCalendarInstance().getWeekForReference(),
-                        QMCalendarInstance().getYearForReference());
+                weekForAction = QMCalendarInstance().returnPreviousWeek(QMCalendarInstance()
+                                .getWeekForReference(), QMCalendarInstance().getYearForReference());
+
                 break;
             default :
                 break;
