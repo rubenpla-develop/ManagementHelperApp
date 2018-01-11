@@ -78,7 +78,7 @@ public class QMCalendarController {
     private boolean isFirstWeekOfYear(int week, int year) {
         boolean isFirstWeek = false;
 
-        if (week == 1) {
+        if (week == WEEK_ONE_OF_YEAR) {
             isFirstWeek = true;
         }
 
