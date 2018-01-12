@@ -74,7 +74,6 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
                 false);
         expandableRecyclerView.setLayoutManager(layoutManager);
         expandableRecyclerView.setHasFixedSize(true);
-
         qmHeaderPanel.setOnQMHeaderPanelListener(this);
 
         qmFabSpeedDialButton.addOnMenuItemClickListener((miniFab, label, itemId) -> {
@@ -201,5 +200,25 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
     @Override
     public void onClickArrowDown() {
         presenter.showQmListWithActionParam(QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION);
+    }
+
+    @Override
+    public void onScheduledButton() {
+
+    }
+
+    @Override
+    public void onDoneButton() {
+
+    }
+
+    @Override
+    public void onAcceptedButton() {
+
+    }
+
+    @Override
+    public void onCancelledButton() {
+
     }
 }

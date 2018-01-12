@@ -72,18 +72,22 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
                 qmHeaderPanelClickListener.onClickArrowDown();
                 break;
             case (R.id.qm_header_scheduled_button) :
+                qmHeaderPanelClickListener.onScheduledButton();
                 Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_header_scheduled_button),
                         Toast.LENGTH_LONG).show();
                 break;
             case (R.id.qm_header_done_button) :
+                qmHeaderPanelClickListener.onDoneButton();
                 Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_header_done_button),
                         Toast.LENGTH_LONG).show();
                 break;
             case (R.id.qm_header_accepted_button) :
+                qmHeaderPanelClickListener.onAcceptedButton();
                 Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_header_accepted_button),
                         Toast.LENGTH_LONG).show();
                 break;
             case (R.id.qm_header_cancelled_button) :
+                qmHeaderPanelClickListener.onCancelledButton();
                 Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_header_cancelled_button),
                         Toast.LENGTH_LONG).show();
                 break;
@@ -101,5 +105,9 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
     public interface OnQmHeaderPanelClickListener {
         void onClickArrowUp();
         void onClickArrowDown();
+        void onScheduledButton();
+        void onDoneButton();
+        void onAcceptedButton();
+        void onCancelledButton();
     }
 }
