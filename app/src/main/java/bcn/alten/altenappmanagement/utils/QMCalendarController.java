@@ -44,6 +44,7 @@ public class QMCalendarController {
 
         if (isFirstWeekOfYear(week, year)) {
             weekPreviousNumber  = JodaTimeConverter.getInstance().getMaximumWeeksValueOfYear(year -1);
+            saveCurrentWeekAndYear(weekPreviousNumber, year -1);
         }
 
         return weekPreviousNumber;
