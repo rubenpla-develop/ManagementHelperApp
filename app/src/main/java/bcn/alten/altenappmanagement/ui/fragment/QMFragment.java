@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 import bcn.alten.altenappmanagement.pojo.WeekRange;
+import bcn.alten.altenappmanagement.ui.customview.QMFilterGroup;
 import bcn.alten.altenappmanagement.ui.customview.QmHeaderPanel;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.QMDeleteDialog;
@@ -37,7 +39,7 @@ import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_N
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
 
 public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener,
-        QmHeaderPanel.OnQmHeaderPanelClickListener{
+        QmHeaderPanel.OnQmHeaderPanelClickListener, QMFilterGroup.OnCheckedChangeListener{
 
     private final String TAG = QMFragment.class.getSimpleName();
 
@@ -46,6 +48,12 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
 
     public static final String QM_ITEM_PARAM = "QM_ITEM_PARAM";
     public static final String QM_ACTIONMODE_PARAM = "QM_ACTIONMODE_PARAM";
+    
+    public static final int SCHEDULED_FILTER_OPTION = 0;
+    public static final int DONE_FILTER_OPTION = 1;
+    public static final int ACCEPTED_FILTER_OPTION = 2;
+    public static final int CANCELLED_FILTER_OPTION = 3;
+    public static final int CLEAR_FILTER_OPTION = 4;
 
     @BindView(R.id.qm_recyclerView)
     RecyclerView expandableRecyclerView;
@@ -204,21 +212,38 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
 
     @Override
     public void onScheduledButton() {
-
+        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(SCHEDULED_FILTER_OPTION);
+        presenter.filterByStatus(filterOption);
     }
 
     @Override
     public void onDoneButton() {
-
+        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(DONE_FILTER_OPTION);
+        presenter.filterByStatus(filterOption);
     }
 
     @Override
     public void onAcceptedButton() {
-
+        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(ACCEPTED_FILTER_OPTION);
+        presenter.filterByStatus(filterOption);
     }
 
     @Override
     public void onCancelledButton() {
+        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(CANCELLED_FILTER_OPTION);
+        presenter.filterByStatus(filterOption);
+    }
 
+    @Override
+    public void onClearFilter() {
+        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(CLEAR_FILTER_OPTION);
+        presenter.filterByStatus(filterOption);
+    }
+
+    @Override
+    public void onCheckedChanged(View radioGroup, View radioButton, boolean isChecked, int checkedId) {
+        Log.i(TAG, "RadioGroup: " + radioGroup + "\nRadioButton : " + radioButton
+                + "\n isChecked : " + isChecked + "\nchekedId : "
+                + getResources().getResourceTypeName(checkedId));
     }
 }
