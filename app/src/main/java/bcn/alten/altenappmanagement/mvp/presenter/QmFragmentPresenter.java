@@ -13,6 +13,10 @@ import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 import bcn.alten.altenappmanagement.pojo.WeekRange;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
+import static bcn.alten.altenappmanagement.ui.fragment.QMFragment.ACCEPTED_FILTER_OPTION;
+import static bcn.alten.altenappmanagement.ui.fragment.QMFragment.CANCELLED_FILTER_OPTION;
+import static bcn.alten.altenappmanagement.ui.fragment.QMFragment.DONE_FILTER_OPTION;
+import static bcn.alten.altenappmanagement.ui.fragment.QMFragment.SCHEDULED_FILTER_OPTION;
 import static bcn.alten.altenappmanagement.utils.QMCalendarController.QMCalendarInstance;
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_NEXT_WEEK_ACTION;
 import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
@@ -98,5 +102,22 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
     public void createNewQm(QMItem qm) {
         CreateNewQmWrapper createNewQmWrapper = new CreateNewQmWrapper(qm);
         createNewQmWrapper.performCreateNewQmOperation();
+    }
+
+    @Override
+    public void filterByStatus(int status) {
+        switch (status) {
+            case SCHEDULED_FILTER_OPTION:
+
+                break;
+            case DONE_FILTER_OPTION:
+                break;
+            case ACCEPTED_FILTER_OPTION:
+                break;
+            case CANCELLED_FILTER_OPTION:
+                break;
+            default:
+                break;
+        }
     }
 }

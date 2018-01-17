@@ -1,6 +1,7 @@
 package bcn.alten.altenappmanagement.ui.customview;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
@@ -9,6 +10,7 @@ import butterknife.ButterKnife;
 public abstract class BaseView extends FrameLayout {
 
     protected int layoutId;
+    protected Resources res;
 
     public BaseView(Context context) {
         super(context);
@@ -28,8 +30,8 @@ public abstract class BaseView extends FrameLayout {
     protected void init(AttributeSet attrs) {
         loadLayout();
         loadContent();
-        setViews();
         loadResources(attrs);
+        setViews();
     }
 
     protected abstract void loadLayout();
@@ -41,6 +43,6 @@ public abstract class BaseView extends FrameLayout {
     }
 
     protected void loadResources(AttributeSet attrs) {
-
+        res = getResources();
     }
 }

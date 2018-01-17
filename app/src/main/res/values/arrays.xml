@@ -12,4 +12,12 @@
         <item name="accepted">@string/qm_dialog_radio_group_accepted_value</item>
         <item name="cancelled">@string/qm_dialog_radio_group_cancelled_value</item>
     </array>
+
+    <array name="qm_filter_options">
+        <item name="scheduled">0</item>
+        <item name="done">1</item>
+        <item name="accepted">2</item>
+        <item name="cancelled">3</item>
+        <item name="all">4</item>
+    </array>
 </resources>

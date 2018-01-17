@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="QMFilterGroup">
+        <attr name="presetRadioCheckedId" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="QMFilterOptionButton">
+        <attr name="pressedButtonColor" format="integer"/>
+        <attr name="defaultColor" format="integer"/>
+    </declare-styleable>
+</resources>

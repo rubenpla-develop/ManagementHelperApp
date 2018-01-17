@@ -9,5 +9,6 @@ public interface IQmFragmentPresenter {
     void editQm(QMItem qmToEdit);
     void deleteQm(QMItem qmToDelete);
     void createNewQm(QMItem qm);
+    void filterByStatus(int status);
 }
 
