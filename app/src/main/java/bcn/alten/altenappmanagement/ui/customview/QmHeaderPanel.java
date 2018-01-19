@@ -45,9 +45,10 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
     protected OnQmHeaderPanelClickListener qmHeaderPanelClickListener;
 
     @NonNull
-    private ArrayList qmFilterOptions;
+    private ArrayList<Integer> qmFilterOptions;
 
-    private int[] filterOptions;
+    private String[] statusOptions;
+    private int previousFilterOption;
 
     public QmHeaderPanel(Context context) {
         super(context);
@@ -66,6 +67,7 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
 
     private void setFilterOptions() {
         int[] stringList;
+        statusOptions = getResources().getStringArray(R.array.qm_status_values);
 
         stringList = res.getIntArray(R.array.qm_filter_options);
         qmFilterOptions = new ArrayList<>();
@@ -92,6 +94,8 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
+        //TODO DELETE TOASTS
         switch (v.getId()) {
             case (R.id.qm_header_arrow_up) :
                 qmHeaderPanelClickListener.onClickArrowUp();
@@ -130,14 +134,26 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
         }
     }
 
+    public void setPreviousFilterOption(int previousFilter) {
+        previousFilterOption = previousFilter;
+    }
+
+    public int getPreviousFilterOption() {
+        return previousFilterOption;
+    }
+
     public void setOnQMHeaderPanelListener(OnQmHeaderPanelClickListener listener) {
         if (listener != null) {
             this.qmHeaderPanelClickListener = listener;
         }
     }
 
-    public ArrayList<Integer> getFilterOptionsArray() {
+    public ArrayList<Integer> getFilterOptions() {
         return qmFilterOptions;
+    }
+
+    public String[] getStatusOptions() {
+        return statusOptions;
     }
 
     public interface OnQmHeaderPanelClickListener {

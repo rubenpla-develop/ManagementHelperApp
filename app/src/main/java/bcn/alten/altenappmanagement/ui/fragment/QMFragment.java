@@ -212,32 +212,41 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
 
     @Override
     public void onScheduledButton() {
-        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(SCHEDULED_FILTER_OPTION);
-        presenter.filterByStatus(filterOption);
+        int filterOption = qmHeaderPanel.getFilterOptions().get(SCHEDULED_FILTER_OPTION);
+        filterByStatusBy(filterOption);
     }
 
     @Override
     public void onDoneButton() {
-        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(DONE_FILTER_OPTION);
-        presenter.filterByStatus(filterOption);
+        int filterOption = qmHeaderPanel.getFilterOptions().get(DONE_FILTER_OPTION);
+        filterByStatusBy(filterOption);
     }
 
     @Override
     public void onAcceptedButton() {
-        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(ACCEPTED_FILTER_OPTION);
-        presenter.filterByStatus(filterOption);
+        int filterOption = qmHeaderPanel.getFilterOptions().get(ACCEPTED_FILTER_OPTION);
+        filterByStatusBy(filterOption);
     }
 
     @Override
     public void onCancelledButton() {
-        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(CANCELLED_FILTER_OPTION);
-        presenter.filterByStatus(filterOption);
+        int filterOption = qmHeaderPanel.getFilterOptions().get(CANCELLED_FILTER_OPTION);
+        filterByStatusBy(filterOption);
     }
 
     @Override
     public void onClearFilter() {
-        int filterOption = qmHeaderPanel.getFilterOptionsArray().get(CLEAR_FILTER_OPTION);
-        presenter.filterByStatus(filterOption);
+        int filterOption = qmHeaderPanel.getFilterOptions().get(CLEAR_FILTER_OPTION);
+        filterByStatusBy(filterOption);
+    }
+
+    private void filterByStatusBy(int filterOption) {
+        qmHeaderPanel.setPreviousFilterOption(filterOption);
+
+        List groups = (filterOption != CLEAR_FILTER_OPTION ?
+                expandableRecyclerViewAdapter.getGroups() :null);
+
+        presenter.filterByStatus(groups, qmHeaderPanel.getStatusOptions(), filterOption);
     }
 
     @Override
