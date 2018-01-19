@@ -67,23 +67,20 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
             view.editQm(qmItem);
         });
 
-        ((QmItemHolder) holder).getView().setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                qmItem = new QMItem();
-                qmItem.setId(model.getId());
-                qmItem.setWeek(model.getWeek());
-                qmItem.setClientName(model.getClientName());
-                qmItem.setClientPhone(model.getClientPhone());
-                qmItem.setCandidateName(model.getCandidateName());
-                qmItem.setCandidatePhone(model.getCandidatePhone());
-                qmItem.setDate(model.getDate());
-                qmItem.setTime(model.getTime());
-                qmItem.setStatus(model.getStatus());
+        ((QmItemHolder) holder).getView().setOnLongClickListener(v -> {
+            qmItem = new QMItem();
+            qmItem.setId(model.getId());
+            qmItem.setWeek(model.getWeek());
+            qmItem.setClientName(model.getClientName());
+            qmItem.setClientPhone(model.getClientPhone());
+            qmItem.setCandidateName(model.getCandidateName());
+            qmItem.setCandidatePhone(model.getCandidatePhone());
+            qmItem.setDate(model.getDate());
+            qmItem.setTime(model.getTime());
+            qmItem.setStatus(model.getStatus());
 
-                view.deleteQm(qmItem);
-                return false;
-            }
+            view.deleteQm(qmItem);
+            return false;
         });
 
         ((QmItemHolder) holder).getCandidateName().setOnClickListener(v -> {
