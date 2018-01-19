@@ -37,7 +37,7 @@
         android:paddingEnd="8dp"
         android:weightSum="5"
         android:layout_gravity="center_vertical"
-        app:presetRadioCheckedId="@+id/qm_filter_group_all_items_button"
+        app:presetRadioCheckedId="@+id/qm_filter_group_clear_all_filters"
         android:orientation="horizontal">
 
         <bcn.alten.altenappmanagement.ui.customview.QMFilterOptionButton
@@ -69,7 +69,6 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/qm_status_color_accepted"
             app:pressedButtonColor="@color/qm_status_color_accepted"
             app:defaultColor="@color/transparent"
             android:background="@drawable/ic_thumb_up_white_36dp"/>
@@ -86,7 +85,7 @@
             android:background="@drawable/ic_highlight_off_white_36dp"/>
 
         <bcn.alten.altenappmanagement.ui.customview.QMFilterOptionButton
-            android:id="@+id/qm_filter_group_all_items_button"
+            android:id="@+id/qm_filter_group_clear_all_filters"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="2dp"

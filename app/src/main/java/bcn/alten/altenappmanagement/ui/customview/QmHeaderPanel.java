@@ -39,7 +39,7 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
     @BindView(R.id.qm_filter_group_cancelled_button)
     QMFilterOptionButton cancelledButton;
 
-    @BindView(R.id.qm_filter_group_all_items_button)
+    @BindView(R.id.qm_filter_group_clear_all_filters)
     QMFilterOptionButton allItemsButton;
 
     protected OnQmHeaderPanelClickListener qmHeaderPanelClickListener;
@@ -123,7 +123,7 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
                 Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_cancelled_button),
                         Toast.LENGTH_LONG).show();
                 break;
-            case (R.id.qm_filter_group_all_items_button) :
+            case (R.id.qm_filter_group_clear_all_filters) :
                 qmHeaderPanelClickListener.onClearFilter();
                 Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_all_items_button),
                         Toast.LENGTH_LONG).show();
