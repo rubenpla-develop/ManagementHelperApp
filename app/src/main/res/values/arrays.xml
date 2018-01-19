@@ -7,10 +7,10 @@
     </array>
 
     <array name="qm_status_values">
-        <item name="scheduled">@string/qm_dialog_radio_group_scheduled_value</item>
-        <item name="done">@string/qm_dialog_radio_group_done_value</item>
-        <item name="accepted">@string/qm_dialog_radio_group_accepted_value</item>
-        <item name="cancelled">@string/qm_dialog_radio_group_cancelled_value</item>
+        <item name="scheduled">"scheduled"</item>
+        <item name="done">"done"</item>
+        <item name="accepted">"accepted"</item>
+        <item name="cancelled">"cancelled"</item>
     </array>
 
     <array name="qm_filter_options">
