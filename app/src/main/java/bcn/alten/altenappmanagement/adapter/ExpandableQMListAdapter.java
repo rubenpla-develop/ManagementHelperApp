@@ -19,6 +19,8 @@ import bcn.alten.altenappmanagement.expandable.holderview.QmItemHolder;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 
+import static bcn.alten.altenappmanagement.utils.QMUtils.codifyStatusText;
+
 public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHolder, QmItemHolder> {
     private IQmFragmentView view;
     private QMItem qmItem;
@@ -123,16 +125,16 @@ public class ExpandableQMListAdapter extends BaseExpandableListAdapter<QmGroupHo
 
             for (QMItem qmItem : listToFilterBadges) {
                 if (context.getString(R.string.qm_dialog_radio_group_scheduled_value)
-                        .equals(qmItem.getStatus())) {
+                        .equals(codifyStatusText(qmItem.getStatus()))) {
                     incrementPlusOneScheduleBadge(badgeCounter);
                 } else if (context.getString(R.string.qm_dialog_radio_group_done_value)
-                        .equals(qmItem.getStatus())) {
+                        .equals(codifyStatusText(qmItem.getStatus()))) {
                     incrementPlusOneDoneBadge(badgeCounter);
                 } else if (context.getString(R.string.qm_dialog_radio_group_accepted_value)
-                        .equals(qmItem.getStatus())) {
+                        .equals(codifyStatusText(qmItem.getStatus()))) {
                     incrementPlusOneAcceptedBadge(badgeCounter);
                 } else if (context.getString(R.string.qm_dialog_radio_group_cancelled_value)
-                        .equals(qmItem.getStatus())) {
+                        .equals(codifyStatusText(qmItem.getStatus()))) {
                     incrementPlusOneCancelledBadge(badgeCounter);
                 }
             }
