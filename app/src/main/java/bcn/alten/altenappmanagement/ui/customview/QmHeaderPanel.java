@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import bcn.alten.altenappmanagement.R;
 import butterknife.BindView;
 
+import static bcn.alten.altenappmanagement.ui.fragment.QMFragment.CLEAR_FILTER_OPTION;
+
 /**
  * Created by alten on 11/1/18.
  */
@@ -75,6 +77,8 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
         for (int filterOption : stringList) {
             qmFilterOptions.add(filterOption);
         }
+
+        previousFilterOption = CLEAR_FILTER_OPTION;
     }
 
     @Override
@@ -90,6 +94,7 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
         doneButton.setOnClickListener(this);
         acceptedButton.setOnClickListener(this);
         cancelledButton.setOnClickListener(this);
+        allItemsButton.setOnClickListener(this);
     }
 
     @Override
@@ -125,7 +130,7 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
                 break;
             case (R.id.qm_filter_group_clear_all_filters) :
                 qmHeaderPanelClickListener.onClearFilter();
-                Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_all_items_button),
+                Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_clear_all_filters),
                         Toast.LENGTH_LONG).show();
                 break;
 

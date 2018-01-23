@@ -41,10 +41,10 @@ import static bcn.alten.altenappmanagement.ui.dialog.QMPhoneInputDialog.OnSetPho
 public class QmCreateEditActivity extends AppCompatActivity implements OnDateSetListener,
         OnTimeSetListener, OnClickListener, OnSetPhoneNumberListener, RadioGroup.OnCheckedChangeListener {
 
-    private final int STATUS_SCHEDULED = 0;
-    private final int STATUS_DONE = 1;
-    private final int STATUS_ACCEPTED = 2;
-    private final int STATUS_CANCELLED = 3;
+    public static final int STATUS_SCHEDULED = 0;
+    public static final int STATUS_DONE = 1;
+    public static final int STATUS_ACCEPTED = 2;
+    public static final int STATUS_CANCELLED = 3;
 
     public static final int QM_ACTIVITY_LAUNCH = 123;
 

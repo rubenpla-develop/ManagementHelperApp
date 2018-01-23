@@ -3,11 +3,3 @@
     android:id="@+id/filter_option_button_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
-
-<!--
-    <android.support.v7.widget.AppCompatImageView
-    android:id="@+id/qm_filter_option_button_image"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-
-</android.support.v7.widget.AppCompatImageView>-->

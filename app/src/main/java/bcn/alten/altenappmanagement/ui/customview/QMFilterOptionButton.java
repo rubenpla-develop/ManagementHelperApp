@@ -23,9 +23,6 @@ import butterknife.BindView;
 
 public class QMFilterOptionButton extends BaseView implements RadioCheckable {
 
-//    @BindView(R.id.qm_filter_option_button_image)
-//    AppCompatImageView qmFilterOptionImage;
-
     @BindView(R.id.filter_option_button_container)
     FrameLayout qmFilterOptionContainer;
 
