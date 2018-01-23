@@ -6,9 +6,9 @@ import android.content.Context;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.pojo.WeekRange;
 import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.pojo.WeekRange;
 
 public interface IQmFragmentView {
     void showQmList(List<QMCategory> list);

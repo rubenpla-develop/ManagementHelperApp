@@ -1,5 +1,7 @@
 package bcn.alten.altenappmanagement.mvp.presenter;
 
+import java.util.List;
+
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 
 public interface IQmFragmentPresenter {
@@ -9,6 +11,7 @@ public interface IQmFragmentPresenter {
     void editQm(QMItem qmToEdit);
     void deleteQm(QMItem qmToDelete);
     void createNewQm(QMItem qm);
-    void filterByStatus(int status);
+    void saveBackupList(List<QMItem> listToBackup);
+    void filterByStatus(String[] statusOptions, int status);
 }
 

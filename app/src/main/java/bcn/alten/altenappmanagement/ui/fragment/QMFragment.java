@@ -153,17 +153,27 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
 
     @Override
     public void showQmList(List<QMCategory> list) {
+        //TODO default adapter creation/update content
         expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), this);
         expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
+        
+        //  TODO adapter init & update content separated (UNSTABLE)
+        /*if (expandableRecyclerViewAdapter == null) {
+            expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), this);
+            expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
+        } else {
+            expandableRecyclerViewAdapter.updateAdapter(list);
+        }*/
     }
 
     @Override
     public void onLiveDataChanged(LiveData<List<QMItem>> list) {
-        /*List<QMCategory> list = QMDataFactory.FactoryInstance()
-                .getCurrentWeeks(QMDataFactory.createMockQMItemList());*/ //MOCKED CONTENT
-
         list.observe(this, qmItems -> {
             List<QMCategory> categoryList = FactoryInstance().getCurrentWeeks(list.getValue());
+
+            if (qmHeaderPanel.getPreviousFilterOption() == CLEAR_FILTER_OPTION) {
+                presenter.saveBackupList(qmItems);
+            }
 
             showQmList(categoryList);
         });
@@ -175,7 +185,13 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
             List<QMCategory> categoryList = FactoryInstance()
                     .getSelectedWeek(list.getValue(), weekRange);
 
-            showQmList(categoryList);
+            if (qmHeaderPanel.getPreviousFilterOption() == CLEAR_FILTER_OPTION) {
+                presenter.saveBackupList(qmItems);
+                showQmList(categoryList);
+            } else {
+                presenter.filterByStatus(qmHeaderPanel.getStatusOptions(),
+                        qmHeaderPanel.getPreviousFilterOption());
+            }
         });
     }
 
@@ -189,15 +205,6 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
         QMDeleteDialog qmDeleteDialog = new QMDeleteDialog(getActivity(),  qmToDelete, presenter);
         AlertDialog alertDialog = qmDeleteDialog.getDialog();
         alertDialog.show();
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        final String dateInmMillis = JodaTimeConverter.getInstance()
-                .parseFromDatePicker(month,dayOfMonth, year);
-        final String date = JodaTimeConverter.getInstance().getDateInStringFormat(dateInmMillis);
-
-        presenter.goToWeek(date);
     }
 
     @Override
@@ -242,11 +249,16 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
 
     private void filterByStatusBy(int filterOption) {
         qmHeaderPanel.setPreviousFilterOption(filterOption);
+        presenter.filterByStatus(qmHeaderPanel.getStatusOptions(), filterOption);
+    }
 
-        List groups = (filterOption != CLEAR_FILTER_OPTION ?
-                expandableRecyclerViewAdapter.getGroups() :null);
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        final String dateInmMillis = JodaTimeConverter.getInstance()
+                .parseFromDatePicker(month,dayOfMonth, year);
+        final String date = JodaTimeConverter.getInstance().getDateInStringFormat(dateInmMillis);
 
-        presenter.filterByStatus(groups, qmHeaderPanel.getStatusOptions(), filterOption);
+        presenter.goToWeek(date);
     }
 
     @Override
