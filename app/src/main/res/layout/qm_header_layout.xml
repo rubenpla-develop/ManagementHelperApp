@@ -50,7 +50,7 @@
             android:layout_weight="1"
             app:pressedButtonColor="@color/qm_status_color_scheduled"
             app:defaultColor="@color/transparent"
-            android:background="@drawable/ic_query_builder_white_36dp"/>
+            app:iconBackground="@drawable/ic_query_builder_white_36dp"/>
 
         <bcn.alten.altenappmanagement.ui.customview.QMFilterOptionButton
             android:id="@+id/qm_filter_group_done_button"
@@ -61,7 +61,7 @@
             android:layout_weight="1"
             app:pressedButtonColor="@color/qm_status_color_already_done"
             app:defaultColor="@color/transparent"
-            android:background="@drawable/ic_done_all_white_36dp"/>
+            app:iconBackground="@drawable/ic_done_all_white_36dp"/>
 
         <bcn.alten.altenappmanagement.ui.customview.QMFilterOptionButton
             android:id="@+id/qm_filter_group_accepted_button"
@@ -72,7 +72,7 @@
             android:layout_weight="1"
             app:pressedButtonColor="@color/qm_status_color_accepted"
             app:defaultColor="@color/transparent"
-            android:background="@drawable/ic_thumb_up_white_36dp"/>
+            app:iconBackground="@drawable/ic_thumb_up_white_36dp"/>
 
         <bcn.alten.altenappmanagement.ui.customview.QMFilterOptionButton
             android:id="@+id/qm_filter_group_cancelled_button"
@@ -83,7 +83,7 @@
             android:layout_weight="1"
             app:pressedButtonColor="@color/qm_status_color_cancelled"
             app:defaultColor="@color/transparent"
-            android:background="@drawable/ic_highlight_off_white_36dp"/>
+            app:iconBackground="@drawable/ic_highlight_off_white_36dp"/>
 
         <bcn.alten.altenappmanagement.ui.customview.QMFilterOptionButton
             android:id="@+id/qm_filter_group_clear_all_filters"
@@ -94,6 +94,6 @@
             android:layout_weight="1"
             app:pressedButtonColor="@color/background_electric_blue"
             app:defaultColor="@color/transparent"
-            android:background="@drawable/ic_view_list_white_36dp"/>
+            app:iconBackground="@drawable/ic_view_list_white_36dp"/>
     </bcn.alten.altenappmanagement.ui.customview.QMFilterGroup>
 </LinearLayout>

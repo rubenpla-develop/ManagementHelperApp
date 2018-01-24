@@ -178,7 +178,7 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
 
     @Override
     public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, WeekRange weekRange) {
-        list.observe(this, qmItems -> {
+        list.observe(this, (List<QMItem> qmItems) -> {
             List<QMCategory> categoryList = FactoryInstance()
                     .getSelectedWeek(list.getValue(), weekRange);
 

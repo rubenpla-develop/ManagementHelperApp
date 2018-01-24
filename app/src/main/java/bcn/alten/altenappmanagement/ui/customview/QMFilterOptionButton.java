@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,12 @@ public class QMFilterOptionButton extends BaseView implements RadioCheckable {
     @BindView(R.id.filter_option_button_container)
     FrameLayout qmFilterOptionContainer;
 
+    @BindView(R.id.filter_option_button_icon)
+    ImageView qmFilterOptionsIcon;
+
     private int defaultColor;
     private int pressedStateColor;
+    private int iconbackGround;
 
     // Variables
     private Drawable mInitialBackgroundDrawable;
@@ -66,8 +71,10 @@ public class QMFilterOptionButton extends BaseView implements RadioCheckable {
     @Override
     protected void setViews() {
         mInitialBackgroundDrawable = getBackground();
-
-
+        if (iconbackGround != 0)
+        {
+            qmFilterOptionsIcon.setBackgroundResource(iconbackGround);
+        }
     }
 
     //================================================================================
@@ -85,6 +92,8 @@ public class QMFilterOptionButton extends BaseView implements RadioCheckable {
             defaultColor = a.getResourceId(R.styleable.QMFilterOptionButton_defaultColor,
                     0);
             pressedStateColor = a.getResourceId(R.styleable.QMFilterOptionButton_pressedButtonColor,
+                    0);
+            iconbackGround = a.getResourceId((R.styleable.QMFilterOptionButton_iconBackground),
                     0);
 
         } finally {

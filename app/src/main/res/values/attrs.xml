@@ -7,6 +7,7 @@
 
     <declare-styleable name="QMFilterOptionButton">
         <attr name="pressedButtonColor" format="integer"/>
+        <attr name="iconBackground" format="integer"/>
         <attr name="defaultColor" format="integer"/>
     </declare-styleable>
 </resources>
