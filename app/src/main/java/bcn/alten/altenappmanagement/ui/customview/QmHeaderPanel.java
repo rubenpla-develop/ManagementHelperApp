@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -100,7 +99,6 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        //TODO DELETE TOASTS
         switch (v.getId()) {
             case (R.id.qm_header_arrow_up) :
                 qmHeaderPanelClickListener.onClickArrowUp();
@@ -110,30 +108,19 @@ public class QmHeaderPanel extends BaseView implements View.OnClickListener{
                 break;
             case (R.id.qm_filter_group_scheduled_button) :
                 qmHeaderPanelClickListener.onScheduledButton();
-                Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_scheduled_button),
-                        Toast.LENGTH_LONG).show();
                 break;
             case (R.id.qm_filter_group_done_button) :
                 qmHeaderPanelClickListener.onDoneButton();
-                Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_done_button),
-                        Toast.LENGTH_LONG).show();
                 break;
             case (R.id.qm_filter_group_accepted_button) :
                 qmHeaderPanelClickListener.onAcceptedButton();
-                Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_accepted_button),
-                        Toast.LENGTH_LONG).show();
                 break;
             case (R.id.qm_filter_group_cancelled_button) :
                 qmHeaderPanelClickListener.onCancelledButton();
-                Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_cancelled_button),
-                        Toast.LENGTH_LONG).show();
                 break;
             case (R.id.qm_filter_group_clear_all_filters) :
                 qmHeaderPanelClickListener.onClearFilter();
-                Toast.makeText(getContext(), getResources().getResourceEntryName(R.id.qm_filter_group_clear_all_filters),
-                        Toast.LENGTH_LONG).show();
                 break;
-
             default:
                 break;
         }

@@ -85,9 +85,7 @@ public class JodaTimeConverter {
     }
 
     public String getWeekNumberRangeTime(int weekNumber, int dayOfWeek, int year) {
-        //TODO  change HARDCODED year to real year
-        return LocalDate.now().withWeekOfWeekyear(weekNumber).withYear(year)
-                .withDayOfWeek(dayOfWeek).toString(DATE_PATTERN);
+        return LocalDate.now().withYear(year).withWeekOfWeekyear(weekNumber).withDayOfWeek(dayOfWeek).toString(DATE_PATTERN);
     }
 
     public int getYearFromDate(String date) {
