@@ -170,10 +170,7 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
     public void onLiveDataChanged(LiveData<List<QMItem>> list) {
         list.observe(this, qmItems -> {
             List<QMCategory> categoryList = FactoryInstance().getCurrentWeeks(list.getValue());
-
-            if (qmHeaderPanel.getPreviousFilterOption() == CLEAR_FILTER_OPTION) {
-                presenter.saveBackupList(qmItems);
-            }
+            presenter.saveBackupList(qmItems);
 
             showQmList(categoryList);
         });
@@ -185,8 +182,9 @@ public class QMFragment extends Fragment implements IQmFragmentView, DatePickerD
             List<QMCategory> categoryList = FactoryInstance()
                     .getSelectedWeek(list.getValue(), weekRange);
 
+            presenter.saveBackupList(qmItems);
+
             if (qmHeaderPanel.getPreviousFilterOption() == CLEAR_FILTER_OPTION) {
-                presenter.saveBackupList(qmItems);
                 showQmList(categoryList);
             } else {
                 presenter.filterByStatus(qmHeaderPanel.getStatusOptions(),
