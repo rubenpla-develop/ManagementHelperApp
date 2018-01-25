@@ -48,7 +48,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            app:pressedButtonColor="@color/qm_status_color_scheduled"
+            app:pressedButtonColor="@drawable/qm_filter_scheduled_option_background"
             app:defaultColor="@color/transparent"
             app:iconBackground="@drawable/ic_query_builder_white_36dp"/>
 
@@ -59,7 +59,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            app:pressedButtonColor="@color/qm_status_color_already_done"
+            app:pressedButtonColor="@drawable/qm_filter_done_option_background"
             app:defaultColor="@color/transparent"
             app:iconBackground="@drawable/ic_done_all_white_36dp"/>
 
@@ -70,7 +70,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            app:pressedButtonColor="@color/qm_status_color_accepted"
+            app:pressedButtonColor="@drawable/qm_filter_accepted_option_background"
             app:defaultColor="@color/transparent"
             app:iconBackground="@drawable/ic_thumb_up_white_36dp"/>
 
@@ -81,7 +81,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            app:pressedButtonColor="@color/qm_status_color_cancelled"
+            app:pressedButtonColor="@drawable/qm_filter_cancelled_option_background"
             app:defaultColor="@color/transparent"
             app:iconBackground="@drawable/ic_highlight_off_white_36dp"/>
 
@@ -92,7 +92,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            app:pressedButtonColor="@color/background_electric_blue"
+            app:pressedButtonColor="@drawable/qm_filter_all_option_background"
             app:defaultColor="@color/transparent"
             app:iconBackground="@drawable/ic_view_list_white_36dp"/>
     </bcn.alten.altenappmanagement.ui.customview.QMFilterGroup>

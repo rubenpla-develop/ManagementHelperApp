@@ -9,8 +9,8 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -25,14 +25,14 @@ import butterknife.BindView;
 public class QMFilterOptionButton extends BaseView implements RadioCheckable {
 
     @BindView(R.id.filter_option_button_container)
-    FrameLayout qmFilterOptionContainer;
+    LinearLayout qmFilterOptionContainer;
 
     @BindView(R.id.filter_option_button_icon)
     ImageView qmFilterOptionsIcon;
 
     private int defaultColor;
     private int pressedStateColor;
-    private int iconbackGround;
+    private int iconBackground;
 
     // Variables
     private Drawable mInitialBackgroundDrawable;
@@ -71,9 +71,9 @@ public class QMFilterOptionButton extends BaseView implements RadioCheckable {
     @Override
     protected void setViews() {
         mInitialBackgroundDrawable = getBackground();
-        if (iconbackGround != 0)
+        if (iconBackground != 0)
         {
-            qmFilterOptionsIcon.setBackgroundResource(iconbackGround);
+            qmFilterOptionsIcon.setBackgroundResource(iconBackground);
         }
     }
 
@@ -93,7 +93,7 @@ public class QMFilterOptionButton extends BaseView implements RadioCheckable {
                     0);
             pressedStateColor = a.getResourceId(R.styleable.QMFilterOptionButton_pressedButtonColor,
                     0);
-            iconbackGround = a.getResourceId((R.styleable.QMFilterOptionButton_iconBackground),
+            iconBackground = a.getResourceId((R.styleable.QMFilterOptionButton_iconBackground),
                     0);
 
         } finally {
@@ -143,13 +143,11 @@ public class QMFilterOptionButton extends BaseView implements RadioCheckable {
     //================================================================================
 
     public void setCheckedState() {
-        qmFilterOptionContainer.setBackgroundColor(pressedStateColor);
-        //ViewCompat.setBackgroundTintList(qmFilterOptionContainer, ColorStateList.valueOf(pressedStateColor));
+        qmFilterOptionContainer.setBackgroundResource(pressedStateColor);
     }
 
     public void setNormalState() {
-        //ViewCompat.setBackgroundTintList(qmFilterOptionContainer, ColorStateList.valueOf(pressedStateColor));
-        qmFilterOptionContainer.setBackgroundDrawable(mInitialBackgroundDrawable);
+        qmFilterOptionContainer.setBackground(mInitialBackgroundDrawable);
     }
 
     //================================================================================
