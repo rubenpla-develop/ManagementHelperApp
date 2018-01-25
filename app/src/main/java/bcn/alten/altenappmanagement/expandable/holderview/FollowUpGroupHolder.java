@@ -42,6 +42,10 @@ public class FollowUpGroupHolder extends BaseGroupHolder {
             badgeView.setVisibility(View.VISIBLE);
             badgeNumber.setText(String.valueOf(group.getItemCount()));
             arrow.setVisibility(View.VISIBLE);
+        } else {
+            if (badgeView.getVisibility() == View.VISIBLE) {
+                badgeView.setVisibility(View.INVISIBLE);
+            }
         }
     }
 

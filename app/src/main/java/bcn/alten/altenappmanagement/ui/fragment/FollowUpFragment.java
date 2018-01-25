@@ -1,6 +1,5 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
-import android.animation.Animator;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.os.Bundle;
@@ -92,24 +91,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
                     .scaleY(1)
                     .setInterpolator(interpolador)
                     .setDuration(400)
-                    .setStartDelay(2000)
-                    .setListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-                        }
-                    });
+                    .setStartDelay(2000);
         }
 
         return view;
@@ -182,7 +164,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof FollowUpItemHolder) {
-            FollowUp followUp = ((FollowUp)expandableRecyclerViewAdapter.getItem(position));
+            FollowUp followUp = expandableRecyclerViewAdapter.getItem(position);
 
             presenter.swipeFollowUp(followUp, getString(R.string.follow_up_dialog_radio_group_done_value));
         }
