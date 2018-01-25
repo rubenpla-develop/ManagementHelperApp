@@ -25,6 +25,8 @@ public class JodaTimeConverter {
 
     private static JodaTimeConverter instance = null;
 
+    private JodaTimeConverter() {}
+
     public static JodaTimeConverter getInstance() {
         if (instance == null) {
             instance = new JodaTimeConverter();
@@ -33,6 +35,9 @@ public class JodaTimeConverter {
         return instance;
     }
 
+    /*
+     * Generic Date operations
+     */
     public String getCurrenDate() {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -79,6 +84,26 @@ public class JodaTimeConverter {
         return isValidDate;
     }
 
+    public String getWeekNumberRangeTime(int weekNumber, int dayOfWeek, int year) {
+        return LocalDate.now().withYear(year).withWeekOfWeekyear(weekNumber).withDayOfWeek(dayOfWeek).toString(DATE_PATTERN);
+    }
+
+    public int getYearFromDate(String date) {
+        String dateInMillis = parseDateFromStringPatternToMillis(date);
+
+        LocalDate localDate = new LocalDate(Long.valueOf(dateInMillis));
+
+        return localDate.getYear();
+    }
+
+    public int getYearFromMillis(String dateInMillis) {
+        return new LocalDate(Long.valueOf(dateInMillis)).getYear();
+    }
+
+    public int getMaximumWeeksValueOfYear(int year) {
+        return new DateTime().withYear(year).weekOfWeekyear().getMaximumValue();
+    }
+
     public String parseFromDatePicker(final int month, final int day, final int year) {
         LocalDate dateTime = new LocalDate(year, month + 1, day);
         DateTime dt = dateTime.toDateTimeAtCurrentTime();
@@ -91,12 +116,6 @@ public class JodaTimeConverter {
         LocalTime localTime = new LocalTime(hour, minutes);
 
         return localTime.toString("HH:mm");
-    }
-
-    public String parseTimeFromStringPatternToMillis(String date) {
-
-
-        return null;
     }
 
     public Long parseDateFromMillisStringFormat(final String millis) {
@@ -143,6 +162,9 @@ public class JodaTimeConverter {
         }
     }
 
+    /*
+     * FollowUp Operations
+     */
     public int getMonthsOfDifferenceWithCurrentDate(final String millis) {
         int difference = 0;
 
@@ -159,6 +181,9 @@ public class JodaTimeConverter {
         }
     }
 
+    /*
+     * QM Operations
+     */
     public int getCurrentWeekOfYear() {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -192,5 +217,9 @@ public class JodaTimeConverter {
         week = dt.getWeekOfWeekyear();
 
         return week;
+    }
+
+    public int getCurrentYear() {
+        return LocalDate.now().getYear();
     }
 }

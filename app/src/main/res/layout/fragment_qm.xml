@@ -5,62 +5,11 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.QMFragment">
-    
-    <LinearLayout
-        android:id="@+id/qm_header_container"
+
+    <bcn.alten.altenappmanagement.ui.customview.QmHeaderPanel
+        android:id="@+id/qm_header_panel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_qm_header_arrow_upward_black_24dp"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_qm_header_arrow_downward_black_24dp"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_qm_header_schedule_black_24dp"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_qm_header_done_all_black_24dp"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_qm_header_thumb_up_black_24dp"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_qm_header_cancel_black_24dp"/>
-    </LinearLayout>
+        android:layout_height="wrap_content"/>
 
     <View
         android:id="@+id/parent_item_divider"

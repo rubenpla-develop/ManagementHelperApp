@@ -9,6 +9,7 @@
     <color name="colorAccent">#F3CD70</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="transparent">#00ffffff</color>
 
     <color name="tab_disable">#979797</color>
     <color name="tab_enable">#FFFFFF</color>
@@ -30,6 +31,12 @@
     <color name="followup_status_color_scheduled">#F3CD70</color>
     <color name="followup_status_color_cancelled">#fa6e18</color>
     <color name="followup_swipe_view_background">#3ADF00</color>
+
+    <color name="qm_status_color_already_done">#58ACFA</color>
+    <color name="qm_status_color_scheduled">#F3CD70</color>
+    <color name="qm_status_color_cancelled">#F00</color>
+    <color name="qm_status_color_accepted">#3ADF00</color>
+    <color name="qm_status_color_default_color">#979797</color>
 
     <!-- Array of ColorStateList -->
     <array name="colors">

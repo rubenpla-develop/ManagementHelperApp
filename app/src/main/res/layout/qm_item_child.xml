@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Deustche Bank"
         android:layout_marginBottom="@dimen/followup_item_vertical_margin"
         android:maxLength="30"
         android:textSize="@dimen/followup_child_item_consultor_name"
@@ -74,7 +73,6 @@
         android:id="@+id/qm_candidate_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ruben Pla Ferrero"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_below="@id/consulter_name"
@@ -101,11 +99,6 @@
             android:id="@+id/qm_status_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Programada"
             android:textColor="@color/followup_status_color_scheduled" />
-
-
     </LinearLayout>
-
-
 </RelativeLayout>

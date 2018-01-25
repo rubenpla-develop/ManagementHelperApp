@@ -56,9 +56,10 @@
 
 
     <!-- QM CATEGORIES-->
-    <string name="qm_category_next_week_title">Próxima semana - %s a %s</string>
-    <string name="qm_category_current_week_title">Semana en curso</string>
-    <string name="qm_category_previous_week_title">Semana anterior - %s a %s</string>
+    <string name="qm_category_next_week_title">Próxima semana\n%s a %s</string>
+    <string name="qm_category_current_week_title">Semana en curso\n%s a %s</string>
+    <string name="qm_category_previous_week_title">Semana anterior\n%s a %s</string>
+    <string name="qm_category_week_generic_title">Semana\n%s a %s</string>
 
     <!-- QM fab speed dial -->
     <string name="qm_speed_dial_menu_add_qm">Añadir QM</string>

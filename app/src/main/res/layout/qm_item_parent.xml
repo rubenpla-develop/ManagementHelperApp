@@ -23,7 +23,9 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/followup_parent_item_consultor_name"
         android:textStyle="bold|italic"
+        android:layout_alignParentTop="true"
         android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="@dimen/text_field_boxes_margin_top"
         android:layout_toEndOf="@id/qm_group_holder_category_icon"
         android:layout_centerVertical="true"/>
 
@@ -31,7 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/qm_group_holder_category_icon"
-        android:layout_below="@id/qm_group_holder_qm_category_title"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="2dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -127,7 +130,6 @@
         android:id="@+id/qm_group_holder_list_item_genre_arrow"
         android:layout_width="@dimen/followup_item_parent_arrow_width"
         android:layout_height="@dimen/followup_item_parent_arrow_height"
-        android:layout_gravity="center_vertical|end"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/followup_item_parent_arrow_margin"
         android:layout_alignParentEnd="true"

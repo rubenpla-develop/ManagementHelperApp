@@ -1,19 +1,19 @@
 package bcn.alten.altenappmanagement.ui.fragment;
 
+import android.app.DatePickerDialog;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.DatePicker;
 
 import java.util.List;
 
@@ -24,20 +24,36 @@ import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
+import bcn.alten.altenappmanagement.pojo.WeekRange;
+import bcn.alten.altenappmanagement.ui.customview.QMFilterGroup;
+import bcn.alten.altenappmanagement.ui.customview.QmHeaderPanel;
+import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.QMDeleteDialog;
-import bcn.alten.altenappmanagement.utils.QMDataFactory;
+import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 
-public class QMFragment extends Fragment implements IQmFragmentView {
+import static bcn.alten.altenappmanagement.utils.QMDataFactory.FactoryInstance;
+import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_NEXT_WEEK_ACTION;
+import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
+
+public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener,
+        QmHeaderPanel.OnQmHeaderPanelClickListener, QMFilterGroup.OnCheckedChangeListener{
 
     private final String TAG = QMFragment.class.getSimpleName();
+
     public static final String ADD_QM_ACTION = "ADD_QM_ACTION";
     public static final String EDIT_QM_ACTION = "EDIT_QM_ACTION";
 
     public static final String QM_ITEM_PARAM = "QM_ITEM_PARAM";
     public static final String QM_ACTIONMODE_PARAM = "QM_ACTIONMODE_PARAM";
+    
+    public static final int SCHEDULED_FILTER_OPTION = 0;
+    public static final int DONE_FILTER_OPTION = 1;
+    public static final int ACCEPTED_FILTER_OPTION = 2;
+    public static final int CANCELLED_FILTER_OPTION = 3;
+    public static final int CLEAR_FILTER_OPTION = 4;
 
     @BindView(R.id.qm_recyclerView)
     RecyclerView expandableRecyclerView;
@@ -45,8 +61,8 @@ public class QMFragment extends Fragment implements IQmFragmentView {
     @BindView(R.id.qm_fab)
     FabSpeedDial qmFabSpeedDialButton;
 
-    @BindView(R.id.qm_header_container)
-    LinearLayout headerContainer;
+    @BindView(R.id.qm_header_panel)
+    QmHeaderPanel  qmHeaderPanel;
 
     private ExpandableQMListAdapter expandableRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -66,11 +82,15 @@ public class QMFragment extends Fragment implements IQmFragmentView {
                 false);
         expandableRecyclerView.setLayoutManager(layoutManager);
         expandableRecyclerView.setHasFixedSize(true);
+        qmHeaderPanel.setOnQMHeaderPanelListener(this);
 
         qmFabSpeedDialButton.addOnMenuItemClickListener((miniFab, label, itemId) -> {
 
             switch (itemId) {
                 case R.id.go_to_week_dial :
+                    AltenDatePickerDialog datePickerDialog = new AltenDatePickerDialog(getActivity(),
+                            this);
+                    datePickerDialog.showDatePicker();
                     break;
                 case R.id.add_qm_dial :
                     launchQmActivityForResult(ADD_QM_ACTION, null);
@@ -80,6 +100,7 @@ public class QMFragment extends Fragment implements IQmFragmentView {
                     break;
             }
         });
+
         return view;
     }
 
@@ -132,22 +153,43 @@ public class QMFragment extends Fragment implements IQmFragmentView {
 
     @Override
     public void showQmList(List<QMCategory> list) {
+        //TODO default adapter creation/update content
         expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), this);
         expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
-                OrientationHelper.HORIZONTAL);
-        expandableRecyclerView.addItemDecoration(dividerItemDecoration);
+        
+        //  TODO adapter init & update content separated (UNSTABLE)
+        /*if (expandableRecyclerViewAdapter == null) {
+            expandableRecyclerViewAdapter = new ExpandableQMListAdapter(list, getActivity(), this);
+            expandableRecyclerView.setAdapter(expandableRecyclerViewAdapter);
+        } else {
+            expandableRecyclerViewAdapter.updateAdapter(list);
+        }*/
     }
 
     @Override
     public void onLiveDataChanged(LiveData<List<QMItem>> list) {
-        /*List<QMCategory> list = QMDataFactory.getInstance()
-                .getCurrentWeeks(QMDataFactory.createMockQMItemList());*/ //MOCKED CONTENT
-
         list.observe(this, qmItems -> {
-            List<QMCategory> categoryList = QMDataFactory.getInstance().getCurrentWeeks(list.getValue());
+            List<QMCategory> categoryList = FactoryInstance().getCurrentWeeks(list.getValue());
+            presenter.saveBackupList(qmItems);
 
             showQmList(categoryList);
+        });
+    }
+
+    @Override
+    public void onLiveDataGoToWeek(LiveData<List<QMItem>> list, WeekRange weekRange) {
+        list.observe(this, (List<QMItem> qmItems) -> {
+            List<QMCategory> categoryList = FactoryInstance()
+                    .getSelectedWeek(list.getValue(), weekRange);
+
+            presenter.saveBackupList(qmItems);
+
+            if (qmHeaderPanel.getPreviousFilterOption() == CLEAR_FILTER_OPTION) {
+                showQmList(categoryList);
+            } else {
+                presenter.filterByStatus(qmHeaderPanel.getStatusOptions(),
+                        qmHeaderPanel.getPreviousFilterOption());
+            }
         });
     }
 
@@ -164,7 +206,63 @@ public class QMFragment extends Fragment implements IQmFragmentView {
     }
 
     @Override
-    public void showAddQmDialog() {
-        launchQmActivityForResult(ADD_QM_ACTION, null);
+    public void onClickArrowUp() {
+        presenter.showQmListWithActionParam(QM_HEADER_ARROW_NEXT_WEEK_ACTION);
+    }
+
+    @Override
+    public void onClickArrowDown() {
+        presenter.showQmListWithActionParam(QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION);
+    }
+
+    @Override
+    public void onScheduledButton() {
+        int filterOption = qmHeaderPanel.getFilterOptions().get(SCHEDULED_FILTER_OPTION);
+        filterByStatusBy(filterOption);
+    }
+
+    @Override
+    public void onDoneButton() {
+        int filterOption = qmHeaderPanel.getFilterOptions().get(DONE_FILTER_OPTION);
+        filterByStatusBy(filterOption);
+    }
+
+    @Override
+    public void onAcceptedButton() {
+        int filterOption = qmHeaderPanel.getFilterOptions().get(ACCEPTED_FILTER_OPTION);
+        filterByStatusBy(filterOption);
+    }
+
+    @Override
+    public void onCancelledButton() {
+        int filterOption = qmHeaderPanel.getFilterOptions().get(CANCELLED_FILTER_OPTION);
+        filterByStatusBy(filterOption);
+    }
+
+    @Override
+    public void onClearFilter() {
+        int filterOption = qmHeaderPanel.getFilterOptions().get(CLEAR_FILTER_OPTION);
+        filterByStatusBy(filterOption);
+    }
+
+    private void filterByStatusBy(int filterOption) {
+        qmHeaderPanel.setPreviousFilterOption(filterOption);
+        presenter.filterByStatus(qmHeaderPanel.getStatusOptions(), filterOption);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        final String dateInmMillis = JodaTimeConverter.getInstance()
+                .parseFromDatePicker(month,dayOfMonth, year);
+        final String date = JodaTimeConverter.getInstance().getDateInStringFormat(dateInmMillis);
+
+        presenter.goToWeek(date);
+    }
+
+    @Override
+    public void onCheckedChanged(View radioGroup, View radioButton, boolean isChecked, int checkedId) {
+        Log.i(TAG, "RadioGroup: " + radioGroup + "\nRadioButton : " + radioButton
+                + "\n isChecked : " + isChecked + "\nchekedId : "
+                + getResources().getResourceTypeName(checkedId));
     }
 }

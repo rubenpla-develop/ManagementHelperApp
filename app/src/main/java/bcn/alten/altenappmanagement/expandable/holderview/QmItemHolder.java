@@ -8,6 +8,8 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
+import static bcn.alten.altenappmanagement.utils.QMUtils.codifyStatusText;
+
 public class QmItemHolder extends BaseChildHolder {
 
     private RelativeLayout containerView;
@@ -38,7 +40,7 @@ public class QmItemHolder extends BaseChildHolder {
         date.setText(JodaTimeConverter.getInstance()
                 .getDateInStringFormat(((QMItem) object).getDate()));
         time.setText(((QMItem) object).getTime());
-        status.setText(((QMItem) object).getStatus());
+        status.setText(codifyStatusText(((QMItem) object).getStatus()));
     }
 
     public RelativeLayout getView() {

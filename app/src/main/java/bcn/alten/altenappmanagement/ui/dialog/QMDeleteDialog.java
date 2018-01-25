@@ -12,6 +12,8 @@ import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
+import static bcn.alten.altenappmanagement.utils.QMUtils.codifyStatusText;
+
 public class QMDeleteDialog {
 
     private Context context;
@@ -51,9 +53,8 @@ public class QMDeleteDialog {
         if (qmToDelete.getStatus().equals("")) {
             statusTextView.append(context.getString(R.string.qm_dialog_no_status));
         } else {
-            statusTextView.append(qmToDelete.getStatus());
+            statusTextView.append(codifyStatusText(qmToDelete.getStatus()));
         }
-
 
         qmInfoContainer.setVisibility(View.GONE);
 
