@@ -21,11 +21,28 @@ allprojects {
         maven { url 'https://jitpack.io' }
         maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
     }
-    project.ext {
+
+   project.ext {
+        //Build tools & API targets
+        androidSupportVersion = "27.0.2"
         altenBuildToolsVersion="26.0.2"
         altenMinSdkVersion=18
         altenTargetSdkVersion=26
         altenCompileSdkVersion=26
+
+        //ANDROID ARCHITECTURE COMPONENTS
+        AACVersion = "1.0.0"
+        AAC_LifecycleVersion = "1.1.0"
+
+        //GSON
+        gsonVersion = "2.8.1"
+
+        //Butterknife
+        butterKnifeVersion = "8.8.1"
+        butterKnifeCompilerVersion = "8.8.1"
+
+        //Joda-Time
+        jodaTimeVersion = "2.9.9"
     }
 }
 
