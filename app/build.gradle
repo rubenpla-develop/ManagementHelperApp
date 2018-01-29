@@ -7,8 +7,8 @@ android {
         applicationId "bcn.alten.altenappmanagement"
         minSdkVersion project.ext.altenMinSdkVersion
         targetSdkVersion project.ext.altenTargetSdkVersion
-        versionCode 2
-        versionName "0.4.4"
+        versionCode 3
+        versionName "0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
