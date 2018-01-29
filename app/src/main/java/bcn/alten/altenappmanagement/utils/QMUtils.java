@@ -4,11 +4,11 @@ import android.content.Context;
 
 import bcn.alten.altenappmanagement.R;
 
-import static bcn.alten.altenappmanagement.QmCreateEditActivity.STATUS_ACCEPTED;
-import static bcn.alten.altenappmanagement.QmCreateEditActivity.STATUS_CANCELLED;
-import static bcn.alten.altenappmanagement.QmCreateEditActivity.STATUS_DONE;
-import static bcn.alten.altenappmanagement.QmCreateEditActivity.STATUS_SCHEDULED;
-import static bcn.alten.altenappmanagement.application.AltenApplication.getInstance;
+import static bcn.alten.altenappmanagement.ui.activity.QmCreateEditActivity.STATUS_ACCEPTED;
+import static bcn.alten.altenappmanagement.ui.activity.QmCreateEditActivity.STATUS_CANCELLED;
+import static bcn.alten.altenappmanagement.ui.activity.QmCreateEditActivity.STATUS_DONE;
+import static bcn.alten.altenappmanagement.ui.activity.QmCreateEditActivity.STATUS_SCHEDULED;
+import static bcn.alten.altenappmanagement.AltenApplication.getInstance;
 
 /**
  * Created by alten on 19/1/18.

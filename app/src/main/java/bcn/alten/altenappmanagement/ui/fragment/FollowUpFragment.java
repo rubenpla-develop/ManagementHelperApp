@@ -21,16 +21,16 @@ import android.view.animation.Interpolator;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.adapter.ExpandableFollowUpListAdapter;
-import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
-import bcn.alten.altenappmanagement.expandable.holderview.FollowUpItemHolder;
+import bcn.alten.altenappmanagement.ui.adapter.ExpandableFollowUpListAdapter;
+import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.FollowUpCategory;
+import bcn.alten.altenappmanagement.ui.adapter.holder.FollowUpItemHolder;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import bcn.alten.altenappmanagement.ui.customview.RecyclerItemTouchHelper;
 import bcn.alten.altenappmanagement.ui.dialog.FollowUpDeleteDialog;
 import bcn.alten.altenappmanagement.ui.dialog.FollowUpDialog;
-import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
+import bcn.alten.altenappmanagement.utils.factory.CategoryDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -105,7 +105,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     }
 
     @Override
-    public void ShowFollowUpList(List<Category> list) {
+    public void ShowFollowUpList(List<FollowUpCategory> list) {
         expandableRecyclerViewAdapter = new ExpandableFollowUpListAdapter(list, getActivity(),
                 this);
 
@@ -122,10 +122,10 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     @Override
     public void onLiveDataChanged(final LiveData< List<FollowUp>> list) {
         list.observe(this, followUpList -> {
-            List<Category> categoryList = CategoryDataFactory.getInstance()
+            List<FollowUpCategory> followUpCategoryList = CategoryDataFactory.getInstance()
                     .getDataFilteredByCategory(list.getValue());
 
-            ShowFollowUpList(categoryList);
+            ShowFollowUpList(followUpCategoryList);
         });
     }
 

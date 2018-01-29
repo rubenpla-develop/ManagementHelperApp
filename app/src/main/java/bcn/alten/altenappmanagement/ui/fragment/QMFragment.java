@@ -17,14 +17,14 @@ import android.widget.DatePicker;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.QmCreateEditActivity;
+import bcn.alten.altenappmanagement.ui.activity.QmCreateEditActivity;
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.adapter.ExpandableQMListAdapter;
-import bcn.alten.altenappmanagement.expandable.groupmodel.QMCategory;
+import bcn.alten.altenappmanagement.ui.adapter.ExpandableQMListAdapter;
+import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
-import bcn.alten.altenappmanagement.pojo.WeekRange;
+import bcn.alten.altenappmanagement.mvp.model.WeekRange;
 import bcn.alten.altenappmanagement.ui.customview.QMFilterGroup;
 import bcn.alten.altenappmanagement.ui.customview.QmHeaderPanel;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
@@ -34,9 +34,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
 
-import static bcn.alten.altenappmanagement.utils.QMDataFactory.FactoryInstance;
-import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_NEXT_WEEK_ACTION;
-import static bcn.alten.altenappmanagement.utils.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
+import static bcn.alten.altenappmanagement.utils.factory.QMDataFactory.FactoryInstance;
+import static bcn.alten.altenappmanagement.utils.factory.QMDataFactory.QM_HEADER_ARROW_NEXT_WEEK_ACTION;
+import static bcn.alten.altenappmanagement.utils.factory.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
 
 public class QMFragment extends Fragment implements IQmFragmentView, DatePickerDialog.OnDateSetListener,
         QmHeaderPanel.OnQmHeaderPanelClickListener, QMFilterGroup.OnCheckedChangeListener{

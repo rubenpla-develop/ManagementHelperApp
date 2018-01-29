@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import bcn.alten.altenappmanagement.expandable.holderview.FollowUpItemHolder;
+import bcn.alten.altenappmanagement.ui.adapter.holder.FollowUpItemHolder;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private RecyclerItemTouchHelperListener listener;
