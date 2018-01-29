@@ -42,6 +42,7 @@ android {
         debug {
             buildConfigField 'boolean', 'HOME_SCREEN_MOCK_CONTENT_BUTTONS', 'true'
             applicationIdSuffix ".debug"
+            versionNameSuffix '_dev'
             signingConfig signingConfigs.development
             //  If it reaches 65k methods, you can uncomment these lines.
             //  Proguard's configuration for debug versions is proguard-android-debug.txt. No
@@ -55,7 +56,7 @@ android {
             applicationIdSuffix ""
             buildConfigField 'boolean', 'HOME_SCREEN_MOCK_CONTENT_BUTTONS', 'false'
             signingConfig signingConfigs.development
-
+            versionNameSuffix '_release'
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
@@ -73,7 +74,7 @@ android {
         implementation "com.android.support:design:${androidSupportVersion}"
         implementation "com.android.support:palette-v7:${androidSupportVersion}"
         implementation "com.android.support:recyclerview-v7:${androidSupportVersion}"
-        implementation "com.android.support:cardview-v7:${androidSupportVersion}"
+        //implementation "com.android.support:cardview-v7:${androidSupportVersion}"
         implementation "com.android.support:support-v4:${androidSupportVersion}"
         implementation "com.android.support:design:${androidSupportVersion}"
         testImplementation 'junit:junit:4.12'
