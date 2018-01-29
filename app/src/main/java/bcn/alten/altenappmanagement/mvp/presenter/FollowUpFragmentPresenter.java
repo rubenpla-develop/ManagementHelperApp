@@ -4,10 +4,10 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.database.AltenDatabase;
-import bcn.alten.altenappmanagement.database.ops.followup.CreateNewFollowUpWrapper;
-import bcn.alten.altenappmanagement.database.ops.followup.DeleteFollowUpWrapper;
-import bcn.alten.altenappmanagement.database.ops.followup.EditFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.db.AltenDatabase;
+import bcn.alten.altenappmanagement.data.ops.followup.CreateNewFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.ops.followup.DeleteFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.ops.followup.EditFollowUpWrapper;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
@@ -31,7 +31,7 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
         view.onLiveDataChanged(categoryList);
 
         //TODO mocking content
-        /*List<Category> categoryList = CategoryDataFactory.createMockFilteredCategories();
+        /*List<FollowUpCategory> categoryList = CategoryDataFactory.createMockFilteredCategories();
         view.ShowFollowUpList(categoryList);*/
     }
 

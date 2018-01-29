@@ -5,12 +5,12 @@ import android.content.Context;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.expandable.groupmodel.Category;
+import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.FollowUpCategory;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 
 public interface IFollowUpFragmentView {
 
-    void ShowFollowUpList(List<Category> list);
+    void ShowFollowUpList(List<FollowUpCategory> list);
     void onLiveDataChanged(LiveData<List<FollowUp>> list);
     void editFollowUp(FollowUp followUp);
     void deleteFollowUp(FollowUp followUp);

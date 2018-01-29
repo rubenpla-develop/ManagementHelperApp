@@ -16,11 +16,11 @@ import java.util.List;
 
 import bcn.alten.altenappmanagement.BuildConfig;
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.database.AltenDatabase;
+import bcn.alten.altenappmanagement.data.db.AltenDatabase;
 import bcn.alten.altenappmanagement.mvp.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.model.QMItem;
-import bcn.alten.altenappmanagement.utils.CategoryDataFactory;
-import bcn.alten.altenappmanagement.utils.QMDataFactory;
+import bcn.alten.altenappmanagement.utils.factory.CategoryDataFactory;
+import bcn.alten.altenappmanagement.utils.factory.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
