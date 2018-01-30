@@ -13,7 +13,7 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.AltenApplication;
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.model.QMItem;
-import bcn.alten.altenappmanagement.model.WeekRange;
+import bcn.alten.altenappmanagement.model.pojo.WeekRange;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 import static bcn.alten.altenappmanagement.utils.controller.QMCalendarController.QMCalendarInstance;

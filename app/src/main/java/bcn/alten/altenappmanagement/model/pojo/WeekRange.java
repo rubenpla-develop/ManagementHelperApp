@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.model;
+package bcn.alten.altenappmanagement.model.pojo;
 
 /**
  * Created by alten on 9/1/18.

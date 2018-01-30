@@ -24,7 +24,7 @@ import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.presenter.QmFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
-import bcn.alten.altenappmanagement.model.WeekRange;
+import bcn.alten.altenappmanagement.model.pojo.WeekRange;
 import bcn.alten.altenappmanagement.ui.customview.QMFilterGroup;
 import bcn.alten.altenappmanagement.ui.customview.QmHeaderPanel;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
