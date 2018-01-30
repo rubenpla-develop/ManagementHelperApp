@@ -1,17 +1,17 @@
-package bcn.alten.altenappmanagement.data.ops.qm;
+package bcn.alten.altenappmanagement.data.db.ops.followup;
 
 import android.os.AsyncTask;
 
 import bcn.alten.altenappmanagement.AltenApplication;
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.model.FollowUp;
 
-public class CreateNewQmAsyncTask extends AsyncTask<QMItem, Void , Void> {
-    private QMItem qmItem;
+public class EditFollowUpAsyncTask extends AsyncTask<FollowUp, Void, Void> {
+    private FollowUp followUp;
 
-    public CreateNewQmAsyncTask(QMItem qmItem) {
+    public EditFollowUpAsyncTask(FollowUp followUp) {
         super();
-        this.qmItem = qmItem;
+        this.followUp = followUp;
     }
 
     @Override
@@ -20,11 +20,11 @@ public class CreateNewQmAsyncTask extends AsyncTask<QMItem, Void , Void> {
     }
 
     @Override
-    protected Void doInBackground(QMItem... params) {
+    protected Void doInBackground(FollowUp... params) {
         AltenDatabase.getDatabase(AltenApplication.getInstance()
                 .getApplicationContext())
                 .daoAccess()
-                .createNewQM(qmItem);
+                .updateFollowUp(followUp);
 
         return null;
     }

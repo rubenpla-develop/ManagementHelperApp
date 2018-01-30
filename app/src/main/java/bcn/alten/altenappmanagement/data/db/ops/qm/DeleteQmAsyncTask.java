@@ -1,10 +1,10 @@
-package bcn.alten.altenappmanagement.data.ops.qm;
+package bcn.alten.altenappmanagement.data.db.ops.qm;
 
 import android.os.AsyncTask;
 
 import bcn.alten.altenappmanagement.AltenApplication;
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.model.QMItem;
 
 public class DeleteQmAsyncTask extends AsyncTask<QMItem, Void, Void> {
 

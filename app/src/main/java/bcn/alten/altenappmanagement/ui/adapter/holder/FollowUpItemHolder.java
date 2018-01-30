@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.ui.adapter.expandable.base.BaseChildHolder;
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class FollowUpItemHolder extends BaseChildHolder {

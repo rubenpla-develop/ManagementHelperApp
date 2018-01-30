@@ -6,7 +6,7 @@ import android.content.Context;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.FollowUpCategory;
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.model.FollowUp;
 
 public interface IFollowUpFragmentView {
 

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.AltenApplication;
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.utils.controller.FollowUpErrorController;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;

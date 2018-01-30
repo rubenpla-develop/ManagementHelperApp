@@ -1,7 +1,7 @@
-package bcn.alten.altenappmanagement.data.ops.qm;
+package bcn.alten.altenappmanagement.data.db.ops.qm;
 
-import bcn.alten.altenappmanagement.data.ops.followup.CreateNewFollowUpWrapper;
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.data.db.ops.followup.CreateNewFollowUpWrapper;
+import bcn.alten.altenappmanagement.model.QMItem;
 
 public class CreateNewQmWrapper {
 

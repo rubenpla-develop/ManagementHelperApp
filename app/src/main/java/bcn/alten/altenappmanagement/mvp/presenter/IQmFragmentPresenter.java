@@ -2,7 +2,7 @@ package bcn.alten.altenappmanagement.mvp.presenter;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.model.QMItem;
 
 public interface IQmFragmentPresenter {
     void showQmList();

@@ -5,7 +5,7 @@ import android.support.v7.util.DiffUtil;
 
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.model.QMItem;
 
 /**
  * Created by alten on 18/1/18.

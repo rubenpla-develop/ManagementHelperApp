@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.mvp.model;
+package bcn.alten.altenappmanagement.model;
 
 /**
  * Created by alten on 9/1/18.

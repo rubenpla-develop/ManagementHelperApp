@@ -14,7 +14,7 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.FollowUpCategory;
 import bcn.alten.altenappmanagement.ui.adapter.holder.FollowUpGroupHolder;
 import bcn.alten.altenappmanagement.ui.adapter.holder.FollowUpItemHolder;
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 
 public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter<FollowUpGroupHolder,

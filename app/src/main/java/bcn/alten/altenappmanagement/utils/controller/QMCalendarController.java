@@ -1,6 +1,6 @@
 package bcn.alten.altenappmanagement.utils.controller;
 
-import bcn.alten.altenappmanagement.mvp.model.WeekRange;
+import bcn.alten.altenappmanagement.model.WeekRange;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class QMCalendarController {

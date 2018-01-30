@@ -17,7 +17,7 @@ import bcn.alten.altenappmanagement.ui.adapter.base.BaseExpandableListAdapter;
 import bcn.alten.altenappmanagement.utils.LegendBadgeCounter;
 import bcn.alten.altenappmanagement.ui.adapter.holder.QmGroupHolder;
 import bcn.alten.altenappmanagement.ui.adapter.holder.QmItemHolder;
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 
 import static bcn.alten.altenappmanagement.utils.QMUtils.codifyStatusText;

@@ -10,8 +10,8 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.model.FollowUp;
+import bcn.alten.altenappmanagement.model.QMItem;
 
 @Dao
 public interface DaoAccess {

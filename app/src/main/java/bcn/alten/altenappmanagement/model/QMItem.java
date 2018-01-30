@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.mvp.model;
+package bcn.alten.altenappmanagement.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;

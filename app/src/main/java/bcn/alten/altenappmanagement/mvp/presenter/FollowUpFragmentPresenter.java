@@ -5,10 +5,10 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
-import bcn.alten.altenappmanagement.data.ops.followup.CreateNewFollowUpWrapper;
-import bcn.alten.altenappmanagement.data.ops.followup.DeleteFollowUpWrapper;
-import bcn.alten.altenappmanagement.data.ops.followup.EditFollowUpWrapper;
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.data.db.ops.followup.CreateNewFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.db.ops.followup.DeleteFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.db.ops.followup.EditFollowUpWrapper;
+import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 

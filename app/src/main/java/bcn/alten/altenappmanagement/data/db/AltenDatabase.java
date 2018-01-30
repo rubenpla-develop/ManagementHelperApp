@@ -9,8 +9,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.model.FollowUp;
+import bcn.alten.altenappmanagement.model.QMItem;
 
 @Database(entities = {FollowUp.class, QMItem.class}, version = 3)
 public abstract class AltenDatabase extends RoomDatabase {

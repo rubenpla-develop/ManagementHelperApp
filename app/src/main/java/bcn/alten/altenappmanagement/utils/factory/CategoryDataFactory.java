@@ -9,7 +9,7 @@ import java.util.List;
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.FollowUpCategory;
 import bcn.alten.altenappmanagement.AltenApplication;
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 public class CategoryDataFactory {

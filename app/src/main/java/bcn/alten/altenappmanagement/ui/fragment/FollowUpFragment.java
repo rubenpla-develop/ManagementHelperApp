@@ -24,7 +24,7 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.ui.adapter.ExpandableFollowUpListAdapter;
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.FollowUpCategory;
 import bcn.alten.altenappmanagement.ui.adapter.holder.FollowUpItemHolder;
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import bcn.alten.altenappmanagement.ui.customview.RecyclerItemTouchHelper;

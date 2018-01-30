@@ -1,6 +1,6 @@
 package bcn.alten.altenappmanagement.mvp.presenter;
 
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.model.FollowUp;
 
 public interface IFollowFragmentPresenter {
 

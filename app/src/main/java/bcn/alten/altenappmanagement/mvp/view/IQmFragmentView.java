@@ -7,8 +7,8 @@ import android.content.Context;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.QMCategory;
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
-import bcn.alten.altenappmanagement.mvp.model.WeekRange;
+import bcn.alten.altenappmanagement.model.QMItem;
+import bcn.alten.altenappmanagement.model.WeekRange;
 
 public interface IQmFragmentView {
     void showQmList(List<QMCategory> list);

@@ -1,6 +1,6 @@
-package bcn.alten.altenappmanagement.data.ops.followup;
+package bcn.alten.altenappmanagement.data.db.ops.followup;
 
-import bcn.alten.altenappmanagement.mvp.model.FollowUp;
+import bcn.alten.altenappmanagement.model.FollowUp;
 
 public class EditFollowUpWrapper {
     private final String TAG = EditFollowUpWrapper.class.getSimpleName();

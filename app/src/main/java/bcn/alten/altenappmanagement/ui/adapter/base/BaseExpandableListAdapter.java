@@ -12,7 +12,7 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.mvp.model.QMItem;
+import bcn.alten.altenappmanagement.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 
 public class BaseExpandableListAdapter<Q extends GroupViewHolder, Q1 extends ChildViewHolder>
