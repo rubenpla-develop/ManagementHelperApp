@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.ui.customview.base.BaseView;
 import butterknife.BindView;
 
 import static bcn.alten.altenappmanagement.ui.fragment.QMFragment.CLEAR_FILTER_OPTION;

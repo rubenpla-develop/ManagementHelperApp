@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.ui.customview;
+package bcn.alten.altenappmanagement.ui.customview.base;
 
 import android.content.Context;
 import android.content.res.Resources;

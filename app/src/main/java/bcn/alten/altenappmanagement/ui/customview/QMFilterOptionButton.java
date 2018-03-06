@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.ui.customview.base.BaseView;
 import bcn.alten.altenappmanagement.ui.customview.callback.RadioCheckable;
 import butterknife.BindView;
 
@@ -205,6 +206,7 @@ public class QMFilterOptionButton extends BaseView implements RadioCheckable {
                     onTouchDown(event);
                     break;
                 case MotionEvent.ACTION_UP:
+                    v.performClick();
                     onTouchUp(event);
                     break;
             }
