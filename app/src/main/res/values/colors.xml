@@ -27,6 +27,8 @@
 
     <color name="child_item_swipeable_background">#FFFFFF</color>
 
+    <color name="autocomplete_row_background">#FFFFFF</color>
+
     <color name="followup_status_color_already_done">#31B404</color>
     <color name="followup_status_color_scheduled">#F3CD70</color>
     <color name="followup_status_color_cancelled">#fa6e18</color>
