@@ -1,5 +1,6 @@
 package bcn.alten.altenappmanagement.ui.customview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -9,16 +10,19 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import bcn.alten.altenappmanagement.ui.customview.base.AutoCompleteTextViewBasic;
 
-/**
- * Created by alten on 5/3/18.
- */
-
 public class ExtendedEditTextWithAutoComplete extends AutoCompleteTextViewBasic {
+
+    private final int DEFAULT_AUTO_COMPLETE_DELAY = 750;
+    private final int HANDLER_MESSAGE_CHANGED = 100;
 
     public int DEFAULT_TEXT_COLOR;
     protected String prefix;
@@ -26,11 +30,15 @@ public class ExtendedEditTextWithAutoComplete extends AutoCompleteTextViewBasic 
     protected int prefixTextColor;
     protected int suffixTextColor;
 
+    private int autoCompleteDelay;
+    private ProgressBar progressBar = null;
+
+    private static Handler autoCompleteHandler;
+
     public ExtendedEditTextWithAutoComplete(Context context) {
         this(context, (AttributeSet)null);
         this.initDefaultColor();
     }
-
 
     public ExtendedEditTextWithAutoComplete(Context context, AttributeSet attrs) {
         this(context, attrs, 16842862);
@@ -40,8 +48,21 @@ public class ExtendedEditTextWithAutoComplete extends AutoCompleteTextViewBasic 
 
     public ExtendedEditTextWithAutoComplete(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.setView();
         this.initDefaultColor();
         this.handleAttributes(context, attrs);
+    }
+
+    @SuppressLint("HandlerLeak")
+    private void setView() {
+        autoCompleteDelay = DEFAULT_AUTO_COMPLETE_DELAY;
+        autoCompleteHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                ExtendedEditTextWithAutoComplete.super.performFiltering((CharSequence) msg.obj,
+                        msg.arg1);
+            }
+        };
     }
 
     protected void initDefaultColor() {
@@ -71,6 +92,14 @@ public class ExtendedEditTextWithAutoComplete extends AutoCompleteTextViewBasic 
             var4.printStackTrace();
         }
 
+    }
+
+    private void setLoadingIndicator(@NonNull ProgressBar progressBar) {
+        this.progressBar = progressBar;
+    }
+
+    private void setAutoCompleteDelay(int delay) {
+        this.autoCompleteDelay = delay;
     }
 
     public void setPrefix(String prefix) {
@@ -117,5 +146,25 @@ public class ExtendedEditTextWithAutoComplete extends AutoCompleteTextViewBasic 
         public int getOpacity() {
             return PixelFormat.OPAQUE;
         }
+    }
+
+    @Override
+    public void performFiltering(CharSequence text, int keyCode) {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        autoCompleteHandler.removeMessages(HANDLER_MESSAGE_CHANGED);
+        autoCompleteHandler.sendMessageDelayed(getHandler().obtainMessage(HANDLER_MESSAGE_CHANGED,
+                text), (long) autoCompleteDelay);
+    }
+
+    @Override
+    public void onFilterComplete(int count) {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
+
+        super.onFilterComplete(count);
     }
 }
