@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.mvp.view.IMainActivityView;
+import bcn.alten.altenappmanagement.ui.customview.ExtendedEditTextWithAutoComplete;
+import bcn.alten.altenappmanagement.ui.customview.TextFieldBoxesWithAutoComplete;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class FollowUpErrorController {
 
@@ -27,10 +27,10 @@ public class FollowUpErrorController {
     public boolean isAnyFieldEmpty(View dialogView) {
         boolean isAnyError = false;
         
-        final TextFieldBoxes consultorNameBox = dialogView.findViewById(R.id.textfieldbox_consultor_name);
-        final TextFieldBoxes clientNameBox = dialogView.findViewById(R.id.textfieldbox_client_name);
-        final ExtendedEditText consultorNameExtEditText = dialogView.findViewById(R.id.extended_edittext_consultor_name);
-        final ExtendedEditText clientNameExtEditText = dialogView.findViewById(R.id.extended_edittext_client_name);
+        final TextFieldBoxesWithAutoComplete consultorNameBox = dialogView.findViewById(R.id.textfieldbox_consultor_name);
+        final TextFieldBoxesWithAutoComplete clientNameBox = dialogView.findViewById(R.id.textfieldbox_client_name);
+        final ExtendedEditTextWithAutoComplete consultorNameExtEditText = dialogView.findViewById(R.id.extended_edittext_consultor_name);
+        final ExtendedEditTextWithAutoComplete clientNameExtEditText = dialogView.findViewById(R.id.extended_edittext_client_name);
         
         if (consultorNameExtEditText.getText().toString().isEmpty()) {
             consultorNameBox.setError(context.getString(R.string.follow_up_error_controller_empty_field),

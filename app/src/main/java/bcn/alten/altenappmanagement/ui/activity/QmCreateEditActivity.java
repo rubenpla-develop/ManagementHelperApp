@@ -1,11 +1,13 @@
 package bcn.alten.altenappmanagement.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,9 @@ import android.widget.TimePicker;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.model.QMItem;
+import bcn.alten.altenappmanagement.ui.adapter.AutoCompleteViewAdapter;
+import bcn.alten.altenappmanagement.ui.customview.DateTextView;
+import bcn.alten.altenappmanagement.ui.customview.ExtendedEditTextWithAutoComplete;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.AltenTimePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.QMPhoneInputDialog;
@@ -32,7 +37,6 @@ import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 import bcn.alten.altenappmanagement.utils.controller.QmErrorController;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static android.app.DatePickerDialog.OnDateSetListener;
 import static android.app.TimePickerDialog.OnTimeSetListener;
@@ -64,11 +68,12 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     private QmErrorController qmErrorController;
     private View activityView;
 
+    @NonNull
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @BindView(R.id.qm_activity_extended_edittext_client_name)
-    ExtendedEditText clientNameExtEditText;
+    ExtendedEditTextWithAutoComplete clientNameExtEditText;
 
     @BindView(R.id.qm_activity_client_phone_contact)
     ImageView clientPhoneContactList;
@@ -77,7 +82,7 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     TextView clientPhoneEditText;
 
     @BindView(R.id.qm_activity_extended_edittext_candidate_name)
-    ExtendedEditText candidateNameExtEditText;
+    ExtendedEditTextWithAutoComplete candidateNameExtEditText;
 
     @BindView(R.id.qm_activity_candidate_phone_contact)
     ImageView candidatePhoneContactList;
@@ -100,6 +105,7 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     @BindView(R.id.qm_activity_date_error_message)
     TextView dateErrorMessage;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +129,10 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
         }
 
         qmErrorController = new QmErrorController(this, activityView);
+
+        AutoCompleteViewAdapter autoCompleteAdapter = new AutoCompleteViewAdapter(this);
+        candidateNameExtEditText.setAdapter(autoCompleteAdapter);
+        clientNameExtEditText.setAdapter(autoCompleteAdapter);
 
         clientPhoneContactList.setOnClickListener(this);
         candidatePhoneContactList.setOnClickListener(this);

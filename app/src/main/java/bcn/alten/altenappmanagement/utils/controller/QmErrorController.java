@@ -8,9 +8,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.ui.customview.ExtendedEditTextWithAutoComplete;
+import bcn.alten.altenappmanagement.ui.customview.TextFieldBoxesWithAutoComplete;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 
 public class QmErrorController {
@@ -35,13 +35,13 @@ public class QmErrorController {
     public boolean isAnyFieldEmpty() {
         boolean isAnyError = false;
 
-        final TextFieldBoxes candidateNameBox = activityView
+        final TextFieldBoxesWithAutoComplete candidateNameBox = activityView
                 .findViewById(R.id.qm_activity_textfieldbox_candidate_name);
-        final TextFieldBoxes clientNameBox = activityView
+        final TextFieldBoxesWithAutoComplete clientNameBox = activityView
                 .findViewById(R.id.qm_activity_textfieldbox_client_name);
-        final ExtendedEditText candidateNameExtEditText = activityView
+        final ExtendedEditTextWithAutoComplete candidateNameExtEditText = activityView
                 .findViewById(R.id.qm_activity_extended_edittext_candidate_name);
-        final ExtendedEditText clientNameExtEditText = activityView
+        final ExtendedEditTextWithAutoComplete clientNameExtEditText = activityView
                 .findViewById(R.id.qm_activity_extended_edittext_client_name);
 
         if (candidateNameExtEditText.getText().toString().isEmpty()) {

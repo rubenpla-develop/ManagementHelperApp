@@ -12,13 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.AltenApplication;
+import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
-import bcn.alten.altenappmanagement.utils.controller.FollowUpErrorController;
+import bcn.alten.altenappmanagement.ui.adapter.AutoCompleteViewAdapter;
+import bcn.alten.altenappmanagement.ui.customview.ExtendedEditTextWithAutoComplete;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
+import bcn.alten.altenappmanagement.utils.controller.FollowUpErrorController;
 
 import static android.app.DatePickerDialog.OnDateSetListener;
 import static android.view.View.OnClickListener;
@@ -68,14 +69,20 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     public AlertDialog getDialog() {
         LayoutInflater inflater = LayoutInflater.from(context);
         dialogView = inflater.inflate(R.layout.dialog_followup_new_edit, null);
-        final ExtendedEditText consultorNameExtEditText = dialogView.findViewById(R.id.extended_edittext_consultor_name);
-        final ExtendedEditText clientNameExtEditText = dialogView.findViewById(R.id.extended_edittext_client_name);
+        //final ExtendedEditTextWithAutoComplete autoCompleteEditText = dialogView.findViewById(R.id.extended_edittext_consultor_name_auto);
+        final ExtendedEditTextWithAutoComplete consultorNameExtEditText = dialogView.
+                findViewById(R.id.extended_edittext_consultor_name);
+        final ExtendedEditTextWithAutoComplete clientNameExtEditText = dialogView.
+                findViewById(R.id.extended_edittext_client_name);
         final CheckBox addNextFollowCheckbox = dialogView.findViewById(R.id.fup_dialog_checkbox_add_next_follow);
         final LinearLayout addNextFollowContainer = dialogView.findViewById(R.id.fup_dialog_container_next_follow);
         final TextView dateText = dialogView.findViewById(R.id.fup_dialog_date_edit);
         final TextView addNextFollowTextView = dialogView.findViewById(R.id.fup_dialog_next_date_edit);
         final RadioGroup statusGroup = dialogView.findViewById(R.id.fup_dialog_radio_group_status);
 
+        AutoCompleteViewAdapter autoCompleteViewAdapter = new AutoCompleteViewAdapter(AltenApplication.getInstance().getApplicationContext());
+        consultorNameExtEditText.setAdapter(autoCompleteViewAdapter);
+        clientNameExtEditText.setAdapter(autoCompleteViewAdapter);
         statusGroup.setOnCheckedChangeListener(this);
 
         String formattedDate;
