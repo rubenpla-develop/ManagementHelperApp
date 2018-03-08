@@ -69,7 +69,6 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     public AlertDialog getDialog() {
         LayoutInflater inflater = LayoutInflater.from(context);
         dialogView = inflater.inflate(R.layout.dialog_followup_new_edit, null);
-        //final ExtendedEditTextWithAutoComplete autoCompleteEditText = dialogView.findViewById(R.id.extended_edittext_consultor_name_auto);
         final ExtendedEditTextWithAutoComplete consultorNameExtEditText = dialogView.
                 findViewById(R.id.extended_edittext_consultor_name);
         final ExtendedEditTextWithAutoComplete clientNameExtEditText = dialogView.

@@ -33,15 +33,17 @@ public class ExtendedEditTextWithAutoComplete extends AutoCompleteTextViewBasic 
     private int autoCompleteDelay;
     private ProgressBar progressBar = null;
 
-    private static Handler autoCompleteHandler;
+    private Handler autoCompleteHandler;
 
     public ExtendedEditTextWithAutoComplete(Context context) {
         this(context, (AttributeSet)null);
+        this.setView();
         this.initDefaultColor();
     }
 
     public ExtendedEditTextWithAutoComplete(Context context, AttributeSet attrs) {
         this(context, attrs, 16842862);
+        this.setView();
         this.initDefaultColor();
         this.handleAttributes(context, attrs);
     }
@@ -155,7 +157,7 @@ public class ExtendedEditTextWithAutoComplete extends AutoCompleteTextViewBasic 
         }
 
         autoCompleteHandler.removeMessages(HANDLER_MESSAGE_CHANGED);
-        autoCompleteHandler.sendMessageDelayed(getHandler().obtainMessage(HANDLER_MESSAGE_CHANGED,
+        autoCompleteHandler.sendMessageDelayed(autoCompleteHandler.obtainMessage(HANDLER_MESSAGE_CHANGED,
                 text), (long) autoCompleteDelay);
     }
 
