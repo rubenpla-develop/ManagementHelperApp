@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
-import bcn.alten.altenappmanagement.data.db.ops.qm.CreateNewQmWrapper;
-import bcn.alten.altenappmanagement.data.db.ops.qm.DeleteQmWrapper;
-import bcn.alten.altenappmanagement.data.db.ops.qm.EditQmWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.qm.CreateNewQmWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.qm.DeleteQmWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.qm.EditQmWrapper;
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;

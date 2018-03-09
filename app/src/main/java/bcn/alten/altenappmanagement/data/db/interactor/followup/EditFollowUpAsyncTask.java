@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.data.db.ops.followup;
+package bcn.alten.altenappmanagement.data.db.interactor.followup;
 
 import android.os.AsyncTask;
 
@@ -6,10 +6,10 @@ import bcn.alten.altenappmanagement.AltenApplication;
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
 import bcn.alten.altenappmanagement.model.FollowUp;
 
-public class CreateNewFollowUpAsyncTask extends AsyncTask<FollowUp, Void, Void> {
+public class EditFollowUpAsyncTask extends AsyncTask<FollowUp, Void, Void> {
     private FollowUp followUp;
 
-    public CreateNewFollowUpAsyncTask(FollowUp followUp) {
+    public EditFollowUpAsyncTask(FollowUp followUp) {
         super();
         this.followUp = followUp;
     }
@@ -24,7 +24,7 @@ public class CreateNewFollowUpAsyncTask extends AsyncTask<FollowUp, Void, Void> 
         AltenDatabase.getDatabase(AltenApplication.getInstance()
                 .getApplicationContext())
                 .daoAccess()
-                .createNewFollowUp(followUp);
+                .updateFollowUp(followUp);
 
         return null;
     }

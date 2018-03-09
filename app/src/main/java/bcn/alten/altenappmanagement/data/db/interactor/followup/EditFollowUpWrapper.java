@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.data.db.ops.followup;
+package bcn.alten.altenappmanagement.data.db.interactor.followup;
 
 import bcn.alten.altenappmanagement.model.FollowUp;
 

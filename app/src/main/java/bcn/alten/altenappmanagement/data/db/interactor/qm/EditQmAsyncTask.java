@@ -1,4 +1,4 @@
-package bcn.alten.altenappmanagement.data.db.ops.qm;
+package bcn.alten.altenappmanagement.data.db.interactor.qm;
 
 import android.os.AsyncTask;
 
