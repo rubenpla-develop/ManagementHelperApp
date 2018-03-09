@@ -24,6 +24,7 @@ import android.widget.TimePicker;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.model.QMItem;
+import bcn.alten.altenappmanagement.ui.customview.DateTextView;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.AltenTimePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.QMPhoneInputDialog;
@@ -54,7 +55,7 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
 
     private Resources res;
 
-    private QMItem qm;
+    private QMItem originalQm;
     private String actionMode;
     private int weekOfYear;
     private String finalDateTime;
@@ -77,13 +78,13 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     TextView clientPhoneEditText;
 
     @BindView(R.id.qm_activity_extended_edittext_candidate_name)
-    ExtendedEditText candidateNameExtEditText;
+    ExtendedEditText consultantNameExtEditText;
 
     @BindView(R.id.qm_activity_candidate_phone_contact)
-    ImageView candidatePhoneContactList;
+    ImageView consultantPhoneContactList;
 
     @BindView(R.id.qm_activity_candidate_phone_edit)
-    TextView candidatePhoneEditText;
+    TextView consultantPhoneEditText;
 
     @BindView(R.id.qm_activity_date_edit)
     TextView dateText;
@@ -118,40 +119,41 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
         if (bundle != null) {
             actionMode = bundle.getString(QMFragment.QM_ACTIONMODE_PARAM);
             if (bundle.containsKey(QMFragment.QM_ITEM_PARAM)) {
-                qm = bundle.getParcelable(QMFragment.QM_ITEM_PARAM);
+                originalQm = bundle.getParcelable(QMFragment.QM_ITEM_PARAM);
             }
         }
 
         qmErrorController = new QmErrorController(this, activityView);
 
         clientPhoneContactList.setOnClickListener(this);
-        candidatePhoneContactList.setOnClickListener(this);
+        consultantPhoneContactList.setOnClickListener(this);
 
         if ((QMFragment.EDIT_QM_ACTION).equals(actionMode)) {
+            //noinspection ConstantConditions
             getSupportActionBar().setTitle("Editar QM");
-            clientNameExtEditText.setText(qm.getClientName());
-            clientPhoneEditText.setText(qm.getClientPhone());
-            candidateNameExtEditText.setText(qm.getCandidateName());
-            candidatePhoneEditText.setText(qm.getCandidatePhone());
-            dateText.setText(JodaTimeConverter.getInstance().getDateInStringFormat(qm.getDate()));
-            timeText.setText(qm.getTime());
+            clientNameExtEditText.setText(originalQm.getClientName());
+            clientPhoneEditText.setText(originalQm.getClientPhone());
+            consultantNameExtEditText.setText(originalQm.getCandidateName());
+            consultantPhoneEditText.setText(originalQm.getCandidatePhone());
+            dateText.setText(JodaTimeConverter.getInstance().getDateInStringFormat(originalQm.getDate()));
+            timeText.setText(originalQm.getTime());
 
-            chosenStatus = qm.getStatus();
+            chosenStatus = originalQm.getStatus();
 
             clientNameExtEditText.requestFocus();
-            candidateNameExtEditText.requestFocus();
+            consultantNameExtEditText.requestFocus();
 
             if (res.getString(R.string.qm_dialog_radio_group_scheduled_value)
-                    .equalsIgnoreCase(qm.getStatus())) {
+                    .equalsIgnoreCase(originalQm.getStatus())) {
                 statusGroup.check(R.id.qm_activity_radio_scheduled);
             } else if (res.getString(R.string.qm_dialog_radio_group_done_value)
-                    .equalsIgnoreCase(qm.getStatus())) {
+                    .equalsIgnoreCase(originalQm.getStatus())) {
                 statusGroup.check(R.id.qm_activity_radio_done);
             } else if (res.getString(R.string.qm_dialog_radio_group_accepted_value)
-                    .equalsIgnoreCase(qm.getStatus())) {
+                    .equalsIgnoreCase(originalQm.getStatus())) {
                 statusGroup.check(R.id.qm_activity_radio_accepted);
             } else if (res.getString(R.string.qm_dialog_radio_group_cancelled_value)
-                    .equalsIgnoreCase(qm.getStatus())) {
+                    .equalsIgnoreCase(originalQm.getStatus())) {
                 statusGroup.check(R.id.qm_activity_radio_cancelled);
             }
         } else {
@@ -161,13 +163,15 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
         statusGroup.setOnCheckedChangeListener(this);
         clientPhoneEditText.setOnClickListener(this);
         clientPhoneContactList.setOnClickListener(this);
-        candidatePhoneEditText.setOnClickListener(this);
-        candidatePhoneContactList.setOnClickListener(this);
+        consultantPhoneEditText.setOnClickListener(this);
+        consultantPhoneContactList.setOnClickListener(this);
 
         dateText.setOnTouchListener((View v, MotionEvent event) -> {
             if (dateErrorMessage.getVisibility() == View.VISIBLE) {
                 dateErrorMessage.setVisibility(View.INVISIBLE);
             }
+
+            dateText.performClick();
             return false;
         });
         
@@ -219,14 +223,16 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
 
         Intent data = new Intent();
 
-        QMItem editedQm = new QMItem(weekOfYear, clientNameExtEditText.getText().toString(),
+        QMItem editedQm = new QMItem(weekOfYear, originalQm.getClientId(),
+                clientNameExtEditText.getText().toString(),
                 clientPhoneEditText.getText().toString(),
-                candidateNameExtEditText.getText().toString(),
-                candidatePhoneEditText.getText().toString(),
+                originalQm.getConsultantId(),
+                consultantNameExtEditText.getText().toString(),
+                consultantPhoneEditText.getText().toString(),
                 formattedDate, timeText.getText().toString(),  chosenStatus);
 
         if (QMFragment.EDIT_QM_ACTION.equals(actionMode)) {
-            editedQm.setId(qm.getId());
+            editedQm.setId(originalQm.getId());
             data.putExtra(QMFragment.QM_ITEM_PARAM, editedQm);
             setResult(RESULT_EDIT_OK, data);
         } else if (QMFragment.ADD_QM_ACTION.equals(actionMode)) {

@@ -1,50 +1,58 @@
 package bcn.alten.altenappmanagement.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "qm")
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "qm", foreignKeys =
+        {@ForeignKey(entity = Client.class, parentColumns = "id",
+                childColumns = "clientId", onDelete = CASCADE), 
+                
+                @ForeignKey(entity = Consultant.class, parentColumns = "id", 
+                        childColumns = "consultantId", onDelete = CASCADE)})
 public class QMItem implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @NonNull
     private int week;
 
-    @NonNull
+    private String clientId;
+
     private String clientName;
 
-    @NonNull
     private String clientPhone;
 
-    @NonNull
+    private String consultantId;
+
     private String candidateName;
 
-    @NonNull
     private String candidatePhone;
 
-    @NonNull
     private String date;
 
-    @NonNull
     private String time;
 
-    @NonNull
     private String status;
 
     @Ignore
     public QMItem(){};
 
-    public QMItem(int week, String clientName,String clientPhone, String candidateName, String candidatePhone,
-                   String date, String time, String status) {
+    public QMItem(int week, @NonNull String clientId, @NonNull String clientName,
+                  @NonNull String clientPhone, String consultantId, @NonNull String candidateName,
+                  @NonNull String candidatePhone, @NonNull String date, String time,
+                  @NonNull String status) {
         this.week = week;
+        this.clientId = clientId;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
+        this.consultantId = consultantId;
         this.candidateName = candidateName;
         this.candidatePhone = candidatePhone;
         this.date = date;
@@ -55,8 +63,10 @@ public class QMItem implements Parcelable {
     protected QMItem(Parcel in) {
         id = in.readInt();
         week = in.readInt();
+        clientId = in.readString();
         clientName = in.readString();
         clientPhone = in.readString();
+        consultantId = in.readString();
         candidateName = in.readString();
         candidatePhone = in.readString();
         date = in.readString();
@@ -149,6 +159,14 @@ public class QMItem implements Parcelable {
         this.status = status;
     }
 
+    public String getClientId() {
+        return clientId;
+    }
+
+    public String getConsultantId() {
+        return consultantId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -158,8 +176,10 @@ public class QMItem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeInt(week);
+        dest.writeString(clientId);
         dest.writeString(clientName);
         dest.writeString(clientPhone);
+        dest.writeString(consultantId);
         dest.writeString(candidateName);
         dest.writeString(candidatePhone);
         dest.writeString(date);

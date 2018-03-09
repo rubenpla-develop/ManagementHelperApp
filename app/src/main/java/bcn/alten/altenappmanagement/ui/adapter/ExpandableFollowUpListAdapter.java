@@ -56,13 +56,16 @@ public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter
                 .getInteger(setRowColor(childIndex)));
 
         holder.getView().setOnClickListener(v -> {
-            String consultorName =  model.getConsultorName();
+
+            String consultantId = model.getConsultantId();
+            String consultantName =  model.getConsultorName();
+            String clientId = model.getClientId();
             String clientName =   model.getCurrentClient();
             String lastDateFollowUp =   model.getDateLastFollow();
             String nextFollowUp = model.getDateNextFollow();
             String status = model.getStatus();
-            FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
-                    nextFollowUp, status);
+            FollowUp followUp  = new FollowUp(consultantId, consultantName, clientId, clientName,
+                    lastDateFollowUp, nextFollowUp, status);
 
             followUp.setId(model.getId());
 
@@ -70,13 +73,15 @@ public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter
         });
 
         ((FollowUpItemHolder)holder).getView().setOnLongClickListener(v -> {
-            String consultorName =  model.getConsultorName();
+            String consultantId = model.getConsultantId();
+            String consultantName =  model.getConsultorName();
+            String clientId = model.getClientId();
             String clientName =   model.getCurrentClient();
             String lastDateFollowUp =   model.getDateLastFollow();
             String nextFollowUp = model.getDateNextFollow();
             String status = model.getStatus();
-            FollowUp followUp  = new FollowUp(consultorName, clientName, lastDateFollowUp,
-                    nextFollowUp, status);
+            FollowUp followUp  = new FollowUp(consultantId, consultantName, clientId, clientName,
+                    lastDateFollowUp, nextFollowUp, status);
 
             followUp.setId(model.getId());
 

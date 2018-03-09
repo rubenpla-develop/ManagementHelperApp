@@ -1,34 +1,46 @@
 package bcn.alten.altenappmanagement.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-@Entity
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity(foreignKeys =
+        {@ForeignKey(entity = Client.class, parentColumns = "id",
+        childColumns = "clientId", onDelete = CASCADE),
+
+        @ForeignKey(entity = Consultant.class, parentColumns = "id",
+        childColumns = "consultantId", onDelete = CASCADE)})
 public class FollowUp implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    //@Embedded(prefix = DbKeys.FOLLOWUP_PREFIX)
+    private String consultantId;
+
     private String consultorName;
 
-    //@Embedded(prefix = DbKeys.FOLLOWUP_PREFIX)
+    private String clientId;
+
     private String currentClient;
 
-    //@Embedded(prefix = DbKeys.FOLLOWUP_PREFIX)
     private String dateLastFollow;
 
     private String dateNextFollow;
 
     private String status;
 
-    public FollowUp(@NonNull String consultorName, @NonNull  String currentClient,
+    public FollowUp(@NonNull String consultantId, @NonNull String consultorName,
+                    @NonNull  String clientId, @NonNull  String currentClient,
                     @NonNull String dateLastFollow, @NonNull String dateNextFollow,
                     @NonNull String status) {
+        this.consultantId = consultantId;
         this.consultorName = consultorName;
+        this.clientId = clientId;
         this.currentClient = currentClient;
         this.dateLastFollow = dateLastFollow;
         this.dateNextFollow = dateNextFollow;
@@ -37,7 +49,9 @@ public class FollowUp implements Parcelable {
     }
 
     protected FollowUp(Parcel in) {
+        consultantId = in.readString();
         consultorName = in.readString();
+        clientId = in.readString();
         currentClient = in.readString();
         dateLastFollow = in.readString();
         dateNextFollow = in.readString();
@@ -63,7 +77,9 @@ public class FollowUp implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(consultantId);
         dest.writeString(consultorName);
+        dest.writeString(clientId);
         dest.writeString(currentClient);
         dest.writeString(dateLastFollow);
         dest.writeString(dateNextFollow);
@@ -122,5 +138,13 @@ public class FollowUp implements Parcelable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getConsultantId() {
+        return consultantId;
+    }
+
+    public String getClientId() {
+        return clientId;
     }
 }

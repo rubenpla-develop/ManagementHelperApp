@@ -54,9 +54,6 @@ public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             convertView = inflater.inflate(R.layout.autocomplete_item, parent, false);
-            /*AbsListView.LayoutParams params = new AbsListView.LayoutParams(100, 35);
-
-            convertView.setLayoutParams(params);*/
 
             holder = new ListViewHolder();
             holder.label = (TextView) convertView.findViewById(R.id.autocomplete_item_tv);
