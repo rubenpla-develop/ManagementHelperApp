@@ -61,6 +61,10 @@ public class Consultant implements Parcelable{
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @NonNull
     public String getName() {
         return name;
