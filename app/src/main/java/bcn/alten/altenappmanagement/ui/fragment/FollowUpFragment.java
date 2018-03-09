@@ -30,7 +30,7 @@ import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import bcn.alten.altenappmanagement.ui.customview.RecyclerItemTouchHelper;
 import bcn.alten.altenappmanagement.ui.dialog.FollowUpDeleteDialog;
 import bcn.alten.altenappmanagement.ui.dialog.FollowUpDialog;
-import bcn.alten.altenappmanagement.utils.factory.CategoryDataFactory;
+import bcn.alten.altenappmanagement.utils.factory.FollowUpFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -122,7 +122,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     @Override
     public void onLiveDataChanged(final LiveData< List<FollowUp>> list) {
         list.observe(this, followUpList -> {
-            List<FollowUpCategory> followUpCategoryList = CategoryDataFactory.getInstance()
+            List<FollowUpCategory> followUpCategoryList = FollowUpFactory.getInstance()
                     .getDataFilteredByCategory(list.getValue());
 
             ShowFollowUpList(followUpCategoryList);

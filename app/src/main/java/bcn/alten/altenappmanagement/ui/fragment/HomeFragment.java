@@ -19,7 +19,7 @@ import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
 import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.model.QMItem;
-import bcn.alten.altenappmanagement.utils.factory.CategoryDataFactory;
+import bcn.alten.altenappmanagement.utils.factory.FollowUpFactory;
 import bcn.alten.altenappmanagement.utils.factory.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -143,7 +143,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            List<FollowUp> list = CategoryDataFactory.createMockFollowUpList();
+            List<FollowUp> list = FollowUpFactory.createMockFollowUpList();
 
             AltenDatabase.getDatabase(getActivity()).daoAccess().insertFollowUpList(list);
 
