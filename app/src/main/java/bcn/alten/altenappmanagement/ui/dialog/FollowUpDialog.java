@@ -40,7 +40,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     private View dialogView;
     private View dateViewClicked;
     private String actionMode;
-    private FollowUp followUp;
+    private FollowUp originalFollowUp;
     private FollowUp editedFollowUp;
     private String nextDateChosenStatus = "";
 
@@ -52,7 +52,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
                           FollowUpFragmentPresenter presenter) {
         this.context = context;
         this.followUpFragmentPresenter = presenter;
-        this.followUp = followUpToEdit;
+        this.originalFollowUp = followUpToEdit;
         this.actionMode = actionMode;
         this.res = context.getResources();
     }
@@ -81,35 +81,35 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         String formattedDate;
 
         if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
-            consultorNameExtEditText.setText(followUp.getConsultorName());
-            clientNameExtEditText.setText(followUp.getCurrentClient());
+            consultorNameExtEditText.setText(originalFollowUp.getConsultorName());
+            clientNameExtEditText.setText(originalFollowUp.getCurrentClient());
             clientNameExtEditText.requestFocus();
             consultorNameExtEditText.requestFocus();
 
-            if (followUp.getDateLastFollow() != null
-                    && followUp.getDateLastFollow().length() > 0) {
+            if (originalFollowUp.getDateLastFollow() != null
+                    && originalFollowUp.getDateLastFollow().length() > 0) {
                  formattedDate = JodaTimeConverter.getInstance()
-                        .getDateInStringFormat(followUp.getDateLastFollow());
+                        .getDateInStringFormat(originalFollowUp.getDateLastFollow());
                  dateText.setText(formattedDate);
             }
 
-            if (followUp.getDateNextFollow() != null
-                    && followUp.getDateNextFollow().length() > 0) {
+            if (originalFollowUp.getDateNextFollow() != null
+                    && originalFollowUp.getDateNextFollow().length() > 0) {
                 addNextFollowCheckbox.setChecked(true);
                 addNextFollowContainer.setVisibility(View.VISIBLE);
                 formattedDate = JodaTimeConverter.getInstance()
-                        .getDateInStringFormat(followUp.getDateNextFollow());
+                        .getDateInStringFormat(originalFollowUp.getDateNextFollow());
                 addNextFollowTextView.setText(formattedDate);
             }
 
             if (res.getString(R.string.follow_up_dialog_radio_group_scheduled_value)
-                    .equalsIgnoreCase(followUp.getStatus())) {
+                    .equalsIgnoreCase(originalFollowUp.getStatus())) {
                 statusGroup.check(R.id.fup_dialog_radio_scheduled);
             } else if (res.getString(R.string.follow_up_dialog_radio_group_done_value)
-                    .equalsIgnoreCase(followUp.getStatus())) {
+                    .equalsIgnoreCase(originalFollowUp.getStatus())) {
                 statusGroup.check(R.id.fup_dialog_radio_done);
             } else if (res.getString(R.string.follow_up_dialog_radio_group_cancelled_value)
-                    .equalsIgnoreCase(followUp.getStatus())) {
+                    .equalsIgnoreCase(originalFollowUp.getStatus())) {
                 statusGroup.check(R.id.fup_dialog_radio_cancelled);
             }
         }
@@ -160,7 +160,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
                     if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
                         followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
                     } else if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
-                        editedFollowUp.setId(followUp.getId());
+                        editedFollowUp.setId(originalFollowUp.getId());
                         followUpFragmentPresenter.editFollowUp(editedFollowUp);
                     }
 
