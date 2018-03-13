@@ -2,6 +2,7 @@ package bcn.alten.altenappmanagement.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -11,10 +12,15 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(foreignKeys =
         {@ForeignKey(entity = Client.class, parentColumns = "id",
-        childColumns = "clientId", onDelete = CASCADE),
+        childColumns = "clientId", onDelete = CASCADE,
+        onUpdate = CASCADE),
 
         @ForeignKey(entity = Consultant.class, parentColumns = "id",
-        childColumns = "consultantId", onDelete = CASCADE)})
+        childColumns = "consultantId", onDelete = CASCADE,
+        onUpdate = CASCADE)},
+        indices = {
+        @Index("clientId"),
+        @Index("consultantId")})
 public class FollowUp implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)

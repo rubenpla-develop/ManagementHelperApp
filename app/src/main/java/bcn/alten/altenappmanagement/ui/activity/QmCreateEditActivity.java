@@ -1,5 +1,6 @@
 package bcn.alten.altenappmanagement.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -24,7 +25,6 @@ import android.widget.TimePicker;
 
 import bcn.alten.altenappmanagement.R;
 import bcn.alten.altenappmanagement.model.QMItem;
-import bcn.alten.altenappmanagement.ui.customview.DateTextView;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.AltenTimePickerDialog;
 import bcn.alten.altenappmanagement.ui.dialog.QMPhoneInputDialog;
@@ -101,6 +101,7 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     @BindView(R.id.qm_activity_date_error_message)
     TextView dateErrorMessage;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -223,6 +224,8 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
 
         Intent data = new Intent();
 
+        //TODO this implementation is WRONGGGGG, consultantId & clientId must be checked
+        //todo If has changed/is new and update corresponding values
         QMItem editedQm = new QMItem(weekOfYear, originalQm.getClientId(),
                 clientNameExtEditText.getText().toString(),
                 clientPhoneEditText.getText().toString(),
