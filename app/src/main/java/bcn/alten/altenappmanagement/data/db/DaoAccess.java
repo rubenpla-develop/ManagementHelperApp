@@ -10,6 +10,8 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import bcn.alten.altenappmanagement.model.Client;
+import bcn.alten.altenappmanagement.model.Consultant;
 import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.model.QMItem;
 
@@ -55,6 +57,15 @@ public interface DaoAccess {
     @Delete
     void deleteQM(QMItem qm);
 
+    /*
+     * Consultant & Client Tables
+     */
+
+    @Query("SELECT * FROM client")
+    List<Client> fecthClientData();
+
+    @Query("SELECT * FROM consultant")
+    List<Consultant> fecthConsultantData();
 
    /* @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);*/

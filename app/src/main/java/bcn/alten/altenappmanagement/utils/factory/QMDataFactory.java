@@ -20,7 +20,7 @@ import static bcn.alten.altenappmanagement.utils.controller.QMCalendarController
 
 public class QMDataFactory {
 
-    private final String TAG = CategoryDataFactory.class.getSimpleName();
+    private final String TAG = FollowUpFactory.class.getSimpleName();
 
     public static final int QM_HEADER_ARROW_NEXT_WEEK_ACTION = 5;
     public static final int QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION = 4;
@@ -204,15 +204,15 @@ public class QMDataFactory {
      *  TESTING MOCK METHODS, NOT USE FOR PRODUCTION
      */
     public static List<QMItem> createMockQMItemList() {
-        QMItem fup1 = new QMItem(30,"Banc Sabadell", "", "Ruben Pla Ferrero", "", "1501338492096", "19:15","Rechazada"); //29-7-2017
-        QMItem fup2 = new QMItem(11,"Opentrends", "", "Laura Hernandez Alonso", "", "1489501854205","19:15", "Realizada");//14-3-2017
-        QMItem fup3 = new QMItem(50, "La Caixa", "", "Ignacio Ferror Planalta", "", "1513002724212","19:15", "Planificada"); //11-12-2017
-        QMItem fup4 = new QMItem(48,"Hays", "","Raul Salomé Gutierrez", "", "1512052470308","19:15", "Planificada");//30-11-2017
-        QMItem fup5 = new QMItem(47,"La Caixa", "", "Jorge Aviario Sole", "", "1511274885640","19:15" , "Cancelada"); //21-11-2017
-        QMItem fup6 = new QMItem(47,"Microsoft", "", "Amaia Ferrero Sanchez", "", "1511361298215", "19:15","Realizada"); //22-11-2017
-        QMItem fup7 = new QMItem(47,"La Caixa", "", "Raul Milito Copón", "", "1511620509125", "19:15","Aceptada"); //25-11-2017
-        QMItem fup8 = new QMItem(46,"Deutsche Bank ", "", "David Jardi Gil", "", "1510583738614","19:15", "Cancelada");//13-11-2017
-        QMItem fup9 = new QMItem(46,"Seat", "", "Cristian Garcia Aran", "", "1510756571338","19:15","Cancelada"); //15-11-2017
+        QMItem fup1 = new QMItem(9,"1", "Banc Sabadell", "", "1", "Ruben Pla Ferrero", "", "1501338492096", "19:15","Rechazada"); //29-7-2017
+        QMItem fup2 = new QMItem(10,"1","Opentrends", "","1", "Laura Hernandez Alonso", "", "1489501854205","19:15", "Realizada");//14-3-2017
+        QMItem fup3 = new QMItem(11, "1", "La Caixa", "","1", "Ignacio Ferror Planalta", "1", "1513002724212","19:15", "Planificada"); //11-12-2017
+        QMItem fup4 = new QMItem(10, "1", "Hays", "","1","Raul Salomé Gutierrez", "1", "1512052470308","19:15", "Planificada");//30-11-2017
+        QMItem fup5 = new QMItem(11, "1","La Caixa", "", "1", "Jorge Aviario Sole", "", "1511274885640","19:15" , "Cancelada"); //21-11-2017
+        QMItem fup6 = new QMItem(11, "1","Microsoft", "", "1", "Amaia Ferrero Sanchez", "", "1511361298215", "19:15","Realizada"); //22-11-2017
+        QMItem fup7 = new QMItem(9,"1","La Caixa", "", "1","Raul Milito Copón", "", "1511620509125", "19:15","Aceptada"); //25-11-2017
+        QMItem fup8 = new QMItem(10, "1","Deutsche Bank ", "", "1", "David Jardi Gil", "", "1510583738614","19:15", "Cancelada");//13-11-2017
+        QMItem fup9 = new QMItem(10, "1","Seat", "", "1","Cristian Garcia Aran", "", "1510756571338","19:15","Cancelada"); //15-11-2017
 
         List<QMItem> tempList = Arrays.asList(fup1, fup2, fup3, fup4, fup5, fup6, fup7, fup8, fup9);
 

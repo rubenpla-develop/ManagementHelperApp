@@ -12,15 +12,15 @@ import bcn.alten.altenappmanagement.AltenApplication;
 import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
-public class CategoryDataFactory {
+public class FollowUpFactory {
 
-    private final String TAG = CategoryDataFactory.class.getSimpleName();
+    private final String TAG = FollowUpFactory.class.getSimpleName();
 
-    private static CategoryDataFactory instance;
+    private static FollowUpFactory instance;
 
-    public static CategoryDataFactory getInstance() {
+    public static FollowUpFactory getInstance() {
         if (instance == null) {
-            instance = new CategoryDataFactory();
+            instance = new FollowUpFactory();
         }
 
         return instance;
@@ -72,11 +72,11 @@ public class CategoryDataFactory {
     }
 
     public static List<FollowUp> makeRedFollows() {
-        FollowUp fup1 = new FollowUp("Ruben Pla Ferrero", "Sabadell", "1476193462083", "", "");
-        FollowUp fup2 = new FollowUp("Jorge Aviario Sole", "Caixa", "1049459419", "", "");
-        FollowUp fup3 = new FollowUp("Ignacio Ferror Planalta", "La Caixa", "1049459419", "", "");
-        FollowUp fup4 = new FollowUp("David Jardi Gil", "Banco Sabadell", "1049459419", "", "");
-        FollowUp fup5 = new FollowUp("Adrian de Miguel Serrano", "Sabadell", "1049459419", "", "");
+        FollowUp fup1 = new FollowUp("1","Ruben Pla Ferrero", "1","Sabadell", "1476193462083", "", "");
+        FollowUp fup2 = new FollowUp("1","Jorge Aviario Sole", "1","Caixa", "1049459419", "", "");
+        FollowUp fup3 = new FollowUp("1","Ignacio Ferror Planalta", "1","La Caixa", "1049459419", "", "");
+        FollowUp fup4 = new FollowUp("1","David Jardi Gil", "1","Banco Sabadell", "1049459419", "", "");
+        FollowUp fup5 = new FollowUp("1","Adrian de Miguel Serrano", "1","Sabadell", "1049459419", "", "");
 
         return Arrays.asList(fup1, fup2, fup3, fup4, fup5);
     }
@@ -86,8 +86,8 @@ public class CategoryDataFactory {
     }
 
     public static List<FollowUp> makeYellowFollows() {
-        FollowUp fup1 = new FollowUp("Yvette Hernandez Alonso", "Opentrends", "1497102810067", "", "");
-        FollowUp fup2 = new FollowUp("Cristian Garcia Aran", "Seat", "1049459419", "", "");
+        FollowUp fup1 = new FollowUp("1","Yvette Hernandez Alonso", "1","Opentrends", "1497102810067", "", "");
+        FollowUp fup2 = new FollowUp("1","Cristian Garcia Aran", "1","Seat", "1049459419", "", "");
 
 
         return Arrays.asList(fup1, fup2);
@@ -98,23 +98,23 @@ public class CategoryDataFactory {
     }
 
     public static List<FollowUp> makeGreenFollows() {
-        FollowUp fup1 = new FollowUp("Ruben Pla Ferrero", "Banco Sabadell", "1049459419", "", "");
-        FollowUp fup2 = new FollowUp("Jorge Aviario Sole", "La Caixa", "1049459419", "", "");
-        FollowUp fup3 = new FollowUp("Ignacio Ferror Planalta", "Caixa", "1505915671853", "", "");
+        FollowUp fup1 = new FollowUp("1","Ruben Pla Ferrero", "1","Banco Sabadell", "1049459419", "", "");
+        FollowUp fup2 = new FollowUp("1","Jorge Aviario Sole", "1","La Caixa", "1049459419", "", "");
+        FollowUp fup3 = new FollowUp("1","Ignacio Ferror Planalta", "1","Caixa", "1505915671853", "", "");
 
         return Arrays.asList(fup1, fup2, fup3);
     }
 
     public static List<FollowUp> createMockFollowUpList() {
-        FollowUp fup1 = new FollowUp("Ruben Pla Ferrero", "Sabadell", "1476197961067", "", ""); //urgent
-        FollowUp fup2 = new FollowUp("Yvette Hernandez Alonso", "Opentrends", "1497102810067", "", "");//warning
-        FollowUp fup3 = new FollowUp("Ignacio Ferror Planalta", "Caixa", "1505915671853", "", ""); //OK
-        FollowUp fup4 = new FollowUp("Ruben Pla Ferrero", "Banco Sabadell", "1491653595412", "", "");//warning
-        FollowUp fup5 = new FollowUp("Jorge Aviario Sole", "La Caixa", "1501330346854", "", ""); //urgent
-        FollowUp fup6 = new FollowUp("Jorge Aviario Sole", "Caixa", "1505915671853", "", ""); //OK
-        FollowUp fup7 = new FollowUp("Ignacio Ferror Planalta", "La Caixa", "1505915671853", "", ""); //OK
-        FollowUp fup8 = new FollowUp("David Jardi Gil", "Banco Sabadell", "1503058305898", "", "");//warning
-        FollowUp fup9 = new FollowUp("Cristian Garcia Aran", "Seat", "1505915671853", "", ""); //OK
+        FollowUp fup1 = new FollowUp("1","Ruben Pla Ferrero", "1","Sabadell", "1476197961067", "", ""); //urgent
+        FollowUp fup2 = new FollowUp("1","Yvette Hernandez Alonso", "1","Opentrends", "1497102810067", "", "");//warning
+        FollowUp fup3 = new FollowUp("1","Ignacio Ferror Planalta", "1","Caixa", "1505915671853", "", ""); //OK
+        FollowUp fup4 = new FollowUp("1","Ruben Pla Ferrero", "1","Banco Sabadell", "1491653595412", "", "");//warning
+        FollowUp fup5 = new FollowUp("1","Jorge Aviario Sole", "1","La Caixa", "1501330346854", "", ""); //urgent
+        FollowUp fup6 = new FollowUp("1","Jorge Aviario Sole", "1","Caixa", "1505915671853", "", ""); //OK
+        FollowUp fup7 = new FollowUp("1","Ignacio Ferror Planalta", "1","La Caixa", "1505915671853", "", ""); //OK
+        FollowUp fup8 = new FollowUp("1","David Jardi Gil", "1","Banco Sabadell", "1503058305898", "", "");//warning
+        FollowUp fup9 = new FollowUp("1","Cristian Garcia Aran", "1","Seat", "1505915671853", "", ""); //OK
 
         List<FollowUp> tempList = Arrays.asList(fup1, fup2, fup3, fup4, fup5, fup6, fup7, fup8,
                 fup9);
@@ -123,15 +123,15 @@ public class CategoryDataFactory {
     }
 
     public static List<FollowUpCategory> createMockFilteredCategories() {
-        FollowUp fup1 = new FollowUp("Ruben Pla Ferrero", "Sabadell", "1476197961067", "", ""); //urgent
-        FollowUp fup2 = new FollowUp("Yvette Hernandez Alonso", "Opentrends", "1497102810067", "", "");//warning
-        FollowUp fup3 = new FollowUp("Ignacio Ferror Planalta", "Caixa", "1505915671853", "", ""); //OK
-        FollowUp fup4 = new FollowUp("Ruben Pla Ferrero", "Banco Sabadell", "1497102810067", "", "");//warning
-        FollowUp fup5 = new FollowUp("Jorge Aviario Sole", "La Caixa", "1476197961067", "", ""); //urgent
-        FollowUp fup6 = new FollowUp("Jorge Aviario Sole", "Caixa", "1505915671853", "", ""); //OK
-        FollowUp fup7 = new FollowUp("Ignacio Ferror Planalta", "La Caixa", "1505915671853", "", ""); //OK
-        FollowUp fup8 = new FollowUp("David Jardi Gil", "Banco Sabadell", "1497102810067", "", "");//warning
-        FollowUp fup9 = new FollowUp("Cristian Garcia Aran", "Seat", "1505915671853", "", ""); //OK
+        FollowUp fup1 = new FollowUp("1","Ruben Pla Ferrero", "1","Sabadell", "1476197961067", "", ""); //urgent
+        FollowUp fup2 = new FollowUp("1","Yvette Hernandez Alonso", "1","Opentrends", "1497102810067", "", "");//warning
+        FollowUp fup3 = new FollowUp("1","Ignacio Ferror Planalta", "1","Caixa", "1505915671853", "", ""); //OK
+        FollowUp fup4 = new FollowUp("1","Ruben Pla Ferrero", "1","Banco Sabadell", "1497102810067", "", "");//warning
+        FollowUp fup5 = new FollowUp("1","Jorge Aviario Sole", "1","La Caixa", "1476197961067", "", ""); //urgent
+        FollowUp fup6 = new FollowUp("1","Jorge Aviario Sole", "1","Caixa", "1505915671853", "", ""); //OK
+        FollowUp fup7 = new FollowUp("1","Ignacio Ferror Planalta", "1","La Caixa", "1505915671853", "", ""); //OK
+        FollowUp fup8 = new FollowUp("1","David Jardi Gil", "1","Banco Sabadell", "1497102810067", "", "");//warning
+        FollowUp fup9 = new FollowUp("1","Cristian Garcia Aran", "1","Seat", "1505915671853", "", ""); //OK
 
         List<FollowUp> tempList = Arrays.asList(fup1, fup2, fup3);
         List<FollowUp> red = new ArrayList<>();

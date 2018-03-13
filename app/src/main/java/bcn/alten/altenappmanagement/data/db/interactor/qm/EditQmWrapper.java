@@ -1,6 +1,6 @@
-package bcn.alten.altenappmanagement.data.db.ops.qm;
+package bcn.alten.altenappmanagement.data.db.interactor.qm;
 
-import bcn.alten.altenappmanagement.data.db.ops.followup.CreateNewFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.followup.CreateNewFollowUpWrapper;
 import bcn.alten.altenappmanagement.model.QMItem;
 
 public class EditQmWrapper {

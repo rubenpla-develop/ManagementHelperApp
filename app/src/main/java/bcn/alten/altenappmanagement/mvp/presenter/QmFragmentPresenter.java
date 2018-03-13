@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
-import bcn.alten.altenappmanagement.data.db.ops.qm.CreateNewQmWrapper;
-import bcn.alten.altenappmanagement.data.db.ops.qm.DeleteQmWrapper;
-import bcn.alten.altenappmanagement.data.db.ops.qm.EditQmWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.qm.CreateNewQmWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.qm.DeleteQmWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.qm.EditQmWrapper;
+import bcn.alten.altenappmanagement.model.Client;
+import bcn.alten.altenappmanagement.model.Consultant;
+import bcn.alten.altenappmanagement.mvp.presenter.base.BasePresenter;
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.model.QMItem;
 import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
@@ -31,16 +34,14 @@ import static bcn.alten.altenappmanagement.utils.factory.QMDataFactory.FactoryIn
 import static bcn.alten.altenappmanagement.utils.factory.QMDataFactory.QM_HEADER_ARROW_NEXT_WEEK_ACTION;
 import static bcn.alten.altenappmanagement.utils.factory.QMDataFactory.QM_HEADER_ARROW_PREVIOUS_WEEK_ACTION;
 
-public class QmFragmentPresenter implements IQmFragmentPresenter{
+public class QmFragmentPresenter extends BasePresenter implements IQmFragmentPresenter{
 
     private final String TAG = IQmFragmentPresenter.class.getSimpleName();
-
-    private IQmFragmentView view;
 
     private List<QMItem> backupList;
 
     public QmFragmentPresenter(IQmFragmentView view) {
-        this.view = view;
+        super(view);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
                 .daoAccess()
                 .fecthQMData();
 
-        view.onLiveDataChanged(qmList);
+        ((IQmFragmentView) view).onLiveDataChanged(qmList);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
 
         WeekRange weekRange = new WeekRange(weekForAction, QMCalendarInstance().getYearForReference());
 
-        view.onLiveDataGoToWeek(qmList, weekRange);
+        ((IQmFragmentView) view).onLiveDataGoToWeek(qmList, weekRange);
     }
 
     @Override
@@ -92,7 +93,7 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
         WeekRange weekRange = new WeekRange(JodaTimeConverter.getInstance().getWeekOfYearFromDate(date),
                 JodaTimeConverter.getInstance().getYearFromDate(date));
 
-        view.onLiveDataGoToWeek(qmList, weekRange);
+        ((IQmFragmentView) view).onLiveDataGoToWeek(qmList, weekRange);
     }
 
     @Override
@@ -167,10 +168,16 @@ public class QmFragmentPresenter implements IQmFragmentPresenter{
             }
         }
 
-        view.showQmList((List<QMCategory>) groupList);
+        ((IQmFragmentView) view).showQmList((List<QMCategory>) groupList);
     }
 
-    public List<QMItem> getBackupList() {
-        return backupList;
+    @Override
+    public LiveData<List<Client>> getClients() {
+        return null;
+    }
+
+    @Override
+    public LiveData<List<Consultant>> getConsultants() {
+        return null;
     }
 }

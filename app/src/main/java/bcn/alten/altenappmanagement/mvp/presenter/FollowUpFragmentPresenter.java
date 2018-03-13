@@ -5,21 +5,22 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
-import bcn.alten.altenappmanagement.data.db.ops.followup.CreateNewFollowUpWrapper;
-import bcn.alten.altenappmanagement.data.db.ops.followup.DeleteFollowUpWrapper;
-import bcn.alten.altenappmanagement.data.db.ops.followup.EditFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.followup.CreateNewFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.followup.DeleteFollowUpWrapper;
+import bcn.alten.altenappmanagement.data.db.interactor.followup.EditFollowUpWrapper;
 import bcn.alten.altenappmanagement.model.FollowUp;
+import bcn.alten.altenappmanagement.mvp.presenter.base.BasePresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
+import bcn.alten.altenappmanagement.mvp.view.base.IBaseView;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
-public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
+public class FollowUpFragmentPresenter extends BasePresenter implements
+        IFollowFragmentPresenter {
 
     private final String TAG = FollowUpFragmentPresenter.class.getSimpleName();
 
-    private IFollowUpFragmentView view;
-
-    public FollowUpFragmentPresenter(IFollowUpFragmentView view) {
-        this.view = view;
+    public FollowUpFragmentPresenter(IBaseView view) {
+        super(view);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class FollowUpFragmentPresenter implements IFollowFragmentPresenter {
                 .daoAccess()
                 .fecthFollowUpData();
 
-        view.onLiveDataChanged(categoryList);
+        ((IFollowUpFragmentView) view).onLiveDataChanged(categoryList);
 
         //TODO mocking content
         /*List<FollowUpCategory> categoryList = CategoryDataFactory.createMockFilteredCategories();
