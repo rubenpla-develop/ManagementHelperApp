@@ -1,6 +1,7 @@
 package bcn.alten.altenappmanagement.ui.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +12,33 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.model.Client;
 
 public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
 
     private String[] stringList = {"One", "Two", "Three", "Four", "Five", "Six", "Seven",
-            "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen"};
+            "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen",
+            "cLiente", "cand", "didat", "sched", "cancel", "led", "done",
+            "ruBeN", "Yve", "tte", "Cri", "stiaN", "Ignacio", "Caixa", "OpenTrends", "Sabadell," +
+            "Aran", "Seat"};
 
-    private ArrayList<String> itemList = new ArrayList<>();
-    private ArrayList<String> resultsList = new ArrayList<>();
+
+    private List<Client> itemList = new ArrayList<>();
+    private List<String> resultsList = new ArrayList<>();
 
     private Context mContext;
 
     public AutoCompleteViewAdapter(Context context) {
         mContext = context;
-        itemList.addAll(Arrays.asList(stringList));
+        resultsList.addAll(Arrays.asList(stringList));
+    }
+
+    public AutoCompleteViewAdapter(Context context,@NonNull List<Client> list) {
+        mContext = context;
+        this.itemList = list;
     }
 
     @Override
@@ -36,7 +48,7 @@ public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public String getItem(int index) {
-        return resultsList.get(index);
+        return resultsList.get(index).toString();
     }
 
     @Override
@@ -46,7 +58,7 @@ public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
+        View view;
         ListViewHolder holder;
 
         if (convertView == null) {
@@ -56,7 +68,7 @@ public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
             convertView = inflater.inflate(R.layout.autocomplete_item, parent, false);
 
             holder = new ListViewHolder();
-            holder.label = (TextView) convertView.findViewById(R.id.autocomplete_item_tv);
+            holder.label = convertView.findViewById(R.id.autocomplete_item_tv);
 
             convertView.setTag(holder);
         } else {
@@ -89,7 +101,7 @@ public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 if (results != null && results.count > 0) {
 
-                    resultsList = (ArrayList<String>) results.values;
+                    resultsList = (List<String>) results.values;
                     notifyDataSetChanged();
                 } else {
                     notifyDataSetInvalidated();
@@ -99,14 +111,14 @@ public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
         return filter;
     }
 
-    private ArrayList<String> findMatches(String constraint) {
-        ArrayList<String> list = new ArrayList<>();
+    private List<String> findMatches(String constraint) {
+        List<String> list = new ArrayList<>();
 
-        for (String item : itemList) {
+        for (Client item : itemList) {
+            if (constraint.equalsIgnoreCase(item.getName()) ||
+                    item.getName().toLowerCase().contains(constraint.toLowerCase())) {
 
-            if (constraint.toString().equalsIgnoreCase(item) ||
-                    item.toLowerCase().contains(constraint.toLowerCase())) {
-                list.add(item);
+                list.add(item.getName());
             }
         }
 
