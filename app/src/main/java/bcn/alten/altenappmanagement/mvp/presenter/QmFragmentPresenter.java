@@ -11,13 +11,11 @@ import bcn.alten.altenappmanagement.data.db.AltenDatabase;
 import bcn.alten.altenappmanagement.data.db.interactor.qm.CreateNewQmWrapper;
 import bcn.alten.altenappmanagement.data.db.interactor.qm.DeleteQmWrapper;
 import bcn.alten.altenappmanagement.data.db.interactor.qm.EditQmWrapper;
-import bcn.alten.altenappmanagement.model.Client;
-import bcn.alten.altenappmanagement.model.Consultant;
-import bcn.alten.altenappmanagement.mvp.presenter.base.BasePresenter;
-import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.model.QMItem;
-import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
 import bcn.alten.altenappmanagement.model.pojo.WeekRange;
+import bcn.alten.altenappmanagement.mvp.presenter.base.BasePresenter;
+import bcn.alten.altenappmanagement.mvp.view.IQmFragmentView;
+import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.QMCategory;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
 
 import static bcn.alten.altenappmanagement.ui.activity.QmCreateEditActivity.STATUS_ACCEPTED;
@@ -169,15 +167,5 @@ public class QmFragmentPresenter extends BasePresenter implements IQmFragmentPre
         }
 
         ((IQmFragmentView) view).showQmList((List<QMCategory>) groupList);
-    }
-
-    @Override
-    public LiveData<List<Client>> getClients() {
-        return null;
-    }
-
-    @Override
-    public LiveData<List<Consultant>> getConsultants() {
-        return null;
     }
 }

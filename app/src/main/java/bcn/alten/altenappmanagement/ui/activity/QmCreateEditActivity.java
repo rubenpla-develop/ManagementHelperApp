@@ -1,6 +1,8 @@
 package bcn.alten.altenappmanagement.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.LiveData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -24,8 +26,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.util.List;
+
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.model.Client;
 import bcn.alten.altenappmanagement.model.QMItem;
+import bcn.alten.altenappmanagement.mvp.presenter.QMCreateEditActivityPresenter;
+import bcn.alten.altenappmanagement.mvp.view.IQMCreateEditActivityView;
 import bcn.alten.altenappmanagement.ui.adapter.AutoCompleteViewAdapter;
 import bcn.alten.altenappmanagement.ui.customview.ExtendedEditTextWithAutoComplete;
 import bcn.alten.altenappmanagement.ui.dialog.AltenDatePickerDialog;
@@ -39,11 +46,13 @@ import butterknife.ButterKnife;
 
 import static android.app.DatePickerDialog.OnDateSetListener;
 import static android.app.TimePickerDialog.OnTimeSetListener;
+import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
 import static bcn.alten.altenappmanagement.ui.dialog.QMPhoneInputDialog.OnSetPhoneNumberListener;
 
-public class QmCreateEditActivity extends AppCompatActivity implements OnDateSetListener,
-        OnTimeSetListener, OnClickListener, OnSetPhoneNumberListener, RadioGroup.OnCheckedChangeListener {
+public class QmCreateEditActivity extends AppCompatActivity implements IQMCreateEditActivityView,
+        OnDateSetListener, OnTimeSetListener, OnClickListener, OnSetPhoneNumberListener,
+        RadioGroup.OnCheckedChangeListener {
 
     public static final int STATUS_SCHEDULED = 0;
     public static final int STATUS_DONE = 1;
@@ -55,17 +64,14 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     public static final int RESULT_ADD_OK = 125;
     public static final int RESULT_EDIT_OK = 126;
 
-    private Resources res;
-
     private QMItem originalQm;
     private String actionMode;
     private int weekOfYear;
-    private String finalDateTime;
     private int phoneViewClicked;
     private String chosenStatus;
 
+    private QMCreateEditActivityPresenter presenter;
     private QmErrorController qmErrorController;
-    private View activityView;
 
     @NonNull
     @BindView(R.id.toolbar)
@@ -109,14 +115,16 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        activityView = LayoutInflater.from(this).inflate(R.layout.activity_qm_new_edit, null);
+        View activityView = LayoutInflater.from(this).inflate(R.layout.activity_qm_new_edit, null);
         setContentView(activityView);
 
         ButterKnife.bind(this);
+        qmErrorController = new QmErrorController(this, activityView);
+        presenter = new QMCreateEditActivityPresenter(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        res = getResources();
+        Resources res = getResources();
 
         Bundle bundle = getIntent().getExtras();
 
@@ -127,11 +135,8 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
             }
         }
 
-        qmErrorController = new QmErrorController(this, activityView);
-
-        AutoCompleteViewAdapter autoCompleteAdapter = new AutoCompleteViewAdapter(this);
-        consultantNameExtEditText.setAdapter(autoCompleteAdapter);
-        clientNameExtEditText.setAdapter(autoCompleteAdapter);
+        presenter.getClients();
+        presenter.getConsultants();
 
         clientPhoneContactList.setOnClickListener(this);
         consultantPhoneContactList.setOnClickListener(this);
@@ -176,10 +181,9 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
 
         dateText.setOnTouchListener((View v, MotionEvent event) -> {
             if (dateErrorMessage.getVisibility() == View.VISIBLE) {
-                dateErrorMessage.setVisibility(View.INVISIBLE);
+                dateErrorMessage.setVisibility(INVISIBLE);
             }
 
-            dateText.performClick();
             return false;
         });
         
@@ -285,7 +289,7 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
         final String dateInmMillis = JodaTimeConverter.getInstance()
                 .parseFromDatePicker(month,dayOfMonth, year);
 
-        finalDateTime = JodaTimeConverter.getInstance()
+        String finalDateTime = JodaTimeConverter.getInstance()
                 .getDateInStringFormat(dateInmMillis);
 
         weekOfYear = JodaTimeConverter.getInstance().getWeekOfYearFromDate(month, dayOfMonth, year);
@@ -372,5 +376,29 @@ public class QmCreateEditActivity extends AppCompatActivity implements OnDateSet
                 chosenStatus = "";
                 break;
         }
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void setConsultantAutoCompleteAdapter(LiveData<List<Client>> list) {
+        list.observe(this, consultants -> {
+            if (consultants != null) {
+                consultantNameExtEditText.setAdapter(new AutoCompleteViewAdapter(this,
+                        consultants));
+            }
+        });
+    }
+
+    @Override
+    public void setClientAutoCompleteAdapter(LiveData<List<Client>> list) {
+        list.observe(this, clients -> {
+            if (clients != null) {
+                clientNameExtEditText.setAdapter(new AutoCompleteViewAdapter(this, clients));
+            }
+        });
     }
 }

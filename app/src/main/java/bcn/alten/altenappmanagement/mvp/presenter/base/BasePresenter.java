@@ -1,32 +1,37 @@
 package bcn.alten.altenappmanagement.mvp.presenter.base;
 
+import android.arch.lifecycle.LiveData;
+
 import java.util.List;
 
-import bcn.alten.altenappmanagement.data.db.AltenDatabase;
 import bcn.alten.altenappmanagement.model.Client;
-import bcn.alten.altenappmanagement.model.Consultant;
 import bcn.alten.altenappmanagement.mvp.view.base.IBaseView;
 
+import static bcn.alten.altenappmanagement.data.db.AltenDatabase.getDatabase;
+
 public class BasePresenter  {
-    public IBaseView view;
+    protected IBaseView view;
+    private LiveData<List<Client>> clientsList;
+    private LiveData<List<Client>> consultantsList;
+
 
     public BasePresenter(IBaseView view) {
         this.view = view;
     }
 
-    public List<Client> getClients() {
-        List<Client> clientsList;
-        clientsList = AltenDatabase.getDatabase(view.getContext()).daoAccess().fecthClientData();
+    public void getClients() {
+        clientsList = getDatabase(view.getContext()).daoAccess().fetchClientData();
+    }
 
+    public void getConsultants() {
+        consultantsList = getDatabase(view.getContext()).daoAccess().fetchConsultantData();
+    }
+
+    protected LiveData<List<Client>> getClientsList() {
         return clientsList;
     }
 
-
-    public List<Consultant> getConsultants() {
-        List<Consultant> consultantsList;
-        consultantsList = AltenDatabase.getDatabase(view.getContext()).daoAccess()
-                .fecthConsultantData();
-
+    protected LiveData<List<Client>> getConsultantsList() {
         return consultantsList;
     }
 }
