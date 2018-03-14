@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "db206da44dc0e271d3b0fbf18c2bf6e9",
+    "identityHash": "cab20ed9792ac1887b45e4a16dcd12e5",
     "entities": [
       {
         "tableName": "FollowUp",
@@ -183,7 +183,24 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_qm_clientId",
+            "unique": false,
+            "columnNames": [
+              "clientId"
+            ],
+            "createSql": "CREATE  INDEX `index_qm_clientId` ON `${TABLE_NAME}` (`clientId`)"
+          },
+          {
+            "name": "index_qm_consultantId",
+            "unique": false,
+            "columnNames": [
+              "consultantId"
+            ],
+            "createSql": "CREATE  INDEX `index_qm_consultantId` ON `${TABLE_NAME}` (`consultantId`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "client",
@@ -276,7 +293,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"db206da44dc0e271d3b0fbf18c2bf6e9\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"cab20ed9792ac1887b45e4a16dcd12e5\")"
     ]
   }
 }

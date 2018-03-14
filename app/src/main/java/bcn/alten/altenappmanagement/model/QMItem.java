@@ -3,19 +3,24 @@ package bcn.alten.altenappmanagement.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import static android.arch.persistence.room.ForeignKey.CASCADE;
+import static android.arch.persistence.room.ForeignKey.NO_ACTION;
 
 @Entity(tableName = "qm", foreignKeys =
         {@ForeignKey(entity = Client.class, parentColumns = "id",
-                childColumns = "clientId", onDelete = CASCADE), 
+                childColumns = "clientId", onDelete = NO_ACTION),
                 
                 @ForeignKey(entity = Consultant.class, parentColumns = "id", 
-                        childColumns = "consultantId", onDelete = CASCADE)})
+                        childColumns = "consultantId", onDelete = NO_ACTION)},
+
+        indices = {
+                @Index("clientId"),
+                @Index("consultantId")})
 public class QMItem implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)

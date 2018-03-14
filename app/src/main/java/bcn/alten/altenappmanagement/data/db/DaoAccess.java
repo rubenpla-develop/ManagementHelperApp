@@ -62,10 +62,28 @@ public interface DaoAccess {
      */
 
     @Query("SELECT * FROM client")
-    List<Client> fecthClientData();
+    LiveData<List<Client>> fetchClientData();
 
     @Query("SELECT * FROM consultant")
-    List<Consultant> fecthConsultantData();
+    LiveData<List<Client>> fetchConsultantData();
+
+    @Query("SELECT id FROM client WHERE name =:targetName")
+    LiveData<Integer> getClientIdByTheirName(String targetName);
+
+    @Query("SELECT id FROM consultant WHERE name =:targetName")
+    LiveData<Integer> getConsultantIdByTheirName(String targetName);
+
+    @Query("SELECT IFNULL(name, 'Nombre cliente') name FROM client WHERE name =:targetId")
+    LiveData<String> getClientIdByTheirId(int targetId);
+
+    @Query("SELECT IFNULL(name, 'Nombre Consultor') name FROM consultant WHERE name =:targetId")
+    LiveData<String> getConsultantIdByTheirId(int targetId);
+
+    @Insert
+    void insertClientsList(List<Client> qmList);
+
+    @Insert
+    void insertConsultantsList(List<Consultant> qmList);
 
    /* @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);*/
