@@ -27,11 +27,41 @@
             android:visibility="visible">
 
             <TextView
-                android:id="@+id/home_followup_title"
+                android:id="@+id/home_cc_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:text="Client &amp; Cosultants Mocks:"
+                android:textSize="19sp" />
+
+            <Button
+                android:id="@+id/home_fragment_cc_fetch_client_consultant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/home_cc_title"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="32dp"
+                android:text="Fetch Data" />
+
+            <Button
+                android:id="@+id/home_fragment_cc_insert_client_consultant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/home_cc_title"
+                android:layout_marginRight="48dp"
+                android:layout_marginTop="32dp"
+                android:text="Insert Data" />
+
+            <TextView
+                android:id="@+id/home_followup_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:layout_below="@id/home_fragment_cc_fetch_client_consultant"
                 android:text="FollowUp Mocks:"
                 android:textSize="19sp" />
 
@@ -91,8 +121,8 @@
             android:id="@+id/fecth_result_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/home_fragment_mock_container"/>
+            android:layout_below="@id/home_fragment_mock_container"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 </ScrollView>

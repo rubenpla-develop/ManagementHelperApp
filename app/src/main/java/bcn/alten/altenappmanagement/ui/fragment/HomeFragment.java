@@ -16,17 +16,27 @@ import java.util.List;
 
 import bcn.alten.altenappmanagement.BuildConfig;
 import bcn.alten.altenappmanagement.R;
-import bcn.alten.altenappmanagement.data.db.AltenDatabase;
+import bcn.alten.altenappmanagement.model.Client;
+import bcn.alten.altenappmanagement.model.Consultant;
 import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.model.QMItem;
+import bcn.alten.altenappmanagement.utils.factory.BaseFactory;
 import bcn.alten.altenappmanagement.utils.factory.FollowUpFactory;
 import bcn.alten.altenappmanagement.utils.factory.QMDataFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static bcn.alten.altenappmanagement.data.db.AltenDatabase.getDatabase;
+
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private final String TAG = HomeFragment.class.getSimpleName();
+
+    @BindView(R.id.home_fragment_cc_insert_client_consultant)
+    Button btnInsertClientConsultantData;
+
+    @BindView(R.id.home_fragment_cc_fetch_client_consultant)
+    Button btnFetchClientConsultantData;
 
     @BindView(R.id.home_fragment_mock_container)
     RelativeLayout home_mock_container;
@@ -38,13 +48,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     TextView fetch_result_tv;
 
     @BindView(R.id.btn_fetch_data)
-    Button btnFecthData;
+    Button btnFetchData;
 
     @BindView(R.id.btn_insert_data)
     Button btnInsertData;
 
     @BindView(R.id.btn_qm_fetch_data)
-    Button btnQmFecthData;
+    Button btnQmFetchData;
 
     @BindView(R.id.btn_qm_insert_data)
     Button btnQmInsertData;
@@ -67,10 +77,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setListeners() {
-        btnFecthData.setOnClickListener(this);
+        btnFetchData.setOnClickListener(this);
         btnInsertData.setOnClickListener(this);
-        btnQmFecthData.setOnClickListener(this);
+        btnQmFetchData.setOnClickListener(this);
         btnQmInsertData.setOnClickListener(this);
+        btnFetchClientConsultantData.setOnClickListener(this);
+        btnInsertClientConsultantData.setOnClickListener(this);
     }
 
     @Override
@@ -82,7 +94,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btn_fetch_data :
-                LiveData<List<FollowUp>> list = AltenDatabase.getDatabase(getContext())
+                LiveData<List<FollowUp>> list = getDatabase(getContext())
                         .daoAccess()
                         .fecthFollowUpData();
 
@@ -108,12 +120,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btn_qm_fetch_data :
-                LiveData<List<QMItem>> qmList = AltenDatabase.getDatabase(getContext())
+                LiveData<List<QMItem>> qmList = getDatabase(getContext())
                         .daoAccess()
                         .fecthQMData();
 
                 qmList.observe(this, followUpList -> {
-
                     fetch_result_tv.setTextSize(10);
                     fetch_result_tv.setText("");
                     if (followUpList != null && followUpList.size() > 0) {
@@ -127,6 +138,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
                 });
                 break;
+
+            case R.id.home_fragment_cc_insert_client_consultant :
+                DatabaseCCAsync ccAsync = new DatabaseCCAsync();
+                ccAsync.execute();
+                break;
+
+            case R.id.home_fragment_cc_fetch_client_consultant :
+                LiveData<List<Client>> clientList = getDatabase(getContext()).daoAccess()
+                        .fetchClientData();
+
+                clientList.observe(this, clients -> {
+                    fetch_result_tv.setTextSize(10);
+                    fetch_result_tv.setText("");
+                    if (clients != null && clients.size() > 0) {
+                        for (Client client : clients) {
+                            String formattedString = client.getId() + "." +
+                                    client.getName() + "\n";
+
+                            fetch_result_tv.append(formattedString);
+                        }
+                    }
+                });
 
             default :
                 break;
@@ -145,7 +178,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             List<FollowUp> list = FollowUpFactory.createMockFollowUpList();
 
-            AltenDatabase.getDatabase(getActivity()).daoAccess().insertFollowUpList(list);
+            getDatabase(getActivity()).daoAccess().insertFollowUpList(list);
 
             return null;
         }
@@ -168,7 +201,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             List<QMItem> list = QMDataFactory.createMockQMItemList();
 
-            AltenDatabase.getDatabase(getActivity()).daoAccess().insertQMList(list);
+            getDatabase(getActivity()).daoAccess().insertQMList(list);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+
+    private class DatabaseCCAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            List<Client> clientList = BaseFactory.getInstance().createMockClientList();
+            List<Consultant> consultantList = BaseFactory.getInstance().createMockConsultantList();
+
+            getDatabase(getActivity()).daoAccess().insertClientsList(clientList);
+            getDatabase(getActivity()).daoAccess().insertConsultantsList(consultantList);
 
             return null;
         }

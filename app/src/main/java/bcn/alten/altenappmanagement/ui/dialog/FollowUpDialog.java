@@ -1,5 +1,6 @@
 package bcn.alten.altenappmanagement.ui.dialog;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
@@ -49,6 +50,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
 
     private FollowUpFragmentPresenter followUpFragmentPresenter;
 
+    // Recommended for Edit current FollowUp selected
     public FollowUpDialog(Context context, String actionMode, FollowUp followUpToEdit,
                           FollowUpFragmentPresenter presenter) {
         this.context = context;
@@ -58,6 +60,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         this.res = context.getResources();
     }
 
+    // Recommended for Create New FollowUp
     public FollowUpDialog(Context context, String actionMode,
                           FollowUpFragmentPresenter presenter) {
         this.context = context;
@@ -66,6 +69,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         this.res = context.getResources();
     }
 
+    @SuppressLint("InflateParams")
     public AlertDialog getDialog() {
         LayoutInflater inflater = LayoutInflater.from(context);
         dialogView = inflater.inflate(R.layout.dialog_followup_new_edit, null);
@@ -79,7 +83,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         final TextView addNextFollowTextView = dialogView.findViewById(R.id.fup_dialog_next_date_edit);
         final RadioGroup statusGroup = dialogView.findViewById(R.id.fup_dialog_radio_group_status);
 
-        AutoCompleteViewAdapter autoCompleteViewAdapter = new AutoCompleteViewAdapter(AltenApplication.getInstance().getApplicationContext());
+        AutoCompleteViewAdapter autoCompleteViewAdapter = new AutoCompleteViewAdapter(context, null );
         consultorNameExtEditText.setAdapter(autoCompleteViewAdapter);
         clientNameExtEditText.setAdapter(autoCompleteViewAdapter);
         statusGroup.setOnCheckedChangeListener(this);
@@ -122,7 +126,8 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setPositiveButton(R.string.follow_up_dialog_positive_button, null)
-                .setNegativeButton(R.string.follow_up_dialog_negative_button, (dialog, which) -> dialog.dismiss());
+                .setNegativeButton(R.string.follow_up_dialog_negative_button, (dialog, which) ->
+                        dialog.dismiss());
 
         alertDialogBuilder.setView(dialogView);
 
