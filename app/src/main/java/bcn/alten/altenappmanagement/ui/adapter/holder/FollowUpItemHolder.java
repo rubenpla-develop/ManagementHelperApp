@@ -40,7 +40,7 @@ public class FollowUpItemHolder extends BaseChildHolder {
 
     @Override
     public void onBind(Object object) {
-        consultorName.setText(((FollowUp) object).getConsultorName());
+        consultorName.setText(((FollowUp) object).getConsultantName());
         clientName.setText(((FollowUp) object).getCurrentClient());
 
         final String NO_DATE = "";

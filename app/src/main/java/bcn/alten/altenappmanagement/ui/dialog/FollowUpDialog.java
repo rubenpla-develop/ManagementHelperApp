@@ -73,7 +73,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     public AlertDialog getDialog() {
         LayoutInflater inflater = LayoutInflater.from(context);
         dialogView = inflater.inflate(R.layout.dialog_followup_new_edit, null);
-        final ExtendedEditTextWithAutoComplete consultorNameExtEditText = dialogView.
+        final ExtendedEditTextWithAutoComplete consultantNameExtEditText = dialogView.
                 findViewById(R.id.extended_edittext_consultor_name);
         final ExtendedEditTextWithAutoComplete clientNameExtEditText = dialogView.
                 findViewById(R.id.extended_edittext_client_name);
@@ -91,10 +91,10 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         String formattedDate;
 
         if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
-            consultorNameExtEditText.setText(originalFollowUp.getConsultorName());
+            consultantNameExtEditText.setText(originalFollowUp.getConsultantName());
             clientNameExtEditText.setText(originalFollowUp.getCurrentClient());
             clientNameExtEditText.requestFocus();
-            consultorNameExtEditText.requestFocus();
+            consultantNameExtEditText.requestFocus();
 
             if (originalFollowUp.getDateLastFollow() != null
                     && originalFollowUp.getDateLastFollow().length() > 0) {
@@ -164,8 +164,9 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
                         formattedNextDate = "";
                     }
 
+                    //TODO wrong implementation, check for foreign kesy clientId & consultantId
                     editedFollowUp = new FollowUp(originalFollowUp.getConsultantId(),
-                            consultorNameExtEditText.getText().toString(),
+                            consultantNameExtEditText.getText().toString(),
                             originalFollowUp.getClientId(),
                             clientNameExtEditText.getText().toString(), formattedLastDate,
                             formattedNextDate, nextDateChosenStatus);

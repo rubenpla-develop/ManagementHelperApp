@@ -39,7 +39,7 @@ public class FollowUpDeleteDialog {
         final TextView nextDateTextview = dialogView.findViewById(R.id.fup_dialog_delete_info_next_date);
         final TextView statusTextView = dialogView.findViewById(R.id.fup_dialog_delete_info_status);
         
-        infoNameTextView.append(followUpToDelete.getConsultorName());
+        infoNameTextView.append(followUpToDelete.getConsultantName());
         infoClientTextview.append(followUpToDelete.getCurrentClient());
 
         String formattedLastDate = JodaTimeConverter.getInstance()

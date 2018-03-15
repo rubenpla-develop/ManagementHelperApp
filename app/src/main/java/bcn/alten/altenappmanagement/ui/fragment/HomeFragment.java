@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (followUpList != null && followUpList.size() > 0) {
                         for (FollowUp follow : followUpList) {
                             String formattedString = follow.getId() + "." +
-                                    follow.getConsultorName() + " " +
+                                    follow.getConsultantName() + " " +
                                     follow.getCurrentClient()  + "\n";
 
                             fetch_result_tv.append(formattedString);

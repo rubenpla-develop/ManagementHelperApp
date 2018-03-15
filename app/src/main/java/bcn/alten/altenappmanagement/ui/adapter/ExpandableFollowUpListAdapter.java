@@ -58,7 +58,7 @@ public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter
         holder.getView().setOnClickListener(v -> {
 
             String consultantId = model.getConsultantId();
-            String consultantName =  model.getConsultorName();
+            String consultantName =  model.getConsultantName();
             String clientId = model.getClientId();
             String clientName =   model.getCurrentClient();
             String lastDateFollowUp =   model.getDateLastFollow();
@@ -74,7 +74,7 @@ public class ExpandableFollowUpListAdapter extends ExpandableRecyclerViewAdapter
 
         ((FollowUpItemHolder)holder).getView().setOnLongClickListener(v -> {
             String consultantId = model.getConsultantId();
-            String consultantName =  model.getConsultorName();
+            String consultantName =  model.getConsultantName();
             String clientId = model.getClientId();
             String clientName =   model.getCurrentClient();
             String lastDateFollowUp =   model.getDateLastFollow();

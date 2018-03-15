@@ -121,7 +121,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     }
 
     @Override
-    public void onLiveDataChanged(final LiveData< List<FollowUp>> list) {
+    public void onLiveDataChanged(final LiveData<List<FollowUp>> list) {
         list.observe(this, followUpList -> {
             List<FollowUpCategory> followUpCategoryList = FollowUpFactory.getInstance()
                     .getDataFilteredByCategory(list.getValue());

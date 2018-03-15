@@ -28,7 +28,7 @@ public class FollowUp implements Parcelable {
 
     private String consultantId;
 
-    private String consultorName;
+    private String consultantName;
 
     private String clientId;
 
@@ -40,12 +40,12 @@ public class FollowUp implements Parcelable {
 
     private String status;
 
-    public FollowUp(@NonNull String consultantId, @NonNull String consultorName,
+    public FollowUp(@NonNull String consultantId, @NonNull String consultantName,
                     @NonNull  String clientId, @NonNull  String currentClient,
                     @NonNull String dateLastFollow, @NonNull String dateNextFollow,
                     @NonNull String status) {
         this.consultantId = consultantId;
-        this.consultorName = consultorName;
+        this.consultantName = consultantName;
         this.clientId = clientId;
         this.currentClient = currentClient;
         this.dateLastFollow = dateLastFollow;
@@ -56,7 +56,7 @@ public class FollowUp implements Parcelable {
 
     protected FollowUp(Parcel in) {
         consultantId = in.readString();
-        consultorName = in.readString();
+        consultantName = in.readString();
         clientId = in.readString();
         currentClient = in.readString();
         dateLastFollow = in.readString();
@@ -84,7 +84,7 @@ public class FollowUp implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(consultantId);
-        dest.writeString(consultorName);
+        dest.writeString(consultantName);
         dest.writeString(clientId);
         dest.writeString(currentClient);
         dest.writeString(dateLastFollow);
@@ -106,12 +106,12 @@ public class FollowUp implements Parcelable {
         this.id = id;
     }
 
-    public String getConsultorName() {
-        return consultorName;
+    public String getConsultantName() {
+        return consultantName;
     }
 
-    public void setConsultorName(String consultorName) {
-        this.consultorName = consultorName;
+    public void setConsultantName(String consultorName) {
+        this.consultantName = consultorName;
     }
 
     public String getCurrentClient() {
