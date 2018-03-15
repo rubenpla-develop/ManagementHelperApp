@@ -11,32 +11,24 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.model.BaseItem;
 import bcn.alten.altenappmanagement.model.Client;
 
-public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
+public class AutoCompleteViewAdapter<T extends BaseItem> extends BaseAdapter implements Filterable {
 
-    private String[] stringList = {"One", "Two", "Three", "Four", "Five", "Six", "Seven",
-            "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen",
-            "cLiente", "cand", "didat", "sched", "cancel", "led", "done",
-            "ruBeN", "Yve", "tte", "Cri", "stiaN", "Ignacio", "Caixa", "OpenTrends", "Sabadell," +
-            "Aran", "Seat"};
-
-
-    private List<Client> itemList = new ArrayList<>();
+    private List<T> itemList = new ArrayList<>();
     private List<String> resultsList = new ArrayList<>();
 
     private Context mContext;
 
     public AutoCompleteViewAdapter(Context context) {
         mContext = context;
-        resultsList.addAll(Arrays.asList(stringList));
     }
 
-    public AutoCompleteViewAdapter(Context context,@NonNull List<Client> list) {
+    public AutoCompleteViewAdapter(Context context,@NonNull List<T> list) {
         mContext = context;
         this.itemList = list;
     }
@@ -114,11 +106,12 @@ public class AutoCompleteViewAdapter extends BaseAdapter implements Filterable {
     private List<String> findMatches(String constraint) {
         List<String> list = new ArrayList<>();
 
-        for (Client item : itemList) {
-            if (constraint.equalsIgnoreCase(item.getName()) ||
-                    item.getName().toLowerCase().contains(constraint.toLowerCase())) {
+        //TODO try to improve, workaround with Client.class cast
+        for (T item : itemList) {
+            if (constraint.equalsIgnoreCase(((Client)item).getName()) ||
+                    ((Client)item).getName().toLowerCase().contains(constraint.toLowerCase())) {
 
-                list.add(item.getName());
+                list.add(((Client)item).getName());
             }
         }
 

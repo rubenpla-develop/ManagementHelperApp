@@ -80,10 +80,10 @@ public interface DaoAccess {
     LiveData<String> getConsultantIdByTheirId(int targetId);
 
     @Insert
-    void insertClientsList(List<Client> qmList);
+    void insertClientsList(List<Client> clientList);
 
     @Insert
-    void insertConsultantsList(List<Consultant> qmList);
+    void insertConsultantsList(List<Consultant> consultantList);
 
    /* @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);*/

@@ -135,8 +135,8 @@ public class QmCreateEditActivity extends AppCompatActivity implements IQMCreate
             }
         }
 
-        presenter.getClients();
-        presenter.getConsultants();
+        presenter.getLiveDataClients();
+        presenter.getLiveDataConsultants();
 
         clientPhoneContactList.setOnClickListener(this);
         consultantPhoneContactList.setOnClickListener(this);
@@ -387,7 +387,7 @@ public class QmCreateEditActivity extends AppCompatActivity implements IQMCreate
     public void setConsultantAutoCompleteAdapter(LiveData<List<Client>> list) {
         list.observe(this, consultants -> {
             if (consultants != null) {
-                consultantNameExtEditText.setAdapter(new AutoCompleteViewAdapter(this,
+                consultantNameExtEditText.setAdapter(new AutoCompleteViewAdapter<>(this,
                         consultants));
             }
         });
@@ -397,7 +397,7 @@ public class QmCreateEditActivity extends AppCompatActivity implements IQMCreate
     public void setClientAutoCompleteAdapter(LiveData<List<Client>> list) {
         list.observe(this, clients -> {
             if (clients != null) {
-                clientNameExtEditText.setAdapter(new AutoCompleteViewAdapter(this, clients));
+                clientNameExtEditText.setAdapter(new AutoCompleteViewAdapter<>(this, clients));
             }
         });
     }

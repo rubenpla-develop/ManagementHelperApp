@@ -13,8 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import bcn.alten.altenappmanagement.AltenApplication;
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.model.Client;
 import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
 import bcn.alten.altenappmanagement.ui.adapter.AutoCompleteViewAdapter;
@@ -48,13 +51,13 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
 
     private Resources res;
 
-    private FollowUpFragmentPresenter followUpFragmentPresenter;
+    private FollowUpFragmentPresenter presenter;
 
     // Recommended for Edit current FollowUp selected
     public FollowUpDialog(Context context, String actionMode, FollowUp followUpToEdit,
                           FollowUpFragmentPresenter presenter) {
         this.context = context;
-        this.followUpFragmentPresenter = presenter;
+        this.presenter = presenter;
         this.originalFollowUp = followUpToEdit;
         this.actionMode = actionMode;
         this.res = context.getResources();
@@ -64,7 +67,7 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
     public FollowUpDialog(Context context, String actionMode,
                           FollowUpFragmentPresenter presenter) {
         this.context = context;
-        this.followUpFragmentPresenter = presenter;
+        this.presenter = presenter;
         this.actionMode = actionMode;
         this.res = context.getResources();
     }
@@ -83,9 +86,10 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
         final TextView addNextFollowTextView = dialogView.findViewById(R.id.fup_dialog_next_date_edit);
         final RadioGroup statusGroup = dialogView.findViewById(R.id.fup_dialog_radio_group_status);
 
-        AutoCompleteViewAdapter autoCompleteViewAdapter = new AutoCompleteViewAdapter(context, null );
-        consultorNameExtEditText.setAdapter(autoCompleteViewAdapter);
-        clientNameExtEditText.setAdapter(autoCompleteViewAdapter);
+        List<Client> clientList = presenter.getAutoCompleteLists().getClientsList();
+        List<Client> consultantList = presenter.getAutoCompleteLists().getConsultantsList();
+        consultantNameExtEditText.setAdapter(new AutoCompleteViewAdapter<>(context, consultantList));
+        clientNameExtEditText.setAdapter(new AutoCompleteViewAdapter<>(context, clientList));
         statusGroup.setOnCheckedChangeListener(this);
 
         String formattedDate;
@@ -172,10 +176,10 @@ public class FollowUpDialog implements OnDateSetListener, OnClickListener,
                             formattedNextDate, nextDateChosenStatus);
 
                     if (ADD_FOLLOWUP_ACTION.equals(actionMode)) {
-                        followUpFragmentPresenter.createNewFollowUp(editedFollowUp);
+                        presenter.createNewFollowUp(editedFollowUp);
                     } else if (EDIT_FOLLOWUP_ACTION.equals(actionMode)) {
                         editedFollowUp.setId(originalFollowUp.getId());
-                        followUpFragmentPresenter.editFollowUp(editedFollowUp);
+                        presenter.editFollowUp(editedFollowUp);
                     }
 
                     followUpDialog.dismiss();

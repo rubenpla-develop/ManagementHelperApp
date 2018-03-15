@@ -55,6 +55,13 @@ public class FollowUpFragmentPresenter extends BasePresenter implements
     }
 
     @Override
+    public void showFollowUpDialog() {
+        getAllLiveDataLists();
+
+        ((IFollowUpFragmentView) view).showAddFollowUpDialog();
+    }
+
+    @Override
     public void swipeFollowUp(FollowUp followUp, String status) {
         followUp.setFollowUpStatusToDone(JodaTimeConverter.getInstance().getCurrenDate(), status);
         editFollowUp(followUp);

@@ -2,33 +2,33 @@ package bcn.alten.altenappmanagement.model.pojo;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.model.BaseItem;
+import bcn.alten.altenappmanagement.model.Client;
 
 public class AutoCompleteLists {
 
-    private List<? extends BaseItem> consultantsList;
-    private List<? extends BaseItem> clientsList;
+    private List<Client> consultantsList;
+    private List<Client> clientsList;
 
     public AutoCompleteLists() {}
 
-    public AutoCompleteLists(List<? extends BaseItem> consultantsList, List<? extends BaseItem> clientsList) {
+    public AutoCompleteLists(List<Client> consultantsList, List<Client> clientsList) {
         this.consultantsList = consultantsList;
         this.clientsList = clientsList;
     }
 
-    public List<? extends BaseItem> getConsultantsList() {
+    public List<Client> getConsultantsList() {
         return consultantsList;
     }
 
-    public void setConsultantsList(List<? extends BaseItem> consultantsList) {
+    public void setConsultantsList(List<Client> consultantsList) {
         this.consultantsList = consultantsList;
     }
 
-    public List<? extends BaseItem> getClientsList() {
+    public List<Client> getClientsList() {
         return clientsList;
     }
 
-    public void setClientsList(List<? extends BaseItem> clientsList) {
+    public void setClientsList(List<Client> clientsList) {
         this.clientsList = clientsList;
     }
 }

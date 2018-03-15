@@ -14,15 +14,15 @@ public class QMCreateEditActivityPresenter extends BasePresenter implements iQMC
     }
 
     @Override
-    public void getClients() {
-        super.getClients();
+    public void getLiveDataClients() {
+        super.getLiveDataClients();
 
         ((IQMCreateEditActivityView) view).setClientAutoCompleteAdapter(getClientsList());
     }
 
     @Override
-    public void getConsultants() {
-        super.getConsultants();
+    public void getLiveDataConsultants() {
+        super.getLiveDataConsultants();
 
         ((IQMCreateEditActivityView) view).setConsultantAutoCompleteAdapter(getConsultantsList());
     }

@@ -22,12 +22,13 @@ import android.view.animation.Interpolator;
 import java.util.List;
 
 import bcn.alten.altenappmanagement.R;
+import bcn.alten.altenappmanagement.model.FollowUp;
+import bcn.alten.altenappmanagement.model.pojo.AutoCompleteLists;
+import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
+import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import bcn.alten.altenappmanagement.ui.adapter.ExpandableFollowUpListAdapter;
 import bcn.alten.altenappmanagement.ui.adapter.expandable.groupmodel.FollowUpCategory;
 import bcn.alten.altenappmanagement.ui.adapter.holder.FollowUpItemHolder;
-import bcn.alten.altenappmanagement.model.FollowUp;
-import bcn.alten.altenappmanagement.mvp.presenter.FollowUpFragmentPresenter;
-import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import bcn.alten.altenappmanagement.ui.customview.RecyclerItemTouchHelper;
 import bcn.alten.altenappmanagement.ui.dialog.FollowUpDeleteDialog;
 import bcn.alten.altenappmanagement.ui.dialog.FollowUpDialog;
@@ -47,10 +48,10 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     FloatingActionButton fab_add_people;
 
     private AlertDialog followUpDialog;
+    private AutoCompleteLists autoCompleteLists;
 
     private FollowUpFragmentPresenter presenter;
     private ExpandableFollowUpListAdapter expandableRecyclerViewAdapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     public static FollowUpFragment newInstance() {
             Bundle args = new Bundle();
@@ -74,23 +75,22 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
 
         ButterKnife.bind(this, view);
 
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         expandableRecyclerView.setLayoutManager(layoutManager);
         expandableRecyclerView.setHasFixedSize(true);
 
-        fab_add_people.setOnClickListener(v -> showAddFollowUpDialog());
+        fab_add_people.setOnClickListener(v -> presenter.showFollowUpDialog());
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            final Interpolator interpolador = AnimationUtils.loadInterpolator(getActivity(),
+            final Interpolator interpolator = AnimationUtils.loadInterpolator(getActivity(),
                     android.R.interpolator.overshoot);
 
             fab_add_people.setScaleX(0);
             fab_add_people.setScaleY(0);
-
             fab_add_people.animate()
                     .scaleX(1)
                     .scaleY(1)
-                    .setInterpolator(interpolador)
+                    .setInterpolator(interpolator)
                     .setDuration(400)
                     .setStartDelay(2000);
         }
@@ -102,6 +102,9 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter = new FollowUpFragmentPresenter(this);
+        autoCompleteLists = new AutoCompleteLists();
+        presenter.getLiveDataClients();
+        presenter.getLiveDataConsultants();
         presenter.showFollowUpList();
     }
 
@@ -155,11 +158,20 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
 
     @Override
     public void showAddFollowUpDialog() {
-        FollowUpDialog followupAddDialog = new FollowUpDialog(getActivity(),
-                FollowUpDialog.ADD_FOLLOWUP_ACTION ,presenter);
+        presenter.getClientsList().observe(this, clients ->
+                autoCompleteLists.setClientsList(clients));
 
-        followUpDialog = followupAddDialog.getDialog();
-        followUpDialog.show();
+        presenter.getConsultantsList().observe(this, consultants -> {
+            autoCompleteLists.setConsultantsList(consultants);
+
+            presenter.setAutoCompleteLists(autoCompleteLists);
+
+            FollowUpDialog followupAddDialog = new FollowUpDialog(getActivity(),
+                    FollowUpDialog.ADD_FOLLOWUP_ACTION ,presenter);
+
+            followUpDialog = followupAddDialog.getDialog();
+            followUpDialog.show();
+        });
     }
 
     @Override

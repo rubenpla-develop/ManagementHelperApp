@@ -14,7 +14,7 @@ public class BasePresenter  {
     protected IBaseView view;
     private LiveData<List<Client>> clientsList;
     private LiveData<List<Client>> consultantsList;
-    public AutoCompleteLists autoCompleteLists;
+    private AutoCompleteLists autoCompleteLists;
 
 
     public BasePresenter(IBaseView view) {
