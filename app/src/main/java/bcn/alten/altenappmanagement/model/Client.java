@@ -1,7 +1,6 @@
 package bcn.alten.altenappmanagement.model;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -11,10 +10,10 @@ import android.support.annotation.NonNull;
  */
 
 @Entity(tableName = "client")
-public class Client implements Parcelable {
+public class Client extends BaseItem implements Parcelable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    /*@PrimaryKey(autoGenerate = true)
+    private int id;*/
 
     @NonNull
     private String name;
