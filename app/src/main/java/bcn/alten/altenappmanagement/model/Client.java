@@ -5,10 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-/**
- * Created by alten on 8/3/18.
- */
-
 @Entity(tableName = "client")
 public class Client extends BaseItem implements Parcelable {
 
@@ -18,7 +14,6 @@ public class Client extends BaseItem implements Parcelable {
     @NonNull
     private String name;
 
-    @NonNull
     private String phone;
 
     public Client(@NonNull String name, @NonNull String phone) {

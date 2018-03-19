@@ -4,15 +4,17 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-import bcn.alten.altenappmanagement.data.db.AltenDatabase;
 import bcn.alten.altenappmanagement.data.db.interactor.followup.CreateNewFollowUpWrapper;
 import bcn.alten.altenappmanagement.data.db.interactor.followup.DeleteFollowUpWrapper;
 import bcn.alten.altenappmanagement.data.db.interactor.followup.EditFollowUpWrapper;
+import bcn.alten.altenappmanagement.model.Client;
 import bcn.alten.altenappmanagement.model.FollowUp;
 import bcn.alten.altenappmanagement.mvp.presenter.base.BasePresenter;
 import bcn.alten.altenappmanagement.mvp.view.IFollowUpFragmentView;
 import bcn.alten.altenappmanagement.mvp.view.base.IBaseView;
 import bcn.alten.altenappmanagement.utils.JodaTimeConverter;
+
+import static bcn.alten.altenappmanagement.data.db.AltenDatabase.getDatabase;
 
 public class FollowUpFragmentPresenter extends BasePresenter implements
         IFollowFragmentPresenter {
@@ -25,7 +27,7 @@ public class FollowUpFragmentPresenter extends BasePresenter implements
 
     @Override
     public void showFollowUpList() {
-        LiveData<List<FollowUp>> categoryList = AltenDatabase.getDatabase(view.getContext())
+        LiveData<List<FollowUp>> categoryList = getDatabase(view.getContext())
                 .daoAccess()
                 .fecthFollowUpData();
 
