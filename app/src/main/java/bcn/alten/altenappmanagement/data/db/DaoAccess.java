@@ -85,6 +85,12 @@ public interface DaoAccess {
     @Insert
     void insertConsultantsList(List<Consultant> consultantList);
 
+    @Insert
+    void insertClient(Client client);
+
+    @Insert
+    void insertConsultant(Client client);
+
    /* @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);*/
    /* @Insert
