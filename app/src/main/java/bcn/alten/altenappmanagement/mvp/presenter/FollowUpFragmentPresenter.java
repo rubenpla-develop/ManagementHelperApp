@@ -32,10 +32,6 @@ public class FollowUpFragmentPresenter extends BasePresenter implements
                 .fecthFollowUpData();
 
         ((IFollowUpFragmentView) view).onLiveDataChanged(categoryList);
-
-        //TODO mocking content
-        /*List<FollowUpCategory> categoryList = CategoryDataFactory.createMockFilteredCategories();
-        view.ShowFollowUpList(categoryList);*/
     }
 
     @Override
