@@ -19,7 +19,7 @@ import bcn.alten.altenappmanagement.model.QMItem;
 public interface DaoAccess {
 
     /*
-     * FOllowUp DAO
+     * FollowUp DAO
      */
     @Query("SELECT * FROM FollowUp")
     LiveData<List<FollowUp>> fecthFollowUpData();
@@ -67,18 +67,43 @@ public interface DaoAccess {
     @Query("SELECT * FROM consultant")
     LiveData<List<Client>> fetchConsultantData();
 
-    @Query("SELECT id FROM client WHERE name =:targetName")
-    LiveData<Integer> getClientIdByTheirName(String targetName);
 
-    @Query("SELECT id FROM consultant WHERE name =:targetName")
-    LiveData<Integer> getConsultantIdByTheirName(String targetName);
+    /*
+     * Queries BY NAME
+     */
+    @Query("SELECT * FROM client WHERE name LIKE :targetName" ) //TODO OK
+    LiveData<Client> getClientByName(String targetName);   // GET ITEM
 
-    @Query("SELECT IFNULL(name, 'Nombre cliente') name FROM client WHERE name =:targetId")
-    LiveData<String> getClientIdByTheirId(int targetId);
+    @Query("SELECT * FROM consultant WHERE name = :targetName")//TODO OK
+    LiveData<Client> getConsultantByName(String targetName); // GET ITEM
 
-    @Query("SELECT IFNULL(name, 'Nombre Consultor') name FROM consultant WHERE name =:targetId")
-    LiveData<String> getConsultantIdByTheirId(int targetId);
+    @Query("SELECT id FROM client WHERE name LIKE :targetName" ) //TODO OK
+    LiveData<Integer> getClientIdByName(String targetName);  // GET 'id' row
 
+    @Query("SELECT id FROM consultant WHERE name = :targetName")//TODO OK
+    LiveData<Integer> getConsultantIdByName(String targetName); //GET 'id' row
+
+
+
+    /*
+     * Queries BY ID
+     */
+    @Query("SELECT * FROM client WHERE id =:targetId")//TODO OK
+    LiveData<Client> getClientById(int targetId); // GET ITEM
+
+    @Query("SELECT * FROM consultant WHERE id =:targetId") //TODO OK
+    LiveData<Client> getConsultantById(int targetId);  //GET ITEM
+
+    @Query("SELECT IFNULL(name, 'NO_NAME_FOUND')name FROM client WHERE id =:targetId") //TODO OK
+    LiveData<String> getClientNameById(int targetId);//GET 'name' row
+
+    @Query("SELECT IFNULL(name, 'NO_NAME_FOUND')name FROM consultant WHERE id =:targetId")//TODO OK
+    LiveData<String> getConsultantNameById(int targetId); //GET 'name' row
+
+
+    /*
+     *  INSERT Queries  for Client & Consultant Pojos
+     */
     @Insert
     void insertClientsList(List<Client> clientList);
 
@@ -94,23 +119,5 @@ public interface DaoAccess {
    /* @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);*/
    /* @Insert
-    void insertMultipleRecord(University... universities);
-
-    @Insert
-    void insertMultipleListRecord(List<University> universities);
-
-    @Insert
-    void insertOnlySingleRecord(University university);
-
-    @Query("SELECT * FROM University")
-    List<University> fetchAllData();
-
-    @Query("SELECT * FROM University WHERE clgid =:college_id")
-    University getSingleRecord(int college_id);
-
-    @Update
-    void updateRecord(University university);
-
-    @Delete
-    void deleteRecord(University university);*/
+    void insertMultipleRecord(University... universities);*/
 }

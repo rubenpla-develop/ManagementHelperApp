@@ -117,10 +117,10 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(expandableRecyclerView.getContext(),
                 OrientationHelper.HORIZONTAL);
         expandableRecyclerView.addItemDecoration(dividerItemDecoration);
-        ItemTouchHelper.SimpleCallback recycleritemTouchHelper =
+        ItemTouchHelper.SimpleCallback recyclerItemTouchHelper =
                 new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
 
-        new ItemTouchHelper(recycleritemTouchHelper).attachToRecyclerView(expandableRecyclerView);
+        new ItemTouchHelper(recyclerItemTouchHelper).attachToRecyclerView(expandableRecyclerView);
     }
 
     @Override
