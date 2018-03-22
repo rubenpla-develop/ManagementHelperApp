@@ -135,8 +135,7 @@ public class QmCreateEditActivity extends AppCompatActivity implements IQMCreate
             }
         }
 
-        presenter.getLiveDataClients();
-        presenter.getLiveDataConsultants();
+        presenter.getAllLiveDataLists();
 
         clientPhoneContactList.setOnClickListener(this);
         consultantPhoneContactList.setOnClickListener(this);

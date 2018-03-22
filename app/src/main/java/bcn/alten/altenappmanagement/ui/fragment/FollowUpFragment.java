@@ -103,8 +103,7 @@ public class FollowUpFragment extends Fragment implements IFollowUpFragmentView,
         super.onViewCreated(view, savedInstanceState);
         presenter = new FollowUpFragmentPresenter(this);
         autoCompleteLists = new AutoCompleteLists();
-        presenter.getLiveDataClients();
-        presenter.getLiveDataConsultants();
+        presenter.getAllLiveDataLists();
         presenter.showFollowUpList();
     }
 
