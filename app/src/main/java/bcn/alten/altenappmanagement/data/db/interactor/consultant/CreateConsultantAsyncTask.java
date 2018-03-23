@@ -1,18 +1,18 @@
-package bcn.alten.altenappmanagement.data.db.interactor.client;
+package bcn.alten.altenappmanagement.data.db.interactor.consultant;
 
 import android.os.AsyncTask;
 
 import bcn.alten.altenappmanagement.AltenApplication;
 import bcn.alten.altenappmanagement.data.db.AltenDatabase;
-import bcn.alten.altenappmanagement.model.Client;
+import bcn.alten.altenappmanagement.model.Consultant;
 
-public class CreateClientAsyncTask extends AsyncTask<Client, Void, Void> {
+public class CreateConsultantAsyncTask extends AsyncTask<Consultant, Void, Void> {
 
-    private Client client;
+    private Consultant consultant;
 
-    public CreateClientAsyncTask(Client client) {
+    public CreateConsultantAsyncTask(Consultant consultant) {
         super();
-        this.client = client;
+        this.consultant = consultant;
     }
 
     @Override
@@ -21,11 +21,11 @@ public class CreateClientAsyncTask extends AsyncTask<Client, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Client... params) {
+    protected Void doInBackground(Consultant... params) {
         AltenDatabase.getDatabase(AltenApplication.getInstance()
                 .getApplicationContext())
                 .daoAccess()
-                .insertClient(client);
+                .insertConsultant(consultant);
 
         return null;
     }
